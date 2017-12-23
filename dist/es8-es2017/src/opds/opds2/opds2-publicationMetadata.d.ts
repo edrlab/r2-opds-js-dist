@@ -1,0 +1,32 @@
+import { OPDSBelongsTo } from "./opds2-belongsTo";
+import { OPDSContributor } from "./opds2-contributor";
+import { IStringMap } from "./opds2-multilang";
+import { OPDSSubject } from "./opds2-subject";
+export declare class OPDSPublicationMetadata {
+    RDFType: string;
+    Title: string | IStringMap;
+    Identifier: string;
+    Author: OPDSContributor[];
+    Translator: OPDSContributor[];
+    Editor: OPDSContributor[];
+    Artist: OPDSContributor[];
+    Illustrator: OPDSContributor[];
+    Letterer: OPDSContributor[];
+    Penciler: OPDSContributor[];
+    Colorist: OPDSContributor[];
+    Inker: OPDSContributor[];
+    Narrator: OPDSContributor[];
+    OPDSContributor: OPDSContributor[];
+    Publisher: OPDSContributor[];
+    Imprint: OPDSContributor[];
+    Language: string[];
+    Modified: Date;
+    PublicationDate: Date;
+    Description: string;
+    Source: string;
+    Rights: string;
+    Subject: OPDSSubject[];
+    BelongsTo: OPDSBelongsTo;
+    Duration: number;
+    private _OnDeserialized();
+}

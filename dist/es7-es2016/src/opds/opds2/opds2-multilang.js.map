@@ -1,0 +1,1 @@
+{"version":3,"file":"opds2-multilang.js","sourceRoot":"","sources":["../../../../../src/opds/opds2/opds2-multilang.ts"],"names":[],"mappings":"","sourcesContent":["export interface IStringMap { [key: string]: string; }\n"]}
