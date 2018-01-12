@@ -40,7 +40,7 @@ function convertOpds1ToOpds2(feed) {
             const collLink = new opds2_link_1.OPDSLink();
             if (entry.Links) {
                 entry.Links.forEach((l) => {
-                    if (l.HasRel("http://opds-spec.org/acquisition")) {
+                    if (l.Rel && l.Rel.indexOf("http://opds-spec.org/acquisition") === 0) {
                         isAnNavigation = false;
                     }
                     if (l.HasRel("collection") || l.HasRel("http://opds-spec.org/group")) {
