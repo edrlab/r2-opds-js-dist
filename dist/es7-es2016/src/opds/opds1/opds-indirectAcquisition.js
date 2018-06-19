@@ -1,6 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const tslib_1 = require("tslib");
+var IndirectAcquisition_1;
+"use strict";
 const xml_js_mapper_1 = require("r2-utils-js/dist/es7-es2016/src/_utils/xml-js-mapper");
 let IndirectAcquisition = IndirectAcquisition_1 = class IndirectAcquisition {
 };
@@ -29,5 +31,4 @@ IndirectAcquisition = IndirectAcquisition_1 = tslib_1.__decorate([
     })
 ], IndirectAcquisition);
 exports.IndirectAcquisition = IndirectAcquisition;
-var IndirectAcquisition_1;
 //# sourceMappingURL=opds-indirectAcquisition.js.map

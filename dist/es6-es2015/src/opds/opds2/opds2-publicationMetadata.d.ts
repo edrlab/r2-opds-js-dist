@@ -28,5 +28,5 @@ export declare class OPDSPublicationMetadata {
     Subject: OPDSSubject[];
     BelongsTo: OPDSBelongsTo;
     Duration: number;
-    private _OnDeserialized();
+    private _OnDeserialized;
 }

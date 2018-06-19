@@ -5,5 +5,5 @@ export declare class OPDSCollection {
     Identifier: string;
     Position: number;
     Links: OPDSLink[];
-    private _OnDeserialized();
+    private _OnDeserialized;
 }

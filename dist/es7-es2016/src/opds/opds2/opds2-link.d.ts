@@ -14,5 +14,5 @@ export declare class OPDSLink {
     AddRels(rels: string[]): void;
     AddRel(rel: string): void;
     HasRel(rel: string): boolean;
-    private _OnDeserialized();
+    private _OnDeserialized;
 }

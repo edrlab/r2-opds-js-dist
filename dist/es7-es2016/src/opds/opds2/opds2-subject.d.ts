@@ -3,5 +3,5 @@ export declare class OPDSSubject {
     SortAs: string;
     Scheme: string;
     Code: string;
-    private _OnDeserialized();
+    private _OnDeserialized;
 }

@@ -10,5 +10,5 @@ export declare class OPDSPublication {
     AddAuthor(name: string, identifier: string, sortAs: string, href: string, typeLink: string): void;
     AddSerie(name: string, position: number, href: string, typeLink: string): void;
     AddPublisher(name: string, href: string, typeLink: string): void;
-    private _OnDeserialized();
+    private _OnDeserialized;
 }

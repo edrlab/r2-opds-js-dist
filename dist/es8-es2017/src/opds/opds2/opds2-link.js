@@ -1,6 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const tslib_1 = require("tslib");
+var OPDSLink_1;
+"use strict";
 const ta_json_string_converter_1 = require("r2-utils-js/dist/es8-es2017/src/_utils/ta-json-string-converter");
 const ta_json_1 = require("ta-json");
 const opds2_properties_1 = require("./opds2-properties");
@@ -87,5 +89,4 @@ OPDSLink = OPDSLink_1 = tslib_1.__decorate([
     ta_json_1.JsonObject()
 ], OPDSLink);
 exports.OPDSLink = OPDSLink;
-var OPDSLink_1;
 //# sourceMappingURL=opds2-link.js.map

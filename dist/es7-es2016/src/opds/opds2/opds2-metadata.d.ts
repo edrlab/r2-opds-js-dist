@@ -7,5 +7,5 @@ export declare class OPDSMetadata {
     ItemsPerPage: number;
     CurrentPage: number;
     Modified: Date;
-    private _OnDeserialized();
+    private _OnDeserialized;
 }

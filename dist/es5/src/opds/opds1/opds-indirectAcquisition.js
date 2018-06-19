@@ -6,6 +6,7 @@ var IndirectAcquisition = (function () {
     function IndirectAcquisition() {
     }
     IndirectAcquisition_1 = IndirectAcquisition;
+    var IndirectAcquisition_1;
     tslib_1.__decorate([
         xml_js_mapper_1.XmlXPathSelector("@type"),
         tslib_1.__metadata("design:type", String)
@@ -31,7 +32,6 @@ var IndirectAcquisition = (function () {
         })
     ], IndirectAcquisition);
     return IndirectAcquisition;
-    var IndirectAcquisition_1;
 }());
 exports.IndirectAcquisition = IndirectAcquisition;
 //# sourceMappingURL=opds-indirectAcquisition.js.map

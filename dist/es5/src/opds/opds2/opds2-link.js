@@ -33,6 +33,7 @@ var OPDSLink = (function () {
             console.log("Link.Href is not set!");
         }
     };
+    var OPDSLink_1;
     tslib_1.__decorate([
         ta_json_1.JsonProperty("href"),
         tslib_1.__metadata("design:type", String)
@@ -90,7 +91,6 @@ var OPDSLink = (function () {
         ta_json_1.JsonObject()
     ], OPDSLink);
     return OPDSLink;
-    var OPDSLink_1;
 }());
 exports.OPDSLink = OPDSLink;
 //# sourceMappingURL=opds2-link.js.map

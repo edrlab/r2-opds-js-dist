@@ -11,6 +11,7 @@ var OPDSIndirectAcquisition = (function () {
             console.log("OPDSIndirectAcquisition.TypeAcquisition is not set!");
         }
     };
+    var OPDSIndirectAcquisition_1;
     tslib_1.__decorate([
         ta_json_1.JsonProperty("type"),
         tslib_1.__metadata("design:type", String)
@@ -30,7 +31,6 @@ var OPDSIndirectAcquisition = (function () {
         ta_json_1.JsonObject()
     ], OPDSIndirectAcquisition);
     return OPDSIndirectAcquisition;
-    var OPDSIndirectAcquisition_1;
 }());
 exports.OPDSIndirectAcquisition = OPDSIndirectAcquisition;
 //# sourceMappingURL=opds2-indirectAcquisition.js.map
