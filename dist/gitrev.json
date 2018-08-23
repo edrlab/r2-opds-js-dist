@@ -1,9 +1,9 @@
 {
-  "short": "90a3aa0",
-  "long": "90a3aa0a0dec7781ff65b01e17dd058e3d30377d",
+  "short": "9c0657d",
+  "long": "9c0657d64006ef64580c3c579b055a879bb085fb",
   "branch": "develop",
-  "date": "2018-08-23T22:21:03.000Z",
+  "date": "2018-08-23T23:05:53.000Z",
   "dirty": true,
-  "urlHistory": "https://github.com/edrlab/r2-opds-js/commits/90a3aa0a0dec7781ff65b01e17dd058e3d30377d",
-  "urlDiff": "https://github.com/edrlab/r2-opds-js/compare/90a3aa0a0dec7781ff65b01e17dd058e3d30377d...develop"
+  "urlHistory": "https://github.com/edrlab/r2-opds-js/commits/9c0657d64006ef64580c3c579b055a879bb085fb",
+  "urlDiff": "https://github.com/edrlab/r2-opds-js/compare/9c0657d64006ef64580c3c579b055a879bb085fb...develop"
 }
