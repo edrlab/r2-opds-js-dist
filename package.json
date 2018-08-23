@@ -46,12 +46,17 @@
   },
   "homepage": "https://github.com/edrlab/r2-opds-js",
   "dependencies": {
+    "debug": "^3.1.0",
     "r2-utils-js": "github:edrlab/r2-utils-js-dist#develop",
     "ta-json": "github:danielweck/ta-json#dist",
-    "tslib": "^1.9.3"
+    "tslib": "^1.9.3",
+    "xmldom": "^0.1.27"
   },
   "devDependencies": {
+    "@types/debug": "0.0.30",
     "@types/node": "8.*.*",
+    "@types/xmldom": "^0.1.29",
+    "ava": "^0.25.0",
     "cpy-cli": "^2.0.0",
     "cross-env": "^5.2.0",
     "cson": "^5.1.0",
@@ -75,7 +80,7 @@
   ],
   "scripts": {
     "cson2json": "sed -E \"s/#ECMASCRIPT#/es5/g\" package-scripts-build.cson > tmp-build.cson && sed -E \"s/#ECMASCRIPT#/es6-es2015/g\" package-scripts-build.cson >> tmp-build.cson && sed -E \"s/#ECMASCRIPT#/es7-es2016/g\" package-scripts-build.cson >> tmp-build.cson && sed -E \"s/#ECMASCRIPT#/es8-es2017/g\" package-scripts-build.cson >> tmp-build.cson && json -I -f package.json -e \"this.scripts=$(cat package-scripts.cson tmp-build.cson | node node_modules/cson/bin/cson2json)\" && rimraf tmp-*.cson",
-    "copydist": "cpy \"./dist/**/*\" ../r2-shared-js/node_modules/r2-opds-js/ --cwd=./ --parents --no-dir && cpy \"./dist/**/*\" ../r2-streamer-js/node_modules/r2-opds-js/ --cwd=./ --parents --no-dir && cpy \"./dist/**/*\" ../r2-navigator-js/node_modules/r2-opds-js/ --cwd=./ --parents --no-dir && cpy \"./dist/**/*\" ../r2-testapp-js/node_modules/r2-opds-js/ --cwd=./ --parents --no-dir",
+    "copydist": "cpy \"./dist/**/*\" ../r2-streamer-js/node_modules/r2-opds-js/ --cwd=./ --parents --no-dir && cpy \"./dist/**/*\" ../r2-navigator-js/node_modules/r2-opds-js/ --cwd=./ --parents --no-dir && cpy \"./dist/**/*\" ../r2-testapp-js/node_modules/r2-opds-js/ --cwd=./ --parents --no-dir",
     "quick-build-dist": "npm run transpile:typescript:es8-es2017+afterdist && npm run copydist",
     "_pregitdist": "npm run build:all",
     "gitdist": "cd ../r2-opds-js-dist/ && git checkout -B develop && (git pull || echo \"pull\") && (git --no-pager status || echo status) && ((rimraf \"*\" && echo rimrafOK) || echo rimrafNOK) && cpy ../r2-opds-js/package.json . && cpy ../r2-opds-js/package-lock.json . && cpy ../r2-opds-js/LICENSE . && cpy ../r2-opds-js/README.md . && cpy \"./docs/**/*\" ../r2-opds-js-dist/ --cwd=../r2-opds-js/ --parents --no-dir && cpy \"./dist/**/*\" ../r2-opds-js-dist/ --cwd=../r2-opds-js/ --parents --no-dir && (git add * || echo add) && (git commit -a -m \"add new dist\" || echo commit) && (git push --set-upstream origin develop || echo push) && (git --no-pager status || echo status) && cd ../r2-opds-js",
@@ -103,6 +108,7 @@
     "transpile:typescript:es8-es2017+afterdist": "npm run transpile:typescript:es8-es2017 && npm run afterdist",
     "transpile:typescript:single": "node tools/typescript_compile_single.js",
     "posttranspile:typescript:single": "npm run afterdist",
+    "test": "cross-env DEBUG=r2:* ava --verbose --fail-fast --serial --color \"./dist/es8-es2017/test/**/test*.js\"",
     "prebuild:es5": "npm run lint && npm run clean",
     "build:es5": "npm run transpile:typescript:es5",
     "postbuild:es5": "npm run afterdist",
