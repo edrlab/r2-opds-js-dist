@@ -1,18 +1,5 @@
+import { Link } from "r2-shared-js/dist/es5/src/models/publication-link";
 import { OPDSProperties } from "./opds2-properties";
-export declare class OPDSLink {
-    Href: string;
-    TypeLink: string;
-    Height: number;
-    Width: number;
-    Title: string;
+export declare class OPDSLink extends Link {
     Properties: OPDSProperties;
-    Duration: number;
-    Templated: boolean;
-    Children: OPDSLink[];
-    Bitrate: number;
-    Rel: string[];
-    AddRels(rels: string[]): void;
-    AddRel(rel: string): void;
-    HasRel(rel: string): boolean;
-    private _OnDeserialized;
 }

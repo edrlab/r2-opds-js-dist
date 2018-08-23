@@ -1,11 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var tslib_1 = require("tslib");
+var metadata_properties_1 = require("r2-shared-js/dist/es5/src/models/metadata-properties");
 var ta_json_1 = require("ta-json");
 var opds2_indirectAcquisition_1 = require("./opds2-indirectAcquisition");
 var opds2_price_1 = require("./opds2-price");
-var OPDSProperties = (function () {
+var OPDSProperties = (function (_super) {
+    tslib_1.__extends(OPDSProperties, _super);
     function OPDSProperties() {
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     tslib_1.__decorate([
         ta_json_1.JsonProperty("numberOfItems"),
@@ -24,6 +27,6 @@ var OPDSProperties = (function () {
         ta_json_1.JsonObject()
     ], OPDSProperties);
     return OPDSProperties;
-}());
+}(metadata_properties_1.Properties));
 exports.OPDSProperties = OPDSProperties;
 //# sourceMappingURL=opds2-properties.js.map

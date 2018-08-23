@@ -1,33 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var tslib_1 = require("tslib");
+var metadata_1 = require("r2-shared-js/dist/es5/src/models/metadata");
 var ta_json_1 = require("ta-json");
-var opds2_belongsTo_1 = require("./opds2-belongsTo");
 var opds2_contributor_1 = require("./opds2-contributor");
-var opds2_subject_1 = require("./opds2-subject");
-var OPDSPublicationMetadata = (function () {
+var OPDSPublicationMetadata = (function (_super) {
+    tslib_1.__extends(OPDSPublicationMetadata, _super);
     function OPDSPublicationMetadata() {
+        return _super !== null && _super.apply(this, arguments) || this;
     }
-    OPDSPublicationMetadata.prototype._OnDeserialized = function () {
-        if (!this.Title) {
-            console.log("OPDSPublicationMetadata.Title is not set!");
-        }
-        if (!this.Identifier) {
-            console.log("OPDSPublicationMetadata.Identifier is not set!");
-        }
-    };
-    tslib_1.__decorate([
-        ta_json_1.JsonProperty("@type"),
-        tslib_1.__metadata("design:type", String)
-    ], OPDSPublicationMetadata.prototype, "RDFType", void 0);
-    tslib_1.__decorate([
-        ta_json_1.JsonProperty("title"),
-        tslib_1.__metadata("design:type", Object)
-    ], OPDSPublicationMetadata.prototype, "Title", void 0);
-    tslib_1.__decorate([
-        ta_json_1.JsonProperty("identifier"),
-        tslib_1.__metadata("design:type", String)
-    ], OPDSPublicationMetadata.prototype, "Identifier", void 0);
     tslib_1.__decorate([
         ta_json_1.JsonProperty("author"),
         ta_json_1.JsonElementType(opds2_contributor_1.OPDSContributor),
@@ -93,54 +74,10 @@ var OPDSPublicationMetadata = (function () {
         ta_json_1.JsonElementType(opds2_contributor_1.OPDSContributor),
         tslib_1.__metadata("design:type", Array)
     ], OPDSPublicationMetadata.prototype, "Imprint", void 0);
-    tslib_1.__decorate([
-        ta_json_1.JsonProperty("language"),
-        ta_json_1.JsonElementType(String),
-        tslib_1.__metadata("design:type", Array)
-    ], OPDSPublicationMetadata.prototype, "Language", void 0);
-    tslib_1.__decorate([
-        ta_json_1.JsonProperty("modified"),
-        tslib_1.__metadata("design:type", Date)
-    ], OPDSPublicationMetadata.prototype, "Modified", void 0);
-    tslib_1.__decorate([
-        ta_json_1.JsonProperty("published"),
-        tslib_1.__metadata("design:type", Date)
-    ], OPDSPublicationMetadata.prototype, "PublicationDate", void 0);
-    tslib_1.__decorate([
-        ta_json_1.JsonProperty("description"),
-        tslib_1.__metadata("design:type", String)
-    ], OPDSPublicationMetadata.prototype, "Description", void 0);
-    tslib_1.__decorate([
-        ta_json_1.JsonProperty("source"),
-        tslib_1.__metadata("design:type", String)
-    ], OPDSPublicationMetadata.prototype, "Source", void 0);
-    tslib_1.__decorate([
-        ta_json_1.JsonProperty("rights"),
-        tslib_1.__metadata("design:type", String)
-    ], OPDSPublicationMetadata.prototype, "Rights", void 0);
-    tslib_1.__decorate([
-        ta_json_1.JsonProperty("subject"),
-        ta_json_1.JsonElementType(opds2_subject_1.OPDSSubject),
-        tslib_1.__metadata("design:type", Array)
-    ], OPDSPublicationMetadata.prototype, "Subject", void 0);
-    tslib_1.__decorate([
-        ta_json_1.JsonProperty("belongs_to"),
-        tslib_1.__metadata("design:type", opds2_belongsTo_1.OPDSBelongsTo)
-    ], OPDSPublicationMetadata.prototype, "BelongsTo", void 0);
-    tslib_1.__decorate([
-        ta_json_1.JsonProperty("duration"),
-        tslib_1.__metadata("design:type", Number)
-    ], OPDSPublicationMetadata.prototype, "Duration", void 0);
-    tslib_1.__decorate([
-        ta_json_1.OnDeserialized(),
-        tslib_1.__metadata("design:type", Function),
-        tslib_1.__metadata("design:paramtypes", []),
-        tslib_1.__metadata("design:returntype", void 0)
-    ], OPDSPublicationMetadata.prototype, "_OnDeserialized", null);
     OPDSPublicationMetadata = tslib_1.__decorate([
         ta_json_1.JsonObject()
     ], OPDSPublicationMetadata);
     return OPDSPublicationMetadata;
-}());
+}(metadata_1.Metadata));
 exports.OPDSPublicationMetadata = OPDSPublicationMetadata;
 //# sourceMappingURL=opds2-publicationMetadata.js.map

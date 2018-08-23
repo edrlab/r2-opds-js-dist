@@ -1,10 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const tslib_1 = require("tslib");
+const metadata_properties_1 = require("r2-shared-js/dist/es8-es2017/src/models/metadata-properties");
 const ta_json_1 = require("ta-json");
 const opds2_indirectAcquisition_1 = require("./opds2-indirectAcquisition");
 const opds2_price_1 = require("./opds2-price");
-let OPDSProperties = class OPDSProperties {
+let OPDSProperties = class OPDSProperties extends metadata_properties_1.Properties {
 };
 tslib_1.__decorate([
     ta_json_1.JsonProperty("numberOfItems"),

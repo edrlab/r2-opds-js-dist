@@ -5,8 +5,8 @@ var ta_json_1 = require("ta-json");
 var init_globals_1 = require("../src/opds/init-globals");
 var opds2_1 = require("../src/opds/opds2/opds2");
 var helpers_1 = require("./helpers");
-init_globals_1.initGlobalConverters_GENERIC();
 init_globals_1.initGlobalConverters_OPDS();
+init_globals_1.initGlobalConverters_GENERIC();
 var contextStr1 = "http://context1";
 var contextStr2 = "http://context2";
 ava_1.test("JSON SERIALIZE: OPDSFeed.Context => string[]", function (t) {

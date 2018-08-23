@@ -5,8 +5,8 @@ const ta_json_1 = require("ta-json");
 const init_globals_1 = require("../src/opds/init-globals");
 const opds2_link_1 = require("../src/opds/opds2/opds2-link");
 const helpers_1 = require("./helpers");
-init_globals_1.initGlobalConverters_GENERIC();
 init_globals_1.initGlobalConverters_OPDS();
+init_globals_1.initGlobalConverters_GENERIC();
 const relStr1 = "rel1";
 const relStr2 = "rel2";
 ava_1.test("JSON SERIALIZE: OPDSLink.Rel => string[]", (t) => {

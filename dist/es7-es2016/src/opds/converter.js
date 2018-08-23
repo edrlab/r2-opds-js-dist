@@ -1,7 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const metadata_belongsto_1 = require("r2-shared-js/dist/es7-es2016/src/models/metadata-belongsto");
+const metadata_subject_1 = require("r2-shared-js/dist/es7-es2016/src/models/metadata-subject");
 const opds2_1 = require("./opds2/opds2");
-const opds2_belongsTo_1 = require("./opds2/opds2-belongsTo");
 const opds2_collection_1 = require("./opds2/opds2-collection");
 const opds2_contributor_1 = require("./opds2/opds2-contributor");
 const opds2_indirectAcquisition_1 = require("./opds2/opds2-indirectAcquisition");
@@ -11,7 +12,6 @@ const opds2_price_1 = require("./opds2/opds2-price");
 const opds2_properties_1 = require("./opds2/opds2-properties");
 const opds2_publication_1 = require("./opds2/opds2-publication");
 const opds2_publicationMetadata_1 = require("./opds2/opds2-publicationMetadata");
-const opds2_subject_1 = require("./opds2/opds2-subject");
 function convertOpds1ToOpds2(feed) {
     const opds2feed = new opds2_1.OPDSFeed();
     opds2feed.Metadata = new opds2_metadata_1.OPDSMetadata();
@@ -74,7 +74,7 @@ function convertOpds1ToOpds2(feed) {
                         coll.Links = [];
                         coll.Links.push(link);
                         if (!p.Metadata.BelongsTo) {
-                            p.Metadata.BelongsTo = new opds2_belongsTo_1.OPDSBelongsTo();
+                            p.Metadata.BelongsTo = new metadata_belongsto_1.BelongsTo();
                         }
                         if (!p.Metadata.BelongsTo.Series) {
                             p.Metadata.BelongsTo.Series = [];
@@ -92,7 +92,7 @@ function convertOpds1ToOpds2(feed) {
                 }
                 if (entry.Categories) {
                     entry.Categories.forEach((cat) => {
-                        const subj = new opds2_subject_1.OPDSSubject();
+                        const subj = new metadata_subject_1.Subject();
                         subj.Code = cat.Term;
                         subj.Name = cat.Label;
                         subj.Scheme = cat.Scheme;

@@ -1,14 +1,17 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var tslib_1 = require("tslib");
+var metadata_belongsto_1 = require("r2-shared-js/dist/es5/src/models/metadata-belongsto");
+var publication_1 = require("r2-shared-js/dist/es5/src/models/publication");
 var ta_json_1 = require("ta-json");
-var opds2_belongsTo_1 = require("./opds2-belongsTo");
 var opds2_collection_1 = require("./opds2-collection");
 var opds2_contributor_1 = require("./opds2-contributor");
 var opds2_link_1 = require("./opds2-link");
 var opds2_publicationMetadata_1 = require("./opds2-publicationMetadata");
-var OPDSPublication = (function () {
+var OPDSPublication = (function (_super) {
+    tslib_1.__extends(OPDSPublication, _super);
     function OPDSPublication() {
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     OPDSPublication.prototype.findFirstLinkByRel = function (rel) {
         return this.Links ? this.Links.find(function (l) {
@@ -30,7 +33,7 @@ var OPDSPublication = (function () {
         }
         this.Images.push(i);
     };
-    OPDSPublication.prototype.AddLink = function (href, typeLink, rel, title) {
+    OPDSPublication.prototype.AddLink_ = function (href, typeLink, rel, title) {
         var l = new opds2_link_1.OPDSLink();
         l.Href = href;
         l.TypeLink = typeLink;
@@ -92,7 +95,7 @@ var OPDSPublication = (function () {
             this.Metadata = new opds2_publicationMetadata_1.OPDSPublicationMetadata();
         }
         if (!this.Metadata.BelongsTo) {
-            this.Metadata.BelongsTo = new opds2_belongsTo_1.OPDSBelongsTo();
+            this.Metadata.BelongsTo = new metadata_belongsto_1.BelongsTo();
         }
         if (!this.Metadata.BelongsTo.Series) {
             this.Metadata.BelongsTo.Series = [];
@@ -121,17 +124,6 @@ var OPDSPublication = (function () {
         }
         this.Metadata.Publisher.push(c);
     };
-    OPDSPublication.prototype._OnDeserialized = function () {
-        if (!this.Metadata) {
-            console.log("OPDSPublication.Metadata is not set!");
-        }
-        if (!this.Links) {
-            console.log("OPDSPublication.Links is not set!");
-        }
-        if (!this.Images) {
-            console.log("OPDSPublication.Images is not set!");
-        }
-    };
     tslib_1.__decorate([
         ta_json_1.JsonProperty("metadata"),
         tslib_1.__metadata("design:type", opds2_publicationMetadata_1.OPDSPublicationMetadata)
@@ -146,16 +138,10 @@ var OPDSPublication = (function () {
         ta_json_1.JsonElementType(opds2_link_1.OPDSLink),
         tslib_1.__metadata("design:type", Array)
     ], OPDSPublication.prototype, "Images", void 0);
-    tslib_1.__decorate([
-        ta_json_1.OnDeserialized(),
-        tslib_1.__metadata("design:type", Function),
-        tslib_1.__metadata("design:paramtypes", []),
-        tslib_1.__metadata("design:returntype", void 0)
-    ], OPDSPublication.prototype, "_OnDeserialized", null);
     OPDSPublication = tslib_1.__decorate([
         ta_json_1.JsonObject()
     ], OPDSPublication);
     return OPDSPublication;
-}());
+}(publication_1.Publication));
 exports.OPDSPublication = OPDSPublication;
 //# sourceMappingURL=opds2-publication.js.map

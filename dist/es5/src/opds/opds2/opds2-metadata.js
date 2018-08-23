@@ -1,29 +1,19 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var tslib_1 = require("tslib");
+var metadata_1 = require("r2-shared-js/dist/es5/src/models/metadata");
 var ta_json_1 = require("ta-json");
 var opds2_contributor_1 = require("./opds2-contributor");
-var OPDSMetadata = (function () {
+var OPDSMetadata = (function (_super) {
+    tslib_1.__extends(OPDSMetadata, _super);
     function OPDSMetadata() {
+        return _super !== null && _super.apply(this, arguments) || this;
     }
-    OPDSMetadata.prototype._OnDeserialized = function () {
-        if (!this.Title) {
-            console.log("OPDSMetadata.Title is not set!");
-        }
-    };
     tslib_1.__decorate([
         ta_json_1.JsonProperty("author"),
         ta_json_1.JsonElementType(opds2_contributor_1.OPDSContributor),
         tslib_1.__metadata("design:type", Array)
     ], OPDSMetadata.prototype, "Author", void 0);
-    tslib_1.__decorate([
-        ta_json_1.JsonProperty("@type"),
-        tslib_1.__metadata("design:type", String)
-    ], OPDSMetadata.prototype, "RDFType", void 0);
-    tslib_1.__decorate([
-        ta_json_1.JsonProperty("title"),
-        tslib_1.__metadata("design:type", String)
-    ], OPDSMetadata.prototype, "Title", void 0);
     tslib_1.__decorate([
         ta_json_1.JsonProperty("numberOfItems"),
         tslib_1.__metadata("design:type", Number)
@@ -36,20 +26,10 @@ var OPDSMetadata = (function () {
         ta_json_1.JsonProperty("currentPage"),
         tslib_1.__metadata("design:type", Number)
     ], OPDSMetadata.prototype, "CurrentPage", void 0);
-    tslib_1.__decorate([
-        ta_json_1.JsonProperty("modified"),
-        tslib_1.__metadata("design:type", Date)
-    ], OPDSMetadata.prototype, "Modified", void 0);
-    tslib_1.__decorate([
-        ta_json_1.OnDeserialized(),
-        tslib_1.__metadata("design:type", Function),
-        tslib_1.__metadata("design:paramtypes", []),
-        tslib_1.__metadata("design:returntype", void 0)
-    ], OPDSMetadata.prototype, "_OnDeserialized", null);
     OPDSMetadata = tslib_1.__decorate([
         ta_json_1.JsonObject()
     ], OPDSMetadata);
     return OPDSMetadata;
-}());
+}(metadata_1.Metadata));
 exports.OPDSMetadata = OPDSMetadata;
 //# sourceMappingURL=opds2-metadata.js.map

@@ -1,13 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const tslib_1 = require("tslib");
+const metadata_belongsto_1 = require("r2-shared-js/dist/es8-es2017/src/models/metadata-belongsto");
+const publication_1 = require("r2-shared-js/dist/es8-es2017/src/models/publication");
 const ta_json_1 = require("ta-json");
-const opds2_belongsTo_1 = require("./opds2-belongsTo");
 const opds2_collection_1 = require("./opds2-collection");
 const opds2_contributor_1 = require("./opds2-contributor");
 const opds2_link_1 = require("./opds2-link");
 const opds2_publicationMetadata_1 = require("./opds2-publicationMetadata");
-let OPDSPublication = class OPDSPublication {
+let OPDSPublication = class OPDSPublication extends publication_1.Publication {
     findFirstLinkByRel(rel) {
         return this.Links ? this.Links.find((l) => {
             return l.HasRel(rel);
@@ -28,7 +29,7 @@ let OPDSPublication = class OPDSPublication {
         }
         this.Images.push(i);
     }
-    AddLink(href, typeLink, rel, title) {
+    AddLink_(href, typeLink, rel, title) {
         const l = new opds2_link_1.OPDSLink();
         l.Href = href;
         l.TypeLink = typeLink;
@@ -90,7 +91,7 @@ let OPDSPublication = class OPDSPublication {
             this.Metadata = new opds2_publicationMetadata_1.OPDSPublicationMetadata();
         }
         if (!this.Metadata.BelongsTo) {
-            this.Metadata.BelongsTo = new opds2_belongsTo_1.OPDSBelongsTo();
+            this.Metadata.BelongsTo = new metadata_belongsto_1.BelongsTo();
         }
         if (!this.Metadata.BelongsTo.Series) {
             this.Metadata.BelongsTo.Series = [];
@@ -119,17 +120,6 @@ let OPDSPublication = class OPDSPublication {
         }
         this.Metadata.Publisher.push(c);
     }
-    _OnDeserialized() {
-        if (!this.Metadata) {
-            console.log("OPDSPublication.Metadata is not set!");
-        }
-        if (!this.Links) {
-            console.log("OPDSPublication.Links is not set!");
-        }
-        if (!this.Images) {
-            console.log("OPDSPublication.Images is not set!");
-        }
-    }
 };
 tslib_1.__decorate([
     ta_json_1.JsonProperty("metadata"),
@@ -145,12 +135,6 @@ tslib_1.__decorate([
     ta_json_1.JsonElementType(opds2_link_1.OPDSLink),
     tslib_1.__metadata("design:type", Array)
 ], OPDSPublication.prototype, "Images", void 0);
-tslib_1.__decorate([
-    ta_json_1.OnDeserialized(),
-    tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", []),
-    tslib_1.__metadata("design:returntype", void 0)
-], OPDSPublication.prototype, "_OnDeserialized", null);
 OPDSPublication = tslib_1.__decorate([
     ta_json_1.JsonObject()
 ], OPDSPublication);

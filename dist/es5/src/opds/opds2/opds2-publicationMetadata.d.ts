@@ -1,11 +1,6 @@
-import { OPDSBelongsTo } from "./opds2-belongsTo";
+import { Metadata } from "r2-shared-js/dist/es5/src/models/metadata";
 import { OPDSContributor } from "./opds2-contributor";
-import { IStringMap } from "./opds2-multilang";
-import { OPDSSubject } from "./opds2-subject";
-export declare class OPDSPublicationMetadata {
-    RDFType: string;
-    Title: string | IStringMap;
-    Identifier: string;
+export declare class OPDSPublicationMetadata extends Metadata {
     Author: OPDSContributor[];
     Translator: OPDSContributor[];
     Editor: OPDSContributor[];
@@ -19,14 +14,4 @@ export declare class OPDSPublicationMetadata {
     OPDSContributor: OPDSContributor[];
     Publisher: OPDSContributor[];
     Imprint: OPDSContributor[];
-    Language: string[];
-    Modified: Date;
-    PublicationDate: Date;
-    Description: string;
-    Source: string;
-    Rights: string;
-    Subject: OPDSSubject[];
-    BelongsTo: OPDSBelongsTo;
-    Duration: number;
-    private _OnDeserialized;
 }
