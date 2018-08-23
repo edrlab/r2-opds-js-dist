@@ -113,11 +113,22 @@ function convertOpds1ToOpds2(feed) {
                         p_1.Metadata.Author.push(cont);
                     });
                 }
-                if (entry.Content) {
-                    p_1.Metadata.Description = entry.Content;
+                if (entry.Summary) {
+                    p_1.Metadata.Description = ((entry.SummaryType === "text/html" || entry.SummaryType === "html") ?
+                        entry.Summary.replace(/ xmlns="[^"]+"/g, "") :
+                        entry.Summary);
                 }
-                else if (entry.Summary) {
-                    p_1.Metadata.Description = entry.Summary;
+                if (entry.Content) {
+                    var txt = ((entry.ContentType === "text/html" || entry.ContentType === "html") ?
+                        entry.Content.replace(/ xmlns="[^"]+"/g, "") :
+                        entry.Content);
+                    if (p_1.Metadata.Description) {
+                        p_1.Metadata.Description += "\n\n";
+                        p_1.Metadata.Description += txt;
+                    }
+                    else {
+                        p_1.Metadata.Description = txt;
+                    }
                 }
                 if (entry.Links) {
                     entry.Links.forEach(function (link) {
@@ -187,6 +198,30 @@ function convertOpds1ToOpds2(feed) {
             else {
                 var linkNav = new opds2_link_1.OPDSLink();
                 linkNav.Title = entry.Title;
+                if (entry.Summary) {
+                    var txt = ((entry.SummaryType === "text/html" || entry.SummaryType === "html") ?
+                        entry.Summary.replace(/ xmlns="[^"]+"/g, "") :
+                        entry.Summary);
+                    if (linkNav.Title) {
+                        linkNav.Title += "\n\n";
+                        linkNav.Title += txt;
+                    }
+                    else {
+                        linkNav.Title = txt;
+                    }
+                }
+                if (entry.Content) {
+                    var txt = ((entry.ContentType === "text/html" || entry.ContentType === "html") ?
+                        entry.Content.replace(/ xmlns="[^"]+"/g, "") :
+                        entry.Content);
+                    if (linkNav.Title) {
+                        linkNav.Title += "\n\n";
+                        linkNav.Title += txt;
+                    }
+                    else {
+                        linkNav.Title = txt;
+                    }
+                }
                 if (entry.Links && entry.Links[0]) {
                     linkNav.AddRel(entry.Links[0].Rel);
                     linkNav.TypeLink = entry.Links[0].Type;
