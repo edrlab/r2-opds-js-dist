@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const tslib_1 = require("tslib");
-const ta_json_string_converter_1 = require("r2-utils-js/dist/es7-es2016/src/_utils/ta-json-string-converter");
 const ta_json_1 = require("ta-json");
 const opds2_facet_1 = require("./opds2-facet");
 const opds2_group_1 = require("./opds2-group");
@@ -177,7 +176,6 @@ let OPDSFeed = class OPDSFeed {
 };
 tslib_1.__decorate([
     ta_json_1.JsonProperty("@context"),
-    ta_json_1.JsonConverter(ta_json_string_converter_1.JsonStringConverter),
     ta_json_1.JsonElementType(String),
     tslib_1.__metadata("design:type", Array)
 ], OPDSFeed.prototype, "Context", void 0);
