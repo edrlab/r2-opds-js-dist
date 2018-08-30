@@ -1,9 +1,9 @@
 {
-  "short": "f8d3465",
-  "long": "f8d3465719996294fa75f1076993d75f5aff5abf",
+  "short": "e1e20ba",
+  "long": "e1e20ba0bed7c0f40df11f1ad26d7bd28d40faea",
   "branch": "develop",
-  "date": "2018-08-30T00:03:02.000Z",
+  "date": "2018-08-30T17:07:04.000Z",
   "dirty": true,
-  "urlHistory": "https://github.com/edrlab/r2-opds-js/commits/f8d3465719996294fa75f1076993d75f5aff5abf",
-  "urlDiff": "https://github.com/edrlab/r2-opds-js/compare/f8d3465719996294fa75f1076993d75f5aff5abf...develop"
+  "urlHistory": "https://github.com/readium/r2-opds-js/commits/e1e20ba0bed7c0f40df11f1ad26d7bd28d40faea",
+  "urlDiff": "https://github.com/readium/r2-opds-js/compare/e1e20ba0bed7c0f40df11f1ad26d7bd28d40faea...develop"
 }
