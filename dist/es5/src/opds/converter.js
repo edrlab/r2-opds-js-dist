@@ -60,7 +60,9 @@ function convertOpds1ToOpds2(feed) {
                 else {
                     p_1.Metadata.Identifier = entry.Id;
                 }
-                p_1.Metadata.Language = [entry.DcLanguage];
+                if (entry.DcLanguage) {
+                    p_1.Metadata.Language = [entry.DcLanguage];
+                }
                 p_1.Metadata.Modified = entry.Updated;
                 p_1.Metadata.PublicationDate = entry.Published;
                 p_1.Metadata.Rights = entry.DcRights;
