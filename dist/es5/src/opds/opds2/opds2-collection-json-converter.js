@@ -1,12 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var ta_json_1 = require("ta-json");
+var ta_json_x_1 = require("ta-json-x");
 var opds2_collection_1 = require("./opds2-collection");
 var JsonOPDSCollectionConverter = (function () {
     function JsonOPDSCollectionConverter() {
     }
     JsonOPDSCollectionConverter.prototype.serialize = function (property) {
-        return ta_json_1.JSON.serialize(property);
+        return ta_json_x_1.JSON.serialize(property);
     };
     JsonOPDSCollectionConverter.prototype.deserialize = function (value) {
         if (typeof value === "string") {
@@ -15,7 +15,7 @@ var JsonOPDSCollectionConverter = (function () {
             return c;
         }
         else {
-            return ta_json_1.JSON.deserialize(value, opds2_collection_1.OPDSCollection);
+            return ta_json_x_1.JSON.deserialize(value, opds2_collection_1.OPDSCollection);
         }
     };
     JsonOPDSCollectionConverter.prototype.collapseArrayWithSingleItem = function () {

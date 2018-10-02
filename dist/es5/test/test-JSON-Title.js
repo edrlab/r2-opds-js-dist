@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var ava_1 = require("ava");
-var ta_json_1 = require("ta-json");
+var ta_json_x_1 = require("ta-json-x");
 var init_globals_1 = require("../src/opds/init-globals");
 var opds2_publicationMetadata_1 = require("../src/opds/opds2/opds2-publicationMetadata");
 var helpers_1 = require("./helpers");
@@ -21,7 +21,7 @@ ava_1.test("JSON SERIALIZE: OPDSPublicationMetadata.Title => string", function (
     var md = new opds2_publicationMetadata_1.OPDSPublicationMetadata();
     md.Title = titleStr1;
     helpers_1.inspect(md);
-    var json = ta_json_1.JSON.serialize(md);
+    var json = ta_json_x_1.JSON.serialize(md);
     helpers_1.logJSON(json);
     helpers_1.checkType_String(t, json.title);
     t.is(json.title, titleStr1);
@@ -30,7 +30,7 @@ ava_1.test("JSON SERIALIZE: OPDSPublicationMetadata.Title => string-lang", funct
     var md = new opds2_publicationMetadata_1.OPDSPublicationMetadata();
     md.Title = titleLangStr1;
     helpers_1.inspect(md);
-    var json = ta_json_1.JSON.serialize(md);
+    var json = ta_json_x_1.JSON.serialize(md);
     helpers_1.logJSON(json);
     helpers_1.checkType_Object(t, json.title);
     helpers_1.checkType_String(t, json.title[titleLang1]);
@@ -42,7 +42,7 @@ ava_1.test("JSON DESERIALIZE: OPDSPublicationMetadata.Title => string", function
     var json = {};
     json.title = titleStr1;
     helpers_1.logJSON(json);
-    var md = ta_json_1.JSON.deserialize(json, opds2_publicationMetadata_1.OPDSPublicationMetadata);
+    var md = ta_json_x_1.JSON.deserialize(json, opds2_publicationMetadata_1.OPDSPublicationMetadata);
     helpers_1.inspect(md);
     helpers_1.checkType_String(t, md.Title);
     t.is(md.Title, titleStr1);
@@ -51,7 +51,7 @@ ava_1.test("JSON DESERIALIZE: OPDSPublicationMetadata.Title => string-lang", fun
     var json = {};
     json.title = titleLangStr1;
     helpers_1.logJSON(json);
-    var md = ta_json_1.JSON.deserialize(json, opds2_publicationMetadata_1.OPDSPublicationMetadata);
+    var md = ta_json_x_1.JSON.deserialize(json, opds2_publicationMetadata_1.OPDSPublicationMetadata);
     helpers_1.inspect(md);
     helpers_1.checkType_Object(t, md.Title);
     helpers_1.checkType_String(t, md.Title[titleLang1]);

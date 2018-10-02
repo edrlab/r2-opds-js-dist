@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var tslib_1 = require("tslib");
-var ta_json_1 = require("ta-json");
+var ta_json_x_1 = require("ta-json-x");
 var OPDSPrice = (function () {
     function OPDSPrice() {
     }
@@ -14,21 +14,21 @@ var OPDSPrice = (function () {
         }
     };
     tslib_1.__decorate([
-        ta_json_1.JsonProperty("currency"),
+        ta_json_x_1.JsonProperty("currency"),
         tslib_1.__metadata("design:type", String)
     ], OPDSPrice.prototype, "Currency", void 0);
     tslib_1.__decorate([
-        ta_json_1.JsonProperty("value"),
+        ta_json_x_1.JsonProperty("value"),
         tslib_1.__metadata("design:type", Number)
     ], OPDSPrice.prototype, "Value", void 0);
     tslib_1.__decorate([
-        ta_json_1.OnDeserialized(),
+        ta_json_x_1.OnDeserialized(),
         tslib_1.__metadata("design:type", Function),
         tslib_1.__metadata("design:paramtypes", []),
         tslib_1.__metadata("design:returntype", void 0)
     ], OPDSPrice.prototype, "_OnDeserialized", null);
     OPDSPrice = tslib_1.__decorate([
-        ta_json_1.JsonObject()
+        ta_json_x_1.JsonObject()
     ], OPDSPrice);
     return OPDSPrice;
 }());

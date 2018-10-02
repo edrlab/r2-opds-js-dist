@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const ava_1 = require("ava");
-const ta_json_1 = require("ta-json");
+const ta_json_x_1 = require("ta-json-x");
 const init_globals_1 = require("../src/opds/init-globals");
 const opds2_1 = require("../src/opds/opds2/opds2");
 const helpers_1 = require("./helpers");
@@ -15,7 +15,7 @@ ava_1.test("JSON SERIALIZE: OPDSFeed.Context => string[]", (t) => {
     pub.Context.push(contextStr1);
     pub.Context.push(contextStr2);
     helpers_1.inspect(pub);
-    const json = ta_json_1.JSON.serialize(pub);
+    const json = ta_json_x_1.JSON.serialize(pub);
     helpers_1.logJSON(json);
     helpers_1.checkType_Array(t, json["@context"]);
     t.is(json["@context"].length, 2);
@@ -28,7 +28,7 @@ ava_1.test("JSON SERIALIZE: OPDSFeed.Context => string[1] collapse-array", (t) =
     const pub = new opds2_1.OPDSFeed();
     pub.Context = [contextStr1];
     helpers_1.inspect(pub);
-    const json = ta_json_1.JSON.serialize(pub);
+    const json = ta_json_x_1.JSON.serialize(pub);
     helpers_1.logJSON(json);
     helpers_1.checkType_String(t, json["@context"]);
     t.is(json["@context"], contextStr1);
@@ -37,7 +37,7 @@ ava_1.test("JSON DESERIALIZE: OPDSFeed.Context => string[]", (t) => {
     const json = {};
     json["@context"] = [contextStr1, contextStr2];
     helpers_1.logJSON(json);
-    const pub = ta_json_1.JSON.deserialize(json, opds2_1.OPDSFeed);
+    const pub = ta_json_x_1.JSON.deserialize(json, opds2_1.OPDSFeed);
     helpers_1.inspect(pub);
     helpers_1.checkType_Array(t, pub.Context);
     t.is(pub.Context.length, 2);
@@ -50,7 +50,7 @@ ava_1.test("JSON DESERIALIZE: OPDSFeed.Context => string[1]", (t) => {
     const json = {};
     json["@context"] = [contextStr1];
     helpers_1.logJSON(json);
-    const pub = ta_json_1.JSON.deserialize(json, opds2_1.OPDSFeed);
+    const pub = ta_json_x_1.JSON.deserialize(json, opds2_1.OPDSFeed);
     helpers_1.inspect(pub);
     helpers_1.checkType_Array(t, pub.Context);
     t.is(pub.Context.length, 1);
@@ -61,7 +61,7 @@ ava_1.test("JSON DESERIALIZE: OPDSFeed.Context => string", (t) => {
     const json = {};
     json["@context"] = contextStr1;
     helpers_1.logJSON(json);
-    const pub = ta_json_1.JSON.deserialize(json, opds2_1.OPDSFeed);
+    const pub = ta_json_x_1.JSON.deserialize(json, opds2_1.OPDSFeed);
     helpers_1.inspect(pub);
     helpers_1.checkType_Array(t, pub.Context);
     t.is(pub.Context.length, 1);

@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var xml_js_mapper_1 = require("r2-utils-js/dist/es5/src/_utils/xml-js-mapper");
 var ava_1 = require("ava");
-var ta_json_1 = require("ta-json");
+var ta_json_x_1 = require("ta-json-x");
 var xmldom = require("xmldom");
 var init_globals_1 = require("../src/opds/init-globals");
 var opds_entry_1 = require("../src/opds/opds1/opds-entry");
@@ -18,7 +18,7 @@ ava_1.test("JSON SERIALIZE: OPDSPublicationMetadata.Modified => Date", function 
     var md = new opds2_publicationMetadata_1.OPDSPublicationMetadata();
     md.Modified = date;
     helpers_1.inspect(md);
-    var json = ta_json_1.JSON.serialize(md);
+    var json = ta_json_x_1.JSON.serialize(md);
     helpers_1.logJSON(json);
     helpers_1.checkType_String(t, json.modified);
     t.is(json.modified, dateSTR);
@@ -27,7 +27,7 @@ ava_1.test("JSON DESERIALIZE: OPDSPublicationMetadata.Modified => Date", functio
     var json = {};
     json.modified = dateSTR;
     helpers_1.logJSON(json);
-    var md = ta_json_1.JSON.deserialize(json, opds2_publicationMetadata_1.OPDSPublicationMetadata);
+    var md = ta_json_x_1.JSON.deserialize(json, opds2_publicationMetadata_1.OPDSPublicationMetadata);
     helpers_1.inspect(md);
     helpers_1.checkType(t, md.Modified, Date);
     helpers_1.checkDate(t, md.Modified, date);

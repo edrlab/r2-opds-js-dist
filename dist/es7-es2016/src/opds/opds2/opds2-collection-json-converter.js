@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const ta_json_1 = require("ta-json");
+const ta_json_x_1 = require("ta-json-x");
 const opds2_collection_1 = require("./opds2-collection");
 class JsonOPDSCollectionConverter {
     serialize(property) {
-        return ta_json_1.JSON.serialize(property);
+        return ta_json_x_1.JSON.serialize(property);
     }
     deserialize(value) {
         if (typeof value === "string") {
@@ -13,7 +13,7 @@ class JsonOPDSCollectionConverter {
             return c;
         }
         else {
-            return ta_json_1.JSON.deserialize(value, opds2_collection_1.OPDSCollection);
+            return ta_json_x_1.JSON.deserialize(value, opds2_collection_1.OPDSCollection);
         }
     }
     collapseArrayWithSingleItem() {

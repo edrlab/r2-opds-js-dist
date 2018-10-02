@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const ava_1 = require("ava");
-const ta_json_1 = require("ta-json");
+const ta_json_x_1 = require("ta-json-x");
 const init_globals_1 = require("../src/opds/init-globals");
 const opds2_link_1 = require("../src/opds/opds2/opds2-link");
 const helpers_1 = require("./helpers");
@@ -14,7 +14,7 @@ ava_1.test("JSON SERIALIZE: OPDSLink.Rel => string[]", (t) => {
     link.AddRel(relStr1);
     link.AddRel(relStr2);
     helpers_1.inspect(link);
-    const json = ta_json_1.JSON.serialize(link);
+    const json = ta_json_x_1.JSON.serialize(link);
     helpers_1.logJSON(json);
     helpers_1.checkType_Array(t, json.rel);
     t.is(json.rel.length, 2);
@@ -33,7 +33,7 @@ ava_1.test("JSON SERIALIZE: OPDSLink.Rel => string[] (recursive links)", (t) => 
     link.Children = [];
     link.Children.push(child);
     helpers_1.inspect(link);
-    const json = ta_json_1.JSON.serialize(link);
+    const json = ta_json_x_1.JSON.serialize(link);
     helpers_1.logJSON(json);
     helpers_1.checkType_Array(t, json.rel);
     t.is(json.rel.length, 2);
@@ -54,7 +54,7 @@ ava_1.test("JSON SERIALIZE: OPDSLink.Rel => string", (t) => {
     const link = new opds2_link_1.OPDSLink();
     link.AddRel(relStr1);
     helpers_1.inspect(link);
-    const json = ta_json_1.JSON.serialize(link);
+    const json = ta_json_x_1.JSON.serialize(link);
     helpers_1.logJSON(json);
     helpers_1.checkType_String(t, json.rel);
     t.is(json.rel, relStr1);
@@ -67,7 +67,7 @@ ava_1.test("JSON SERIALIZE: OPDSLink.Rel => string (recursive links)", (t) => {
     link.Children = [];
     link.Children.push(child);
     helpers_1.inspect(link);
-    const json = ta_json_1.JSON.serialize(link);
+    const json = ta_json_x_1.JSON.serialize(link);
     helpers_1.logJSON(json);
     helpers_1.checkType_String(t, json.rel);
     t.is(json.rel, relStr1);
@@ -80,7 +80,7 @@ ava_1.test("JSON DESERIALIZE: OPDSLink.Rel => string[]", (t) => {
     const json = {};
     json.rel = [relStr1, relStr2];
     helpers_1.logJSON(json);
-    const link = ta_json_1.JSON.deserialize(json, opds2_link_1.OPDSLink);
+    const link = ta_json_x_1.JSON.deserialize(json, opds2_link_1.OPDSLink);
     helpers_1.inspect(link);
     helpers_1.checkType_Array(t, link.Rel);
     t.is(link.Rel.length, 2);
@@ -95,7 +95,7 @@ ava_1.test("JSON DESERIALIZE: OPDSLink.Rel => string[] (recursive children)", (t
     json.children = [];
     json.children.push({ rel: [relStr2, relStr1] });
     helpers_1.logJSON(json);
-    const link = ta_json_1.JSON.deserialize(json, opds2_link_1.OPDSLink);
+    const link = ta_json_x_1.JSON.deserialize(json, opds2_link_1.OPDSLink);
     helpers_1.inspect(link);
     helpers_1.checkType_Array(t, link.Rel);
     t.is(link.Rel.length, 2);
@@ -116,7 +116,7 @@ ava_1.test("JSON DESERIALIZE: OPDSLink.Rel => string[1]", (t) => {
     const json = {};
     json.rel = [relStr1];
     helpers_1.logJSON(json);
-    const link = ta_json_1.JSON.deserialize(json, opds2_link_1.OPDSLink);
+    const link = ta_json_x_1.JSON.deserialize(json, opds2_link_1.OPDSLink);
     helpers_1.inspect(link);
     helpers_1.checkType_Array(t, link.Rel);
     t.is(link.Rel.length, 1);
@@ -127,7 +127,7 @@ ava_1.test("JSON DESERIALIZE: OPDSLink.Rel => string", (t) => {
     const json = {};
     json.rel = relStr1;
     helpers_1.logJSON(json);
-    const link = ta_json_1.JSON.deserialize(json, opds2_link_1.OPDSLink);
+    const link = ta_json_x_1.JSON.deserialize(json, opds2_link_1.OPDSLink);
     helpers_1.inspect(link);
     helpers_1.checkType_Array(t, link.Rel);
     t.is(link.Rel.length, 1);
@@ -140,7 +140,7 @@ ava_1.test("JSON DESERIALIZE: OPDSLink.Rel => string (recursive children)", (t) 
     json.children = [];
     json.children.push({ rel: relStr2 });
     helpers_1.logJSON(json);
-    const link = ta_json_1.JSON.deserialize(json, opds2_link_1.OPDSLink);
+    const link = ta_json_x_1.JSON.deserialize(json, opds2_link_1.OPDSLink);
     helpers_1.inspect(link);
     helpers_1.checkType_Array(t, link.Rel);
     t.is(link.Rel.length, 1);

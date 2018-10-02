@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var tslib_1 = require("tslib");
 var metadata_belongsto_1 = require("r2-shared-js/dist/es5/src/models/metadata-belongsto");
 var publication_1 = require("r2-shared-js/dist/es5/src/models/publication");
-var ta_json_1 = require("ta-json");
+var ta_json_x_1 = require("ta-json-x");
 var opds2_collection_1 = require("./opds2-collection");
 var opds2_contributor_1 = require("./opds2-contributor");
 var opds2_link_1 = require("./opds2-link");
@@ -125,21 +125,21 @@ var OPDSPublication = (function (_super) {
         this.Metadata.Publisher.push(c);
     };
     tslib_1.__decorate([
-        ta_json_1.JsonProperty("metadata"),
+        ta_json_x_1.JsonProperty("metadata"),
         tslib_1.__metadata("design:type", opds2_publicationMetadata_1.OPDSPublicationMetadata)
     ], OPDSPublication.prototype, "Metadata", void 0);
     tslib_1.__decorate([
-        ta_json_1.JsonProperty("links"),
-        ta_json_1.JsonElementType(opds2_link_1.OPDSLink),
+        ta_json_x_1.JsonProperty("links"),
+        ta_json_x_1.JsonElementType(opds2_link_1.OPDSLink),
         tslib_1.__metadata("design:type", Array)
     ], OPDSPublication.prototype, "Links", void 0);
     tslib_1.__decorate([
-        ta_json_1.JsonProperty("images"),
-        ta_json_1.JsonElementType(opds2_link_1.OPDSLink),
+        ta_json_x_1.JsonProperty("images"),
+        ta_json_x_1.JsonElementType(opds2_link_1.OPDSLink),
         tslib_1.__metadata("design:type", Array)
     ], OPDSPublication.prototype, "Images", void 0);
     OPDSPublication = tslib_1.__decorate([
-        ta_json_1.JsonObject()
+        ta_json_x_1.JsonObject()
     ], OPDSPublication);
     return OPDSPublication;
 }(publication_1.Publication));
