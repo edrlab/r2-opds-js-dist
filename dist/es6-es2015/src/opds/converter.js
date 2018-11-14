@@ -12,6 +12,181 @@ const opds2_price_1 = require("./opds2/opds2-price");
 const opds2_properties_1 = require("./opds2/opds2-properties");
 const opds2_publication_1 = require("./opds2/opds2-publication");
 const opds2_publicationMetadata_1 = require("./opds2/opds2-publicationMetadata");
+function convertOpds1ToOpds2_EntryToPublication(entry) {
+    const p = new opds2_publication_1.OPDSPublication();
+    p.Metadata = new opds2_publicationMetadata_1.OPDSPublicationMetadata();
+    p.Metadata.Title = entry.Title;
+    if (entry.DcIdentifier) {
+        p.Metadata.Identifier = entry.DcIdentifier;
+    }
+    else {
+        p.Metadata.Identifier = entry.Id;
+    }
+    if (entry.DcLanguage) {
+        p.Metadata.Language = [entry.DcLanguage];
+    }
+    p.Metadata.Modified = entry.Updated;
+    p.Metadata.PublicationDate = entry.Published;
+    p.Metadata.Rights = entry.DcRights;
+    if (entry.Series) {
+        entry.Series.forEach((s) => {
+            const coll = new opds2_collection_1.OPDSCollection();
+            coll.Name = s.Name;
+            coll.Position = s.Position;
+            const link = new opds2_link_1.OPDSLink();
+            link.Href = s.Url;
+            coll.Links = [];
+            coll.Links.push(link);
+            if (!p.Metadata.BelongsTo) {
+                p.Metadata.BelongsTo = new metadata_belongsto_1.BelongsTo();
+            }
+            if (!p.Metadata.BelongsTo.Series) {
+                p.Metadata.BelongsTo.Series = [];
+            }
+            p.Metadata.BelongsTo.Series.push(coll);
+        });
+    }
+    if (entry.DcPublisher) {
+        const c = new opds2_contributor_1.OPDSContributor();
+        c.Name = entry.DcPublisher;
+        if (!p.Metadata.Publisher) {
+            p.Metadata.Publisher = [];
+        }
+        p.Metadata.Publisher.push(c);
+    }
+    if (entry.Categories) {
+        entry.Categories.forEach((cat) => {
+            const subj = new metadata_subject_1.Subject();
+            subj.Code = cat.Term;
+            subj.Name = cat.Label;
+            subj.Scheme = cat.Scheme;
+            if (!p.Metadata.Subject) {
+                p.Metadata.Subject = [];
+            }
+            p.Metadata.Subject.push(subj);
+        });
+    }
+    if (entry.Authors) {
+        entry.Authors.forEach((aut) => {
+            const cont = new opds2_contributor_1.OPDSContributor();
+            cont.Name = aut.Name;
+            cont.Identifier = aut.Uri;
+            if (!p.Metadata.Author) {
+                p.Metadata.Author = [];
+            }
+            p.Metadata.Author.push(cont);
+        });
+    }
+    if (entry.Summary) {
+        p.Metadata.Description = ((entry.SummaryType === "text/html" || entry.SummaryType === "html") ?
+            entry.Summary.replace(/ xmlns="[^"]+"/g, "") :
+            entry.Summary);
+    }
+    if (entry.Content) {
+        const txt = ((entry.ContentType === "text/html" || entry.ContentType === "html") ?
+            entry.Content.replace(/ xmlns="[^"]+"/g, "") :
+            entry.Content);
+        if (p.Metadata.Description) {
+            p.Metadata.Description += "\n\n";
+            p.Metadata.Description += txt;
+        }
+        else {
+            p.Metadata.Description = txt;
+        }
+    }
+    if (entry.Links) {
+        entry.Links.forEach((link) => {
+            const l = new opds2_link_1.OPDSLink();
+            l.Href = link.Href;
+            l.TypeLink = link.Type;
+            l.AddRel(link.Rel);
+            l.Title = link.Title;
+            if (link.OpdsIndirectAcquisitions && link.OpdsIndirectAcquisitions.length) {
+                if (!l.Properties) {
+                    l.Properties = new opds2_properties_1.OPDSProperties();
+                }
+                link.OpdsIndirectAcquisitions.forEach((ia) => {
+                    const ind = new opds2_indirectAcquisition_1.OPDSIndirectAcquisition();
+                    ind.TypeAcquisition = ia.OpdsIndirectAcquisitionType;
+                    if (ia.OpdsIndirectAcquisitions && ia.OpdsIndirectAcquisitions.length) {
+                        ia.OpdsIndirectAcquisitions.forEach((iac) => {
+                            const cia = new opds2_indirectAcquisition_1.OPDSIndirectAcquisition();
+                            cia.TypeAcquisition = iac.OpdsIndirectAcquisitionType;
+                            if (!ind.Children) {
+                                ind.Children = [];
+                            }
+                            ind.Children.push(cia);
+                        });
+                    }
+                    if (!l.Properties.IndirectAcquisitions) {
+                        l.Properties.IndirectAcquisitions = [];
+                    }
+                    l.Properties.IndirectAcquisitions.push(ind);
+                });
+            }
+            if (link.OpdsPrice && link.OpdsPriceCurrencyCode) {
+                if (!l.Properties) {
+                    l.Properties = new opds2_properties_1.OPDSProperties();
+                }
+                l.Properties.Price = new opds2_price_1.OPDSPrice();
+                l.Properties.Price.Currency = link.OpdsPriceCurrencyCode;
+                l.Properties.Price.Value = link.OpdsPrice;
+            }
+            if (link.HasRel("collection") || link.HasRel("http://opds-spec.org/group")) {
+            }
+            else if (link.HasRel("http://opds-spec.org/image") ||
+                link.HasRel("http://opds-spec.org/image/thumbnail")) {
+                if (!p.Images) {
+                    p.Images = [];
+                }
+                p.Images.push(l);
+            }
+            else {
+                if (!p.Links) {
+                    p.Links = [];
+                }
+                p.Links.push(l);
+            }
+        });
+    }
+    return p;
+}
+exports.convertOpds1ToOpds2_EntryToPublication = convertOpds1ToOpds2_EntryToPublication;
+function convertOpds1ToOpds2_EntryToLink(entry) {
+    const linkNav = new opds2_link_1.OPDSLink();
+    linkNav.Title = entry.Title;
+    if (entry.Summary) {
+        const txt = ((entry.SummaryType === "text/html" || entry.SummaryType === "html") ?
+            entry.Summary.replace(/ xmlns="[^"]+"/g, "") :
+            entry.Summary);
+        if (linkNav.Title) {
+            linkNav.Title += "\n\n";
+            linkNav.Title += txt;
+        }
+        else {
+            linkNav.Title = txt;
+        }
+    }
+    if (entry.Content) {
+        const txt = ((entry.ContentType === "text/html" || entry.ContentType === "html") ?
+            entry.Content.replace(/ xmlns="[^"]+"/g, "") :
+            entry.Content);
+        if (linkNav.Title) {
+            linkNav.Title += "\n\n";
+            linkNav.Title += txt;
+        }
+        else {
+            linkNav.Title = txt;
+        }
+    }
+    if (entry.Links && entry.Links[0]) {
+        linkNav.AddRel(entry.Links[0].Rel);
+        linkNav.TypeLink = entry.Links[0].Type;
+        linkNav.Href = entry.Links[0].Href;
+    }
+    return linkNav;
+}
+exports.convertOpds1ToOpds2_EntryToLink = convertOpds1ToOpds2_EntryToLink;
 function convertOpds1ToOpds2(feed) {
     const opds2feed = new opds2_1.OPDSFeed();
     opds2feed.Metadata = new opds2_metadata_1.OPDSMetadata();
@@ -51,142 +226,7 @@ function convertOpds1ToOpds2(feed) {
                 });
             }
             if (!isAnNavigation) {
-                const p = new opds2_publication_1.OPDSPublication();
-                p.Metadata = new opds2_publicationMetadata_1.OPDSPublicationMetadata();
-                p.Metadata.Title = entry.Title;
-                if (entry.DcIdentifier) {
-                    p.Metadata.Identifier = entry.DcIdentifier;
-                }
-                else {
-                    p.Metadata.Identifier = entry.Id;
-                }
-                if (entry.DcLanguage) {
-                    p.Metadata.Language = [entry.DcLanguage];
-                }
-                p.Metadata.Modified = entry.Updated;
-                p.Metadata.PublicationDate = entry.Published;
-                p.Metadata.Rights = entry.DcRights;
-                if (entry.Series) {
-                    entry.Series.forEach((s) => {
-                        const coll = new opds2_collection_1.OPDSCollection();
-                        coll.Name = s.Name;
-                        coll.Position = s.Position;
-                        const link = new opds2_link_1.OPDSLink();
-                        link.Href = s.Url;
-                        coll.Links = [];
-                        coll.Links.push(link);
-                        if (!p.Metadata.BelongsTo) {
-                            p.Metadata.BelongsTo = new metadata_belongsto_1.BelongsTo();
-                        }
-                        if (!p.Metadata.BelongsTo.Series) {
-                            p.Metadata.BelongsTo.Series = [];
-                        }
-                        p.Metadata.BelongsTo.Series.push(coll);
-                    });
-                }
-                if (entry.DcPublisher) {
-                    const c = new opds2_contributor_1.OPDSContributor();
-                    c.Name = entry.DcPublisher;
-                    if (!p.Metadata.Publisher) {
-                        p.Metadata.Publisher = [];
-                    }
-                    p.Metadata.Publisher.push(c);
-                }
-                if (entry.Categories) {
-                    entry.Categories.forEach((cat) => {
-                        const subj = new metadata_subject_1.Subject();
-                        subj.Code = cat.Term;
-                        subj.Name = cat.Label;
-                        subj.Scheme = cat.Scheme;
-                        if (!p.Metadata.Subject) {
-                            p.Metadata.Subject = [];
-                        }
-                        p.Metadata.Subject.push(subj);
-                    });
-                }
-                if (entry.Authors) {
-                    entry.Authors.forEach((aut) => {
-                        const cont = new opds2_contributor_1.OPDSContributor();
-                        cont.Name = aut.Name;
-                        cont.Identifier = aut.Uri;
-                        if (!p.Metadata.Author) {
-                            p.Metadata.Author = [];
-                        }
-                        p.Metadata.Author.push(cont);
-                    });
-                }
-                if (entry.Summary) {
-                    p.Metadata.Description = ((entry.SummaryType === "text/html" || entry.SummaryType === "html") ?
-                        entry.Summary.replace(/ xmlns="[^"]+"/g, "") :
-                        entry.Summary);
-                }
-                if (entry.Content) {
-                    const txt = ((entry.ContentType === "text/html" || entry.ContentType === "html") ?
-                        entry.Content.replace(/ xmlns="[^"]+"/g, "") :
-                        entry.Content);
-                    if (p.Metadata.Description) {
-                        p.Metadata.Description += "\n\n";
-                        p.Metadata.Description += txt;
-                    }
-                    else {
-                        p.Metadata.Description = txt;
-                    }
-                }
-                if (entry.Links) {
-                    entry.Links.forEach((link) => {
-                        const l = new opds2_link_1.OPDSLink();
-                        l.Href = link.Href;
-                        l.TypeLink = link.Type;
-                        l.AddRel(link.Rel);
-                        l.Title = link.Title;
-                        if (link.OpdsIndirectAcquisitions && link.OpdsIndirectAcquisitions.length) {
-                            if (!l.Properties) {
-                                l.Properties = new opds2_properties_1.OPDSProperties();
-                            }
-                            link.OpdsIndirectAcquisitions.forEach((ia) => {
-                                const ind = new opds2_indirectAcquisition_1.OPDSIndirectAcquisition();
-                                ind.TypeAcquisition = ia.OpdsIndirectAcquisitionType;
-                                if (ia.OpdsIndirectAcquisitions && ia.OpdsIndirectAcquisitions.length) {
-                                    ia.OpdsIndirectAcquisitions.forEach((iac) => {
-                                        const cia = new opds2_indirectAcquisition_1.OPDSIndirectAcquisition();
-                                        cia.TypeAcquisition = iac.OpdsIndirectAcquisitionType;
-                                        if (!ind.Children) {
-                                            ind.Children = [];
-                                        }
-                                        ind.Children.push(cia);
-                                    });
-                                }
-                                if (!l.Properties.IndirectAcquisitions) {
-                                    l.Properties.IndirectAcquisitions = [];
-                                }
-                                l.Properties.IndirectAcquisitions.push(ind);
-                            });
-                        }
-                        if (link.OpdsPrice && link.OpdsPriceCurrencyCode) {
-                            if (!l.Properties) {
-                                l.Properties = new opds2_properties_1.OPDSProperties();
-                            }
-                            l.Properties.Price = new opds2_price_1.OPDSPrice();
-                            l.Properties.Price.Currency = link.OpdsPriceCurrencyCode;
-                            l.Properties.Price.Value = link.OpdsPrice;
-                        }
-                        if (link.HasRel("collection") || link.HasRel("http://opds-spec.org/group")) {
-                        }
-                        else if (link.HasRel("http://opds-spec.org/image") ||
-                            link.HasRel("http://opds-spec.org/image/thumbnail")) {
-                            if (!p.Images) {
-                                p.Images = [];
-                            }
-                            p.Images.push(l);
-                        }
-                        else {
-                            if (!p.Links) {
-                                p.Links = [];
-                            }
-                            p.Links.push(l);
-                        }
-                    });
-                }
+                const p = convertOpds1ToOpds2_EntryToPublication(entry);
                 if (collLink.Href) {
                     opds2feed.AddPublicationInGroup(p, collLink);
                 }
@@ -198,37 +238,7 @@ function convertOpds1ToOpds2(feed) {
                 }
             }
             else {
-                const linkNav = new opds2_link_1.OPDSLink();
-                linkNav.Title = entry.Title;
-                if (entry.Summary) {
-                    const txt = ((entry.SummaryType === "text/html" || entry.SummaryType === "html") ?
-                        entry.Summary.replace(/ xmlns="[^"]+"/g, "") :
-                        entry.Summary);
-                    if (linkNav.Title) {
-                        linkNav.Title += "\n\n";
-                        linkNav.Title += txt;
-                    }
-                    else {
-                        linkNav.Title = txt;
-                    }
-                }
-                if (entry.Content) {
-                    const txt = ((entry.ContentType === "text/html" || entry.ContentType === "html") ?
-                        entry.Content.replace(/ xmlns="[^"]+"/g, "") :
-                        entry.Content);
-                    if (linkNav.Title) {
-                        linkNav.Title += "\n\n";
-                        linkNav.Title += txt;
-                    }
-                    else {
-                        linkNav.Title = txt;
-                    }
-                }
-                if (entry.Links && entry.Links[0]) {
-                    linkNav.AddRel(entry.Links[0].Rel);
-                    linkNav.TypeLink = entry.Links[0].Type;
-                    linkNav.Href = entry.Links[0].Href;
-                }
+                const linkNav = convertOpds1ToOpds2_EntryToLink(entry);
                 if (collLink.Href) {
                     opds2feed.AddNavigationInGroup(linkNav, collLink);
                 }
