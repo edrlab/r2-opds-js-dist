@@ -9,7 +9,7 @@ function fn() {
         return Promise.resolve("foo");
     });
 }
-ava_1.test("dummy async test", (t) => tslib_1.__awaiter(this, void 0, void 0, function* () {
+ava_1.default("dummy async test", (t) => tslib_1.__awaiter(this, void 0, void 0, function* () {
     debug("test ASYNC");
     t.is(yield fn(), "foo");
 }));

@@ -9,7 +9,7 @@ init_globals_1.initGlobalConverters_OPDS();
 init_globals_1.initGlobalConverters_GENERIC();
 const relStr1 = "rel1";
 const relStr2 = "rel2";
-ava_1.test("JSON SERIALIZE: OPDSLink.Rel => string[]", (t) => {
+ava_1.default("JSON SERIALIZE: OPDSLink.Rel => string[]", (t) => {
     const link = new opds2_link_1.OPDSLink();
     link.AddRel(relStr1);
     link.AddRel(relStr2);
@@ -23,7 +23,7 @@ ava_1.test("JSON SERIALIZE: OPDSLink.Rel => string[]", (t) => {
     helpers_1.checkType_String(t, json.rel[1]);
     t.is(json.rel[1], relStr2);
 });
-ava_1.test("JSON SERIALIZE: OPDSLink.Rel => string[] (recursive links)", (t) => {
+ava_1.default("JSON SERIALIZE: OPDSLink.Rel => string[] (recursive links)", (t) => {
     const link = new opds2_link_1.OPDSLink();
     link.AddRel(relStr1);
     link.AddRel(relStr2);
@@ -50,7 +50,7 @@ ava_1.test("JSON SERIALIZE: OPDSLink.Rel => string[] (recursive links)", (t) => 
     helpers_1.checkType_String(t, json.children[0].rel[1]);
     t.is(json.children[0].rel[1], relStr1);
 });
-ava_1.test("JSON SERIALIZE: OPDSLink.Rel => string", (t) => {
+ava_1.default("JSON SERIALIZE: OPDSLink.Rel => string", (t) => {
     const link = new opds2_link_1.OPDSLink();
     link.AddRel(relStr1);
     helpers_1.inspect(link);
@@ -59,7 +59,7 @@ ava_1.test("JSON SERIALIZE: OPDSLink.Rel => string", (t) => {
     helpers_1.checkType_String(t, json.rel);
     t.is(json.rel, relStr1);
 });
-ava_1.test("JSON SERIALIZE: OPDSLink.Rel => string (recursive links)", (t) => {
+ava_1.default("JSON SERIALIZE: OPDSLink.Rel => string (recursive links)", (t) => {
     const link = new opds2_link_1.OPDSLink();
     link.AddRel(relStr1);
     const child = new opds2_link_1.OPDSLink();
@@ -76,7 +76,7 @@ ava_1.test("JSON SERIALIZE: OPDSLink.Rel => string (recursive links)", (t) => {
     helpers_1.checkType_String(t, json.children[0].rel);
     t.is(json.children[0].rel, relStr2);
 });
-ava_1.test("JSON DESERIALIZE: OPDSLink.Rel => string[]", (t) => {
+ava_1.default("JSON DESERIALIZE: OPDSLink.Rel => string[]", (t) => {
     const json = {};
     json.rel = [relStr1, relStr2];
     helpers_1.logJSON(json);
@@ -89,7 +89,7 @@ ava_1.test("JSON DESERIALIZE: OPDSLink.Rel => string[]", (t) => {
     helpers_1.checkType_String(t, link.Rel[1]);
     t.is(link.Rel[1], relStr2);
 });
-ava_1.test("JSON DESERIALIZE: OPDSLink.Rel => string[] (recursive children)", (t) => {
+ava_1.default("JSON DESERIALIZE: OPDSLink.Rel => string[] (recursive children)", (t) => {
     const json = {};
     json.rel = [relStr1, relStr2];
     json.children = [];
@@ -112,7 +112,7 @@ ava_1.test("JSON DESERIALIZE: OPDSLink.Rel => string[] (recursive children)", (t
     helpers_1.checkType_String(t, link.Children[0].Rel[1]);
     t.is(link.Children[0].Rel[1], relStr1);
 });
-ava_1.test("JSON DESERIALIZE: OPDSLink.Rel => string[1]", (t) => {
+ava_1.default("JSON DESERIALIZE: OPDSLink.Rel => string[1]", (t) => {
     const json = {};
     json.rel = [relStr1];
     helpers_1.logJSON(json);
@@ -123,7 +123,7 @@ ava_1.test("JSON DESERIALIZE: OPDSLink.Rel => string[1]", (t) => {
     helpers_1.checkType_String(t, link.Rel[0]);
     t.is(link.Rel[0], relStr1);
 });
-ava_1.test("JSON DESERIALIZE: OPDSLink.Rel => string", (t) => {
+ava_1.default("JSON DESERIALIZE: OPDSLink.Rel => string", (t) => {
     const json = {};
     json.rel = relStr1;
     helpers_1.logJSON(json);
@@ -134,7 +134,7 @@ ava_1.test("JSON DESERIALIZE: OPDSLink.Rel => string", (t) => {
     helpers_1.checkType_String(t, link.Rel[0]);
     t.is(link.Rel[0], relStr1);
 });
-ava_1.test("JSON DESERIALIZE: OPDSLink.Rel => string (recursive children)", (t) => {
+ava_1.default("JSON DESERIALIZE: OPDSLink.Rel => string (recursive children)", (t) => {
     const json = {};
     json.rel = relStr1;
     json.children = [];

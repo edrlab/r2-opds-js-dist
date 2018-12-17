@@ -6,7 +6,7 @@ const debug = debug_("r2:opds#test");
 async function fn() {
     return Promise.resolve("foo");
 }
-ava_1.test("dummy async test", async (t) => {
+ava_1.default("dummy async test", async (t) => {
     debug("test ASYNC");
     t.is(await fn(), "foo");
 });

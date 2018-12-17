@@ -14,7 +14,7 @@ const date = new Date();
 date.setUTCFullYear(2000, 11, 31);
 date.setUTCHours(23, 59, 59, 999);
 const dateSTR = "2000-12-31T23:59:59.999Z";
-ava_1.test("JSON SERIALIZE: OPDSPublicationMetadata.Modified => Date", (t) => {
+ava_1.default("JSON SERIALIZE: OPDSPublicationMetadata.Modified => Date", (t) => {
     const md = new opds2_publicationMetadata_1.OPDSPublicationMetadata();
     md.Modified = date;
     helpers_1.inspect(md);
@@ -23,7 +23,7 @@ ava_1.test("JSON SERIALIZE: OPDSPublicationMetadata.Modified => Date", (t) => {
     helpers_1.checkType_String(t, json.modified);
     t.is(json.modified, dateSTR);
 });
-ava_1.test("JSON DESERIALIZE: OPDSPublicationMetadata.Modified => Date", (t) => {
+ava_1.default("JSON DESERIALIZE: OPDSPublicationMetadata.Modified => Date", (t) => {
     const json = {};
     json.modified = dateSTR;
     helpers_1.logJSON(json);
@@ -32,7 +32,7 @@ ava_1.test("JSON DESERIALIZE: OPDSPublicationMetadata.Modified => Date", (t) => 
     helpers_1.checkType(t, md.Modified, Date);
     helpers_1.checkDate(t, md.Modified, date);
 });
-ava_1.test("XML DESERIALIZE: OPDS Entry.Updated => Date", (t) => {
+ava_1.default("XML DESERIALIZE: OPDS Entry.Updated => Date", (t) => {
     const xmlStr = `<entry xmlns="http://opds-spec.org/2010/catalog" xmlns:atom="http://www.w3.org/2005/Atom">
             <atom:updated>${dateSTR}</atom:updated>
         </entry>`;
