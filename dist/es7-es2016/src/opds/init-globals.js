@@ -4,10 +4,7 @@ const ta_json_date_converter_1 = require("r2-utils-js/dist/es7-es2016/src/_utils
 const ta_json_number_converter_1 = require("r2-utils-js/dist/es7-es2016/src/_utils/ta-json-number-converter");
 const xml_js_mapper_1 = require("r2-utils-js/dist/es7-es2016/src/_utils/xml-js-mapper");
 const ta_json_x_1 = require("ta-json-x");
-const opds2_collection_1 = require("./opds2/opds2-collection");
-const opds2_collection_json_converter_1 = require("./opds2/opds2-collection-json-converter");
 function initGlobalConverters_OPDS() {
-    ta_json_x_1.propertyConverters.set(opds2_collection_1.OPDSCollection, new opds2_collection_json_converter_1.JsonOPDSCollectionConverter());
 }
 exports.initGlobalConverters_OPDS = initGlobalConverters_OPDS;
 function initGlobalConverters_GENERIC() {

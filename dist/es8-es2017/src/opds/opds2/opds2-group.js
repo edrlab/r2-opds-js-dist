@@ -6,11 +6,6 @@ const opds2_link_1 = require("./opds2-link");
 const opds2_metadata_1 = require("./opds2-metadata");
 const opds2_publication_1 = require("./opds2-publication");
 let OPDSGroup = class OPDSGroup {
-    _OnDeserialized() {
-        if (!this.Metadata) {
-            console.log("OPDSGroup.Metadata is not set!");
-        }
-    }
 };
 tslib_1.__decorate([
     ta_json_x_1.JsonProperty("metadata"),
@@ -31,12 +26,6 @@ tslib_1.__decorate([
     ta_json_x_1.JsonElementType(opds2_link_1.OPDSLink),
     tslib_1.__metadata("design:type", Array)
 ], OPDSGroup.prototype, "Navigation", void 0);
-tslib_1.__decorate([
-    ta_json_x_1.OnDeserialized(),
-    tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", []),
-    tslib_1.__metadata("design:returntype", void 0)
-], OPDSGroup.prototype, "_OnDeserialized", null);
 OPDSGroup = tslib_1.__decorate([
     ta_json_x_1.JsonObject()
 ], OPDSGroup);

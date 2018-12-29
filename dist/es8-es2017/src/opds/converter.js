@@ -1,20 +1,20 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const metadata_1 = require("r2-shared-js/dist/es8-es2017/src/models/metadata");
 const metadata_belongsto_1 = require("r2-shared-js/dist/es8-es2017/src/models/metadata-belongsto");
+const metadata_contributor_1 = require("r2-shared-js/dist/es8-es2017/src/models/metadata-contributor");
 const metadata_subject_1 = require("r2-shared-js/dist/es8-es2017/src/models/metadata-subject");
+const publication_link_1 = require("r2-shared-js/dist/es8-es2017/src/models/publication-link");
 const opds2_1 = require("./opds2/opds2");
-const opds2_collection_1 = require("./opds2/opds2-collection");
-const opds2_contributor_1 = require("./opds2/opds2-contributor");
 const opds2_indirectAcquisition_1 = require("./opds2/opds2-indirectAcquisition");
 const opds2_link_1 = require("./opds2/opds2-link");
 const opds2_metadata_1 = require("./opds2/opds2-metadata");
 const opds2_price_1 = require("./opds2/opds2-price");
 const opds2_properties_1 = require("./opds2/opds2-properties");
 const opds2_publication_1 = require("./opds2/opds2-publication");
-const opds2_publicationMetadata_1 = require("./opds2/opds2-publicationMetadata");
 function convertOpds1ToOpds2_EntryToPublication(entry) {
     const p = new opds2_publication_1.OPDSPublication();
-    p.Metadata = new opds2_publicationMetadata_1.OPDSPublicationMetadata();
+    p.Metadata = new metadata_1.Metadata();
     p.Metadata.Title = entry.Title;
     if (entry.DcIdentifier) {
         p.Metadata.Identifier = entry.DcIdentifier;
@@ -30,10 +30,10 @@ function convertOpds1ToOpds2_EntryToPublication(entry) {
     p.Metadata.Rights = entry.DcRights;
     if (entry.Series) {
         entry.Series.forEach((s) => {
-            const coll = new opds2_collection_1.OPDSCollection();
+            const coll = new metadata_contributor_1.Contributor();
             coll.Name = s.Name;
             coll.Position = s.Position;
-            const link = new opds2_link_1.OPDSLink();
+            const link = new publication_link_1.Link();
             link.Href = s.Url;
             coll.Links = [];
             coll.Links.push(link);
@@ -47,7 +47,7 @@ function convertOpds1ToOpds2_EntryToPublication(entry) {
         });
     }
     if (entry.DcPublisher) {
-        const c = new opds2_contributor_1.OPDSContributor();
+        const c = new metadata_contributor_1.Contributor();
         c.Name = entry.DcPublisher;
         if (!p.Metadata.Publisher) {
             p.Metadata.Publisher = [];
@@ -68,7 +68,7 @@ function convertOpds1ToOpds2_EntryToPublication(entry) {
     }
     if (entry.Authors) {
         entry.Authors.forEach((aut) => {
-            const cont = new opds2_contributor_1.OPDSContributor();
+            const cont = new metadata_contributor_1.Contributor();
             cont.Name = aut.Name;
             cont.Identifier = aut.Uri;
             if (!p.Metadata.Author) {
@@ -200,7 +200,7 @@ function convertOpds1ToOpds2(feed) {
     }
     if (feed.Authors) {
         feed.Authors.forEach((aut) => {
-            const cont = new opds2_contributor_1.OPDSContributor();
+            const cont = new metadata_contributor_1.Contributor();
             cont.Name = aut.Name;
             cont.Identifier = aut.Uri;
             if (!opds2feed.Metadata.Author) {

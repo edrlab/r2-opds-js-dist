@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var metadata_1 = require("r2-shared-js/dist/es5/src/models/metadata");
 var ava_1 = require("ava");
 var ta_json_x_1 = require("ta-json-x");
 var init_globals_1 = require("../src/opds/init-globals");
-var opds2_publicationMetadata_1 = require("../src/opds/opds2/opds2-publicationMetadata");
 var helpers_1 = require("./helpers");
 init_globals_1.initGlobalConverters_OPDS();
 init_globals_1.initGlobalConverters_GENERIC();
@@ -17,8 +17,8 @@ titleLangStr1[titleLang2] = titleStr2;
 var titleLangStr2 = {};
 titleLangStr2[titleLang1] = titleStr2;
 titleLangStr2[titleLang2] = titleStr1;
-ava_1.default("JSON SERIALIZE: OPDSPublicationMetadata.Title => string", function (t) {
-    var md = new opds2_publicationMetadata_1.OPDSPublicationMetadata();
+ava_1.default("JSON SERIALIZE: Metadata.Title => string", function (t) {
+    var md = new metadata_1.Metadata();
     md.Title = titleStr1;
     helpers_1.inspect(md);
     var json = ta_json_x_1.JSON.serialize(md);
@@ -26,8 +26,8 @@ ava_1.default("JSON SERIALIZE: OPDSPublicationMetadata.Title => string", functio
     helpers_1.checkType_String(t, json.title);
     t.is(json.title, titleStr1);
 });
-ava_1.default("JSON SERIALIZE: OPDSPublicationMetadata.Title => string-lang", function (t) {
-    var md = new opds2_publicationMetadata_1.OPDSPublicationMetadata();
+ava_1.default("JSON SERIALIZE: Metadata.Title => string-lang", function (t) {
+    var md = new metadata_1.Metadata();
     md.Title = titleLangStr1;
     helpers_1.inspect(md);
     var json = ta_json_x_1.JSON.serialize(md);
@@ -38,20 +38,20 @@ ava_1.default("JSON SERIALIZE: OPDSPublicationMetadata.Title => string-lang", fu
     helpers_1.checkType_String(t, json.title[titleLang2]);
     t.is(json.title[titleLang2], titleStr2);
 });
-ava_1.default("JSON DESERIALIZE: OPDSPublicationMetadata.Title => string", function (t) {
+ava_1.default("JSON DESERIALIZE: Metadata.Title => string", function (t) {
     var json = {};
     json.title = titleStr1;
     helpers_1.logJSON(json);
-    var md = ta_json_x_1.JSON.deserialize(json, opds2_publicationMetadata_1.OPDSPublicationMetadata);
+    var md = ta_json_x_1.JSON.deserialize(json, metadata_1.Metadata);
     helpers_1.inspect(md);
     helpers_1.checkType_String(t, md.Title);
     t.is(md.Title, titleStr1);
 });
-ava_1.default("JSON DESERIALIZE: OPDSPublicationMetadata.Title => string-lang", function (t) {
+ava_1.default("JSON DESERIALIZE: Metadata.Title => string-lang", function (t) {
     var json = {};
     json.title = titleLangStr1;
     helpers_1.logJSON(json);
-    var md = ta_json_x_1.JSON.deserialize(json, opds2_publicationMetadata_1.OPDSPublicationMetadata);
+    var md = ta_json_x_1.JSON.deserialize(json, metadata_1.Metadata);
     helpers_1.inspect(md);
     helpers_1.checkType_Object(t, md.Title);
     helpers_1.checkType_String(t, md.Title[titleLang1]);

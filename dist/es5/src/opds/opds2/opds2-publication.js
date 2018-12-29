@@ -1,17 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var tslib_1 = require("tslib");
+var metadata_1 = require("r2-shared-js/dist/es5/src/models/metadata");
 var metadata_belongsto_1 = require("r2-shared-js/dist/es5/src/models/metadata-belongsto");
-var publication_1 = require("r2-shared-js/dist/es5/src/models/publication");
+var metadata_contributor_1 = require("r2-shared-js/dist/es5/src/models/metadata-contributor");
+var publication_link_1 = require("r2-shared-js/dist/es5/src/models/publication-link");
 var ta_json_x_1 = require("ta-json-x");
-var opds2_collection_1 = require("./opds2-collection");
-var opds2_contributor_1 = require("./opds2-contributor");
 var opds2_link_1 = require("./opds2-link");
-var opds2_publicationMetadata_1 = require("./opds2-publicationMetadata");
-var OPDSPublication = (function (_super) {
-    tslib_1.__extends(OPDSPublication, _super);
+var OPDSPublication = (function () {
     function OPDSPublication() {
-        return _super !== null && _super.apply(this, arguments) || this;
     }
     OPDSPublication.prototype.findFirstLinkByRel = function (rel) {
         return this.Links ? this.Links.find(function (l) {
@@ -19,7 +16,7 @@ var OPDSPublication = (function (_super) {
         }) : undefined;
     };
     OPDSPublication.prototype.AddImage = function (href, typeImage, height, width) {
-        var i = new opds2_link_1.OPDSLink();
+        var i = new publication_link_1.Link();
         i.Href = href;
         i.TypeLink = typeImage;
         if (height) {
@@ -49,7 +46,7 @@ var OPDSPublication = (function (_super) {
         this.Links.push(l);
     };
     OPDSPublication.prototype.AddAuthor = function (name, identifier, sortAs, href, typeLink) {
-        var c = new opds2_contributor_1.OPDSContributor();
+        var c = new metadata_contributor_1.Contributor();
         c.Name = name;
         if (identifier) {
             c.Identifier = identifier;
@@ -57,7 +54,7 @@ var OPDSPublication = (function (_super) {
         if (sortAs) {
             c.SortAs = sortAs;
         }
-        var l = new opds2_link_1.OPDSLink();
+        var l = new publication_link_1.Link();
         if (href) {
             l.Href = href;
         }
@@ -69,7 +66,7 @@ var OPDSPublication = (function (_super) {
             c.Links.push(l);
         }
         if (!this.Metadata) {
-            this.Metadata = new opds2_publicationMetadata_1.OPDSPublicationMetadata();
+            this.Metadata = new metadata_1.Metadata();
         }
         if (!this.Metadata.Author) {
             this.Metadata.Author = [];
@@ -77,10 +74,10 @@ var OPDSPublication = (function (_super) {
         this.Metadata.Author.push(c);
     };
     OPDSPublication.prototype.AddSerie = function (name, position, href, typeLink) {
-        var c = new opds2_collection_1.OPDSCollection();
+        var c = new metadata_contributor_1.Contributor();
         c.Name = name;
         c.Position = position;
-        var l = new opds2_link_1.OPDSLink();
+        var l = new publication_link_1.Link();
         if (href) {
             l.Href = href;
         }
@@ -92,7 +89,7 @@ var OPDSPublication = (function (_super) {
             c.Links.push(l);
         }
         if (!this.Metadata) {
-            this.Metadata = new opds2_publicationMetadata_1.OPDSPublicationMetadata();
+            this.Metadata = new metadata_1.Metadata();
         }
         if (!this.Metadata.BelongsTo) {
             this.Metadata.BelongsTo = new metadata_belongsto_1.BelongsTo();
@@ -103,9 +100,9 @@ var OPDSPublication = (function (_super) {
         this.Metadata.BelongsTo.Series.push(c);
     };
     OPDSPublication.prototype.AddPublisher = function (name, href, typeLink) {
-        var c = new opds2_contributor_1.OPDSContributor();
+        var c = new metadata_contributor_1.Contributor();
         c.Name = name;
-        var l = new opds2_link_1.OPDSLink();
+        var l = new publication_link_1.Link();
         if (href) {
             l.Href = href;
         }
@@ -117,16 +114,27 @@ var OPDSPublication = (function (_super) {
             c.Links.push(l);
         }
         if (!this.Metadata) {
-            this.Metadata = new opds2_publicationMetadata_1.OPDSPublicationMetadata();
+            this.Metadata = new metadata_1.Metadata();
         }
         if (!this.Metadata.Publisher) {
             this.Metadata.Publisher = [];
         }
         this.Metadata.Publisher.push(c);
     };
+    OPDSPublication.prototype._OnDeserialized = function () {
+        if (!this.Metadata) {
+            console.log("OPDSPublication.Metadata is not set!");
+        }
+        if (!this.Links) {
+            console.log("OPDSPublication.Links is not set!");
+        }
+        if (!this.Images) {
+            console.log("OPDSPublication.Images is not set!");
+        }
+    };
     tslib_1.__decorate([
         ta_json_x_1.JsonProperty("metadata"),
-        tslib_1.__metadata("design:type", opds2_publicationMetadata_1.OPDSPublicationMetadata)
+        tslib_1.__metadata("design:type", metadata_1.Metadata)
     ], OPDSPublication.prototype, "Metadata", void 0);
     tslib_1.__decorate([
         ta_json_x_1.JsonProperty("links"),
@@ -135,13 +143,19 @@ var OPDSPublication = (function (_super) {
     ], OPDSPublication.prototype, "Links", void 0);
     tslib_1.__decorate([
         ta_json_x_1.JsonProperty("images"),
-        ta_json_x_1.JsonElementType(opds2_link_1.OPDSLink),
+        ta_json_x_1.JsonElementType(publication_link_1.Link),
         tslib_1.__metadata("design:type", Array)
     ], OPDSPublication.prototype, "Images", void 0);
+    tslib_1.__decorate([
+        ta_json_x_1.OnDeserialized(),
+        tslib_1.__metadata("design:type", Function),
+        tslib_1.__metadata("design:paramtypes", []),
+        tslib_1.__metadata("design:returntype", void 0)
+    ], OPDSPublication.prototype, "_OnDeserialized", null);
     OPDSPublication = tslib_1.__decorate([
         ta_json_x_1.JsonObject()
     ], OPDSPublication);
     return OPDSPublication;
-}(publication_1.Publication));
+}());
 exports.OPDSPublication = OPDSPublication;
 //# sourceMappingURL=opds2-publication.js.map

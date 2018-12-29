@@ -43,6 +43,14 @@ function checkType_String(t, obj) {
     t.is(obj.constructor, String);
 }
 exports.checkType_String = checkType_String;
+function checkType_Number(t, obj) {
+    t.is(typeof obj, "number");
+    t.false(obj instanceof String);
+    t.false(obj instanceof Object);
+    t.false(obj instanceof Number);
+    t.is(obj.constructor, Number);
+}
+exports.checkType_Number = checkType_Number;
 function checkType_Array(t, obj) {
     t.is(typeof obj, "object");
     t.true(obj instanceof Array);

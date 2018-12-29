@@ -7,14 +7,6 @@ var opds2_metadata_1 = require("./opds2-metadata");
 var OPDSFacet = (function () {
     function OPDSFacet() {
     }
-    OPDSFacet.prototype._OnDeserialized = function () {
-        if (!this.Metadata) {
-            console.log("OPDSFacet.Metadata is not set!");
-        }
-        if (!this.Links) {
-            console.log("OPDSFacet.Links is not set!");
-        }
-    };
     tslib_1.__decorate([
         ta_json_x_1.JsonProperty("metadata"),
         tslib_1.__metadata("design:type", opds2_metadata_1.OPDSMetadata)
@@ -24,12 +16,6 @@ var OPDSFacet = (function () {
         ta_json_x_1.JsonElementType(opds2_link_1.OPDSLink),
         tslib_1.__metadata("design:type", Array)
     ], OPDSFacet.prototype, "Links", void 0);
-    tslib_1.__decorate([
-        ta_json_x_1.OnDeserialized(),
-        tslib_1.__metadata("design:type", Function),
-        tslib_1.__metadata("design:paramtypes", []),
-        tslib_1.__metadata("design:returntype", void 0)
-    ], OPDSFacet.prototype, "_OnDeserialized", null);
     OPDSFacet = tslib_1.__decorate([
         ta_json_x_1.JsonObject()
     ], OPDSFacet);

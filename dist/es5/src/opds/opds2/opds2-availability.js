@@ -1,0 +1,34 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var tslib_1 = require("tslib");
+var ta_json_x_1 = require("ta-json-x");
+var OPDSAvailability = (function () {
+    function OPDSAvailability() {
+    }
+    OPDSAvailability.prototype._OnDeserialized = function () {
+        if (!this.State) {
+            console.log("OPDSAvailability.State is not set!");
+        }
+    };
+    tslib_1.__decorate([
+        ta_json_x_1.JsonProperty("state"),
+        tslib_1.__metadata("design:type", String)
+    ], OPDSAvailability.prototype, "State", void 0);
+    tslib_1.__decorate([
+        ta_json_x_1.JsonProperty("since"),
+        tslib_1.__metadata("design:type", Date)
+    ], OPDSAvailability.prototype, "Since", void 0);
+    tslib_1.__decorate([
+        ta_json_x_1.JsonProperty("until"),
+        tslib_1.__metadata("design:type", Date)
+    ], OPDSAvailability.prototype, "Until", void 0);
+    tslib_1.__decorate([
+        ta_json_x_1.OnDeserialized(),
+        tslib_1.__metadata("design:type", Function),
+        tslib_1.__metadata("design:paramtypes", []),
+        tslib_1.__metadata("design:returntype", void 0)
+    ], OPDSAvailability.prototype, "_OnDeserialized", null);
+    return OPDSAvailability;
+}());
+exports.OPDSAvailability = OPDSAvailability;
+//# sourceMappingURL=opds2-availability.js.map

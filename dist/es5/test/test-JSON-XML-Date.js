@@ -1,12 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var metadata_1 = require("r2-shared-js/dist/es5/src/models/metadata");
 var xml_js_mapper_1 = require("r2-utils-js/dist/es5/src/_utils/xml-js-mapper");
 var ava_1 = require("ava");
 var ta_json_x_1 = require("ta-json-x");
 var xmldom = require("xmldom");
 var init_globals_1 = require("../src/opds/init-globals");
 var opds_entry_1 = require("../src/opds/opds1/opds-entry");
-var opds2_publicationMetadata_1 = require("../src/opds/opds2/opds2-publicationMetadata");
 var helpers_1 = require("./helpers");
 init_globals_1.initGlobalConverters_OPDS();
 init_globals_1.initGlobalConverters_GENERIC();
@@ -14,8 +14,8 @@ var date = new Date();
 date.setUTCFullYear(2000, 11, 31);
 date.setUTCHours(23, 59, 59, 999);
 var dateSTR = "2000-12-31T23:59:59.999Z";
-ava_1.default("JSON SERIALIZE: OPDSPublicationMetadata.Modified => Date", function (t) {
-    var md = new opds2_publicationMetadata_1.OPDSPublicationMetadata();
+ava_1.default("JSON SERIALIZE: Metadata.Modified => Date", function (t) {
+    var md = new metadata_1.Metadata();
     md.Modified = date;
     helpers_1.inspect(md);
     var json = ta_json_x_1.JSON.serialize(md);
@@ -23,11 +23,11 @@ ava_1.default("JSON SERIALIZE: OPDSPublicationMetadata.Modified => Date", functi
     helpers_1.checkType_String(t, json.modified);
     t.is(json.modified, dateSTR);
 });
-ava_1.default("JSON DESERIALIZE: OPDSPublicationMetadata.Modified => Date", function (t) {
+ava_1.default("JSON DESERIALIZE: Metadata.Modified => Date", function (t) {
     var json = {};
     json.modified = dateSTR;
     helpers_1.logJSON(json);
-    var md = ta_json_x_1.JSON.deserialize(json, opds2_publicationMetadata_1.OPDSPublicationMetadata);
+    var md = ta_json_x_1.JSON.deserialize(json, metadata_1.Metadata);
     helpers_1.inspect(md);
     helpers_1.checkType(t, md.Modified, Date);
     helpers_1.checkDate(t, md.Modified, date);

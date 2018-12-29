@@ -3,17 +3,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var tslib_1 = require("tslib");
 var metadata_1 = require("r2-shared-js/dist/es5/src/models/metadata");
 var ta_json_x_1 = require("ta-json-x");
-var opds2_contributor_1 = require("./opds2-contributor");
 var OPDSMetadata = (function (_super) {
     tslib_1.__extends(OPDSMetadata, _super);
     function OPDSMetadata() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    tslib_1.__decorate([
-        ta_json_x_1.JsonProperty("author"),
-        ta_json_x_1.JsonElementType(opds2_contributor_1.OPDSContributor),
-        tslib_1.__metadata("design:type", Array)
-    ], OPDSMetadata.prototype, "Author", void 0);
     tslib_1.__decorate([
         ta_json_x_1.JsonProperty("numberOfItems"),
         tslib_1.__metadata("design:type", Number)

@@ -18,5 +18,5 @@ export declare class OPDSFeed {
     AddFacet(link: OPDSLink, group: string): void;
     AddPublicationInGroup(publication: OPDSPublication, collLink: OPDSLink): void;
     AddNavigationInGroup(link: OPDSLink, collLink: OPDSLink): void;
-    private _OnDeserialized;
+    protected _OnDeserialized(): void;
 }

@@ -10,12 +10,12 @@ init_globals_1.initGlobalConverters_GENERIC();
 const contextStr1 = "http://context1";
 const contextStr2 = "http://context2";
 ava_1.default("JSON SERIALIZE: OPDSFeed.Context => string[]", (t) => {
-    const pub = new opds2_1.OPDSFeed();
-    pub.Context = [];
-    pub.Context.push(contextStr1);
-    pub.Context.push(contextStr2);
-    helpers_1.inspect(pub);
-    const json = ta_json_x_1.JSON.serialize(pub);
+    const feed = new opds2_1.OPDSFeed();
+    feed.Context = [];
+    feed.Context.push(contextStr1);
+    feed.Context.push(contextStr2);
+    helpers_1.inspect(feed);
+    const json = ta_json_x_1.JSON.serialize(feed);
     helpers_1.logJSON(json);
     helpers_1.checkType_Array(t, json["@context"]);
     t.is(json["@context"].length, 2);
@@ -24,37 +24,48 @@ ava_1.default("JSON SERIALIZE: OPDSFeed.Context => string[]", (t) => {
     helpers_1.checkType_String(t, json["@context"][1]);
     t.is(json["@context"][1], contextStr2);
 });
-ava_1.default("JSON SERIALIZE: OPDSFeed.Context => string[1] NO collapse-array", (t) => {
-    const pub = new opds2_1.OPDSFeed();
-    pub.Context = [contextStr1];
-    helpers_1.inspect(pub);
-    const json = ta_json_x_1.JSON.serialize(pub);
+ava_1.default("JSON SERIALIZE: OPDSFeed.Context => string[1] collapse-array", (t) => {
+    const feed = new opds2_1.OPDSFeed();
+    feed.Context = [contextStr1];
+    helpers_1.inspect(feed);
+    const json = ta_json_x_1.JSON.serialize(feed);
     helpers_1.logJSON(json);
-    helpers_1.checkType_Array(t, json["@context"]);
-    t.is(json["@context"][0], contextStr1);
+    helpers_1.checkType_String(t, json["@context"]);
+    t.is(json["@context"], contextStr1);
 });
 ava_1.default("JSON DESERIALIZE: OPDSFeed.Context => string[]", (t) => {
     const json = {};
     json["@context"] = [contextStr1, contextStr2];
     helpers_1.logJSON(json);
-    const pub = ta_json_x_1.JSON.deserialize(json, opds2_1.OPDSFeed);
-    helpers_1.inspect(pub);
-    helpers_1.checkType_Array(t, pub.Context);
-    t.is(pub.Context.length, 2);
-    helpers_1.checkType_String(t, pub.Context[0]);
-    t.is(pub.Context[0], contextStr1);
-    helpers_1.checkType_String(t, pub.Context[1]);
-    t.is(pub.Context[1], contextStr2);
+    const feed = ta_json_x_1.JSON.deserialize(json, opds2_1.OPDSFeed);
+    helpers_1.inspect(feed);
+    helpers_1.checkType_Array(t, feed.Context);
+    t.is(feed.Context.length, 2);
+    helpers_1.checkType_String(t, feed.Context[0]);
+    t.is(feed.Context[0], contextStr1);
+    helpers_1.checkType_String(t, feed.Context[1]);
+    t.is(feed.Context[1], contextStr2);
 });
 ava_1.default("JSON DESERIALIZE: OPDSFeed.Context => string[1]", (t) => {
     const json = {};
     json["@context"] = [contextStr1];
     helpers_1.logJSON(json);
-    const pub = ta_json_x_1.JSON.deserialize(json, opds2_1.OPDSFeed);
-    helpers_1.inspect(pub);
-    helpers_1.checkType_Array(t, pub.Context);
-    t.is(pub.Context.length, 1);
-    helpers_1.checkType_String(t, pub.Context[0]);
-    t.is(pub.Context[0], contextStr1);
+    const feed = ta_json_x_1.JSON.deserialize(json, opds2_1.OPDSFeed);
+    helpers_1.inspect(feed);
+    helpers_1.checkType_Array(t, feed.Context);
+    t.is(feed.Context.length, 1);
+    helpers_1.checkType_String(t, feed.Context[0]);
+    t.is(feed.Context[0], contextStr1);
+});
+ava_1.default("JSON DESERIALIZE: OPDSFeed.Context => string", (t) => {
+    const json = {};
+    json["@context"] = contextStr1;
+    helpers_1.logJSON(json);
+    const feed = ta_json_x_1.JSON.deserialize(json, opds2_1.OPDSFeed);
+    helpers_1.inspect(feed);
+    helpers_1.checkType_Array(t, feed.Context);
+    t.is(feed.Context.length, 1);
+    helpers_1.checkType_String(t, feed.Context[0]);
+    t.is(feed.Context[0], contextStr1);
 });
 //# sourceMappingURL=test-JSON-Context.js.map

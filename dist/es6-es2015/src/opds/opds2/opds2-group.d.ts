@@ -6,5 +6,4 @@ export declare class OPDSGroup {
     Publications: OPDSPublication[];
     Links: OPDSLink[];
     Navigation: OPDSLink[];
-    private _OnDeserialized;
 }

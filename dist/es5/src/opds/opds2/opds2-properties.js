@@ -3,6 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var tslib_1 = require("tslib");
 var metadata_properties_1 = require("r2-shared-js/dist/es5/src/models/metadata-properties");
 var ta_json_x_1 = require("ta-json-x");
+var opds2_availability_1 = require("./opds2-availability");
+var opds2_copy_1 = require("./opds2-copy");
+var opds2_hold_1 = require("./opds2-hold");
 var opds2_indirectAcquisition_1 = require("./opds2-indirectAcquisition");
 var opds2_price_1 = require("./opds2-price");
 var OPDSProperties = (function (_super) {
@@ -23,6 +26,18 @@ var OPDSProperties = (function (_super) {
         ta_json_x_1.JsonElementType(opds2_indirectAcquisition_1.OPDSIndirectAcquisition),
         tslib_1.__metadata("design:type", Array)
     ], OPDSProperties.prototype, "IndirectAcquisitions", void 0);
+    tslib_1.__decorate([
+        ta_json_x_1.JsonProperty("holds"),
+        tslib_1.__metadata("design:type", opds2_hold_1.OPDSHold)
+    ], OPDSProperties.prototype, "Holds", void 0);
+    tslib_1.__decorate([
+        ta_json_x_1.JsonProperty("copies"),
+        tslib_1.__metadata("design:type", opds2_copy_1.OPDSCopy)
+    ], OPDSProperties.prototype, "Copies", void 0);
+    tslib_1.__decorate([
+        ta_json_x_1.JsonProperty("availability"),
+        tslib_1.__metadata("design:type", opds2_availability_1.OPDSAvailability)
+    ], OPDSProperties.prototype, "Availability", void 0);
     OPDSProperties = tslib_1.__decorate([
         ta_json_x_1.JsonObject()
     ], OPDSProperties);
