@@ -24,7 +24,7 @@ function fn() {
         return Promise.resolve("foo");
     });
 }
-ava_1.default("dummy async test", (t) => tslib_1.__awaiter(this, void 0, void 0, function* () {
+ava_1.default("dummy async test", (t) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
     debug("test ASYNC");
     t.is(yield fn(), "foo");
 }));
@@ -581,15 +581,15 @@ function runUrlTestAlt(t, url) {
         t.true(yield delay(false));
     });
 }
-ava_1.default("OPDS2 HTTP (de)serialize roundtrip (recursive) 1", (t) => tslib_1.__awaiter(this, void 0, void 0, function* () {
+ava_1.default("OPDS2 HTTP (de)serialize roundtrip (recursive) 1", (t) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
     const url = "https://test.opds.io/2.0/home.json";
     yield runUrlTest(t, url);
 }));
-ava_1.default("OPDS2 HTTP (de)serialize roundtrip (recursive) 2", (t) => tslib_1.__awaiter(this, void 0, void 0, function* () {
+ava_1.default("OPDS2 HTTP (de)serialize roundtrip (recursive) 2", (t) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
     const url = "https://catalog.feedbooks.com/catalog/public_domain.json";
     yield runUrlTest(t, url);
 }));
-ava_1.default("OPDS1-2 HTTP convert (de)serialize roundtrip (recursive)", (t) => tslib_1.__awaiter(this, void 0, void 0, function* () {
+ava_1.default("OPDS1-2 HTTP convert (de)serialize roundtrip (recursive)", (t) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
     const url = "https://bookserver.archive.org/group/openaudiobooks";
     yield runUrlTestAlt(t, url);
 }));

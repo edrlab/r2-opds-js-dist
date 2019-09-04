@@ -1,5 +1,4 @@
 "use strict";
-var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var tslib_1 = require("tslib");
 var https = require("https");
@@ -27,7 +26,7 @@ function fn() {
         });
     });
 }
-ava_1.default("dummy async test", function (t) { return tslib_1.__awaiter(_this, void 0, void 0, function () {
+ava_1.default("dummy async test", function (t) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
     var _a, _b;
     return tslib_1.__generator(this, function (_c) {
         switch (_c.label) {
@@ -759,7 +758,7 @@ function runUrlTestAlt(t, url) {
         });
     });
 }
-ava_1.default("OPDS2 HTTP (de)serialize roundtrip (recursive) 1", function (t) { return tslib_1.__awaiter(_this, void 0, void 0, function () {
+ava_1.default("OPDS2 HTTP (de)serialize roundtrip (recursive) 1", function (t) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
     var url;
     return tslib_1.__generator(this, function (_a) {
         switch (_a.label) {
@@ -772,7 +771,7 @@ ava_1.default("OPDS2 HTTP (de)serialize roundtrip (recursive) 1", function (t) {
         }
     });
 }); });
-ava_1.default("OPDS2 HTTP (de)serialize roundtrip (recursive) 2", function (t) { return tslib_1.__awaiter(_this, void 0, void 0, function () {
+ava_1.default("OPDS2 HTTP (de)serialize roundtrip (recursive) 2", function (t) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
     var url;
     return tslib_1.__generator(this, function (_a) {
         switch (_a.label) {
@@ -785,7 +784,7 @@ ava_1.default("OPDS2 HTTP (de)serialize roundtrip (recursive) 2", function (t) {
         }
     });
 }); });
-ava_1.default("OPDS1-2 HTTP convert (de)serialize roundtrip (recursive)", function (t) { return tslib_1.__awaiter(_this, void 0, void 0, function () {
+ava_1.default("OPDS1-2 HTTP convert (de)serialize roundtrip (recursive)", function (t) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
     var url;
     return tslib_1.__generator(this, function (_a) {
         switch (_a.label) {
