@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const tslib_1 = require("tslib");
-const metadata_1 = require("r2-shared-js/dist/es6-es2015/src/models/metadata");
 const ta_json_x_1 = require("ta-json-x");
+const metadata_1 = require("r2-shared-js/dist/es6-es2015/src/models/metadata");
 let OPDSMetadata = class OPDSMetadata extends metadata_1.Metadata {
 };
 tslib_1.__decorate([

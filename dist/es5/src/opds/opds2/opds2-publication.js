@@ -1,11 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var tslib_1 = require("tslib");
+var ta_json_x_1 = require("ta-json-x");
 var metadata_1 = require("r2-shared-js/dist/es5/src/models/metadata");
 var metadata_belongsto_1 = require("r2-shared-js/dist/es5/src/models/metadata-belongsto");
 var metadata_contributor_1 = require("r2-shared-js/dist/es5/src/models/metadata-contributor");
 var publication_link_1 = require("r2-shared-js/dist/es5/src/models/publication-link");
-var ta_json_x_1 = require("ta-json-x");
 var opds2_link_1 = require("./opds2-link");
 var OPDSPublication = (function () {
     function OPDSPublication() {

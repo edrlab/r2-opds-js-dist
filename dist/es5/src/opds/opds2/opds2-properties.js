@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var tslib_1 = require("tslib");
-var metadata_properties_1 = require("r2-shared-js/dist/es5/src/models/metadata-properties");
 var ta_json_x_1 = require("ta-json-x");
+var metadata_properties_1 = require("r2-shared-js/dist/es5/src/models/metadata-properties");
 var opds2_availability_1 = require("./opds2-availability");
 var opds2_copy_1 = require("./opds2-copy");
 var opds2_hold_1 = require("./opds2-hold");

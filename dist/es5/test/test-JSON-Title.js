@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var metadata_1 = require("r2-shared-js/dist/es5/src/models/metadata");
 var ava_1 = require("ava");
 var ta_json_x_1 = require("ta-json-x");
+var metadata_1 = require("r2-shared-js/dist/es5/src/models/metadata");
 var init_globals_1 = require("../src/opds/init-globals");
 var helpers_1 = require("./helpers");
 init_globals_1.initGlobalConverters_OPDS();

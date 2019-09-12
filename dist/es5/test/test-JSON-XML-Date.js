@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var metadata_1 = require("r2-shared-js/dist/es5/src/models/metadata");
-var xml_js_mapper_1 = require("r2-utils-js/dist/es5/src/_utils/xml-js-mapper");
 var ava_1 = require("ava");
 var ta_json_x_1 = require("ta-json-x");
 var xmldom = require("xmldom");
+var metadata_1 = require("r2-shared-js/dist/es5/src/models/metadata");
+var xml_js_mapper_1 = require("r2-utils-js/dist/es5/src/_utils/xml-js-mapper");
 var init_globals_1 = require("../src/opds/init-globals");
 var opds_entry_1 = require("../src/opds/opds1/opds-entry");
 var helpers_1 = require("./helpers");

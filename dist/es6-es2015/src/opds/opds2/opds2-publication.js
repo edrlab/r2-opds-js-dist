@@ -1,11 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const tslib_1 = require("tslib");
+const ta_json_x_1 = require("ta-json-x");
 const metadata_1 = require("r2-shared-js/dist/es6-es2015/src/models/metadata");
 const metadata_belongsto_1 = require("r2-shared-js/dist/es6-es2015/src/models/metadata-belongsto");
 const metadata_contributor_1 = require("r2-shared-js/dist/es6-es2015/src/models/metadata-contributor");
 const publication_link_1 = require("r2-shared-js/dist/es6-es2015/src/models/publication-link");
-const ta_json_x_1 = require("ta-json-x");
 const opds2_link_1 = require("./opds2-link");
 let OPDSPublication = class OPDSPublication {
     findFirstLinkByRel(rel) {

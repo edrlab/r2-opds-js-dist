@@ -2,7 +2,6 @@
 var IndirectAcquisition_1;
 Object.defineProperty(exports, "__esModule", { value: true });
 const tslib_1 = require("tslib");
-"use strict";
 const xml_js_mapper_1 = require("r2-utils-js/dist/es6-es2015/src/_utils/xml-js-mapper");
 let IndirectAcquisition = IndirectAcquisition_1 = class IndirectAcquisition {
 };

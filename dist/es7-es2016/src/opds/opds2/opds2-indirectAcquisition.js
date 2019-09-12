@@ -2,7 +2,6 @@
 var OPDSIndirectAcquisition_1;
 Object.defineProperty(exports, "__esModule", { value: true });
 const tslib_1 = require("tslib");
-"use strict";
 const ta_json_x_1 = require("ta-json-x");
 let OPDSIndirectAcquisition = OPDSIndirectAcquisition_1 = class OPDSIndirectAcquisition {
     _OnDeserialized() {

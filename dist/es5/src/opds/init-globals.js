@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var ta_json_x_1 = require("ta-json-x");
 var ta_json_date_converter_1 = require("r2-utils-js/dist/es5/src/_utils/ta-json-date-converter");
 var ta_json_number_converter_1 = require("r2-utils-js/dist/es5/src/_utils/ta-json-number-converter");
 var xml_js_mapper_1 = require("r2-utils-js/dist/es5/src/_utils/xml-js-mapper");
-var ta_json_x_1 = require("ta-json-x");
 function initGlobalConverters_OPDS() {
 }
 exports.initGlobalConverters_OPDS = initGlobalConverters_OPDS;

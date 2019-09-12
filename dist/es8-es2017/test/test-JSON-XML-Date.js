@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const metadata_1 = require("r2-shared-js/dist/es8-es2017/src/models/metadata");
-const xml_js_mapper_1 = require("r2-utils-js/dist/es8-es2017/src/_utils/xml-js-mapper");
 const ava_1 = require("ava");
 const ta_json_x_1 = require("ta-json-x");
 const xmldom = require("xmldom");
+const metadata_1 = require("r2-shared-js/dist/es8-es2017/src/models/metadata");
+const xml_js_mapper_1 = require("r2-utils-js/dist/es8-es2017/src/_utils/xml-js-mapper");
 const init_globals_1 = require("../src/opds/init-globals");
 const opds_entry_1 = require("../src/opds/opds1/opds-entry");
 const helpers_1 = require("./helpers");
