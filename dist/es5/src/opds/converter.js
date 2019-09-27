@@ -135,7 +135,9 @@ function convertOpds1ToOpds2_EntryToPublication(entry) {
             if (link.HasRel("collection") || link.HasRel("http://opds-spec.org/group")) {
             }
             else if (link.HasRel("http://opds-spec.org/image") ||
-                link.HasRel("http://opds-spec.org/image/thumbnail")) {
+                link.HasRel("http://opds-spec.org/image/thumbnail") ||
+                link.HasRel("x-stanza-cover-image") ||
+                link.HasRel("x-stanza-cover-image-thumbnail")) {
                 if (!p.Images) {
                     p.Images = [];
                 }
@@ -215,7 +217,17 @@ function convertOpds1ToOpds2(feed) {
             var collLink = new opds2_link_1.OPDSLink();
             if (entry.Links) {
                 entry.Links.forEach(function (l) {
-                    if (l.Rel && l.Rel.indexOf("http://opds-spec.org/acquisition") === 0) {
+                    if (l.Href) {
+                        l.Href = l.Href.replace(/ /g, "%20");
+                    }
+                    if (l.Type === "image/jpg") {
+                        l.Type = "image/jpeg";
+                    }
+                    if ((l.Rel && l.Rel.indexOf("http://opds-spec.org/acquisition") === 0) ||
+                        (!l.Rel && l.Type === "application/epub+zip")) {
+                        if (!l.Rel) {
+                            l.Rel = "http://opds-spec.org/acquisition";
+                        }
                         isAnNavigation = false;
                     }
                     if (l.HasRel("collection") || l.HasRel("http://opds-spec.org/group")) {
@@ -253,6 +265,9 @@ function convertOpds1ToOpds2(feed) {
     }
     if (feed.Links) {
         feed.Links.forEach(function (l) {
+            if (l.Href) {
+                l.Href = l.Href.replace(/ /g, "%20");
+            }
             var linkFeed = new opds2_link_1.OPDSLink();
             linkFeed.Href = l.Href;
             linkFeed.AddRel(l.Rel);
