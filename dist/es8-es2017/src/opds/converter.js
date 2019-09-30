@@ -181,10 +181,16 @@ function convertOpds1ToOpds2_EntryToLink(entry) {
             linkNav.Title = txt;
         }
     }
-    if (entry.Links && entry.Links[0]) {
-        linkNav.AddRel(entry.Links[0].Rel);
-        linkNav.TypeLink = entry.Links[0].Type;
-        linkNav.Href = entry.Links[0].Href;
+    if (entry.Links) {
+        const atomLink = entry.Links.find((l) => {
+            return l.Type && l.Type.indexOf("application/atom+xml") >= 0;
+        });
+        const link = atomLink ? atomLink : (entry.Links[0] ? entry.Links[0] : undefined);
+        if (link) {
+            linkNav.AddRel(link.Rel);
+            linkNav.TypeLink = link.Type;
+            linkNav.Href = link.Href;
+        }
     }
     return linkNav;
 }
@@ -214,6 +220,7 @@ function convertOpds1ToOpds2(feed) {
     if (feed.Entries) {
         feed.Entries.forEach((entry) => {
             let isAnNavigation = true;
+            let thereIsAtomLink = false;
             const collLink = new opds2_link_1.OPDSLink();
             if (entry.Links) {
                 entry.Links.forEach((l) => {
@@ -235,7 +242,13 @@ function convertOpds1ToOpds2(feed) {
                         collLink.Href = l.Href;
                         collLink.Title = l.Title;
                     }
+                    if (l.Type && l.Type.indexOf("application/atom+xml") >= 0) {
+                        thereIsAtomLink = true;
+                    }
                 });
+                if (isAnNavigation && !thereIsAtomLink) {
+                    isAnNavigation = false;
+                }
             }
             if (!isAnNavigation) {
                 const p = convertOpds1ToOpds2_EntryToPublication(entry);
