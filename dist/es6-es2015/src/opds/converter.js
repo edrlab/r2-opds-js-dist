@@ -101,6 +101,12 @@ function convertOpds1ToOpds2_EntryToPublication(entry) {
             l.TypeLink = link.Type;
             l.AddRel(link.Rel);
             l.Title = link.Title;
+            if (link.ThrCount) {
+                if (!l.Properties) {
+                    l.Properties = new opds2_properties_1.OPDSProperties();
+                }
+                l.Properties.NumberOfItems = link.ThrCount;
+            }
             if (link.OpdsIndirectAcquisitions && link.OpdsIndirectAcquisitions.length) {
                 if (!l.Properties) {
                     l.Properties = new opds2_properties_1.OPDSProperties();
@@ -187,6 +193,12 @@ function convertOpds1ToOpds2_EntryToLink(entry) {
         });
         const link = atomLink ? atomLink : (entry.Links[0] ? entry.Links[0] : undefined);
         if (link) {
+            if (link.ThrCount) {
+                if (!linkNav.Properties) {
+                    linkNav.Properties = new opds2_properties_1.OPDSProperties();
+                }
+                linkNav.Properties.NumberOfItems = link.ThrCount;
+            }
             linkNav.AddRel(link.Rel);
             linkNav.TypeLink = link.Type;
             linkNav.Href = link.Href;
@@ -224,6 +236,12 @@ function convertOpds1ToOpds2(feed) {
             const collLink = new opds2_link_1.OPDSLink();
             if (entry.Links) {
                 entry.Links.forEach((l) => {
+                    if (l.ThrCount) {
+                        if (!collLink.Properties) {
+                            collLink.Properties = new opds2_properties_1.OPDSProperties();
+                        }
+                        collLink.Properties.NumberOfItems = l.ThrCount;
+                    }
                     if (l.Href) {
                         l.Href = l.Href.replace(/ /g, "%20");
                     }
@@ -286,9 +304,13 @@ function convertOpds1ToOpds2(feed) {
             linkFeed.AddRel(l.Rel);
             linkFeed.TypeLink = l.Type;
             linkFeed.Title = l.Title;
-            if (l.HasRel("http://opds-spec.org/facet")) {
-                linkFeed.Properties = new opds2_properties_1.OPDSProperties();
+            if (l.ThrCount) {
+                if (!linkFeed.Properties) {
+                    linkFeed.Properties = new opds2_properties_1.OPDSProperties();
+                }
                 linkFeed.Properties.NumberOfItems = l.ThrCount;
+            }
+            if (l.HasRel("http://opds-spec.org/facet")) {
                 opds2feed.AddFacet(linkFeed, l.FacetGroup);
             }
             else {
