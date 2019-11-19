@@ -25,6 +25,18 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:type", String)
 ], Entry.prototype, "Title", void 0);
 tslib_1.__decorate([
+    xml_js_mapper_1.XmlXPathSelector("atom:title/@type"),
+    tslib_1.__metadata("design:type", String)
+], Entry.prototype, "TitleType", void 0);
+tslib_1.__decorate([
+    xml_js_mapper_1.XmlXPathSelector("atom:subtitle/text()"),
+    tslib_1.__metadata("design:type", String)
+], Entry.prototype, "SubTitle", void 0);
+tslib_1.__decorate([
+    xml_js_mapper_1.XmlXPathSelector("atom:subtitle/@type"),
+    tslib_1.__metadata("design:type", String)
+], Entry.prototype, "SubTitleType", void 0);
+tslib_1.__decorate([
     xml_js_mapper_1.XmlXPathSelector("atom:author"),
     xml_js_mapper_1.XmlItemType(opds_author_1.Author),
     tslib_1.__metadata("design:type", Array)

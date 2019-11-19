@@ -7,6 +7,9 @@ export declare class Entry {
     SchemaRatingAdditionalType: string;
     SchemaAdditionalType: string;
     Title: string;
+    TitleType: string;
+    SubTitle: string;
+    SubTitleType: string;
     Authors: Author[];
     Id: string;
     Summary: string;

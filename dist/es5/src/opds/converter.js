@@ -15,7 +15,16 @@ var opds2_publication_1 = require("./opds2/opds2-publication");
 function convertOpds1ToOpds2_EntryToPublication(entry) {
     var p = new opds2_publication_1.OPDSPublication();
     p.Metadata = new metadata_1.Metadata();
-    p.Metadata.Title = entry.Title;
+    if (entry.Title) {
+        p.Metadata.Title = ((entry.TitleType === "text/html" || entry.TitleType === "html" || entry.TitleType === "xhtml") ?
+            entry.Title.replace(/xmlns=["']http:\/\/www\.w3\.org\/2005\/Atom["']/g, " ") :
+            entry.Title);
+    }
+    if (entry.SubTitle) {
+        p.Metadata.SubTitle = ((entry.SubTitleType === "text/html" || entry.SubTitleType === "html" || entry.SubTitleType === "xhtml") ?
+            entry.SubTitle.replace(/xmlns=["']http:\/\/www\.w3\.org\/2005\/Atom["']/g, " ") :
+            entry.SubTitle);
+    }
     if (entry.DcIdentifier) {
         p.Metadata.Identifier = entry.DcIdentifier;
     }
@@ -78,13 +87,13 @@ function convertOpds1ToOpds2_EntryToPublication(entry) {
         });
     }
     if (entry.Summary) {
-        p.Metadata.Description = ((entry.SummaryType === "text/html" || entry.SummaryType === "html") ?
-            entry.Summary.replace(/ xmlns=["'][^"']+["']/g, "") :
+        p.Metadata.Description = ((entry.SummaryType === "text/html" || entry.SummaryType === "html" || entry.SummaryType === "xhtml") ?
+            entry.Summary.replace(/xmlns=["']http:\/\/www\.w3\.org\/2005\/Atom["']/g, " ") :
             entry.Summary);
     }
     if (entry.Content) {
-        var txt = ((entry.ContentType === "text/html" || entry.ContentType === "html") ?
-            entry.Content.replace(/ xmlns=["'][^"']+["']/g, "") :
+        var txt = ((entry.ContentType === "text/html" || entry.ContentType === "html" || entry.ContentType === "xhtml") ?
+            entry.Content.replace(/xmlns=["']http:\/\/www\.w3\.org\/2005\/Atom["']/g, " ") :
             entry.Content);
         if (p.Metadata.Description) {
             p.Metadata.Description += "\n\n";
@@ -142,8 +151,18 @@ function convertOpds1ToOpds2_EntryToPublication(entry) {
             }
             else if (link.HasRel("http://opds-spec.org/image") ||
                 link.HasRel("http://opds-spec.org/image/thumbnail") ||
+                link.HasRel("http://opds-spec.org/cover") ||
+                link.HasRel("http://opds-spec.org/thumbnail") ||
                 link.HasRel("x-stanza-cover-image") ||
                 link.HasRel("x-stanza-cover-image-thumbnail")) {
+                var iCoverRel = l.Rel.indexOf("http://opds-spec.org/cover");
+                if (iCoverRel >= 0) {
+                    l.Rel[iCoverRel] = "http://opds-spec.org/image";
+                }
+                var iThumbnailRel = l.Rel.indexOf("http://opds-spec.org/thumbnail");
+                if (iThumbnailRel >= 0) {
+                    l.Rel[iThumbnailRel] = "http://opds-spec.org/image/thumbnail";
+                }
                 if (!p.Images) {
                     p.Images = [];
                 }
@@ -162,10 +181,14 @@ function convertOpds1ToOpds2_EntryToPublication(entry) {
 exports.convertOpds1ToOpds2_EntryToPublication = convertOpds1ToOpds2_EntryToPublication;
 function convertOpds1ToOpds2_EntryToLink(entry) {
     var linkNav = new opds2_link_1.OPDSLink();
-    linkNav.Title = entry.Title;
+    if (entry.Title) {
+        linkNav.Title = ((entry.TitleType === "text/html" || entry.TitleType === "html" || entry.TitleType === "xhtml") ?
+            entry.Title.replace(/xmlns=["']http:\/\/www\.w3\.org\/2005\/Atom["']/g, " ") :
+            entry.Title);
+    }
     if (entry.Summary) {
-        var txt = ((entry.SummaryType === "text/html" || entry.SummaryType === "html") ?
-            entry.Summary.replace(/ xmlns=["'][^"']+["']/g, "") :
+        var txt = ((entry.SummaryType === "text/html" || entry.SummaryType === "html" || entry.SummaryType === "xhtml") ?
+            entry.Summary.replace(/xmlns=["']http:\/\/www\.w3\.org\/2005\/Atom["']/g, " ") :
             entry.Summary);
         if (linkNav.Title) {
             linkNav.Title += "\n\n";
@@ -176,8 +199,8 @@ function convertOpds1ToOpds2_EntryToLink(entry) {
         }
     }
     if (entry.Content) {
-        var txt = ((entry.ContentType === "text/html" || entry.ContentType === "html") ?
-            entry.Content.replace(/ xmlns=["'][^"']+["']/g, "") :
+        var txt = ((entry.ContentType === "text/html" || entry.ContentType === "html" || entry.ContentType === "xhtml") ?
+            entry.Content.replace(/xmlns=["']http:\/\/www\.w3\.org\/2005\/Atom["']/g, " ") :
             entry.Content);
         if (linkNav.Title) {
             linkNav.Title += "\n\n";
@@ -233,6 +256,7 @@ function convertOpds1ToOpds2(feed) {
         feed.Entries.forEach(function (entry) {
             var isAnNavigation = true;
             var thereIsAtomLink = false;
+            var thereIsImageLink = false;
             var collLink = new opds2_link_1.OPDSLink();
             if (entry.Links) {
                 entry.Links.forEach(function (l) {
@@ -263,10 +287,17 @@ function convertOpds1ToOpds2(feed) {
                     if (l.Type && l.Type.indexOf("application/atom+xml") >= 0) {
                         thereIsAtomLink = true;
                     }
+                    if (l.Type && l.Type.indexOf("image/") >= 0) {
+                        thereIsImageLink = true;
+                    }
                 });
-                if (isAnNavigation && !thereIsAtomLink) {
-                    isAnNavigation = false;
-                }
+            }
+            var thereIsAuthor = entry.Authors && entry.Authors.length;
+            if (isAnNavigation && (thereIsImageLink || thereIsAuthor)) {
+                isAnNavigation = false;
+            }
+            if (isAnNavigation && !thereIsAtomLink) {
+                isAnNavigation = false;
             }
             if (!isAnNavigation) {
                 var p = convertOpds1ToOpds2_EntryToPublication(entry);
