@@ -4,14 +4,16 @@ const tslib_1 = require("tslib");
 const ta_json_x_1 = require("ta-json-x");
 const opds2_link_1 = require("./opds2-link");
 const opds2_metadata_1 = require("./opds2-metadata");
+const METADATA_JSON_PROP = "metadata";
+const LINKS_JSON_PROP = "links";
 let OPDSFacet = class OPDSFacet {
 };
 tslib_1.__decorate([
-    ta_json_x_1.JsonProperty("metadata"),
+    ta_json_x_1.JsonProperty(METADATA_JSON_PROP),
     tslib_1.__metadata("design:type", opds2_metadata_1.OPDSMetadata)
 ], OPDSFacet.prototype, "Metadata", void 0);
 tslib_1.__decorate([
-    ta_json_x_1.JsonProperty("links"),
+    ta_json_x_1.JsonProperty(LINKS_JSON_PROP),
     ta_json_x_1.JsonElementType(opds2_link_1.OPDSLink),
     tslib_1.__metadata("design:type", Array)
 ], OPDSFacet.prototype, "Links", void 0);

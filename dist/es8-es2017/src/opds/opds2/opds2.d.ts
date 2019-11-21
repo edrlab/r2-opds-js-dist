@@ -11,6 +11,7 @@ export declare class OPDSFeed {
     Navigation: OPDSLink[];
     Facets: OPDSFacet[];
     Groups: OPDSGroup[];
+    Catalogs: OPDSPublication[];
     findFirstLinkByRel(rel: string): OPDSLink | undefined;
     AddLink(href: string, rel: string, typeLink: string, templated: boolean): void;
     AddNavigation(title: string, href: string, rel: string, typeLink: string): void;

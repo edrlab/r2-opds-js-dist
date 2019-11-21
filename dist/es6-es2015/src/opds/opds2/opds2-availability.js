@@ -2,6 +2,13 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const tslib_1 = require("tslib");
 const ta_json_x_1 = require("ta-json-x");
+var OPDSAvailabilityEnum;
+(function (OPDSAvailabilityEnum) {
+    OPDSAvailabilityEnum["Available"] = "available";
+    OPDSAvailabilityEnum["Unavailable"] = "unavailable";
+    OPDSAvailabilityEnum["Reserved"] = "reserved";
+    OPDSAvailabilityEnum["Ready"] = "ready";
+})(OPDSAvailabilityEnum = exports.OPDSAvailabilityEnum || (exports.OPDSAvailabilityEnum = {}));
 class OPDSAvailability {
     _OnDeserialized() {
         if (!this.State) {

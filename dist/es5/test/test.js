@@ -3,11 +3,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var tslib_1 = require("tslib");
 var ava_1 = require("ava");
 var debug_ = require("debug");
+var http = require("http");
 var https = require("https");
 var jsonDiff = require("json-diff");
-var ta_json_x_1 = require("ta-json-x");
 var url_1 = require("url");
 var xmldom = require("xmldom");
+var serializable_1 = require("r2-lcp-js/dist/es5/src/serializable");
 var publication_1 = require("r2-shared-js/dist/es5/src/models/publication");
 var JsonUtils_1 = require("r2-utils-js/dist/es5/src/_utils/JsonUtils");
 var xml_js_mapper_1 = require("r2-utils-js/dist/es5/src/_utils/xml-js-mapper");
@@ -15,6 +16,7 @@ var converter_1 = require("../src/opds/converter");
 var init_globals_1 = require("../src/opds/init-globals");
 var opds_1 = require("../src/opds/opds1/opds");
 var opds2_1 = require("../src/opds/opds2/opds2");
+var opds2_authentication_doc_1 = require("../src/opds/opds2/opds2-authentication-doc");
 var opds2_publication_1 = require("../src/opds/opds2/opds2-publication");
 init_globals_1.initGlobalConverters_OPDS();
 init_globals_1.initGlobalConverters_GENERIC();
@@ -203,6 +205,7 @@ function parseCompareJSONs(url, json1, json2) {
                     var pubUrls = new Set();
                     var webpubUrls = new Set();
                     var audiowebpubUrls = new Set();
+                    var authenticationUrls = new Set();
                     JsonUtils_1.traverseJsonObjects(json1, function (obj) {
                         if (obj === null) {
                             return;
@@ -210,9 +213,10 @@ function parseCompareJSONs(url, json1, json2) {
                         var isFeed = obj.type === "application/opds+json";
                         var isPub = obj.type === "application/opds-publication+json";
                         var isWebPubManifestAudio = obj.type === "application/audiobook+json";
+                        var isAuth = obj.type === "application/vnd.opds.authentication.v1.0+json";
                         var isWebPubManifest = obj.type === "application/webpub+json" &&
                             obj.href && obj.href.indexOf(".epub") < 0;
-                        if (obj.href && (isFeed || isPub || isWebPubManifest || isWebPubManifestAudio)) {
+                        if (obj.href && (isFeed || isPub || isWebPubManifest || isWebPubManifestAudio || isAuth)) {
                             var u = new url_1.URL(obj.href, thisUrl);
                             var uStr = u.toString();
                             if (uStr !== thisUrlStr) {
@@ -228,6 +232,9 @@ function parseCompareJSONs(url, json1, json2) {
                                 else if (isWebPubManifestAudio) {
                                     audiowebpubUrls.add(uStr);
                                 }
+                                else if (isAuth) {
+                                    authenticationUrls.add(uStr);
+                                }
                             }
                             else {
                             }
@@ -235,6 +242,7 @@ function parseCompareJSONs(url, json1, json2) {
                     });
                     var set = {
                         audiowebpubs: audiowebpubUrls,
+                        authentications: authenticationUrls,
                         feeds: feedUrls,
                         pubs: pubUrls,
                         webpubs: webpubUrls,
@@ -250,13 +258,15 @@ function opds2Test(url) {
         return tslib_1.__generator(this, function (_a) {
             return [2, new Promise(function (resolve, reject) {
                     debug(url);
-                    https.get(url, function (response) {
+                    var proto = /^https:\/\//.test(url) ? https : http;
+                    proto.get(url, function (response) {
                         var str;
                         var buffs;
                         if (response.statusCode && (response.statusCode < 200 || response.statusCode >= 300)) {
                             debug(url + " ==> " + response.statusCode + " (skipped)");
                             var empty = {
                                 audiowebpubs: new Set([]),
+                                authentications: new Set([]),
                                 feeds: new Set([]),
                                 pubs: new Set([]),
                                 webpubs: new Set([]),
@@ -279,7 +289,7 @@ function opds2Test(url) {
                             }
                         });
                         response.on("end", function () { return tslib_1.__awaiter(_this, void 0, void 0, function () {
-                            var src, json1, isPublication, opds2Feed, json2, res, err_1;
+                            var src, json1, isPublication, isAuth, opds2Feed, json2, res, err_1;
                             return tslib_1.__generator(this, function (_a) {
                                 switch (_a.label) {
                                     case 0:
@@ -294,11 +304,16 @@ function opds2Test(url) {
                                             return [2];
                                         }
                                         json1 = JSON.parse(src);
-                                        isPublication = !json1.publications && !json1.navigation && !json1.groups && json1.metadata;
-                                        opds2Feed = isPublication ?
-                                            ta_json_x_1.JSON.deserialize(json1, opds2_publication_1.OPDSPublication) :
-                                            ta_json_x_1.JSON.deserialize(json1, opds2_1.OPDSFeed);
-                                        json2 = ta_json_x_1.JSON.serialize(opds2Feed);
+                                        isPublication = !json1.publications &&
+                                            !json1.navigation &&
+                                            !json1.groups &&
+                                            !json1.catalogs &&
+                                            json1.metadata;
+                                        isAuth = !isPublication && json1.authentication;
+                                        opds2Feed = isPublication ? serializable_1.TaJsonDeserialize(json1, opds2_publication_1.OPDSPublication) :
+                                            (isAuth ? serializable_1.TaJsonDeserialize(json1, opds2_authentication_doc_1.OPDSAuthenticationDoc) :
+                                                serializable_1.TaJsonDeserialize(json1, opds2_1.OPDSFeed));
+                                        json2 = serializable_1.TaJsonSerialize(opds2Feed);
                                         _a.label = 1;
                                     case 1:
                                         _a.trys.push([1, 3, , 4]);
@@ -331,7 +346,8 @@ function webpubTest(url, alreadyDone) {
             alreadyDone.add(url);
             return [2, new Promise(function (resolve, reject) {
                     debug(url);
-                    https.get(url, function (response) {
+                    var proto = /^https:\/\//.test(url) ? https : http;
+                    proto.get(url, function (response) {
                         var str;
                         var buffs;
                         if (response.statusCode && (response.statusCode < 200 || response.statusCode >= 300)) {
@@ -370,14 +386,14 @@ function webpubTest(url, alreadyDone) {
                                         }
                                         json1 = JSON.parse(src);
                                         try {
-                                            pub = ta_json_x_1.JSON.deserialize(json1, publication_1.Publication);
+                                            pub = serializable_1.TaJsonDeserialize(json1, publication_1.Publication);
                                         }
                                         catch (err) {
                                             debug(err);
                                             reject(err);
                                             return [2];
                                         }
-                                        json2 = ta_json_x_1.JSON.serialize(pub);
+                                        json2 = serializable_1.TaJsonSerialize(pub);
                                         _a.label = 1;
                                     case 1:
                                         _a.trys.push([1, 3, , 4]);
@@ -405,9 +421,9 @@ function webpubTest(url, alreadyDone) {
 }
 function recursePubs(t, urls, alreadyDone) {
     return tslib_1.__awaiter(this, void 0, void 0, function () {
-        var urlsTodoWebPubs, _i, urlsTodoWebPubs_1, href, okay, err_3, urlsTodoAudioWebPubs, _a, urlsTodoAudioWebPubs_1, href, okay, err_4, urlsTodoPubs, _b, urlsTodoPubs_1, href, okay;
-        return tslib_1.__generator(this, function (_c) {
-            switch (_c.label) {
+        var urlsTodoWebPubs, _i, urlsTodoWebPubs_1, href, okay, err_3, urlsTodoAudioWebPubs, _a, urlsTodoAudioWebPubs_1, href, okay, err_4, urlsTodoPubs, _b, urlsTodoPubs_1, href, okay, urlsAuths, _c, urlsAuths_1, href, okay;
+        return tslib_1.__generator(this, function (_d) {
+            switch (_d.label) {
                 case 0:
                     urlsTodoWebPubs = [];
                     urls.webpubs.forEach(function (u) {
@@ -416,22 +432,22 @@ function recursePubs(t, urls, alreadyDone) {
                         }
                     });
                     _i = 0, urlsTodoWebPubs_1 = urlsTodoWebPubs;
-                    _c.label = 1;
+                    _d.label = 1;
                 case 1:
                     if (!(_i < urlsTodoWebPubs_1.length)) return [3, 6];
                     href = urlsTodoWebPubs_1[_i];
-                    _c.label = 2;
+                    _d.label = 2;
                 case 2:
-                    _c.trys.push([2, 4, , 5]);
+                    _d.trys.push([2, 4, , 5]);
                     return [4, webpubTest(href, alreadyDone)];
                 case 3:
-                    okay = _c.sent();
+                    okay = _d.sent();
                     if (!okay) {
                         return [2, false];
                     }
                     return [3, 5];
                 case 4:
-                    err_3 = _c.sent();
+                    err_3 = _d.sent();
                     debug(err_3);
                     return [2, false];
                 case 5:
@@ -445,22 +461,22 @@ function recursePubs(t, urls, alreadyDone) {
                         }
                     });
                     _a = 0, urlsTodoAudioWebPubs_1 = urlsTodoAudioWebPubs;
-                    _c.label = 7;
+                    _d.label = 7;
                 case 7:
                     if (!(_a < urlsTodoAudioWebPubs_1.length)) return [3, 12];
                     href = urlsTodoAudioWebPubs_1[_a];
-                    _c.label = 8;
+                    _d.label = 8;
                 case 8:
-                    _c.trys.push([8, 10, , 11]);
+                    _d.trys.push([8, 10, , 11]);
                     return [4, webpubTest(href, alreadyDone)];
                 case 9:
-                    okay = _c.sent();
+                    okay = _d.sent();
                     if (!okay) {
                         return [2, false];
                     }
                     return [3, 11];
                 case 10:
-                    err_4 = _c.sent();
+                    err_4 = _d.sent();
                     debug(err_4);
                     return [2, false];
                 case 11:
@@ -474,21 +490,43 @@ function recursePubs(t, urls, alreadyDone) {
                         }
                     });
                     _b = 0, urlsTodoPubs_1 = urlsTodoPubs;
-                    _c.label = 13;
+                    _d.label = 13;
                 case 13:
                     if (!(_b < urlsTodoPubs_1.length)) return [3, 16];
                     href = urlsTodoPubs_1[_b];
                     return [4, testUrl(t, href, alreadyDone)];
                 case 14:
-                    okay = _c.sent();
+                    okay = _d.sent();
                     if (!okay) {
                         return [2, false];
                     }
-                    _c.label = 15;
+                    _d.label = 15;
                 case 15:
                     _b++;
                     return [3, 13];
-                case 16: return [2, true];
+                case 16:
+                    urlsAuths = [];
+                    urls.authentications.forEach(function (u) {
+                        if (!alreadyDone.has(u)) {
+                            urlsAuths.push(u);
+                        }
+                    });
+                    _c = 0, urlsAuths_1 = urlsAuths;
+                    _d.label = 17;
+                case 17:
+                    if (!(_c < urlsAuths_1.length)) return [3, 20];
+                    href = urlsAuths_1[_c];
+                    return [4, testUrl(t, href, alreadyDone)];
+                case 18:
+                    okay = _d.sent();
+                    if (!okay) {
+                        return [2, false];
+                    }
+                    _d.label = 19;
+                case 19:
+                    _c++;
+                    return [3, 17];
+                case 20: return [2, true];
             }
         });
     });
@@ -598,7 +636,8 @@ function testUrlAlt(t, url, alreadyDone) {
                     }
                     alreadyDone.add(url);
                     promise = new Promise(function (resolve, reject) {
-                        https.get(url, function (response) { return tslib_1.__awaiter(_this, void 0, void 0, function () {
+                        var proto = /^https:\/\//.test(url) ? https : http;
+                        proto.get(url, function (response) { return tslib_1.__awaiter(_this, void 0, void 0, function () {
                             var str, buffs;
                             var _this = this;
                             return tslib_1.__generator(this, function (_a) {
@@ -650,7 +689,7 @@ function testUrlAlt(t, url, alreadyDone) {
                                                 }
                                                 opds1Feed = xml_js_mapper_1.XML.deserialize(xmlDom, opds_1.OPDS);
                                                 opds2Feed = converter_1.convertOpds1ToOpds2(opds1Feed);
-                                                opds2FeedJson = ta_json_x_1.JSON.serialize(opds2Feed);
+                                                opds2FeedJson = serializable_1.TaJsonSerialize(opds2Feed);
                                                 _a.label = 1;
                                             case 1:
                                                 _a.trys.push([1, 3, , 4]);
@@ -777,6 +816,32 @@ ava_1.default("OPDS2 HTTP (de)serialize roundtrip (recursive) 2", function (t) {
         switch (_a.label) {
             case 0:
                 url = "https://catalog.feedbooks.com/catalog/public_domain.json";
+                return [4, runUrlTest(t, url)];
+            case 1:
+                _a.sent();
+                return [2];
+        }
+    });
+}); });
+ava_1.default("OPDS2 HTTP (de)serialize roundtrip (recursive) CATALOGS", function (t) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
+    var url;
+    return tslib_1.__generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                url = "https://libraryregistry.librarysimplified.org/libraries";
+                return [4, runUrlTest(t, url)];
+            case 1:
+                _a.sent();
+                return [2];
+        }
+    });
+}); });
+ava_1.default("OPDS2 HTTP (de)serialize roundtrip (recursive) AUTHENTICATION", function (t) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
+    var url;
+    return tslib_1.__generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                url = "http://acl.simplye-ca.org/CALMDA/authentication_document";
                 return [4, runUrlTest(t, url)];
             case 1:
                 _a.sent();

@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const ava_1 = require("ava");
-const ta_json_x_1 = require("ta-json-x");
 const xmldom = require("xmldom");
+const serializable_1 = require("r2-lcp-js/dist/es8-es2017/src/serializable");
 const metadata_1 = require("r2-shared-js/dist/es8-es2017/src/models/metadata");
 const xml_js_mapper_1 = require("r2-utils-js/dist/es8-es2017/src/_utils/xml-js-mapper");
 const init_globals_1 = require("../src/opds/init-globals");
@@ -18,7 +18,7 @@ ava_1.default("JSON SERIALIZE: Metadata.Modified => Date", (t) => {
     const md = new metadata_1.Metadata();
     md.Modified = date;
     helpers_1.inspect(md);
-    const json = ta_json_x_1.JSON.serialize(md);
+    const json = serializable_1.TaJsonSerialize(md);
     helpers_1.logJSON(json);
     helpers_1.checkType_String(t, json.modified);
     t.is(json.modified, dateSTR);
@@ -27,7 +27,7 @@ ava_1.default("JSON DESERIALIZE: Metadata.Modified => Date", (t) => {
     const json = {};
     json.modified = dateSTR;
     helpers_1.logJSON(json);
-    const md = ta_json_x_1.JSON.deserialize(json, metadata_1.Metadata);
+    const md = serializable_1.TaJsonDeserialize(json, metadata_1.Metadata);
     helpers_1.inspect(md);
     helpers_1.checkType(t, md.Modified, Date);
     helpers_1.checkDate(t, md.Modified, date);

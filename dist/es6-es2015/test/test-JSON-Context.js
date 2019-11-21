@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const ava_1 = require("ava");
-const ta_json_x_1 = require("ta-json-x");
+const serializable_1 = require("r2-lcp-js/dist/es6-es2015/src/serializable");
 const init_globals_1 = require("../src/opds/init-globals");
 const opds2_1 = require("../src/opds/opds2/opds2");
 const helpers_1 = require("./helpers");
@@ -15,20 +15,21 @@ ava_1.default("JSON SERIALIZE: OPDSFeed.Context => string[]", (t) => {
     feed.Context.push(contextStr1);
     feed.Context.push(contextStr2);
     helpers_1.inspect(feed);
-    const json = ta_json_x_1.JSON.serialize(feed);
+    const json = serializable_1.TaJsonSerialize(feed);
     helpers_1.logJSON(json);
     helpers_1.checkType_Array(t, json["@context"]);
-    t.is(json["@context"].length, 2);
-    helpers_1.checkType_String(t, json["@context"][0]);
-    t.is(json["@context"][0], contextStr1);
-    helpers_1.checkType_String(t, json["@context"][1]);
-    t.is(json["@context"][1], contextStr2);
+    const ctx = json["@context"];
+    t.is(ctx.length, 2);
+    helpers_1.checkType_String(t, ctx[0]);
+    t.is(ctx[0], contextStr1);
+    helpers_1.checkType_String(t, ctx[1]);
+    t.is(ctx[1], contextStr2);
 });
 ava_1.default("JSON SERIALIZE: OPDSFeed.Context => string[1] collapse-array", (t) => {
     const feed = new opds2_1.OPDSFeed();
     feed.Context = [contextStr1];
     helpers_1.inspect(feed);
-    const json = ta_json_x_1.JSON.serialize(feed);
+    const json = serializable_1.TaJsonSerialize(feed);
     helpers_1.logJSON(json);
     helpers_1.checkType_String(t, json["@context"]);
     t.is(json["@context"], contextStr1);
@@ -37,7 +38,7 @@ ava_1.default("JSON DESERIALIZE: OPDSFeed.Context => string[]", (t) => {
     const json = {};
     json["@context"] = [contextStr1, contextStr2];
     helpers_1.logJSON(json);
-    const feed = ta_json_x_1.JSON.deserialize(json, opds2_1.OPDSFeed);
+    const feed = serializable_1.TaJsonDeserialize(json, opds2_1.OPDSFeed);
     helpers_1.inspect(feed);
     helpers_1.checkType_Array(t, feed.Context);
     t.is(feed.Context.length, 2);
@@ -50,7 +51,7 @@ ava_1.default("JSON DESERIALIZE: OPDSFeed.Context => string[1]", (t) => {
     const json = {};
     json["@context"] = [contextStr1];
     helpers_1.logJSON(json);
-    const feed = ta_json_x_1.JSON.deserialize(json, opds2_1.OPDSFeed);
+    const feed = serializable_1.TaJsonDeserialize(json, opds2_1.OPDSFeed);
     helpers_1.inspect(feed);
     helpers_1.checkType_Array(t, feed.Context);
     t.is(feed.Context.length, 1);
@@ -61,7 +62,7 @@ ava_1.default("JSON DESERIALIZE: OPDSFeed.Context => string", (t) => {
     const json = {};
     json["@context"] = contextStr1;
     helpers_1.logJSON(json);
-    const feed = ta_json_x_1.JSON.deserialize(json, opds2_1.OPDSFeed);
+    const feed = serializable_1.TaJsonDeserialize(json, opds2_1.OPDSFeed);
     helpers_1.inspect(feed);
     helpers_1.checkType_Array(t, feed.Context);
     t.is(feed.Context.length, 1);

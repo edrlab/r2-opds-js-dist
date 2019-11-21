@@ -7,6 +7,9 @@ const metadata_belongsto_1 = require("r2-shared-js/dist/es7-es2016/src/models/me
 const metadata_contributor_1 = require("r2-shared-js/dist/es7-es2016/src/models/metadata-contributor");
 const publication_link_1 = require("r2-shared-js/dist/es7-es2016/src/models/publication-link");
 const opds2_link_1 = require("./opds2-link");
+const METADATA_JSON_PROP = "metadata";
+const LINKS_JSON_PROP = "links";
+const IMAGES_JSON_PROP = "images";
 let OPDSPublication = class OPDSPublication {
     findFirstLinkByRel(rel) {
         return this.Links ? this.Links.find((l) => {
@@ -132,16 +135,16 @@ let OPDSPublication = class OPDSPublication {
     }
 };
 tslib_1.__decorate([
-    ta_json_x_1.JsonProperty("metadata"),
+    ta_json_x_1.JsonProperty(METADATA_JSON_PROP),
     tslib_1.__metadata("design:type", metadata_1.Metadata)
 ], OPDSPublication.prototype, "Metadata", void 0);
 tslib_1.__decorate([
-    ta_json_x_1.JsonProperty("links"),
+    ta_json_x_1.JsonProperty(LINKS_JSON_PROP),
     ta_json_x_1.JsonElementType(opds2_link_1.OPDSLink),
     tslib_1.__metadata("design:type", Array)
 ], OPDSPublication.prototype, "Links", void 0);
 tslib_1.__decorate([
-    ta_json_x_1.JsonProperty("images"),
+    ta_json_x_1.JsonProperty(IMAGES_JSON_PROP),
     ta_json_x_1.JsonElementType(publication_link_1.Link),
     tslib_1.__metadata("design:type", Array)
 ], OPDSPublication.prototype, "Images", void 0);

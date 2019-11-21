@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const ava_1 = require("ava");
-const ta_json_x_1 = require("ta-json-x");
+const serializable_1 = require("r2-lcp-js/dist/es8-es2017/src/serializable");
 const metadata_1 = require("r2-shared-js/dist/es8-es2017/src/models/metadata");
 const init_globals_1 = require("../src/opds/init-globals");
 const helpers_1 = require("./helpers");
@@ -21,7 +21,7 @@ ava_1.default("JSON SERIALIZE: Metadata.Title => string", (t) => {
     const md = new metadata_1.Metadata();
     md.Title = titleStr1;
     helpers_1.inspect(md);
-    const json = ta_json_x_1.JSON.serialize(md);
+    const json = serializable_1.TaJsonSerialize(md);
     helpers_1.logJSON(json);
     helpers_1.checkType_String(t, json.title);
     t.is(json.title, titleStr1);
@@ -30,19 +30,20 @@ ava_1.default("JSON SERIALIZE: Metadata.Title => string-lang", (t) => {
     const md = new metadata_1.Metadata();
     md.Title = titleLangStr1;
     helpers_1.inspect(md);
-    const json = ta_json_x_1.JSON.serialize(md);
+    const json = serializable_1.TaJsonSerialize(md);
     helpers_1.logJSON(json);
     helpers_1.checkType_Object(t, json.title);
-    helpers_1.checkType_String(t, json.title[titleLang1]);
-    t.is(json.title[titleLang1], titleStr1);
-    helpers_1.checkType_String(t, json.title[titleLang2]);
-    t.is(json.title[titleLang2], titleStr2);
+    const title = json.title;
+    helpers_1.checkType_String(t, title[titleLang1]);
+    t.is(title[titleLang1], titleStr1);
+    helpers_1.checkType_String(t, title[titleLang2]);
+    t.is(title[titleLang2], titleStr2);
 });
 ava_1.default("JSON DESERIALIZE: Metadata.Title => string", (t) => {
     const json = {};
     json.title = titleStr1;
     helpers_1.logJSON(json);
-    const md = ta_json_x_1.JSON.deserialize(json, metadata_1.Metadata);
+    const md = serializable_1.TaJsonDeserialize(json, metadata_1.Metadata);
     helpers_1.inspect(md);
     helpers_1.checkType_String(t, md.Title);
     t.is(md.Title, titleStr1);
@@ -51,7 +52,7 @@ ava_1.default("JSON DESERIALIZE: Metadata.Title => string-lang", (t) => {
     const json = {};
     json.title = titleLangStr1;
     helpers_1.logJSON(json);
-    const md = ta_json_x_1.JSON.deserialize(json, metadata_1.Metadata);
+    const md = serializable_1.TaJsonDeserialize(json, metadata_1.Metadata);
     helpers_1.inspect(md);
     helpers_1.checkType_Object(t, md.Title);
     helpers_1.checkType_String(t, md.Title[titleLang1]);

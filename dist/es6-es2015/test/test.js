@@ -3,11 +3,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const tslib_1 = require("tslib");
 const ava_1 = require("ava");
 const debug_ = require("debug");
+const http = require("http");
 const https = require("https");
 const jsonDiff = require("json-diff");
-const ta_json_x_1 = require("ta-json-x");
 const url_1 = require("url");
 const xmldom = require("xmldom");
+const serializable_1 = require("r2-lcp-js/dist/es6-es2015/src/serializable");
 const publication_1 = require("r2-shared-js/dist/es6-es2015/src/models/publication");
 const JsonUtils_1 = require("r2-utils-js/dist/es6-es2015/src/_utils/JsonUtils");
 const xml_js_mapper_1 = require("r2-utils-js/dist/es6-es2015/src/_utils/xml-js-mapper");
@@ -15,6 +16,7 @@ const converter_1 = require("../src/opds/converter");
 const init_globals_1 = require("../src/opds/init-globals");
 const opds_1 = require("../src/opds/opds1/opds");
 const opds2_1 = require("../src/opds/opds2/opds2");
+const opds2_authentication_doc_1 = require("../src/opds/opds2/opds2-authentication-doc");
 const opds2_publication_1 = require("../src/opds/opds2/opds2-publication");
 init_globals_1.initGlobalConverters_OPDS();
 init_globals_1.initGlobalConverters_GENERIC();
@@ -188,6 +190,7 @@ function parseCompareJSONs(url, json1, json2) {
             const pubUrls = new Set();
             const webpubUrls = new Set();
             const audiowebpubUrls = new Set();
+            const authenticationUrls = new Set();
             JsonUtils_1.traverseJsonObjects(json1, (obj) => {
                 if (obj === null) {
                     return;
@@ -195,9 +198,10 @@ function parseCompareJSONs(url, json1, json2) {
                 const isFeed = obj.type === "application/opds+json";
                 const isPub = obj.type === "application/opds-publication+json";
                 const isWebPubManifestAudio = obj.type === "application/audiobook+json";
+                const isAuth = obj.type === "application/vnd.opds.authentication.v1.0+json";
                 const isWebPubManifest = obj.type === "application/webpub+json" &&
                     obj.href && obj.href.indexOf(".epub") < 0;
-                if (obj.href && (isFeed || isPub || isWebPubManifest || isWebPubManifestAudio)) {
+                if (obj.href && (isFeed || isPub || isWebPubManifest || isWebPubManifestAudio || isAuth)) {
                     const u = new url_1.URL(obj.href, thisUrl);
                     const uStr = u.toString();
                     if (uStr !== thisUrlStr) {
@@ -213,6 +217,9 @@ function parseCompareJSONs(url, json1, json2) {
                         else if (isWebPubManifestAudio) {
                             audiowebpubUrls.add(uStr);
                         }
+                        else if (isAuth) {
+                            authenticationUrls.add(uStr);
+                        }
                     }
                     else {
                     }
@@ -220,6 +227,7 @@ function parseCompareJSONs(url, json1, json2) {
             });
             const set = {
                 audiowebpubs: audiowebpubUrls,
+                authentications: authenticationUrls,
                 feeds: feedUrls,
                 pubs: pubUrls,
                 webpubs: webpubUrls,
@@ -232,13 +240,15 @@ function opds2Test(url) {
     return tslib_1.__awaiter(this, void 0, void 0, function* () {
         return new Promise((resolve, reject) => {
             debug(url);
-            https.get(url, (response) => {
+            const proto = /^https:\/\//.test(url) ? https : http;
+            proto.get(url, (response) => {
                 let str;
                 let buffs;
                 if (response.statusCode && (response.statusCode < 200 || response.statusCode >= 300)) {
                     debug(`${url} ==> ${response.statusCode} (skipped)`);
                     const empty = {
                         audiowebpubs: new Set([]),
+                        authentications: new Set([]),
                         feeds: new Set([]),
                         pubs: new Set([]),
                         webpubs: new Set([]),
@@ -273,11 +283,16 @@ function opds2Test(url) {
                         return;
                     }
                     const json1 = JSON.parse(src);
-                    const isPublication = !json1.publications && !json1.navigation && !json1.groups && json1.metadata;
-                    const opds2Feed = isPublication ?
-                        ta_json_x_1.JSON.deserialize(json1, opds2_publication_1.OPDSPublication) :
-                        ta_json_x_1.JSON.deserialize(json1, opds2_1.OPDSFeed);
-                    const json2 = ta_json_x_1.JSON.serialize(opds2Feed);
+                    const isPublication = !json1.publications &&
+                        !json1.navigation &&
+                        !json1.groups &&
+                        !json1.catalogs &&
+                        json1.metadata;
+                    const isAuth = !isPublication && json1.authentication;
+                    const opds2Feed = isPublication ? serializable_1.TaJsonDeserialize(json1, opds2_publication_1.OPDSPublication) :
+                        (isAuth ? serializable_1.TaJsonDeserialize(json1, opds2_authentication_doc_1.OPDSAuthenticationDoc) :
+                            serializable_1.TaJsonDeserialize(json1, opds2_1.OPDSFeed));
+                    const json2 = serializable_1.TaJsonSerialize(opds2Feed);
                     let res;
                     try {
                         res = yield parseCompareJSONs(url, json1, json2);
@@ -300,7 +315,8 @@ function webpubTest(url, alreadyDone) {
         alreadyDone.add(url);
         return new Promise((resolve, reject) => {
             debug(url);
-            https.get(url, (response) => {
+            const proto = /^https:\/\//.test(url) ? https : http;
+            proto.get(url, (response) => {
                 let str;
                 let buffs;
                 if (response.statusCode && (response.statusCode < 200 || response.statusCode >= 300)) {
@@ -337,14 +353,14 @@ function webpubTest(url, alreadyDone) {
                     const json1 = JSON.parse(src);
                     let pub;
                     try {
-                        pub = ta_json_x_1.JSON.deserialize(json1, publication_1.Publication);
+                        pub = serializable_1.TaJsonDeserialize(json1, publication_1.Publication);
                     }
                     catch (err) {
                         debug(err);
                         reject(err);
                         return;
                     }
-                    const json2 = ta_json_x_1.JSON.serialize(pub);
+                    const json2 = serializable_1.TaJsonSerialize(pub);
                     try {
                         yield parseCompareJSONs(url, json1, json2);
                     }
@@ -406,6 +422,18 @@ function recursePubs(t, urls, alreadyDone) {
             }
         });
         for (const href of urlsTodoPubs) {
+            const okay = yield testUrl(t, href, alreadyDone);
+            if (!okay) {
+                return false;
+            }
+        }
+        const urlsAuths = [];
+        urls.authentications.forEach((u) => {
+            if (!alreadyDone.has(u)) {
+                urlsAuths.push(u);
+            }
+        });
+        for (const href of urlsAuths) {
             const okay = yield testUrl(t, href, alreadyDone);
             if (!okay) {
                 return false;
@@ -476,7 +504,8 @@ function testUrlAlt(t, url, alreadyDone) {
         }
         alreadyDone.add(url);
         const promise = new Promise((resolve, reject) => {
-            https.get(url, (response) => tslib_1.__awaiter(this, void 0, void 0, function* () {
+            const proto = /^https:\/\//.test(url) ? https : http;
+            proto.get(url, (response) => tslib_1.__awaiter(this, void 0, void 0, function* () {
                 let str;
                 let buffs;
                 if (response.statusCode && (response.statusCode < 200 || response.statusCode >= 300)) {
@@ -524,7 +553,7 @@ function testUrlAlt(t, url, alreadyDone) {
                     }
                     const opds1Feed = xml_js_mapper_1.XML.deserialize(xmlDom, opds_1.OPDS);
                     const opds2Feed = converter_1.convertOpds1ToOpds2(opds1Feed);
-                    const opds2FeedJson = ta_json_x_1.JSON.serialize(opds2Feed);
+                    const opds2FeedJson = serializable_1.TaJsonSerialize(opds2Feed);
                     let urls;
                     try {
                         urls = yield parseCompareJSONs(url, opds2FeedJson, opds2FeedJson);
@@ -587,6 +616,14 @@ ava_1.default("OPDS2 HTTP (de)serialize roundtrip (recursive) 1", (t) => tslib_1
 }));
 ava_1.default("OPDS2 HTTP (de)serialize roundtrip (recursive) 2", (t) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
     const url = "https://catalog.feedbooks.com/catalog/public_domain.json";
+    yield runUrlTest(t, url);
+}));
+ava_1.default("OPDS2 HTTP (de)serialize roundtrip (recursive) CATALOGS", (t) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
+    const url = "https://libraryregistry.librarysimplified.org/libraries";
+    yield runUrlTest(t, url);
+}));
+ava_1.default("OPDS2 HTTP (de)serialize roundtrip (recursive) AUTHENTICATION", (t) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
+    const url = "http://acl.simplye-ca.org/CALMDA/authentication_document";
     yield runUrlTest(t, url);
 }));
 ava_1.default("OPDS1-2 HTTP convert (de)serialize roundtrip (recursive)", (t) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {

@@ -8,6 +8,13 @@ const opds2_group_1 = require("./opds2-group");
 const opds2_link_1 = require("./opds2-link");
 const opds2_metadata_1 = require("./opds2-metadata");
 const opds2_publication_1 = require("./opds2-publication");
+const METADATA_JSON_PROP = "metadata";
+const FACETS_JSON_PROP = "facets";
+const GROUPS_JSON_PROP = "groups";
+const CATALOGS_JSON_PROP = "catalogs";
+const PUBLICATIONS_JSON_PROP = "publications";
+const LINKS_JSON_PROP = "links";
+const NAVIGATION_JSON_PROP = "navigation";
 let OPDSFeed = class OPDSFeed {
     findFirstLinkByRel(rel) {
         return this.Links ? this.Links.find((l) => {
@@ -173,8 +180,8 @@ let OPDSFeed = class OPDSFeed {
         if (!this.Links) {
             console.log("OPDS2Feed.Links is not set!");
         }
-        if (!this.Publications && !this.Navigation && !this.Groups) {
-            console.log("One of OPDS2Feed.Publications|Navigation|Groups must be set!");
+        if (!this.Publications && !this.Navigation && !this.Groups && !this.Catalogs) {
+            console.log("One of OPDS2Feed.Publications|Navigation|Groups|Catalogs must be set!");
         }
     }
 };
@@ -185,34 +192,39 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:type", Array)
 ], OPDSFeed.prototype, "Context", void 0);
 tslib_1.__decorate([
-    ta_json_x_1.JsonProperty("metadata"),
+    ta_json_x_1.JsonProperty(METADATA_JSON_PROP),
     tslib_1.__metadata("design:type", opds2_metadata_1.OPDSMetadata)
 ], OPDSFeed.prototype, "Metadata", void 0);
 tslib_1.__decorate([
-    ta_json_x_1.JsonProperty("links"),
+    ta_json_x_1.JsonProperty(LINKS_JSON_PROP),
     ta_json_x_1.JsonElementType(opds2_link_1.OPDSLink),
     tslib_1.__metadata("design:type", Array)
 ], OPDSFeed.prototype, "Links", void 0);
 tslib_1.__decorate([
-    ta_json_x_1.JsonProperty("publications"),
+    ta_json_x_1.JsonProperty(PUBLICATIONS_JSON_PROP),
     ta_json_x_1.JsonElementType(opds2_publication_1.OPDSPublication),
     tslib_1.__metadata("design:type", Array)
 ], OPDSFeed.prototype, "Publications", void 0);
 tslib_1.__decorate([
-    ta_json_x_1.JsonProperty("navigation"),
+    ta_json_x_1.JsonProperty(NAVIGATION_JSON_PROP),
     ta_json_x_1.JsonElementType(opds2_link_1.OPDSLink),
     tslib_1.__metadata("design:type", Array)
 ], OPDSFeed.prototype, "Navigation", void 0);
 tslib_1.__decorate([
-    ta_json_x_1.JsonProperty("facets"),
+    ta_json_x_1.JsonProperty(FACETS_JSON_PROP),
     ta_json_x_1.JsonElementType(opds2_facet_1.OPDSFacet),
     tslib_1.__metadata("design:type", Array)
 ], OPDSFeed.prototype, "Facets", void 0);
 tslib_1.__decorate([
-    ta_json_x_1.JsonProperty("groups"),
+    ta_json_x_1.JsonProperty(GROUPS_JSON_PROP),
     ta_json_x_1.JsonElementType(opds2_group_1.OPDSGroup),
     tslib_1.__metadata("design:type", Array)
 ], OPDSFeed.prototype, "Groups", void 0);
+tslib_1.__decorate([
+    ta_json_x_1.JsonProperty(CATALOGS_JSON_PROP),
+    ta_json_x_1.JsonElementType(opds2_publication_1.OPDSPublication),
+    tslib_1.__metadata("design:type", Array)
+], OPDSFeed.prototype, "Catalogs", void 0);
 tslib_1.__decorate([
     ta_json_x_1.OnDeserialized(),
     tslib_1.__metadata("design:type", Function),
