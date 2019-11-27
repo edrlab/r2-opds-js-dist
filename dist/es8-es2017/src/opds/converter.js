@@ -256,7 +256,6 @@ function convertOpds1ToOpds2(feed) {
         feed.Entries.forEach((entry) => {
             let isAnNavigation = true;
             let thereIsAtomLink = false;
-            let thereIsImageLink = false;
             const collLink = new opds2_link_1.OPDSLink();
             if (entry.Links) {
                 entry.Links.forEach((l) => {
@@ -287,13 +286,10 @@ function convertOpds1ToOpds2(feed) {
                     if (l.Type && l.Type.indexOf("application/atom+xml") >= 0) {
                         thereIsAtomLink = true;
                     }
-                    if (l.Type && l.Type.indexOf("image/") >= 0) {
-                        thereIsImageLink = true;
-                    }
                 });
             }
             const thereIsAuthor = entry.Authors && entry.Authors.length;
-            if (isAnNavigation && (thereIsImageLink || thereIsAuthor)) {
+            if (isAnNavigation && thereIsAuthor) {
                 isAnNavigation = false;
             }
             if (isAnNavigation && !thereIsAtomLink) {
