@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.OPDSGroup = void 0;
 const tslib_1 = require("tslib");
 const ta_json_x_1 = require("ta-json-x");
 const opds2_link_1 = require("./opds2-link");
@@ -9,29 +10,32 @@ const METADATA_JSON_PROP = "metadata";
 const PUBLICATIONS_JSON_PROP = "publications";
 const LINKS_JSON_PROP = "links";
 const NAVIGATION_JSON_PROP = "navigation";
-let OPDSGroup = class OPDSGroup {
-};
-tslib_1.__decorate([
-    ta_json_x_1.JsonProperty(METADATA_JSON_PROP),
-    tslib_1.__metadata("design:type", opds2_metadata_1.OPDSMetadata)
-], OPDSGroup.prototype, "Metadata", void 0);
-tslib_1.__decorate([
-    ta_json_x_1.JsonProperty(PUBLICATIONS_JSON_PROP),
-    ta_json_x_1.JsonElementType(opds2_publication_1.OPDSPublication),
-    tslib_1.__metadata("design:type", Array)
-], OPDSGroup.prototype, "Publications", void 0);
-tslib_1.__decorate([
-    ta_json_x_1.JsonProperty(LINKS_JSON_PROP),
-    ta_json_x_1.JsonElementType(opds2_link_1.OPDSLink),
-    tslib_1.__metadata("design:type", Array)
-], OPDSGroup.prototype, "Links", void 0);
-tslib_1.__decorate([
-    ta_json_x_1.JsonProperty(NAVIGATION_JSON_PROP),
-    ta_json_x_1.JsonElementType(opds2_link_1.OPDSLink),
-    tslib_1.__metadata("design:type", Array)
-], OPDSGroup.prototype, "Navigation", void 0);
-OPDSGroup = tslib_1.__decorate([
-    ta_json_x_1.JsonObject()
-], OPDSGroup);
+let OPDSGroup = (() => {
+    let OPDSGroup = class OPDSGroup {
+    };
+    tslib_1.__decorate([
+        ta_json_x_1.JsonProperty(METADATA_JSON_PROP),
+        tslib_1.__metadata("design:type", opds2_metadata_1.OPDSMetadata)
+    ], OPDSGroup.prototype, "Metadata", void 0);
+    tslib_1.__decorate([
+        ta_json_x_1.JsonProperty(PUBLICATIONS_JSON_PROP),
+        ta_json_x_1.JsonElementType(opds2_publication_1.OPDSPublication),
+        tslib_1.__metadata("design:type", Array)
+    ], OPDSGroup.prototype, "Publications", void 0);
+    tslib_1.__decorate([
+        ta_json_x_1.JsonProperty(LINKS_JSON_PROP),
+        ta_json_x_1.JsonElementType(opds2_link_1.OPDSLink),
+        tslib_1.__metadata("design:type", Array)
+    ], OPDSGroup.prototype, "Links", void 0);
+    tslib_1.__decorate([
+        ta_json_x_1.JsonProperty(NAVIGATION_JSON_PROP),
+        ta_json_x_1.JsonElementType(opds2_link_1.OPDSLink),
+        tslib_1.__metadata("design:type", Array)
+    ], OPDSGroup.prototype, "Navigation", void 0);
+    OPDSGroup = tslib_1.__decorate([
+        ta_json_x_1.JsonObject()
+    ], OPDSGroup);
+    return OPDSGroup;
+})();
 exports.OPDSGroup = OPDSGroup;
 //# sourceMappingURL=opds2-group.js.map

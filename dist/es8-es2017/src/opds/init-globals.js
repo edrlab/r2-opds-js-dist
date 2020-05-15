@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.initGlobalConverters_GENERIC = exports.initGlobalConverters_OPDS = void 0;
 const ta_json_x_1 = require("ta-json-x");
 const ta_json_date_converter_1 = require("r2-utils-js/dist/es8-es2017/src/_utils/ta-json-date-converter");
 const ta_json_number_converter_1 = require("r2-utils-js/dist/es8-es2017/src/_utils/ta-json-number-converter");

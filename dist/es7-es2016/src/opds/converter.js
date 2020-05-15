@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.convertOpds1ToOpds2 = exports.convertOpds1ToOpds2_EntryToLink = exports.convertOpds1ToOpds2_EntryToPublication = void 0;
 const metadata_1 = require("r2-shared-js/dist/es7-es2016/src/models/metadata");
 const metadata_belongsto_1 = require("r2-shared-js/dist/es7-es2016/src/models/metadata-belongsto");
 const metadata_contributor_1 = require("r2-shared-js/dist/es7-es2016/src/models/metadata-contributor");

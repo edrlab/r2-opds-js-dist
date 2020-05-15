@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.OPDSAuthentication = void 0;
 var tslib_1 = require("tslib");
 var ta_json_x_1 = require("ta-json-x");
 var opds2_authentication_labels_1 = require("./opds2-authentication-labels");

@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.OPDSLink = exports.OPDSLinkRelEnum = void 0;
 var tslib_1 = require("tslib");
 var ta_json_x_1 = require("ta-json-x");
 var publication_link_1 = require("r2-shared-js/dist/es5/src/models/publication-link");

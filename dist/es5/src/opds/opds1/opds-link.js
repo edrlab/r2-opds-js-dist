@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Link = void 0;
 var tslib_1 = require("tslib");
 var xml_js_mapper_1 = require("r2-utils-js/dist/es5/src/_utils/xml-js-mapper");
 var opds_indirectAcquisition_1 = require("./opds-indirectAcquisition");
