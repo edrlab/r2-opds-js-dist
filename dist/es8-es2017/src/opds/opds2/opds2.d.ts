@@ -15,7 +15,7 @@ export declare class OPDSFeed {
     findFirstLinkByRel(rel: string): OPDSLink | undefined;
     AddLink(href: string, rel: string, typeLink: string, templated: boolean): void;
     AddNavigation(title: string, href: string, rel: string, typeLink: string): void;
-    AddPagination(numberItems: number, itemsPerPage: number, currentPage: number, nextLink: string, prevLink: string, firstLink: string, lastLink: string): void;
+    AddPagination(numberItems: number, itemsPerPage: number, currentPage: number, nextLink?: string, prevLink?: string, firstLink?: string, lastLink?: string): void;
     AddFacet(link: OPDSLink, group: string): void;
     AddPublicationInGroup(publication: OPDSPublication, collLink: OPDSLink): void;
     AddNavigationInGroup(link: OPDSLink, collLink: OPDSLink): void;
