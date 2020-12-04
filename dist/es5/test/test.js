@@ -184,6 +184,16 @@ function parseCompareJSONs(url, json1, json2) {
                                 harmonizeArrays_1(obj);
                             }
                         });
+                        JsonUtils_1.traverseJsonObjects(json2, function (obj) {
+                            if (obj !== null) {
+                                harmonizeBitrateAndTrack_1(obj);
+                            }
+                        });
+                        JsonUtils_1.traverseJsonObjects(json2, function (obj) {
+                            if (obj !== null) {
+                                harmonizeNulls_1(obj);
+                            }
+                        });
                         json1 = JsonUtils_1.sortObject(json1);
                         json2 = JsonUtils_1.sortObject(json2);
                         var str1 = JSON.stringify(json1, null, 2);

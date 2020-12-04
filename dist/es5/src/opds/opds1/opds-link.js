@@ -3,6 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Link = void 0;
 var tslib_1 = require("tslib");
 var xml_js_mapper_1 = require("r2-utils-js/dist/es5/src/_utils/xml-js-mapper");
+var opds_availability_1 = require("./opds-availability");
+var opds_copies_1 = require("./opds-copies");
+var opds_holds_1 = require("./opds-holds");
 var opds_indirectAcquisition_1 = require("./opds-indirectAcquisition");
 var Link = (function () {
     function Link() {
@@ -26,6 +29,18 @@ var Link = (function () {
         xml_js_mapper_1.XmlItemType(opds_indirectAcquisition_1.IndirectAcquisition),
         tslib_1.__metadata("design:type", Array)
     ], Link.prototype, "OpdsIndirectAcquisitions", void 0);
+    tslib_1.__decorate([
+        xml_js_mapper_1.XmlXPathSelector("opds:availability"),
+        tslib_1.__metadata("design:type", opds_availability_1.Availability)
+    ], Link.prototype, "OpdsAvailability", void 0);
+    tslib_1.__decorate([
+        xml_js_mapper_1.XmlXPathSelector("opds:copies"),
+        tslib_1.__metadata("design:type", opds_copies_1.Copies)
+    ], Link.prototype, "OpdsCopies", void 0);
+    tslib_1.__decorate([
+        xml_js_mapper_1.XmlXPathSelector("opds:holds"),
+        tslib_1.__metadata("design:type", opds_holds_1.Holds)
+    ], Link.prototype, "OpdsHolds", void 0);
     tslib_1.__decorate([
         xml_js_mapper_1.XmlXPathSelector("@type"),
         tslib_1.__metadata("design:type", String)

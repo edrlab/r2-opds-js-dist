@@ -3,6 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Link = void 0;
 const tslib_1 = require("tslib");
 const xml_js_mapper_1 = require("r2-utils-js/dist/es6-es2015/src/_utils/xml-js-mapper");
+const opds_availability_1 = require("./opds-availability");
+const opds_copies_1 = require("./opds-copies");
+const opds_holds_1 = require("./opds-holds");
 const opds_indirectAcquisition_1 = require("./opds-indirectAcquisition");
 let Link = class Link {
     HasRel(rel) {
@@ -25,6 +28,18 @@ tslib_1.__decorate([
     xml_js_mapper_1.XmlItemType(opds_indirectAcquisition_1.IndirectAcquisition),
     tslib_1.__metadata("design:type", Array)
 ], Link.prototype, "OpdsIndirectAcquisitions", void 0);
+tslib_1.__decorate([
+    xml_js_mapper_1.XmlXPathSelector("opds:availability"),
+    tslib_1.__metadata("design:type", opds_availability_1.Availability)
+], Link.prototype, "OpdsAvailability", void 0);
+tslib_1.__decorate([
+    xml_js_mapper_1.XmlXPathSelector("opds:copies"),
+    tslib_1.__metadata("design:type", opds_copies_1.Copies)
+], Link.prototype, "OpdsCopies", void 0);
+tslib_1.__decorate([
+    xml_js_mapper_1.XmlXPathSelector("opds:holds"),
+    tslib_1.__metadata("design:type", opds_holds_1.Holds)
+], Link.prototype, "OpdsHolds", void 0);
 tslib_1.__decorate([
     xml_js_mapper_1.XmlXPathSelector("@type"),
     tslib_1.__metadata("design:type", String)

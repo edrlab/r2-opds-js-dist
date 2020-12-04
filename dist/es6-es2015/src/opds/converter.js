@@ -7,6 +7,9 @@ const metadata_contributor_1 = require("r2-shared-js/dist/es6-es2015/src/models/
 const metadata_subject_1 = require("r2-shared-js/dist/es6-es2015/src/models/metadata-subject");
 const publication_link_1 = require("r2-shared-js/dist/es6-es2015/src/models/publication-link");
 const opds2_1 = require("./opds2/opds2");
+const opds2_availability_1 = require("./opds2/opds2-availability");
+const opds2_copy_1 = require("./opds2/opds2-copy");
+const opds2_hold_1 = require("./opds2/opds2-hold");
 const opds2_indirectAcquisition_1 = require("./opds2/opds2-indirectAcquisition");
 const opds2_link_1 = require("./opds2/opds2-link");
 const opds2_metadata_1 = require("./opds2/opds2-metadata");
@@ -107,16 +110,7 @@ function convertOpds1ToOpds2_EntryToPublication(entry) {
     if (entry.Links) {
         entry.Links.forEach((link) => {
             const l = new opds2_link_1.OPDSLink();
-            l.Href = link.Href;
-            l.TypeLink = link.Type;
-            l.AddRel(link.Rel);
-            l.Title = link.Title;
-            if (link.ThrCount) {
-                if (!l.Properties) {
-                    l.Properties = new opds2_properties_1.OPDSProperties();
-                }
-                l.Properties.NumberOfItems = link.ThrCount;
-            }
+            portLinkInfo(link, l);
             if (link.OpdsIndirectAcquisitions && link.OpdsIndirectAcquisitions.length) {
                 if (!l.Properties) {
                     l.Properties = new opds2_properties_1.OPDSProperties();
@@ -217,15 +211,7 @@ function convertOpds1ToOpds2_EntryToLink(entry) {
         });
         const link = atomLink ? atomLink : (entry.Links[0] ? entry.Links[0] : undefined);
         if (link) {
-            if (link.ThrCount) {
-                if (!linkNav.Properties) {
-                    linkNav.Properties = new opds2_properties_1.OPDSProperties();
-                }
-                linkNav.Properties.NumberOfItems = link.ThrCount;
-            }
-            linkNav.AddRel(link.Rel);
-            linkNav.TypeLink = link.Type;
-            linkNav.Href = link.Href;
+            portLinkInfo(link, linkNav);
         }
     }
     return linkNav;
@@ -260,12 +246,6 @@ function convertOpds1ToOpds2(feed) {
             const collLink = new opds2_link_1.OPDSLink();
             if (entry.Links) {
                 entry.Links.forEach((l) => {
-                    if (l.ThrCount) {
-                        if (!collLink.Properties) {
-                            collLink.Properties = new opds2_properties_1.OPDSProperties();
-                        }
-                        collLink.Properties.NumberOfItems = l.ThrCount;
-                    }
                     if (l.Href) {
                         l.Href = l.Href.replace(/ /g, "%20");
                     }
@@ -284,6 +264,7 @@ function convertOpds1ToOpds2(feed) {
                         collLink.Href = l.Href;
                         collLink.Title = l.Title;
                     }
+                    portLinkInfo(l, collLink);
                     if (l.Type && l.Type.indexOf("application/atom+xml") >= 0) {
                         thereIsAtomLink = true;
                     }
@@ -328,16 +309,7 @@ function convertOpds1ToOpds2(feed) {
                 l.Href = l.Href.replace(/ /g, "%20");
             }
             const linkFeed = new opds2_link_1.OPDSLink();
-            linkFeed.Href = l.Href;
-            linkFeed.AddRel(l.Rel);
-            linkFeed.TypeLink = l.Type;
-            linkFeed.Title = l.Title;
-            if (l.ThrCount) {
-                if (!linkFeed.Properties) {
-                    linkFeed.Properties = new opds2_properties_1.OPDSProperties();
-                }
-                linkFeed.Properties.NumberOfItems = l.ThrCount;
-            }
+            portLinkInfo(l, linkFeed);
             if (l.HasRel("http://opds-spec.org/facet")) {
                 opds2feed.AddFacet(linkFeed, l.FacetGroup);
             }
@@ -352,4 +324,63 @@ function convertOpds1ToOpds2(feed) {
     return opds2feed;
 }
 exports.convertOpds1ToOpds2 = convertOpds1ToOpds2;
+const portLinkInfo = (linkSource, linkDest) => {
+    if (!linkDest.Href && linkSource.Href) {
+        linkDest.Href = linkSource.Href;
+    }
+    if (!linkDest.TypeLink && linkSource.Type) {
+        linkDest.TypeLink = linkSource.Type;
+    }
+    if (!linkDest.Title && linkSource.Title) {
+        linkDest.Title = linkSource.Title;
+    }
+    if ((!linkDest.Rel || !linkDest.Rel.length) && linkSource.Rel) {
+        linkDest.AddRel(linkSource.Rel);
+    }
+    if (linkSource.OpdsAvailability) {
+        if (!linkDest.Properties) {
+            linkDest.Properties = new opds2_properties_1.OPDSProperties();
+        }
+        linkDest.Properties.Availability = new opds2_availability_1.OPDSAvailability();
+        if (linkSource.OpdsAvailability.Since) {
+            linkDest.Properties.Availability.Since = linkSource.OpdsAvailability.Since;
+        }
+        if (linkSource.OpdsAvailability.Until) {
+            linkDest.Properties.Availability.Until = linkSource.OpdsAvailability.Until;
+        }
+        if (linkSource.OpdsAvailability.State) {
+            linkDest.Properties.Availability.State = linkSource.OpdsAvailability.State;
+        }
+    }
+    if (linkSource.OpdsCopies) {
+        if (!linkDest.Properties) {
+            linkDest.Properties = new opds2_properties_1.OPDSProperties();
+        }
+        linkDest.Properties.Copies = new opds2_copy_1.OPDSCopy();
+        if (typeof linkSource.OpdsCopies.Available === "number") {
+            linkDest.Properties.Copies.Available = linkSource.OpdsCopies.Available;
+        }
+        if (typeof linkSource.OpdsCopies.Total === "number") {
+            linkDest.Properties.Copies.Total = linkSource.OpdsCopies.Total;
+        }
+    }
+    if (linkSource.OpdsHolds) {
+        if (!linkDest.Properties) {
+            linkDest.Properties = new opds2_properties_1.OPDSProperties();
+        }
+        linkDest.Properties.Holds = new opds2_hold_1.OPDSHold();
+        if (typeof linkSource.OpdsHolds.Position === "number") {
+            linkDest.Properties.Holds.Position = linkSource.OpdsHolds.Position;
+        }
+        if (typeof linkSource.OpdsHolds.Total === "number") {
+            linkDest.Properties.Holds.Total = linkSource.OpdsHolds.Total;
+        }
+    }
+    if (linkSource.ThrCount) {
+        if (!linkDest.Properties) {
+            linkDest.Properties = new opds2_properties_1.OPDSProperties();
+        }
+        linkDest.Properties.NumberOfItems = linkSource.ThrCount;
+    }
+};
 //# sourceMappingURL=converter.js.map
