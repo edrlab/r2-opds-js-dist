@@ -11,6 +11,10 @@ var Availability = (function () {
         tslib_1.__metadata("design:type", String)
     ], Availability.prototype, "State", void 0);
     tslib_1.__decorate([
+        xml_js_mapper_1.XmlXPathSelector("@status"),
+        tslib_1.__metadata("design:type", String)
+    ], Availability.prototype, "Status", void 0);
+    tslib_1.__decorate([
         xml_js_mapper_1.XmlXPathSelector("@since"),
         tslib_1.__metadata("design:type", Date)
     ], Availability.prototype, "Since", void 0);
