@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.checkType_Object = exports.checkType_Array = exports.checkType_Number = exports.checkType_String = exports.checkType = exports.checkDate = exports.logJSON = exports.log = exports.inspect = void 0;
+exports.checkType_Object = exports.checkType_Array = exports.checkType_Number = exports.checkType_String = exports.checkType = exports.checkNumber = exports.checkDate = exports.logJSON = exports.log = exports.inspect = void 0;
 const util = require("util");
 function inspect(obj) {
     if (!process.env.DEBUG || process.env.DEBUG === "false" || process.env.DEBUG === "0") {
@@ -31,6 +31,11 @@ function checkDate(t, d1, d2) {
     t.true(d1 >= d2 && d1 <= d2);
 }
 exports.checkDate = checkDate;
+function checkNumber(t, d1, d2) {
+    t.is(d1, d2);
+    t.true(d1 === d2);
+}
+exports.checkNumber = checkNumber;
 function checkType(t, obj, clazz) {
     t.is(typeof obj, "object");
     t.true(obj instanceof clazz);

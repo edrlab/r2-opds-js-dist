@@ -3,6 +3,7 @@ export declare function inspect(obj: any): void;
 export declare function log(str: string): void;
 export declare function logJSON(json: any): void;
 export declare function checkDate(t: ExecutionContext, d1: Date, d2: Date): void;
+export declare function checkNumber(t: ExecutionContext, d1: number, d2: number): void;
 export declare function checkType(t: ExecutionContext, obj: any, clazz: Function): void;
 export declare function checkType_String(t: ExecutionContext, obj: any): void;
 export declare function checkType_Number(t: ExecutionContext, obj: any): void;

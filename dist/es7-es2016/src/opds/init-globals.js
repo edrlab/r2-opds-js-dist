@@ -14,6 +14,7 @@ function initGlobalConverters_GENERIC() {
     ta_json_x_1.propertyConverters.set(Number, new ta_json_number_converter_1.JsonNumberConverter());
     xml_js_mapper_1.propertyConverters.set(Buffer, new xml_js_mapper_1.BufferConverter());
     xml_js_mapper_1.propertyConverters.set(Date, new xml_js_mapper_1.DateConverter());
+    xml_js_mapper_1.propertyConverters.set(Number, new xml_js_mapper_1.NumberConverter());
 }
 exports.initGlobalConverters_GENERIC = initGlobalConverters_GENERIC;
 //# sourceMappingURL=init-globals.js.map
