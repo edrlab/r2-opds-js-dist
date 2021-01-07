@@ -9,6 +9,7 @@ export declare class Link {
     OpdsAvailability: Availability;
     OpdsCopies: Copies;
     OpdsHolds: Holds;
+    LcpHashedPassphrase: string;
     Type: string;
     ThrCount: number;
     FacetGroup: string;

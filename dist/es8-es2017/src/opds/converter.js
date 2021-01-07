@@ -111,6 +111,15 @@ function convertOpds1ToOpds2_EntryToPublication(entry) {
         entry.Links.forEach((link) => {
             const l = new opds2_link_1.OPDSLink();
             portLinkInfo(link, l);
+            if (link.LcpHashedPassphrase) {
+                if (!l.Properties) {
+                    l.Properties = new opds2_properties_1.OPDSProperties();
+                }
+                if (!l.Properties.AdditionalJSON) {
+                    l.Properties.AdditionalJSON = {};
+                }
+                l.Properties.AdditionalJSON.lcp_hashed_passphrase = link.LcpHashedPassphrase;
+            }
             if (link.OpdsIndirectAcquisitions && link.OpdsIndirectAcquisitions.length) {
                 if (!l.Properties) {
                     l.Properties = new opds2_properties_1.OPDSProperties();
@@ -261,10 +270,8 @@ function convertOpds1ToOpds2(feed) {
                     }
                     if (l.HasRel("collection") || l.HasRel("http://opds-spec.org/group")) {
                         collLink.AddRel("collection");
-                        collLink.Href = l.Href;
-                        collLink.Title = l.Title;
+                        portLinkInfo(l, collLink);
                     }
-                    portLinkInfo(l, collLink);
                     if (l.Type && l.Type.indexOf("application/atom+xml") >= 0) {
                         thereIsAtomLink = true;
                     }

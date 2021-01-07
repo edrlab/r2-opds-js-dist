@@ -15,6 +15,7 @@ var xml_js_mapper_1 = require("r2-utils-js/dist/es5/src/_utils/xml-js-mapper");
 var converter_1 = require("../src/opds/converter");
 var init_globals_1 = require("../src/opds/init-globals");
 var opds_1 = require("../src/opds/opds1/opds");
+var opds_entry_1 = require("../src/opds/opds1/opds-entry");
 var opds2_1 = require("../src/opds/opds2/opds2");
 var opds2_authentication_doc_1 = require("../src/opds/opds2/opds2-authentication-doc");
 var opds2_publication_1 = require("../src/opds/opds2/opds2-publication");
@@ -870,6 +871,22 @@ ava_1.default("OPDS1-2 HTTP convert (de)serialize roundtrip (recursive)", functi
                 _a.sent();
                 return [2];
         }
+    });
+}); });
+ava_1.default("OPDS1-2 LCP passphrase convert (de)serialize roundtrip", function (t) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
+    var xmlSrc, xmlDom, isEntry, opds1Entry, opds2Pub, opds2PubJson;
+    return tslib_1.__generator(this, function (_a) {
+        xmlSrc = "\n<entry\n    xmlns=\"http://www.w3.org/2005/Atom\"\n    xmlns:lcp=\"http://readium.org/lcp-specs/ns\">\n\n    <link\n        rel=\"http://opds-spec.org/acquisition/\"\n        href=\"FAKE_URL\"\n        type=\"application/vnd.readium.lcp.license.v1.0+json\">\n\n        <lcp:hashed_passphrase>FAKE_BASE64</lcp:hashed_passphrase>\n    </link>\n</entry>\n    ";
+        xmlDom = new xmldom.DOMParser().parseFromString(xmlSrc);
+        isEntry = xmlDom.documentElement.localName === "entry";
+        t.true(isEntry);
+        opds1Entry = xml_js_mapper_1.XML.deserialize(xmlDom, opds_entry_1.Entry);
+        t.is(opds1Entry.Links[0].LcpHashedPassphrase, "FAKE_BASE64");
+        opds2Pub = converter_1.convertOpds1ToOpds2_EntryToPublication(opds1Entry);
+        t.is(opds2Pub.Links[0].Properties.AdditionalJSON.lcp_hashed_passphrase, "FAKE_BASE64");
+        opds2PubJson = serializable_1.TaJsonSerialize(opds2Pub);
+        t.is(opds2PubJson.links[0].properties.lcp_hashed_passphrase, "FAKE_BASE64");
+        return [2];
     });
 }); });
 //# sourceMappingURL=test.js.map

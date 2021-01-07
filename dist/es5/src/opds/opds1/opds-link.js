@@ -42,6 +42,10 @@ var Link = (function () {
         tslib_1.__metadata("design:type", opds_holds_1.Holds)
     ], Link.prototype, "OpdsHolds", void 0);
     tslib_1.__decorate([
+        xml_js_mapper_1.XmlXPathSelector("lcp:hashed_passphrase/text()"),
+        tslib_1.__metadata("design:type", String)
+    ], Link.prototype, "LcpHashedPassphrase", void 0);
+    tslib_1.__decorate([
         xml_js_mapper_1.XmlXPathSelector("@type"),
         tslib_1.__metadata("design:type", String)
     ], Link.prototype, "Type", void 0);
@@ -71,6 +75,7 @@ var Link = (function () {
             atom: "http://www.w3.org/2005/Atom",
             bibframe: "http://bibframe.org/vocab/",
             dcterms: "http://purl.org/dc/terms/",
+            lcp: "http://readium.org/lcp-specs/ns",
             odl: "http://opds-spec.org/odl",
             opds: "http://opds-spec.org/2010/catalog",
             opensearch: "http://a9.com/-/spec/opensearch/1.1/",

@@ -4,10 +4,14 @@ exports.OPDSFeed = void 0;
 var tslib_1 = require("tslib");
 var ta_json_x_1 = require("ta-json-x");
 var ta_json_string_converter_1 = require("r2-utils-js/dist/es5/src/_utils/ta-json-string-converter");
+var opds2_availability_1 = require("./opds2-availability");
+var opds2_copy_1 = require("./opds2-copy");
 var opds2_facet_1 = require("./opds2-facet");
 var opds2_group_1 = require("./opds2-group");
+var opds2_hold_1 = require("./opds2-hold");
 var opds2_link_1 = require("./opds2-link");
 var opds2_metadata_1 = require("./opds2-metadata");
+var opds2_properties_1 = require("./opds2-properties");
 var opds2_publication_1 = require("./opds2-publication");
 var METADATA_JSON_PROP = "metadata";
 var FACETS_JSON_PROP = "facets";
@@ -16,6 +20,70 @@ var CATALOGS_JSON_PROP = "catalogs";
 var PUBLICATIONS_JSON_PROP = "publications";
 var LINKS_JSON_PROP = "links";
 var NAVIGATION_JSON_PROP = "navigation";
+var cloneLinkInfo = function (linkSource, linkDest) {
+    if (!linkDest.Href && linkSource.Href) {
+        linkDest.Href = linkSource.Href;
+    }
+    if (!linkDest.TypeLink && linkSource.TypeLink) {
+        linkDest.TypeLink = linkSource.TypeLink;
+    }
+    if (!linkDest.Title && linkSource.Title) {
+        linkDest.Title = linkSource.Title;
+    }
+    if ((!linkDest.Rel || !linkDest.Rel.length) && linkSource.Rel) {
+        for (var _i = 0, _a = linkSource.Rel; _i < _a.length; _i++) {
+            var r = _a[_i];
+            linkDest.AddRel(r);
+        }
+    }
+    if (linkSource.Properties) {
+        if (linkSource.Properties.Availability) {
+            if (!linkDest.Properties) {
+                linkDest.Properties = new opds2_properties_1.OPDSProperties();
+            }
+            linkDest.Properties.Availability = new opds2_availability_1.OPDSAvailability();
+            if (linkSource.Properties.Availability.Since) {
+                linkDest.Properties.Availability.Since = linkSource.Properties.Availability.Since;
+            }
+            if (linkSource.Properties.Availability.Until) {
+                linkDest.Properties.Availability.Until = linkSource.Properties.Availability.Until;
+            }
+            if (linkSource.Properties.Availability.State) {
+                linkDest.Properties.Availability.State = linkSource.Properties.Availability.State;
+            }
+        }
+        if (linkSource.Properties.Copies) {
+            if (!linkDest.Properties) {
+                linkDest.Properties = new opds2_properties_1.OPDSProperties();
+            }
+            linkDest.Properties.Copies = new opds2_copy_1.OPDSCopy();
+            if (typeof linkSource.Properties.Copies.Available === "number") {
+                linkDest.Properties.Copies.Available = linkSource.Properties.Copies.Available;
+            }
+            if (typeof linkSource.Properties.Copies.Total === "number") {
+                linkDest.Properties.Copies.Total = linkSource.Properties.Copies.Total;
+            }
+        }
+        if (linkSource.Properties.Holds) {
+            if (!linkDest.Properties) {
+                linkDest.Properties = new opds2_properties_1.OPDSProperties();
+            }
+            linkDest.Properties.Holds = new opds2_hold_1.OPDSHold();
+            if (typeof linkSource.Properties.Holds.Position === "number") {
+                linkDest.Properties.Holds.Position = linkSource.Properties.Holds.Position;
+            }
+            if (typeof linkSource.Properties.Holds.Total === "number") {
+                linkDest.Properties.Holds.Total = linkSource.Properties.Holds.Total;
+            }
+        }
+        if (typeof linkSource.Properties.NumberOfItems === "number") {
+            if (!linkDest.Properties) {
+                linkDest.Properties = new opds2_properties_1.OPDSProperties();
+            }
+            linkDest.Properties.NumberOfItems = linkSource.Properties.NumberOfItems;
+        }
+    }
+};
 var OPDSFeed = (function () {
     function OPDSFeed() {
     }
@@ -127,8 +195,7 @@ var OPDSFeed = (function () {
         group.Publications.push(publication);
         var linkSelf = new opds2_link_1.OPDSLink();
         linkSelf.AddRel("self");
-        linkSelf.Title = collLink.Title;
-        linkSelf.Href = collLink.Href;
+        cloneLinkInfo(collLink, linkSelf);
         group.Links = [];
         group.Links.push(linkSelf);
         if (!this.Groups) {
@@ -167,10 +234,9 @@ var OPDSFeed = (function () {
         group.Navigation.push(link);
         var linkSelf = new opds2_link_1.OPDSLink();
         linkSelf.AddRel("self");
-        linkSelf.Title = collLink.Title;
-        linkSelf.Href = collLink.Href;
+        cloneLinkInfo(collLink, linkSelf);
         group.Links = [];
-        group.Links.push(link);
+        group.Links.push(linkSelf);
         if (!this.Groups) {
             this.Groups = [];
         }
