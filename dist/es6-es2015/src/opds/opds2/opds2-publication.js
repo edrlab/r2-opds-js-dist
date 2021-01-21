@@ -11,6 +11,7 @@ const opds2_link_1 = require("./opds2-link");
 const METADATA_JSON_PROP = "metadata";
 const LINKS_JSON_PROP = "links";
 const IMAGES_JSON_PROP = "images";
+const IMAGE_JSON_PROP = "image";
 let OPDSPublication = class OPDSPublication {
     findFirstLinkByRel(rel) {
         return this.Links ? this.Links.find((l) => {
@@ -130,8 +131,8 @@ let OPDSPublication = class OPDSPublication {
         if (!this.Links) {
             console.log("OPDSPublication.Links is not set!");
         }
-        if (!this.Images) {
-            console.log("OPDSPublication.Images is not set!");
+        if (!this.Images && !this.Image) {
+            console.log("OPDSPublication.Image[s] is not set!");
         }
     }
 };
@@ -149,6 +150,10 @@ tslib_1.__decorate([
     ta_json_x_1.JsonElementType(publication_link_1.Link),
     tslib_1.__metadata("design:type", Array)
 ], OPDSPublication.prototype, "Images", void 0);
+tslib_1.__decorate([
+    ta_json_x_1.JsonProperty(IMAGE_JSON_PROP),
+    tslib_1.__metadata("design:type", publication_link_1.Link)
+], OPDSPublication.prototype, "Image", void 0);
 tslib_1.__decorate([
     ta_json_x_1.OnDeserialized(),
     tslib_1.__metadata("design:type", Function),

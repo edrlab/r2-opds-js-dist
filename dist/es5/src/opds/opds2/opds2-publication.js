@@ -11,6 +11,7 @@ var opds2_link_1 = require("./opds2-link");
 var METADATA_JSON_PROP = "metadata";
 var LINKS_JSON_PROP = "links";
 var IMAGES_JSON_PROP = "images";
+var IMAGE_JSON_PROP = "image";
 var OPDSPublication = (function () {
     function OPDSPublication() {
     }
@@ -132,8 +133,8 @@ var OPDSPublication = (function () {
         if (!this.Links) {
             console.log("OPDSPublication.Links is not set!");
         }
-        if (!this.Images) {
-            console.log("OPDSPublication.Images is not set!");
+        if (!this.Images && !this.Image) {
+            console.log("OPDSPublication.Image[s] is not set!");
         }
     };
     tslib_1.__decorate([
@@ -150,6 +151,10 @@ var OPDSPublication = (function () {
         ta_json_x_1.JsonElementType(publication_link_1.Link),
         tslib_1.__metadata("design:type", Array)
     ], OPDSPublication.prototype, "Images", void 0);
+    tslib_1.__decorate([
+        ta_json_x_1.JsonProperty(IMAGE_JSON_PROP),
+        tslib_1.__metadata("design:type", publication_link_1.Link)
+    ], OPDSPublication.prototype, "Image", void 0);
     tslib_1.__decorate([
         ta_json_x_1.OnDeserialized(),
         tslib_1.__metadata("design:type", Function),

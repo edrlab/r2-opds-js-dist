@@ -5,6 +5,7 @@ export declare class OPDSPublication {
     Metadata: Metadata;
     Links: OPDSLink[];
     Images: Link[];
+    Image: Link;
     findFirstLinkByRel(rel: string): OPDSLink | undefined;
     AddImage(href: string, typeImage: string, height: number, width: number): void;
     AddLink_(href: string, typeLink: string, rel: string, title: string): void;
