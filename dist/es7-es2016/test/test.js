@@ -22,6 +22,134 @@ const opds2_publication_1 = require("../src/opds/opds2/opds2-publication");
 init_globals_1.initGlobalConverters_OPDS();
 init_globals_1.initGlobalConverters_GENERIC();
 const debug = debug_("r2:opds#test");
+const plainTextWithEscapedHtmlChars = `
+
+This &amp; is &#039;a&quot;        test
+\tof &lt; summary text &gt;
+
+`;
+const xhtmlWithSomeEscapedHtmlCharsPrefixedNamespace = `
+<xhtm:div>
+    Hello &amp;\t<xhtm:b>  world &lt; &quot;_&#039; &gt;  </xhtm:b>!
+</xhtm:div>
+`;
+const xhtmlWithSomeEscapedHtmlCharsNoPrefixedNamespace = `
+<div xmlns="http://www.w3.org/1999/xhtml">
+    Hi &amp;\t<b>  world &lt; &quot;_&#039; &gt;  </b>!
+</div>
+`;
+const xmlWithSomeEscapedHtmlCharsAtomDefaultNamespace = `
+<div>
+    Oops &amp;\t<b>  world &lt; &quot;_&#039; &gt;  </b>!
+</div>
+`;
+const escapedHtmlWithSomeDoubleEscapedHtmlChars = `
+&lt;div&gt;
+    Hello &amp;amp;\t&lt;b&gt;  world &amp;lt; &amp;quot;_&amp;#039; &amp;gt;  &lt;/b&gt;!
+&lt;/div&gt;
+`;
+ava_1.default("OPDS1-2 description: summary + content(XHTML NAMESPACE PREFIX)", (t) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
+    const xmlSrc = `
+<entry
+    xmlns="http://www.w3.org/2005/Atom"
+    xmlns:xhtm="http://www.w3.org/1999/xhtml">
+<summary>${plainTextWithEscapedHtmlChars}</summary>
+<content type="xhtml">${xhtmlWithSomeEscapedHtmlCharsPrefixedNamespace}</content>
+</entry>
+    `;
+    const xmlDom = new xmldom.DOMParser().parseFromString(xmlSrc);
+    const isEntry = xmlDom.documentElement.localName === "entry";
+    t.true(isEntry);
+    const opds1Entry = xml_js_mapper_1.XML.deserialize(xmlDom, opds_entry_1.Entry);
+    t.is(opds1Entry.Summary, converter_1.unescapeHtmlEntities(plainTextWithEscapedHtmlChars));
+    const toMatch = xhtmlWithSomeEscapedHtmlCharsPrefixedNamespace
+        .replace(/&gt;/g, ">")
+        .replace(/&quot;/g, "\"")
+        .replace(/&#039;/g, "'");
+    t.is(opds1Entry.Content.replace(/ xmlns:xhtm="http:\/\/www\.w3\.org\/1999\/xhtml"/, ""), toMatch);
+    const opds2Pub = converter_1.convertOpds1ToOpds2_EntryToPublication(opds1Entry);
+    t.is(opds2Pub.Metadata.Description.replace(/ xmlns:xhtm="http:\/\/www\.w3\.org\/1999\/xhtml"/, ""), toMatch);
+}));
+ava_1.default("OPDS1-2 description: summary + content(XHTML NAMESPACE NO PREFIX)", (t) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
+    const xmlSrc = `
+<entry
+    xmlns="http://www.w3.org/2005/Atom"
+    xmlns:xhtm="http://www.w3.org/1999/xhtml">
+<summary>${plainTextWithEscapedHtmlChars}</summary>
+<content type="xhtml">${xhtmlWithSomeEscapedHtmlCharsNoPrefixedNamespace}</content>
+</entry>
+    `;
+    const xmlDom = new xmldom.DOMParser().parseFromString(xmlSrc);
+    const isEntry = xmlDom.documentElement.localName === "entry";
+    t.true(isEntry);
+    const opds1Entry = xml_js_mapper_1.XML.deserialize(xmlDom, opds_entry_1.Entry);
+    t.is(opds1Entry.Summary, converter_1.unescapeHtmlEntities(plainTextWithEscapedHtmlChars));
+    const toMatch = xhtmlWithSomeEscapedHtmlCharsNoPrefixedNamespace
+        .replace(/&gt;/g, ">")
+        .replace(/&quot;/g, "\"")
+        .replace(/&#039;/g, "'");
+    t.is(opds1Entry.Content, toMatch);
+    const opds2Pub = converter_1.convertOpds1ToOpds2_EntryToPublication(opds1Entry);
+    t.is(opds2Pub.Metadata.Description, toMatch);
+}));
+ava_1.default("OPDS1-2 description: summary + content(XML DEFAULT ATOM NAMESPACE)", (t) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
+    const xmlSrc = `
+<entry
+    xmlns="http://www.w3.org/2005/Atom"
+    xmlns:xhtm="http://www.w3.org/1999/xhtml">
+<summary>${plainTextWithEscapedHtmlChars}</summary>
+<content type="xhtml">${xmlWithSomeEscapedHtmlCharsAtomDefaultNamespace}</content>
+</entry>
+    `;
+    const xmlDom = new xmldom.DOMParser().parseFromString(xmlSrc);
+    const isEntry = xmlDom.documentElement.localName === "entry";
+    t.true(isEntry);
+    const opds1Entry = xml_js_mapper_1.XML.deserialize(xmlDom, opds_entry_1.Entry);
+    t.is(opds1Entry.Summary, converter_1.unescapeHtmlEntities(plainTextWithEscapedHtmlChars));
+    const toMatch = xmlWithSomeEscapedHtmlCharsAtomDefaultNamespace
+        .replace(/&gt;/g, ">")
+        .replace(/&quot;/g, "\"")
+        .replace(/&#039;/g, "'");
+    t.is(opds1Entry.Content.replace(/ xmlns="http:\/\/www\.w3\.org\/2005\/Atom"/, ""), toMatch);
+    const opds2Pub = converter_1.convertOpds1ToOpds2_EntryToPublication(opds1Entry);
+    t.is(opds2Pub.Metadata.Description.replace(/ xmlns="http:\/\/www\.w3\.org\/1999\/xhtml"/, ""), toMatch);
+}));
+ava_1.default("OPDS1-2 description: summary", (t) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
+    const xmlSrc = `
+<entry
+    xmlns="http://www.w3.org/2005/Atom"
+    xmlns:xhtm="http://www.w3.org/1999/xhtml">
+<summary>${plainTextWithEscapedHtmlChars}</summary>
+</entry>
+    `;
+    const xmlDom = new xmldom.DOMParser().parseFromString(xmlSrc);
+    const isEntry = xmlDom.documentElement.localName === "entry";
+    t.true(isEntry);
+    const opds1Entry = xml_js_mapper_1.XML.deserialize(xmlDom, opds_entry_1.Entry);
+    const toMatch = converter_1.unescapeHtmlEntities(plainTextWithEscapedHtmlChars);
+    t.is(opds1Entry.Summary, toMatch);
+    const opds2Pub = converter_1.convertOpds1ToOpds2_EntryToPublication(opds1Entry);
+    t.is(opds2Pub.Metadata.Description, toMatch);
+}));
+ava_1.default("OPDS1-2 description: summary + content(HTML)", (t) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
+    const xmlSrc = `
+<entry
+    xmlns="http://www.w3.org/2005/Atom"
+    xmlns:xhtm="http://www.w3.org/1999/xhtml">
+<summary>${plainTextWithEscapedHtmlChars}</summary>
+<content type="html">${escapedHtmlWithSomeDoubleEscapedHtmlChars}</content>
+</entry>
+    `;
+    const xmlDom = new xmldom.DOMParser().parseFromString(xmlSrc);
+    const isEntry = xmlDom.documentElement.localName === "entry";
+    t.true(isEntry);
+    const opds1Entry = xml_js_mapper_1.XML.deserialize(xmlDom, opds_entry_1.Entry);
+    t.is(opds1Entry.Summary, converter_1.unescapeHtmlEntities(plainTextWithEscapedHtmlChars));
+    const toMatch = converter_1.unescapeHtmlEntities(escapedHtmlWithSomeDoubleEscapedHtmlChars);
+    t.is(opds1Entry.Content, toMatch);
+    const opds2Pub = converter_1.convertOpds1ToOpds2_EntryToPublication(opds1Entry);
+    t.is(opds2Pub.Metadata.Description, toMatch);
+}));
 function fn() {
     return tslib_1.__awaiter(this, void 0, void 0, function* () {
         return Promise.resolve("foo");
@@ -640,6 +768,14 @@ ava_1.default("OPDS2 HTTP (de)serialize roundtrip (recursive) AUTHENTICATION", (
 ava_1.default("OPDS1-2 HTTP convert (de)serialize roundtrip (recursive)", (t) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
     const url = "https://bookserver.archive.org/group/openaudiobooks";
     yield runUrlTestAlt(t, url);
+}));
+ava_1.default("test", (t) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
+    const url = "https://api.archivelab.org/books/bookconcord_preface_1202/opds_audio_manifest";
+    const done = new Set([]);
+    yield webpubTest(url, done);
+    debug(done);
+    debug(done.size);
+    t.true(yield delay(true));
 }));
 ava_1.default("OPDS1-2 LCP passphrase convert (de)serialize roundtrip", (t) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
     const xmlSrc = `

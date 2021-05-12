@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.convertOpds1ToOpds2 = exports.convertOpds1ToOpds2_EntryToLink = exports.convertOpds1ToOpds2_EntryToPublication = void 0;
+exports.convertOpds1ToOpds2 = exports.convertOpds1ToOpds2_EntryToLink = exports.convertOpds1ToOpds2_EntryToPublication = exports.escapeHtmlEntities = exports.unescapeHtmlEntities = void 0;
 const metadata_1 = require("r2-shared-js/dist/es6-es2015/src/models/metadata");
 const metadata_belongsto_1 = require("r2-shared-js/dist/es6-es2015/src/models/metadata-belongsto");
 const metadata_contributor_1 = require("r2-shared-js/dist/es6-es2015/src/models/metadata-contributor");
@@ -16,18 +16,61 @@ const opds2_metadata_1 = require("./opds2/opds2-metadata");
 const opds2_price_1 = require("./opds2/opds2-price");
 const opds2_properties_1 = require("./opds2/opds2-properties");
 const opds2_publication_1 = require("./opds2/opds2-publication");
+const unescapeHtmlEntities = (str, onlyEssential = undefined) => {
+    if (onlyEssential) {
+        return str
+            .replace(/&lt;/g, "<")
+            .replace(/&amp;/g, "&");
+    }
+    return str
+        .replace(/&lt;/g, "<")
+        .replace(/&gt;/g, ">")
+        .replace(/&quot;/g, "\"")
+        .replace(/&#039;/g, "'")
+        .replace(/&apos;/g, "'")
+        .replace(/&amp;/g, "&");
+};
+exports.unescapeHtmlEntities = unescapeHtmlEntities;
+const escapeHtmlEntities = (str, onlyEssential = undefined) => {
+    if (onlyEssential) {
+        return str
+            .replace(/</g, "&lt;")
+            .replace(/&/g, "&amp;");
+    }
+    return str
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;")
+        .replace(/&/g, "&amp;");
+};
+exports.escapeHtmlEntities = escapeHtmlEntities;
+const processTypedString = (str, type) => {
+    if (type === "text/html" || type === "html") {
+        return str;
+    }
+    else if (type === "xhtml" || type && type.indexOf("xhtml") >= 0) {
+        return str.replace(/http:\/\/www\.w3\.org\/2005\/Atom/g, "http://www.w3.org/1999/xhtml");
+    }
+    return str;
+};
+const convertContentSummary = (entry) => {
+    if (entry.Content) {
+        return processTypedString(entry.Content, entry.ContentType);
+    }
+    else if (entry.Summary) {
+        return processTypedString(entry.Summary, entry.SummaryType);
+    }
+    return undefined;
+};
 function convertOpds1ToOpds2_EntryToPublication(entry) {
     const p = new opds2_publication_1.OPDSPublication();
     p.Metadata = new metadata_1.Metadata();
     if (entry.Title) {
-        p.Metadata.Title = ((entry.TitleType === "text/html" || entry.TitleType === "html" || entry.TitleType === "xhtml") ?
-            entry.Title.replace(/xmlns=["']http:\/\/www\.w3\.org\/2005\/Atom["']/g, " ") :
-            entry.Title);
+        p.Metadata.Title = processTypedString(entry.Title, entry.TitleType);
     }
     if (entry.SubTitle) {
-        p.Metadata.SubTitle = ((entry.SubTitleType === "text/html" || entry.SubTitleType === "html" || entry.SubTitleType === "xhtml") ?
-            entry.SubTitle.replace(/xmlns=["']http:\/\/www\.w3\.org\/2005\/Atom["']/g, " ") :
-            entry.SubTitle);
+        p.Metadata.SubTitle = processTypedString(entry.SubTitle, entry.SubTitleType);
     }
     if (entry.DcIdentifier) {
         p.Metadata.Identifier = entry.DcIdentifier;
@@ -90,22 +133,9 @@ function convertOpds1ToOpds2_EntryToPublication(entry) {
             p.Metadata.Author.push(cont);
         });
     }
-    if (entry.Summary) {
-        p.Metadata.Description = ((entry.SummaryType === "text/html" || entry.SummaryType === "html" || entry.SummaryType === "xhtml") ?
-            entry.Summary.replace(/xmlns=["']http:\/\/www\.w3\.org\/2005\/Atom["']/g, " ") :
-            entry.Summary);
-    }
-    if (entry.Content) {
-        const txt = ((entry.ContentType === "text/html" || entry.ContentType === "html" || entry.ContentType === "xhtml") ?
-            entry.Content.replace(/xmlns=["']http:\/\/www\.w3\.org\/2005\/Atom["']/g, " ") :
-            entry.Content);
-        if (p.Metadata.Description) {
-            p.Metadata.Description += "\n\n";
-            p.Metadata.Description += txt;
-        }
-        else {
-            p.Metadata.Description = txt;
-        }
+    const t = convertContentSummary(entry);
+    if (t) {
+        p.Metadata.Description = t;
     }
     if (entry.Links) {
         entry.Links.forEach((link) => {
@@ -186,33 +216,11 @@ exports.convertOpds1ToOpds2_EntryToPublication = convertOpds1ToOpds2_EntryToPubl
 function convertOpds1ToOpds2_EntryToLink(entry) {
     const linkNav = new opds2_link_1.OPDSLink();
     if (entry.Title) {
-        linkNav.Title = ((entry.TitleType === "text/html" || entry.TitleType === "html" || entry.TitleType === "xhtml") ?
-            entry.Title.replace(/xmlns=["']http:\/\/www\.w3\.org\/2005\/Atom["']/g, " ") :
-            entry.Title);
+        linkNav.Title = processTypedString(entry.Title, entry.TitleType);
     }
-    if (entry.Summary) {
-        const txt = ((entry.SummaryType === "text/html" || entry.SummaryType === "html" || entry.SummaryType === "xhtml") ?
-            entry.Summary.replace(/xmlns=["']http:\/\/www\.w3\.org\/2005\/Atom["']/g, " ") :
-            entry.Summary);
-        if (linkNav.Title) {
-            linkNav.Title += "\n\n";
-            linkNav.Title += txt;
-        }
-        else {
-            linkNav.Title = txt;
-        }
-    }
-    if (entry.Content) {
-        const txt = ((entry.ContentType === "text/html" || entry.ContentType === "html" || entry.ContentType === "xhtml") ?
-            entry.Content.replace(/xmlns=["']http:\/\/www\.w3\.org\/2005\/Atom["']/g, " ") :
-            entry.Content);
-        if (linkNav.Title) {
-            linkNav.Title += "\n\n";
-            linkNav.Title += txt;
-        }
-        else {
-            linkNav.Title = txt;
-        }
+    const t = convertContentSummary(entry);
+    if (t) {
+        linkNav.Title = t;
     }
     if (entry.Links) {
         const atomLink = entry.Links.find((l) => {

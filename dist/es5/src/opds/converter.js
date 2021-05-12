@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.convertOpds1ToOpds2 = exports.convertOpds1ToOpds2_EntryToLink = exports.convertOpds1ToOpds2_EntryToPublication = void 0;
+exports.convertOpds1ToOpds2 = exports.convertOpds1ToOpds2_EntryToLink = exports.convertOpds1ToOpds2_EntryToPublication = exports.escapeHtmlEntities = exports.unescapeHtmlEntities = void 0;
 var metadata_1 = require("r2-shared-js/dist/es5/src/models/metadata");
 var metadata_belongsto_1 = require("r2-shared-js/dist/es5/src/models/metadata-belongsto");
 var metadata_contributor_1 = require("r2-shared-js/dist/es5/src/models/metadata-contributor");
@@ -16,18 +16,63 @@ var opds2_metadata_1 = require("./opds2/opds2-metadata");
 var opds2_price_1 = require("./opds2/opds2-price");
 var opds2_properties_1 = require("./opds2/opds2-properties");
 var opds2_publication_1 = require("./opds2/opds2-publication");
+var unescapeHtmlEntities = function (str, onlyEssential) {
+    if (onlyEssential === void 0) { onlyEssential = undefined; }
+    if (onlyEssential) {
+        return str
+            .replace(/&lt;/g, "<")
+            .replace(/&amp;/g, "&");
+    }
+    return str
+        .replace(/&lt;/g, "<")
+        .replace(/&gt;/g, ">")
+        .replace(/&quot;/g, "\"")
+        .replace(/&#039;/g, "'")
+        .replace(/&apos;/g, "'")
+        .replace(/&amp;/g, "&");
+};
+exports.unescapeHtmlEntities = unescapeHtmlEntities;
+var escapeHtmlEntities = function (str, onlyEssential) {
+    if (onlyEssential === void 0) { onlyEssential = undefined; }
+    if (onlyEssential) {
+        return str
+            .replace(/</g, "&lt;")
+            .replace(/&/g, "&amp;");
+    }
+    return str
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;")
+        .replace(/&/g, "&amp;");
+};
+exports.escapeHtmlEntities = escapeHtmlEntities;
+var processTypedString = function (str, type) {
+    if (type === "text/html" || type === "html") {
+        return str;
+    }
+    else if (type === "xhtml" || type && type.indexOf("xhtml") >= 0) {
+        return str.replace(/http:\/\/www\.w3\.org\/2005\/Atom/g, "http://www.w3.org/1999/xhtml");
+    }
+    return str;
+};
+var convertContentSummary = function (entry) {
+    if (entry.Content) {
+        return processTypedString(entry.Content, entry.ContentType);
+    }
+    else if (entry.Summary) {
+        return processTypedString(entry.Summary, entry.SummaryType);
+    }
+    return undefined;
+};
 function convertOpds1ToOpds2_EntryToPublication(entry) {
     var p = new opds2_publication_1.OPDSPublication();
     p.Metadata = new metadata_1.Metadata();
     if (entry.Title) {
-        p.Metadata.Title = ((entry.TitleType === "text/html" || entry.TitleType === "html" || entry.TitleType === "xhtml") ?
-            entry.Title.replace(/xmlns=["']http:\/\/www\.w3\.org\/2005\/Atom["']/g, " ") :
-            entry.Title);
+        p.Metadata.Title = processTypedString(entry.Title, entry.TitleType);
     }
     if (entry.SubTitle) {
-        p.Metadata.SubTitle = ((entry.SubTitleType === "text/html" || entry.SubTitleType === "html" || entry.SubTitleType === "xhtml") ?
-            entry.SubTitle.replace(/xmlns=["']http:\/\/www\.w3\.org\/2005\/Atom["']/g, " ") :
-            entry.SubTitle);
+        p.Metadata.SubTitle = processTypedString(entry.SubTitle, entry.SubTitleType);
     }
     if (entry.DcIdentifier) {
         p.Metadata.Identifier = entry.DcIdentifier;
@@ -90,22 +135,9 @@ function convertOpds1ToOpds2_EntryToPublication(entry) {
             p.Metadata.Author.push(cont);
         });
     }
-    if (entry.Summary) {
-        p.Metadata.Description = ((entry.SummaryType === "text/html" || entry.SummaryType === "html" || entry.SummaryType === "xhtml") ?
-            entry.Summary.replace(/xmlns=["']http:\/\/www\.w3\.org\/2005\/Atom["']/g, " ") :
-            entry.Summary);
-    }
-    if (entry.Content) {
-        var txt = ((entry.ContentType === "text/html" || entry.ContentType === "html" || entry.ContentType === "xhtml") ?
-            entry.Content.replace(/xmlns=["']http:\/\/www\.w3\.org\/2005\/Atom["']/g, " ") :
-            entry.Content);
-        if (p.Metadata.Description) {
-            p.Metadata.Description += "\n\n";
-            p.Metadata.Description += txt;
-        }
-        else {
-            p.Metadata.Description = txt;
-        }
+    var t = convertContentSummary(entry);
+    if (t) {
+        p.Metadata.Description = t;
     }
     if (entry.Links) {
         entry.Links.forEach(function (link) {
@@ -186,33 +218,11 @@ exports.convertOpds1ToOpds2_EntryToPublication = convertOpds1ToOpds2_EntryToPubl
 function convertOpds1ToOpds2_EntryToLink(entry) {
     var linkNav = new opds2_link_1.OPDSLink();
     if (entry.Title) {
-        linkNav.Title = ((entry.TitleType === "text/html" || entry.TitleType === "html" || entry.TitleType === "xhtml") ?
-            entry.Title.replace(/xmlns=["']http:\/\/www\.w3\.org\/2005\/Atom["']/g, " ") :
-            entry.Title);
+        linkNav.Title = processTypedString(entry.Title, entry.TitleType);
     }
-    if (entry.Summary) {
-        var txt = ((entry.SummaryType === "text/html" || entry.SummaryType === "html" || entry.SummaryType === "xhtml") ?
-            entry.Summary.replace(/xmlns=["']http:\/\/www\.w3\.org\/2005\/Atom["']/g, " ") :
-            entry.Summary);
-        if (linkNav.Title) {
-            linkNav.Title += "\n\n";
-            linkNav.Title += txt;
-        }
-        else {
-            linkNav.Title = txt;
-        }
-    }
-    if (entry.Content) {
-        var txt = ((entry.ContentType === "text/html" || entry.ContentType === "html" || entry.ContentType === "xhtml") ?
-            entry.Content.replace(/xmlns=["']http:\/\/www\.w3\.org\/2005\/Atom["']/g, " ") :
-            entry.Content);
-        if (linkNav.Title) {
-            linkNav.Title += "\n\n";
-            linkNav.Title += txt;
-        }
-        else {
-            linkNav.Title = txt;
-        }
+    var t = convertContentSummary(entry);
+    if (t) {
+        linkNav.Title = t;
     }
     if (entry.Links) {
         var atomLink = entry.Links.find(function (l) {
