@@ -19,112 +19,112 @@ var opds_entry_1 = require("../src/opds/opds1/opds-entry");
 var opds2_1 = require("../src/opds/opds2/opds2");
 var opds2_authentication_doc_1 = require("../src/opds/opds2/opds2-authentication-doc");
 var opds2_publication_1 = require("../src/opds/opds2/opds2-publication");
-init_globals_1.initGlobalConverters_OPDS();
-init_globals_1.initGlobalConverters_GENERIC();
+(0, init_globals_1.initGlobalConverters_OPDS)();
+(0, init_globals_1.initGlobalConverters_GENERIC)();
 var debug = debug_("r2:opds#test");
 var plainTextWithEscapedHtmlChars = "\n\nThis &amp; is &#039;a&quot;        test\n\tof &lt; summary text &gt;\n\n";
 var xhtmlWithSomeEscapedHtmlCharsPrefixedNamespace = "\n<xhtm:div>\n    Hello &amp;\t<xhtm:b>  world &lt; &quot;_&#039; &gt;  </xhtm:b>!\n</xhtm:div>\n";
 var xhtmlWithSomeEscapedHtmlCharsNoPrefixedNamespace = "\n<div xmlns=\"http://www.w3.org/1999/xhtml\">\n    Hi &amp;\t<b>  world &lt; &quot;_&#039; &gt;  </b>!\n</div>\n";
 var xmlWithSomeEscapedHtmlCharsAtomDefaultNamespace = "\n<div>\n    Oops &amp;\t<b>  world &lt; &quot;_&#039; &gt;  </b>!\n</div>\n";
 var escapedHtmlWithSomeDoubleEscapedHtmlChars = "\n&lt;div&gt;\n    Hello &amp;amp;\t&lt;b&gt;  world &amp;lt; &amp;quot;_&amp;#039; &amp;gt;  &lt;/b&gt;!\n&lt;/div&gt;\n";
-ava_1.default("OPDS1-2 description: summary + content(XHTML NAMESPACE PREFIX)", function (t) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
+(0, ava_1.default)("OPDS1-2 description: summary + content(XHTML NAMESPACE PREFIX)", function (t) { return (0, tslib_1.__awaiter)(void 0, void 0, void 0, function () {
     var xmlSrc, xmlDom, isEntry, opds1Entry, toMatch, opds2Pub;
-    return tslib_1.__generator(this, function (_a) {
+    return (0, tslib_1.__generator)(this, function (_a) {
         xmlSrc = "\n<entry\n    xmlns=\"http://www.w3.org/2005/Atom\"\n    xmlns:xhtm=\"http://www.w3.org/1999/xhtml\">\n<summary>" + plainTextWithEscapedHtmlChars + "</summary>\n<content type=\"xhtml\">" + xhtmlWithSomeEscapedHtmlCharsPrefixedNamespace + "</content>\n</entry>\n    ";
         xmlDom = new xmldom.DOMParser().parseFromString(xmlSrc);
         isEntry = xmlDom.documentElement.localName === "entry";
         t.true(isEntry);
         opds1Entry = xml_js_mapper_1.XML.deserialize(xmlDom, opds_entry_1.Entry);
-        t.is(opds1Entry.Summary, converter_1.unescapeHtmlEntities(plainTextWithEscapedHtmlChars));
+        t.is(opds1Entry.Summary, (0, converter_1.unescapeHtmlEntities)(plainTextWithEscapedHtmlChars));
         toMatch = xhtmlWithSomeEscapedHtmlCharsPrefixedNamespace
             .replace(/&gt;/g, ">")
             .replace(/&quot;/g, "\"")
             .replace(/&#039;/g, "'");
         t.is(opds1Entry.Content.replace(/ xmlns:xhtm="http:\/\/www\.w3\.org\/1999\/xhtml"/, ""), toMatch);
-        opds2Pub = converter_1.convertOpds1ToOpds2_EntryToPublication(opds1Entry);
+        opds2Pub = (0, converter_1.convertOpds1ToOpds2_EntryToPublication)(opds1Entry);
         t.is(opds2Pub.Metadata.Description.replace(/ xmlns:xhtm="http:\/\/www\.w3\.org\/1999\/xhtml"/, ""), toMatch);
         return [2];
     });
 }); });
-ava_1.default("OPDS1-2 description: summary + content(XHTML NAMESPACE NO PREFIX)", function (t) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
+(0, ava_1.default)("OPDS1-2 description: summary + content(XHTML NAMESPACE NO PREFIX)", function (t) { return (0, tslib_1.__awaiter)(void 0, void 0, void 0, function () {
     var xmlSrc, xmlDom, isEntry, opds1Entry, toMatch, opds2Pub;
-    return tslib_1.__generator(this, function (_a) {
+    return (0, tslib_1.__generator)(this, function (_a) {
         xmlSrc = "\n<entry\n    xmlns=\"http://www.w3.org/2005/Atom\"\n    xmlns:xhtm=\"http://www.w3.org/1999/xhtml\">\n<summary>" + plainTextWithEscapedHtmlChars + "</summary>\n<content type=\"xhtml\">" + xhtmlWithSomeEscapedHtmlCharsNoPrefixedNamespace + "</content>\n</entry>\n    ";
         xmlDom = new xmldom.DOMParser().parseFromString(xmlSrc);
         isEntry = xmlDom.documentElement.localName === "entry";
         t.true(isEntry);
         opds1Entry = xml_js_mapper_1.XML.deserialize(xmlDom, opds_entry_1.Entry);
-        t.is(opds1Entry.Summary, converter_1.unescapeHtmlEntities(plainTextWithEscapedHtmlChars));
+        t.is(opds1Entry.Summary, (0, converter_1.unescapeHtmlEntities)(plainTextWithEscapedHtmlChars));
         toMatch = xhtmlWithSomeEscapedHtmlCharsNoPrefixedNamespace
             .replace(/&gt;/g, ">")
             .replace(/&quot;/g, "\"")
             .replace(/&#039;/g, "'");
         t.is(opds1Entry.Content, toMatch);
-        opds2Pub = converter_1.convertOpds1ToOpds2_EntryToPublication(opds1Entry);
+        opds2Pub = (0, converter_1.convertOpds1ToOpds2_EntryToPublication)(opds1Entry);
         t.is(opds2Pub.Metadata.Description, toMatch);
         return [2];
     });
 }); });
-ava_1.default("OPDS1-2 description: summary + content(XML DEFAULT ATOM NAMESPACE)", function (t) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
+(0, ava_1.default)("OPDS1-2 description: summary + content(XML DEFAULT ATOM NAMESPACE)", function (t) { return (0, tslib_1.__awaiter)(void 0, void 0, void 0, function () {
     var xmlSrc, xmlDom, isEntry, opds1Entry, toMatch, opds2Pub;
-    return tslib_1.__generator(this, function (_a) {
+    return (0, tslib_1.__generator)(this, function (_a) {
         xmlSrc = "\n<entry\n    xmlns=\"http://www.w3.org/2005/Atom\"\n    xmlns:xhtm=\"http://www.w3.org/1999/xhtml\">\n<summary>" + plainTextWithEscapedHtmlChars + "</summary>\n<content type=\"xhtml\">" + xmlWithSomeEscapedHtmlCharsAtomDefaultNamespace + "</content>\n</entry>\n    ";
         xmlDom = new xmldom.DOMParser().parseFromString(xmlSrc);
         isEntry = xmlDom.documentElement.localName === "entry";
         t.true(isEntry);
         opds1Entry = xml_js_mapper_1.XML.deserialize(xmlDom, opds_entry_1.Entry);
-        t.is(opds1Entry.Summary, converter_1.unescapeHtmlEntities(plainTextWithEscapedHtmlChars));
+        t.is(opds1Entry.Summary, (0, converter_1.unescapeHtmlEntities)(plainTextWithEscapedHtmlChars));
         toMatch = xmlWithSomeEscapedHtmlCharsAtomDefaultNamespace
             .replace(/&gt;/g, ">")
             .replace(/&quot;/g, "\"")
             .replace(/&#039;/g, "'");
         t.is(opds1Entry.Content.replace(/ xmlns="http:\/\/www\.w3\.org\/2005\/Atom"/, ""), toMatch);
-        opds2Pub = converter_1.convertOpds1ToOpds2_EntryToPublication(opds1Entry);
+        opds2Pub = (0, converter_1.convertOpds1ToOpds2_EntryToPublication)(opds1Entry);
         t.is(opds2Pub.Metadata.Description.replace(/ xmlns="http:\/\/www\.w3\.org\/1999\/xhtml"/, ""), toMatch);
         return [2];
     });
 }); });
-ava_1.default("OPDS1-2 description: summary", function (t) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
+(0, ava_1.default)("OPDS1-2 description: summary", function (t) { return (0, tslib_1.__awaiter)(void 0, void 0, void 0, function () {
     var xmlSrc, xmlDom, isEntry, opds1Entry, toMatch, opds2Pub;
-    return tslib_1.__generator(this, function (_a) {
+    return (0, tslib_1.__generator)(this, function (_a) {
         xmlSrc = "\n<entry\n    xmlns=\"http://www.w3.org/2005/Atom\"\n    xmlns:xhtm=\"http://www.w3.org/1999/xhtml\">\n<summary>" + plainTextWithEscapedHtmlChars + "</summary>\n</entry>\n    ";
         xmlDom = new xmldom.DOMParser().parseFromString(xmlSrc);
         isEntry = xmlDom.documentElement.localName === "entry";
         t.true(isEntry);
         opds1Entry = xml_js_mapper_1.XML.deserialize(xmlDom, opds_entry_1.Entry);
-        toMatch = converter_1.unescapeHtmlEntities(plainTextWithEscapedHtmlChars);
+        toMatch = (0, converter_1.unescapeHtmlEntities)(plainTextWithEscapedHtmlChars);
         t.is(opds1Entry.Summary, toMatch);
-        opds2Pub = converter_1.convertOpds1ToOpds2_EntryToPublication(opds1Entry);
+        opds2Pub = (0, converter_1.convertOpds1ToOpds2_EntryToPublication)(opds1Entry);
         t.is(opds2Pub.Metadata.Description, toMatch);
         return [2];
     });
 }); });
-ava_1.default("OPDS1-2 description: summary + content(HTML)", function (t) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
+(0, ava_1.default)("OPDS1-2 description: summary + content(HTML)", function (t) { return (0, tslib_1.__awaiter)(void 0, void 0, void 0, function () {
     var xmlSrc, xmlDom, isEntry, opds1Entry, toMatch, opds2Pub;
-    return tslib_1.__generator(this, function (_a) {
+    return (0, tslib_1.__generator)(this, function (_a) {
         xmlSrc = "\n<entry\n    xmlns=\"http://www.w3.org/2005/Atom\"\n    xmlns:xhtm=\"http://www.w3.org/1999/xhtml\">\n<summary>" + plainTextWithEscapedHtmlChars + "</summary>\n<content type=\"html\">" + escapedHtmlWithSomeDoubleEscapedHtmlChars + "</content>\n</entry>\n    ";
         xmlDom = new xmldom.DOMParser().parseFromString(xmlSrc);
         isEntry = xmlDom.documentElement.localName === "entry";
         t.true(isEntry);
         opds1Entry = xml_js_mapper_1.XML.deserialize(xmlDom, opds_entry_1.Entry);
-        t.is(opds1Entry.Summary, converter_1.unescapeHtmlEntities(plainTextWithEscapedHtmlChars));
-        toMatch = converter_1.unescapeHtmlEntities(escapedHtmlWithSomeDoubleEscapedHtmlChars);
+        t.is(opds1Entry.Summary, (0, converter_1.unescapeHtmlEntities)(plainTextWithEscapedHtmlChars));
+        toMatch = (0, converter_1.unescapeHtmlEntities)(escapedHtmlWithSomeDoubleEscapedHtmlChars);
         t.is(opds1Entry.Content, toMatch);
-        opds2Pub = converter_1.convertOpds1ToOpds2_EntryToPublication(opds1Entry);
+        opds2Pub = (0, converter_1.convertOpds1ToOpds2_EntryToPublication)(opds1Entry);
         t.is(opds2Pub.Metadata.Description, toMatch);
         return [2];
     });
 }); });
 function fn() {
-    return tslib_1.__awaiter(this, void 0, void 0, function () {
-        return tslib_1.__generator(this, function (_a) {
+    return (0, tslib_1.__awaiter)(this, void 0, void 0, function () {
+        return (0, tslib_1.__generator)(this, function (_a) {
             return [2, Promise.resolve("foo")];
         });
     });
 }
-ava_1.default("dummy async test", function (t) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
+(0, ava_1.default)("dummy async test", function (t) { return (0, tslib_1.__awaiter)(void 0, void 0, void 0, function () {
     var _a, _b;
-    return tslib_1.__generator(this, function (_c) {
+    return (0, tslib_1.__generator)(this, function (_c) {
         switch (_c.label) {
             case 0:
                 debug("test ASYNC");
@@ -139,8 +139,8 @@ ava_1.default("dummy async test", function (t) { return tslib_1.__awaiter(void 0
 var MAX_TESTS = process.env.MAX_TESTS || 10;
 var FEEDS_FIRST = process.env.FEEDS_FIRST || false;
 function delay(okay) {
-    return tslib_1.__awaiter(this, void 0, void 0, function () {
-        return tslib_1.__generator(this, function (_a) {
+    return (0, tslib_1.__awaiter)(this, void 0, void 0, function () {
+        return (0, tslib_1.__generator)(this, function (_a) {
             return [2, new Promise(function (resolve, _reject) {
                     setTimeout(function () {
                         resolve(okay);
@@ -150,8 +150,8 @@ function delay(okay) {
     });
 }
 function parseCompareJSONs(url, json1, json2) {
-    return tslib_1.__awaiter(this, void 0, void 0, function () {
-        return tslib_1.__generator(this, function (_a) {
+    return (0, tslib_1.__awaiter)(this, void 0, void 0, function () {
+        return (0, tslib_1.__generator)(this, function (_a) {
             return [2, new Promise(function (resolve, reject) {
                     if (json1 !== json2) {
                         var harmonizeNulls_1 = function (obj) {
@@ -238,58 +238,58 @@ function parseCompareJSONs(url, json1, json2) {
                                 }
                             });
                         };
-                        JsonUtils_1.traverseJsonObjects(json1, function (obj) {
+                        (0, JsonUtils_1.traverseJsonObjects)(json1, function (obj) {
                             if (obj !== null) {
                                 harmonizeDate_1(obj);
                             }
                         });
-                        JsonUtils_1.traverseJsonObjects(json1, function (obj) {
+                        (0, JsonUtils_1.traverseJsonObjects)(json1, function (obj) {
                             if (obj !== null) {
                                 harmonizeName_1(obj);
                             }
                         });
-                        JsonUtils_1.traverseJsonObjects(json1, function (obj) {
+                        (0, JsonUtils_1.traverseJsonObjects)(json1, function (obj) {
                             if (obj !== null) {
                                 harmonizeArrays_1(obj);
                             }
                         });
-                        JsonUtils_1.traverseJsonObjects(json1, function (obj) {
+                        (0, JsonUtils_1.traverseJsonObjects)(json1, function (obj) {
                             if (obj !== null) {
                                 harmonizeBitrateAndTrack_1(obj);
                             }
                         });
-                        JsonUtils_1.traverseJsonObjects(json1, function (obj) {
+                        (0, JsonUtils_1.traverseJsonObjects)(json1, function (obj) {
                             if (obj !== null) {
                                 harmonizeNulls_1(obj);
                             }
                         });
-                        JsonUtils_1.traverseJsonObjects(json2, function (obj) {
+                        (0, JsonUtils_1.traverseJsonObjects)(json2, function (obj) {
                             if (obj !== null) {
                                 harmonizeDate_1(obj);
                             }
                         });
-                        JsonUtils_1.traverseJsonObjects(json2, function (obj) {
+                        (0, JsonUtils_1.traverseJsonObjects)(json2, function (obj) {
                             if (obj !== null) {
                                 harmonizeName_1(obj);
                             }
                         });
-                        JsonUtils_1.traverseJsonObjects(json2, function (obj) {
+                        (0, JsonUtils_1.traverseJsonObjects)(json2, function (obj) {
                             if (obj !== null) {
                                 harmonizeArrays_1(obj);
                             }
                         });
-                        JsonUtils_1.traverseJsonObjects(json2, function (obj) {
+                        (0, JsonUtils_1.traverseJsonObjects)(json2, function (obj) {
                             if (obj !== null) {
                                 harmonizeBitrateAndTrack_1(obj);
                             }
                         });
-                        JsonUtils_1.traverseJsonObjects(json2, function (obj) {
+                        (0, JsonUtils_1.traverseJsonObjects)(json2, function (obj) {
                             if (obj !== null) {
                                 harmonizeNulls_1(obj);
                             }
                         });
-                        json1 = JsonUtils_1.sortObject(json1);
-                        json2 = JsonUtils_1.sortObject(json2);
+                        json1 = (0, JsonUtils_1.sortObject)(json1);
+                        json2 = (0, JsonUtils_1.sortObject)(json2);
                         var str1 = JSON.stringify(json1, null, 2);
                         var str2 = JSON.stringify(json2, null, 2);
                         if (str1 !== str2) {
@@ -310,7 +310,7 @@ function parseCompareJSONs(url, json1, json2) {
                     var webpubUrls = new Set();
                     var audiowebpubUrls = new Set();
                     var authenticationUrls = new Set();
-                    JsonUtils_1.traverseJsonObjects(json1, function (obj) {
+                    (0, JsonUtils_1.traverseJsonObjects)(json1, function (obj) {
                         if (obj === null) {
                             return;
                         }
@@ -357,9 +357,9 @@ function parseCompareJSONs(url, json1, json2) {
     });
 }
 function opds2Test(url) {
-    return tslib_1.__awaiter(this, void 0, void 0, function () {
+    return (0, tslib_1.__awaiter)(this, void 0, void 0, function () {
         var _this = this;
-        return tslib_1.__generator(this, function (_a) {
+        return (0, tslib_1.__generator)(this, function (_a) {
             return [2, new Promise(function (resolve, reject) {
                     debug(url);
                     var proto = /^https:\/\//.test(url) ? https : http;
@@ -392,9 +392,9 @@ function opds2Test(url) {
                                 buffs.push(chunk);
                             }
                         });
-                        response.on("end", function () { return tslib_1.__awaiter(_this, void 0, void 0, function () {
+                        response.on("end", function () { return (0, tslib_1.__awaiter)(_this, void 0, void 0, function () {
                             var src, json1, isPublication, isAuth, opds2Feed, json2, res, err_1;
-                            return tslib_1.__generator(this, function (_a) {
+                            return (0, tslib_1.__generator)(this, function (_a) {
                                 switch (_a.label) {
                                     case 0:
                                         if (str) {
@@ -414,10 +414,10 @@ function opds2Test(url) {
                                             !json1.catalogs &&
                                             json1.metadata;
                                         isAuth = !isPublication && json1.authentication;
-                                        opds2Feed = isPublication ? serializable_1.TaJsonDeserialize(json1, opds2_publication_1.OPDSPublication) :
-                                            (isAuth ? serializable_1.TaJsonDeserialize(json1, opds2_authentication_doc_1.OPDSAuthenticationDoc) :
-                                                serializable_1.TaJsonDeserialize(json1, opds2_1.OPDSFeed));
-                                        json2 = serializable_1.TaJsonSerialize(opds2Feed);
+                                        opds2Feed = isPublication ? (0, serializable_1.TaJsonDeserialize)(json1, opds2_publication_1.OPDSPublication) :
+                                            (isAuth ? (0, serializable_1.TaJsonDeserialize)(json1, opds2_authentication_doc_1.OPDSAuthenticationDoc) :
+                                                (0, serializable_1.TaJsonDeserialize)(json1, opds2_1.OPDSFeed));
+                                        json2 = (0, serializable_1.TaJsonSerialize)(opds2Feed);
                                         _a.label = 1;
                                     case 1:
                                         _a.trys.push([1, 3, , 4]);
@@ -444,9 +444,9 @@ function opds2Test(url) {
     });
 }
 function webpubTest(url, alreadyDone) {
-    return tslib_1.__awaiter(this, void 0, void 0, function () {
+    return (0, tslib_1.__awaiter)(this, void 0, void 0, function () {
         var _this = this;
-        return tslib_1.__generator(this, function (_a) {
+        return (0, tslib_1.__generator)(this, function (_a) {
             alreadyDone.add(url);
             return [2, new Promise(function (resolve, reject) {
                     debug(url);
@@ -473,9 +473,9 @@ function webpubTest(url, alreadyDone) {
                                 buffs.push(chunk);
                             }
                         });
-                        response.on("end", function () { return tslib_1.__awaiter(_this, void 0, void 0, function () {
+                        response.on("end", function () { return (0, tslib_1.__awaiter)(_this, void 0, void 0, function () {
                             var src, json1, pub, json2, err_2;
-                            return tslib_1.__generator(this, function (_a) {
+                            return (0, tslib_1.__generator)(this, function (_a) {
                                 switch (_a.label) {
                                     case 0:
                                         if (str) {
@@ -490,14 +490,14 @@ function webpubTest(url, alreadyDone) {
                                         }
                                         json1 = JSON.parse(src);
                                         try {
-                                            pub = serializable_1.TaJsonDeserialize(json1, publication_1.Publication);
+                                            pub = (0, serializable_1.TaJsonDeserialize)(json1, publication_1.Publication);
                                         }
                                         catch (err) {
                                             debug(err);
                                             reject(err);
                                             return [2];
                                         }
-                                        json2 = serializable_1.TaJsonSerialize(pub);
+                                        json2 = (0, serializable_1.TaJsonSerialize)(pub);
                                         _a.label = 1;
                                     case 1:
                                         _a.trys.push([1, 3, , 4]);
@@ -524,9 +524,9 @@ function webpubTest(url, alreadyDone) {
     });
 }
 function recursePubs(t, urls, alreadyDone) {
-    return tslib_1.__awaiter(this, void 0, void 0, function () {
+    return (0, tslib_1.__awaiter)(this, void 0, void 0, function () {
         var urlsTodoWebPubs, _i, urlsTodoWebPubs_1, href, okay, err_3, urlsTodoAudioWebPubs, _a, urlsTodoAudioWebPubs_1, href, okay, err_4, urlsTodoPubs, _b, urlsTodoPubs_1, href, okay, urlsAuths, _c, urlsAuths_1, href, okay;
-        return tslib_1.__generator(this, function (_d) {
+        return (0, tslib_1.__generator)(this, function (_d) {
             switch (_d.label) {
                 case 0:
                     urlsTodoWebPubs = [];
@@ -636,9 +636,9 @@ function recursePubs(t, urls, alreadyDone) {
     });
 }
 function recurseFeeds(t, urls, alreadyDone) {
-    return tslib_1.__awaiter(this, void 0, void 0, function () {
+    return (0, tslib_1.__awaiter)(this, void 0, void 0, function () {
         var urlsTodoFeeds, _i, urlsTodoFeeds_1, href, okay;
-        return tslib_1.__generator(this, function (_a) {
+        return (0, tslib_1.__generator)(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     urlsTodoFeeds = [];
@@ -668,9 +668,9 @@ function recurseFeeds(t, urls, alreadyDone) {
     });
 }
 function recurse(t, urls, alreadyDone) {
-    return tslib_1.__awaiter(this, void 0, void 0, function () {
+    return (0, tslib_1.__awaiter)(this, void 0, void 0, function () {
         var b1, b2, b3, b4;
-        return tslib_1.__generator(this, function (_a) {
+        return (0, tslib_1.__generator)(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     if (!FEEDS_FIRST) return [3, 3];
@@ -699,9 +699,9 @@ function recurse(t, urls, alreadyDone) {
     });
 }
 function testUrl(t, url, alreadyDone) {
-    return tslib_1.__awaiter(this, void 0, void 0, function () {
+    return (0, tslib_1.__awaiter)(this, void 0, void 0, function () {
         var urls, err_5;
-        return tslib_1.__generator(this, function (_a) {
+        return (0, tslib_1.__generator)(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     if (alreadyDone.size >= MAX_TESTS) {
@@ -729,10 +729,10 @@ function testUrl(t, url, alreadyDone) {
     });
 }
 function testUrlAlt(t, url, alreadyDone) {
-    return tslib_1.__awaiter(this, void 0, void 0, function () {
+    return (0, tslib_1.__awaiter)(this, void 0, void 0, function () {
         var promise;
         var _this = this;
-        return tslib_1.__generator(this, function (_a) {
+        return (0, tslib_1.__generator)(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     if (alreadyDone.size >= MAX_TESTS) {
@@ -741,10 +741,10 @@ function testUrlAlt(t, url, alreadyDone) {
                     alreadyDone.add(url);
                     promise = new Promise(function (resolve, reject) {
                         var proto = /^https:\/\//.test(url) ? https : http;
-                        proto.get(url, function (response) { return tslib_1.__awaiter(_this, void 0, void 0, function () {
+                        proto.get(url, function (response) { return (0, tslib_1.__awaiter)(_this, void 0, void 0, function () {
                             var str, buffs;
                             var _this = this;
-                            return tslib_1.__generator(this, function (_a) {
+                            return (0, tslib_1.__generator)(this, function (_a) {
                                 if (response.statusCode && (response.statusCode < 200 || response.statusCode >= 300)) {
                                     debug(url + " ==> " + response.statusCode + " (skipped)");
                                     resolve(true);
@@ -764,9 +764,9 @@ function testUrlAlt(t, url, alreadyDone) {
                                         buffs.push(chunk);
                                     }
                                 });
-                                response.on("end", function () { return tslib_1.__awaiter(_this, void 0, void 0, function () {
+                                response.on("end", function () { return (0, tslib_1.__awaiter)(_this, void 0, void 0, function () {
                                     var src, xmlDom, isEntry, opds1Feed, opds2Feed, opds2FeedJson, urls, err_6, b;
-                                    return tslib_1.__generator(this, function (_a) {
+                                    return (0, tslib_1.__generator)(this, function (_a) {
                                         switch (_a.label) {
                                             case 0:
                                                 if (str) {
@@ -792,8 +792,8 @@ function testUrlAlt(t, url, alreadyDone) {
                                                     return [2];
                                                 }
                                                 opds1Feed = xml_js_mapper_1.XML.deserialize(xmlDom, opds_1.OPDS);
-                                                opds2Feed = converter_1.convertOpds1ToOpds2(opds1Feed);
-                                                opds2FeedJson = serializable_1.TaJsonSerialize(opds2Feed);
+                                                opds2Feed = (0, converter_1.convertOpds1ToOpds2)(opds1Feed);
+                                                opds2FeedJson = (0, serializable_1.TaJsonSerialize)(opds2Feed);
                                                 _a.label = 1;
                                             case 1:
                                                 _a.trys.push([1, 3, , 4]);
@@ -820,8 +820,8 @@ function testUrlAlt(t, url, alreadyDone) {
                                 }); });
                                 return [2];
                             });
-                        }); }).on("error", function (err) { return tslib_1.__awaiter(_this, void 0, void 0, function () {
-                            return tslib_1.__generator(this, function (_a) {
+                        }); }).on("error", function (err) { return (0, tslib_1.__awaiter)(_this, void 0, void 0, function () {
+                            return (0, tslib_1.__generator)(this, function (_a) {
                                 reject(err);
                                 return [2];
                             });
@@ -834,9 +834,9 @@ function testUrlAlt(t, url, alreadyDone) {
     });
 }
 function runUrlTest(t, url) {
-    return tslib_1.__awaiter(this, void 0, void 0, function () {
+    return (0, tslib_1.__awaiter)(this, void 0, void 0, function () {
         var done, okay, _a, _b, err_7, _c, _d;
-        return tslib_1.__generator(this, function (_e) {
+        return (0, tslib_1.__generator)(this, function (_e) {
             switch (_e.label) {
                 case 0:
                     done = new Set([]);
@@ -868,9 +868,9 @@ function runUrlTest(t, url) {
     });
 }
 function runUrlTestAlt(t, url) {
-    return tslib_1.__awaiter(this, void 0, void 0, function () {
+    return (0, tslib_1.__awaiter)(this, void 0, void 0, function () {
         var done, okay, _a, _b, err_8, _c, _d;
-        return tslib_1.__generator(this, function (_e) {
+        return (0, tslib_1.__generator)(this, function (_e) {
             switch (_e.label) {
                 case 0:
                     done = new Set([]);
@@ -901,9 +901,9 @@ function runUrlTestAlt(t, url) {
         });
     });
 }
-ava_1.default("OPDS2 HTTP (de)serialize roundtrip (recursive) 1", function (t) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
+(0, ava_1.default)("OPDS2 HTTP (de)serialize roundtrip (recursive) 1", function (t) { return (0, tslib_1.__awaiter)(void 0, void 0, void 0, function () {
     var url;
-    return tslib_1.__generator(this, function (_a) {
+    return (0, tslib_1.__generator)(this, function (_a) {
         switch (_a.label) {
             case 0:
                 url = "https://test.opds.io/2.0/home.json";
@@ -914,9 +914,9 @@ ava_1.default("OPDS2 HTTP (de)serialize roundtrip (recursive) 1", function (t) {
         }
     });
 }); });
-ava_1.default("OPDS2 HTTP (de)serialize roundtrip (recursive) 2", function (t) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
+(0, ava_1.default)("OPDS2 HTTP (de)serialize roundtrip (recursive) 2", function (t) { return (0, tslib_1.__awaiter)(void 0, void 0, void 0, function () {
     var url;
-    return tslib_1.__generator(this, function (_a) {
+    return (0, tslib_1.__generator)(this, function (_a) {
         switch (_a.label) {
             case 0:
                 url = "https://catalog.feedbooks.com/catalog/public_domain.json";
@@ -927,9 +927,9 @@ ava_1.default("OPDS2 HTTP (de)serialize roundtrip (recursive) 2", function (t) {
         }
     });
 }); });
-ava_1.default("OPDS2 HTTP (de)serialize roundtrip (recursive) CATALOGS", function (t) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
+(0, ava_1.default)("OPDS2 HTTP (de)serialize roundtrip (recursive) CATALOGS", function (t) { return (0, tslib_1.__awaiter)(void 0, void 0, void 0, function () {
     var url;
-    return tslib_1.__generator(this, function (_a) {
+    return (0, tslib_1.__generator)(this, function (_a) {
         switch (_a.label) {
             case 0:
                 url = "https://libraryregistry.librarysimplified.org/libraries";
@@ -940,9 +940,9 @@ ava_1.default("OPDS2 HTTP (de)serialize roundtrip (recursive) CATALOGS", functio
         }
     });
 }); });
-ava_1.default("OPDS2 HTTP (de)serialize roundtrip (recursive) AUTHENTICATION", function (t) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
+(0, ava_1.default)("OPDS2 HTTP (de)serialize roundtrip (recursive) AUTHENTICATION", function (t) { return (0, tslib_1.__awaiter)(void 0, void 0, void 0, function () {
     var url;
-    return tslib_1.__generator(this, function (_a) {
+    return (0, tslib_1.__generator)(this, function (_a) {
         switch (_a.label) {
             case 0:
                 url = "http://acl.simplye-ca.org/CALMDA/authentication_document";
@@ -953,9 +953,9 @@ ava_1.default("OPDS2 HTTP (de)serialize roundtrip (recursive) AUTHENTICATION", f
         }
     });
 }); });
-ava_1.default("OPDS1-2 HTTP convert (de)serialize roundtrip (recursive)", function (t) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
+(0, ava_1.default)("OPDS1-2 HTTP convert (de)serialize roundtrip (recursive)", function (t) { return (0, tslib_1.__awaiter)(void 0, void 0, void 0, function () {
     var url;
-    return tslib_1.__generator(this, function (_a) {
+    return (0, tslib_1.__generator)(this, function (_a) {
         switch (_a.label) {
             case 0:
                 url = "https://bookserver.archive.org/group/openaudiobooks";
@@ -966,9 +966,9 @@ ava_1.default("OPDS1-2 HTTP convert (de)serialize roundtrip (recursive)", functi
         }
     });
 }); });
-ava_1.default("test", function (t) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
+(0, ava_1.default)("test", function (t) { return (0, tslib_1.__awaiter)(void 0, void 0, void 0, function () {
     var url, done, _a, _b;
-    return tslib_1.__generator(this, function (_c) {
+    return (0, tslib_1.__generator)(this, function (_c) {
         switch (_c.label) {
             case 0:
                 url = "https://api.archivelab.org/books/bookconcord_preface_1202/opds_audio_manifest";
@@ -986,18 +986,18 @@ ava_1.default("test", function (t) { return tslib_1.__awaiter(void 0, void 0, vo
         }
     });
 }); });
-ava_1.default("OPDS1-2 LCP passphrase convert (de)serialize roundtrip", function (t) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
+(0, ava_1.default)("OPDS1-2 LCP passphrase convert (de)serialize roundtrip", function (t) { return (0, tslib_1.__awaiter)(void 0, void 0, void 0, function () {
     var xmlSrc, xmlDom, isEntry, opds1Entry, opds2Pub, opds2PubJson;
-    return tslib_1.__generator(this, function (_a) {
+    return (0, tslib_1.__generator)(this, function (_a) {
         xmlSrc = "\n<entry\n    xmlns=\"http://www.w3.org/2005/Atom\"\n    xmlns:lcp=\"http://readium.org/lcp-specs/ns\">\n\n    <link\n        rel=\"http://opds-spec.org/acquisition/\"\n        href=\"FAKE_URL\"\n        type=\"application/vnd.readium.lcp.license.v1.0+json\">\n\n        <lcp:hashed_passphrase>FAKE_BASE64</lcp:hashed_passphrase>\n    </link>\n</entry>\n    ";
         xmlDom = new xmldom.DOMParser().parseFromString(xmlSrc);
         isEntry = xmlDom.documentElement.localName === "entry";
         t.true(isEntry);
         opds1Entry = xml_js_mapper_1.XML.deserialize(xmlDom, opds_entry_1.Entry);
         t.is(opds1Entry.Links[0].LcpHashedPassphrase, "FAKE_BASE64");
-        opds2Pub = converter_1.convertOpds1ToOpds2_EntryToPublication(opds1Entry);
+        opds2Pub = (0, converter_1.convertOpds1ToOpds2_EntryToPublication)(opds1Entry);
         t.is(opds2Pub.Links[0].Properties.AdditionalJSON.lcp_hashed_passphrase, "FAKE_BASE64");
-        opds2PubJson = serializable_1.TaJsonSerialize(opds2Pub);
+        opds2PubJson = (0, serializable_1.TaJsonSerialize)(opds2Pub);
         t.is(opds2PubJson.links[0].properties.lcp_hashed_passphrase, "FAKE_BASE64");
         return [2];
     });

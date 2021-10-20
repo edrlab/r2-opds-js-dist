@@ -19,12 +19,12 @@ var OPDSLinkRelEnum;
 const PROPERTIES_JSON_PROP = "properties";
 let OPDSLink = class OPDSLink extends publication_link_1.Link {
 };
-tslib_1.__decorate([
-    ta_json_x_1.JsonProperty(PROPERTIES_JSON_PROP),
-    tslib_1.__metadata("design:type", opds2_properties_1.OPDSProperties)
+(0, tslib_1.__decorate)([
+    (0, ta_json_x_1.JsonProperty)(PROPERTIES_JSON_PROP),
+    (0, tslib_1.__metadata)("design:type", opds2_properties_1.OPDSProperties)
 ], OPDSLink.prototype, "Properties", void 0);
-OPDSLink = tslib_1.__decorate([
-    ta_json_x_1.JsonObject()
+OPDSLink = (0, tslib_1.__decorate)([
+    (0, ta_json_x_1.JsonObject)()
 ], OPDSLink);
 exports.OPDSLink = OPDSLink;
 //# sourceMappingURL=opds2-link.js.map

@@ -5,20 +5,20 @@ const tslib_1 = require("tslib");
 const xml_js_mapper_1 = require("r2-utils-js/dist/es8-es2017/src/_utils/xml-js-mapper");
 let Serie = class Serie {
 };
-tslib_1.__decorate([
-    xml_js_mapper_1.XmlXPathSelector("@schema:name"),
-    tslib_1.__metadata("design:type", String)
+(0, tslib_1.__decorate)([
+    (0, xml_js_mapper_1.XmlXPathSelector)("@schema:name"),
+    (0, tslib_1.__metadata)("design:type", String)
 ], Serie.prototype, "Name", void 0);
-tslib_1.__decorate([
-    xml_js_mapper_1.XmlXPathSelector("@schema:url"),
-    tslib_1.__metadata("design:type", String)
+(0, tslib_1.__decorate)([
+    (0, xml_js_mapper_1.XmlXPathSelector)("@schema:url"),
+    (0, tslib_1.__metadata)("design:type", String)
 ], Serie.prototype, "Url", void 0);
-tslib_1.__decorate([
-    xml_js_mapper_1.XmlXPathSelector("@schema:position"),
-    tslib_1.__metadata("design:type", Number)
+(0, tslib_1.__decorate)([
+    (0, xml_js_mapper_1.XmlXPathSelector)("@schema:position"),
+    (0, tslib_1.__metadata)("design:type", Number)
 ], Serie.prototype, "Position", void 0);
-Serie = tslib_1.__decorate([
-    xml_js_mapper_1.XmlObject({
+Serie = (0, tslib_1.__decorate)([
+    (0, xml_js_mapper_1.XmlObject)({
         app: "http://www.w3.org/2007/app",
         atom: "http://www.w3.org/2005/Atom",
         bibframe: "http://bibframe.org/vocab/",

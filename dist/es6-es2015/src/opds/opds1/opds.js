@@ -8,55 +8,55 @@ const opds_entry_1 = require("./opds-entry");
 const opds_link_1 = require("./opds-link");
 let OPDS = class OPDS {
 };
-tslib_1.__decorate([
-    xml_js_mapper_1.XmlXPathSelector("opensearch:totalResults/text()"),
-    tslib_1.__metadata("design:type", Number)
+(0, tslib_1.__decorate)([
+    (0, xml_js_mapper_1.XmlXPathSelector)("opensearch:totalResults/text()"),
+    (0, tslib_1.__metadata)("design:type", Number)
 ], OPDS.prototype, "OpensearchTotalResults", void 0);
-tslib_1.__decorate([
-    xml_js_mapper_1.XmlXPathSelector("opensearch:itemsPerPage/text()"),
-    tslib_1.__metadata("design:type", Number)
+(0, tslib_1.__decorate)([
+    (0, xml_js_mapper_1.XmlXPathSelector)("opensearch:itemsPerPage/text()"),
+    (0, tslib_1.__metadata)("design:type", Number)
 ], OPDS.prototype, "OpensearchItemsPerPage", void 0);
-tslib_1.__decorate([
-    xml_js_mapper_1.XmlXPathSelector("atom:id/text()"),
-    tslib_1.__metadata("design:type", String)
+(0, tslib_1.__decorate)([
+    (0, xml_js_mapper_1.XmlXPathSelector)("atom:id/text()"),
+    (0, tslib_1.__metadata)("design:type", String)
 ], OPDS.prototype, "Id", void 0);
-tslib_1.__decorate([
-    xml_js_mapper_1.XmlXPathSelector("atom:title/text()"),
-    tslib_1.__metadata("design:type", String)
+(0, tslib_1.__decorate)([
+    (0, xml_js_mapper_1.XmlXPathSelector)("atom:title/text()"),
+    (0, tslib_1.__metadata)("design:type", String)
 ], OPDS.prototype, "Title", void 0);
-tslib_1.__decorate([
-    xml_js_mapper_1.XmlXPathSelector("atom:subtitle/text()"),
-    tslib_1.__metadata("design:type", String)
+(0, tslib_1.__decorate)([
+    (0, xml_js_mapper_1.XmlXPathSelector)("atom:subtitle/text()"),
+    (0, tslib_1.__metadata)("design:type", String)
 ], OPDS.prototype, "SubTitle", void 0);
-tslib_1.__decorate([
-    xml_js_mapper_1.XmlXPathSelector("atom:updated/text()"),
-    tslib_1.__metadata("design:type", Date)
+(0, tslib_1.__decorate)([
+    (0, xml_js_mapper_1.XmlXPathSelector)("atom:updated/text()"),
+    (0, tslib_1.__metadata)("design:type", Date)
 ], OPDS.prototype, "Updated", void 0);
-tslib_1.__decorate([
-    xml_js_mapper_1.XmlXPathSelector("atom:icon/text()"),
-    tslib_1.__metadata("design:type", String)
+(0, tslib_1.__decorate)([
+    (0, xml_js_mapper_1.XmlXPathSelector)("atom:icon/text()"),
+    (0, tslib_1.__metadata)("design:type", String)
 ], OPDS.prototype, "Icon", void 0);
-tslib_1.__decorate([
-    xml_js_mapper_1.XmlXPathSelector("atom:author"),
-    xml_js_mapper_1.XmlItemType(opds_author_1.Author),
-    tslib_1.__metadata("design:type", Array)
+(0, tslib_1.__decorate)([
+    (0, xml_js_mapper_1.XmlXPathSelector)("atom:author"),
+    (0, xml_js_mapper_1.XmlItemType)(opds_author_1.Author),
+    (0, tslib_1.__metadata)("design:type", Array)
 ], OPDS.prototype, "Authors", void 0);
-tslib_1.__decorate([
-    xml_js_mapper_1.XmlXPathSelector("@lang | @xml:lang"),
-    tslib_1.__metadata("design:type", String)
+(0, tslib_1.__decorate)([
+    (0, xml_js_mapper_1.XmlXPathSelector)("@lang | @xml:lang"),
+    (0, tslib_1.__metadata)("design:type", String)
 ], OPDS.prototype, "Lang", void 0);
-tslib_1.__decorate([
-    xml_js_mapper_1.XmlXPathSelector("atom:link"),
-    xml_js_mapper_1.XmlItemType(opds_link_1.Link),
-    tslib_1.__metadata("design:type", Array)
+(0, tslib_1.__decorate)([
+    (0, xml_js_mapper_1.XmlXPathSelector)("atom:link"),
+    (0, xml_js_mapper_1.XmlItemType)(opds_link_1.Link),
+    (0, tslib_1.__metadata)("design:type", Array)
 ], OPDS.prototype, "Links", void 0);
-tslib_1.__decorate([
-    xml_js_mapper_1.XmlXPathSelector("atom:entry"),
-    xml_js_mapper_1.XmlItemType(opds_entry_1.Entry),
-    tslib_1.__metadata("design:type", Array)
+(0, tslib_1.__decorate)([
+    (0, xml_js_mapper_1.XmlXPathSelector)("atom:entry"),
+    (0, xml_js_mapper_1.XmlItemType)(opds_entry_1.Entry),
+    (0, tslib_1.__metadata)("design:type", Array)
 ], OPDS.prototype, "Entries", void 0);
-OPDS = tslib_1.__decorate([
-    xml_js_mapper_1.XmlObject({
+OPDS = (0, tslib_1.__decorate)([
+    (0, xml_js_mapper_1.XmlObject)({
         app: "http://www.w3.org/2007/app",
         atom: "http://www.w3.org/2005/Atom",
         bibframe: "http://bibframe.org/vocab/",

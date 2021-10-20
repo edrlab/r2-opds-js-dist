@@ -16,61 +16,61 @@ var Link = (function () {
     Link.prototype.SetRel = function (rel) {
         this.Rel = rel;
     };
-    tslib_1.__decorate([
-        xml_js_mapper_1.XmlXPathSelector("opds:price/text()"),
-        tslib_1.__metadata("design:type", Number)
+    (0, tslib_1.__decorate)([
+        (0, xml_js_mapper_1.XmlXPathSelector)("opds:price/text()"),
+        (0, tslib_1.__metadata)("design:type", Number)
     ], Link.prototype, "OpdsPrice", void 0);
-    tslib_1.__decorate([
-        xml_js_mapper_1.XmlXPathSelector("opds:price/@currencycode"),
-        tslib_1.__metadata("design:type", String)
+    (0, tslib_1.__decorate)([
+        (0, xml_js_mapper_1.XmlXPathSelector)("opds:price/@currencycode"),
+        (0, tslib_1.__metadata)("design:type", String)
     ], Link.prototype, "OpdsPriceCurrencyCode", void 0);
-    tslib_1.__decorate([
-        xml_js_mapper_1.XmlXPathSelector("opds:indirectAcquisition"),
-        xml_js_mapper_1.XmlItemType(opds_indirectAcquisition_1.IndirectAcquisition),
-        tslib_1.__metadata("design:type", Array)
+    (0, tslib_1.__decorate)([
+        (0, xml_js_mapper_1.XmlXPathSelector)("opds:indirectAcquisition"),
+        (0, xml_js_mapper_1.XmlItemType)(opds_indirectAcquisition_1.IndirectAcquisition),
+        (0, tslib_1.__metadata)("design:type", Array)
     ], Link.prototype, "OpdsIndirectAcquisitions", void 0);
-    tslib_1.__decorate([
-        xml_js_mapper_1.XmlXPathSelector("opds:availability"),
-        tslib_1.__metadata("design:type", opds_availability_1.Availability)
+    (0, tslib_1.__decorate)([
+        (0, xml_js_mapper_1.XmlXPathSelector)("opds:availability"),
+        (0, tslib_1.__metadata)("design:type", opds_availability_1.Availability)
     ], Link.prototype, "OpdsAvailability", void 0);
-    tslib_1.__decorate([
-        xml_js_mapper_1.XmlXPathSelector("opds:copies"),
-        tslib_1.__metadata("design:type", opds_copies_1.Copies)
+    (0, tslib_1.__decorate)([
+        (0, xml_js_mapper_1.XmlXPathSelector)("opds:copies"),
+        (0, tslib_1.__metadata)("design:type", opds_copies_1.Copies)
     ], Link.prototype, "OpdsCopies", void 0);
-    tslib_1.__decorate([
-        xml_js_mapper_1.XmlXPathSelector("opds:holds"),
-        tslib_1.__metadata("design:type", opds_holds_1.Holds)
+    (0, tslib_1.__decorate)([
+        (0, xml_js_mapper_1.XmlXPathSelector)("opds:holds"),
+        (0, tslib_1.__metadata)("design:type", opds_holds_1.Holds)
     ], Link.prototype, "OpdsHolds", void 0);
-    tslib_1.__decorate([
-        xml_js_mapper_1.XmlXPathSelector("lcp:hashed_passphrase/text()"),
-        tslib_1.__metadata("design:type", String)
+    (0, tslib_1.__decorate)([
+        (0, xml_js_mapper_1.XmlXPathSelector)("lcp:hashed_passphrase/text()"),
+        (0, tslib_1.__metadata)("design:type", String)
     ], Link.prototype, "LcpHashedPassphrase", void 0);
-    tslib_1.__decorate([
-        xml_js_mapper_1.XmlXPathSelector("@type"),
-        tslib_1.__metadata("design:type", String)
+    (0, tslib_1.__decorate)([
+        (0, xml_js_mapper_1.XmlXPathSelector)("@type"),
+        (0, tslib_1.__metadata)("design:type", String)
     ], Link.prototype, "Type", void 0);
-    tslib_1.__decorate([
-        xml_js_mapper_1.XmlXPathSelector("@thr:count"),
-        tslib_1.__metadata("design:type", Number)
+    (0, tslib_1.__decorate)([
+        (0, xml_js_mapper_1.XmlXPathSelector)("@thr:count"),
+        (0, tslib_1.__metadata)("design:type", Number)
     ], Link.prototype, "ThrCount", void 0);
-    tslib_1.__decorate([
-        xml_js_mapper_1.XmlXPathSelector("@opds:facetGroup"),
-        tslib_1.__metadata("design:type", String)
+    (0, tslib_1.__decorate)([
+        (0, xml_js_mapper_1.XmlXPathSelector)("@opds:facetGroup"),
+        (0, tslib_1.__metadata)("design:type", String)
     ], Link.prototype, "FacetGroup", void 0);
-    tslib_1.__decorate([
-        xml_js_mapper_1.XmlXPathSelector("@href"),
-        tslib_1.__metadata("design:type", String)
+    (0, tslib_1.__decorate)([
+        (0, xml_js_mapper_1.XmlXPathSelector)("@href"),
+        (0, tslib_1.__metadata)("design:type", String)
     ], Link.prototype, "Href", void 0);
-    tslib_1.__decorate([
-        xml_js_mapper_1.XmlXPathSelector("@title"),
-        tslib_1.__metadata("design:type", String)
+    (0, tslib_1.__decorate)([
+        (0, xml_js_mapper_1.XmlXPathSelector)("@title"),
+        (0, tslib_1.__metadata)("design:type", String)
     ], Link.prototype, "Title", void 0);
-    tslib_1.__decorate([
-        xml_js_mapper_1.XmlXPathSelector("@rel"),
-        tslib_1.__metadata("design:type", String)
+    (0, tslib_1.__decorate)([
+        (0, xml_js_mapper_1.XmlXPathSelector)("@rel"),
+        (0, tslib_1.__metadata)("design:type", String)
     ], Link.prototype, "Rel", void 0);
-    Link = tslib_1.__decorate([
-        xml_js_mapper_1.XmlObject({
+    Link = (0, tslib_1.__decorate)([
+        (0, xml_js_mapper_1.XmlObject)({
             app: "http://www.w3.org/2007/app",
             atom: "http://www.w3.org/2005/Atom",
             bibframe: "http://bibframe.org/vocab/",

@@ -12,27 +12,27 @@ const LINKS_JSON_PROP = "links";
 const NAVIGATION_JSON_PROP = "navigation";
 let OPDSGroup = class OPDSGroup {
 };
-tslib_1.__decorate([
-    ta_json_x_1.JsonProperty(METADATA_JSON_PROP),
-    tslib_1.__metadata("design:type", opds2_metadata_1.OPDSMetadata)
+(0, tslib_1.__decorate)([
+    (0, ta_json_x_1.JsonProperty)(METADATA_JSON_PROP),
+    (0, tslib_1.__metadata)("design:type", opds2_metadata_1.OPDSMetadata)
 ], OPDSGroup.prototype, "Metadata", void 0);
-tslib_1.__decorate([
-    ta_json_x_1.JsonProperty(PUBLICATIONS_JSON_PROP),
-    ta_json_x_1.JsonElementType(opds2_publication_1.OPDSPublication),
-    tslib_1.__metadata("design:type", Array)
+(0, tslib_1.__decorate)([
+    (0, ta_json_x_1.JsonProperty)(PUBLICATIONS_JSON_PROP),
+    (0, ta_json_x_1.JsonElementType)(opds2_publication_1.OPDSPublication),
+    (0, tslib_1.__metadata)("design:type", Array)
 ], OPDSGroup.prototype, "Publications", void 0);
-tslib_1.__decorate([
-    ta_json_x_1.JsonProperty(LINKS_JSON_PROP),
-    ta_json_x_1.JsonElementType(opds2_link_1.OPDSLink),
-    tslib_1.__metadata("design:type", Array)
+(0, tslib_1.__decorate)([
+    (0, ta_json_x_1.JsonProperty)(LINKS_JSON_PROP),
+    (0, ta_json_x_1.JsonElementType)(opds2_link_1.OPDSLink),
+    (0, tslib_1.__metadata)("design:type", Array)
 ], OPDSGroup.prototype, "Links", void 0);
-tslib_1.__decorate([
-    ta_json_x_1.JsonProperty(NAVIGATION_JSON_PROP),
-    ta_json_x_1.JsonElementType(opds2_link_1.OPDSLink),
-    tslib_1.__metadata("design:type", Array)
+(0, tslib_1.__decorate)([
+    (0, ta_json_x_1.JsonProperty)(NAVIGATION_JSON_PROP),
+    (0, ta_json_x_1.JsonElementType)(opds2_link_1.OPDSLink),
+    (0, tslib_1.__metadata)("design:type", Array)
 ], OPDSGroup.prototype, "Navigation", void 0);
-OPDSGroup = tslib_1.__decorate([
-    ta_json_x_1.JsonObject()
+OPDSGroup = (0, tslib_1.__decorate)([
+    (0, ta_json_x_1.JsonObject)()
 ], OPDSGroup);
 exports.OPDSGroup = OPDSGroup;
 //# sourceMappingURL=opds2-group.js.map

@@ -137,32 +137,32 @@ var OPDSPublication = (function () {
             console.log("OPDSPublication.Image[s] is not set!");
         }
     };
-    tslib_1.__decorate([
-        ta_json_x_1.JsonProperty(METADATA_JSON_PROP),
-        tslib_1.__metadata("design:type", metadata_1.Metadata)
+    (0, tslib_1.__decorate)([
+        (0, ta_json_x_1.JsonProperty)(METADATA_JSON_PROP),
+        (0, tslib_1.__metadata)("design:type", metadata_1.Metadata)
     ], OPDSPublication.prototype, "Metadata", void 0);
-    tslib_1.__decorate([
-        ta_json_x_1.JsonProperty(LINKS_JSON_PROP),
-        ta_json_x_1.JsonElementType(opds2_link_1.OPDSLink),
-        tslib_1.__metadata("design:type", Array)
+    (0, tslib_1.__decorate)([
+        (0, ta_json_x_1.JsonProperty)(LINKS_JSON_PROP),
+        (0, ta_json_x_1.JsonElementType)(opds2_link_1.OPDSLink),
+        (0, tslib_1.__metadata)("design:type", Array)
     ], OPDSPublication.prototype, "Links", void 0);
-    tslib_1.__decorate([
-        ta_json_x_1.JsonProperty(IMAGES_JSON_PROP),
-        ta_json_x_1.JsonElementType(publication_link_1.Link),
-        tslib_1.__metadata("design:type", Array)
+    (0, tslib_1.__decorate)([
+        (0, ta_json_x_1.JsonProperty)(IMAGES_JSON_PROP),
+        (0, ta_json_x_1.JsonElementType)(publication_link_1.Link),
+        (0, tslib_1.__metadata)("design:type", Array)
     ], OPDSPublication.prototype, "Images", void 0);
-    tslib_1.__decorate([
-        ta_json_x_1.JsonProperty(IMAGE_JSON_PROP),
-        tslib_1.__metadata("design:type", publication_link_1.Link)
+    (0, tslib_1.__decorate)([
+        (0, ta_json_x_1.JsonProperty)(IMAGE_JSON_PROP),
+        (0, tslib_1.__metadata)("design:type", publication_link_1.Link)
     ], OPDSPublication.prototype, "Image", void 0);
-    tslib_1.__decorate([
-        ta_json_x_1.OnDeserialized(),
-        tslib_1.__metadata("design:type", Function),
-        tslib_1.__metadata("design:paramtypes", []),
-        tslib_1.__metadata("design:returntype", void 0)
+    (0, tslib_1.__decorate)([
+        (0, ta_json_x_1.OnDeserialized)(),
+        (0, tslib_1.__metadata)("design:type", Function),
+        (0, tslib_1.__metadata)("design:paramtypes", []),
+        (0, tslib_1.__metadata)("design:returntype", void 0)
     ], OPDSPublication.prototype, "_OnDeserialized", null);
-    OPDSPublication = tslib_1.__decorate([
-        ta_json_x_1.JsonObject()
+    OPDSPublication = (0, tslib_1.__decorate)([
+        (0, ta_json_x_1.JsonObject)()
     ], OPDSPublication);
     return OPDSPublication;
 }());

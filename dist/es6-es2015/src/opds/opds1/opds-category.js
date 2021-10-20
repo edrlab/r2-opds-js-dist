@@ -5,20 +5,20 @@ const tslib_1 = require("tslib");
 const xml_js_mapper_1 = require("r2-utils-js/dist/es6-es2015/src/_utils/xml-js-mapper");
 let Category = class Category {
 };
-tslib_1.__decorate([
-    xml_js_mapper_1.XmlXPathSelector("@term"),
-    tslib_1.__metadata("design:type", String)
+(0, tslib_1.__decorate)([
+    (0, xml_js_mapper_1.XmlXPathSelector)("@term"),
+    (0, tslib_1.__metadata)("design:type", String)
 ], Category.prototype, "Term", void 0);
-tslib_1.__decorate([
-    xml_js_mapper_1.XmlXPathSelector("@scheme"),
-    tslib_1.__metadata("design:type", String)
+(0, tslib_1.__decorate)([
+    (0, xml_js_mapper_1.XmlXPathSelector)("@scheme"),
+    (0, tslib_1.__metadata)("design:type", String)
 ], Category.prototype, "Scheme", void 0);
-tslib_1.__decorate([
-    xml_js_mapper_1.XmlXPathSelector("@label"),
-    tslib_1.__metadata("design:type", String)
+(0, tslib_1.__decorate)([
+    (0, xml_js_mapper_1.XmlXPathSelector)("@label"),
+    (0, tslib_1.__metadata)("design:type", String)
 ], Category.prototype, "Label", void 0);
-Category = tslib_1.__decorate([
-    xml_js_mapper_1.XmlObject({
+Category = (0, tslib_1.__decorate)([
+    (0, xml_js_mapper_1.XmlObject)({
         app: "http://www.w3.org/2007/app",
         atom: "http://www.w3.org/2005/Atom",
         bibframe: "http://bibframe.org/vocab/",

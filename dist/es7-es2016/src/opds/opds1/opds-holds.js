@@ -5,16 +5,16 @@ const tslib_1 = require("tslib");
 const xml_js_mapper_1 = require("r2-utils-js/dist/es7-es2016/src/_utils/xml-js-mapper");
 let Holds = class Holds {
 };
-tslib_1.__decorate([
-    xml_js_mapper_1.XmlXPathSelector("@total"),
-    tslib_1.__metadata("design:type", Number)
+(0, tslib_1.__decorate)([
+    (0, xml_js_mapper_1.XmlXPathSelector)("@total"),
+    (0, tslib_1.__metadata)("design:type", Number)
 ], Holds.prototype, "Total", void 0);
-tslib_1.__decorate([
-    xml_js_mapper_1.XmlXPathSelector("@position"),
-    tslib_1.__metadata("design:type", Number)
+(0, tslib_1.__decorate)([
+    (0, xml_js_mapper_1.XmlXPathSelector)("@position"),
+    (0, tslib_1.__metadata)("design:type", Number)
 ], Holds.prototype, "Position", void 0);
-Holds = tslib_1.__decorate([
-    xml_js_mapper_1.XmlObject({
+Holds = (0, tslib_1.__decorate)([
+    (0, xml_js_mapper_1.XmlObject)({
         app: "http://www.w3.org/2007/app",
         atom: "http://www.w3.org/2005/Atom",
         bibframe: "http://bibframe.org/vocab/",

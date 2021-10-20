@@ -5,24 +5,24 @@ const tslib_1 = require("tslib");
 const xml_js_mapper_1 = require("r2-utils-js/dist/es7-es2016/src/_utils/xml-js-mapper");
 let Availability = class Availability {
 };
-tslib_1.__decorate([
-    xml_js_mapper_1.XmlXPathSelector("@state"),
-    tslib_1.__metadata("design:type", String)
+(0, tslib_1.__decorate)([
+    (0, xml_js_mapper_1.XmlXPathSelector)("@state"),
+    (0, tslib_1.__metadata)("design:type", String)
 ], Availability.prototype, "State", void 0);
-tslib_1.__decorate([
-    xml_js_mapper_1.XmlXPathSelector("@status"),
-    tslib_1.__metadata("design:type", String)
+(0, tslib_1.__decorate)([
+    (0, xml_js_mapper_1.XmlXPathSelector)("@status"),
+    (0, tslib_1.__metadata)("design:type", String)
 ], Availability.prototype, "Status", void 0);
-tslib_1.__decorate([
-    xml_js_mapper_1.XmlXPathSelector("@since"),
-    tslib_1.__metadata("design:type", Date)
+(0, tslib_1.__decorate)([
+    (0, xml_js_mapper_1.XmlXPathSelector)("@since"),
+    (0, tslib_1.__metadata)("design:type", Date)
 ], Availability.prototype, "Since", void 0);
-tslib_1.__decorate([
-    xml_js_mapper_1.XmlXPathSelector("@until"),
-    tslib_1.__metadata("design:type", Date)
+(0, tslib_1.__decorate)([
+    (0, xml_js_mapper_1.XmlXPathSelector)("@until"),
+    (0, tslib_1.__metadata)("design:type", Date)
 ], Availability.prototype, "Until", void 0);
-Availability = tslib_1.__decorate([
-    xml_js_mapper_1.XmlObject({
+Availability = (0, tslib_1.__decorate)([
+    (0, xml_js_mapper_1.XmlObject)({
         app: "http://www.w3.org/2007/app",
         atom: "http://www.w3.org/2005/Atom",
         bibframe: "http://bibframe.org/vocab/",

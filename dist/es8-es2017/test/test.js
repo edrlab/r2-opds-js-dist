@@ -18,8 +18,8 @@ const opds_entry_1 = require("../src/opds/opds1/opds-entry");
 const opds2_1 = require("../src/opds/opds2/opds2");
 const opds2_authentication_doc_1 = require("../src/opds/opds2/opds2-authentication-doc");
 const opds2_publication_1 = require("../src/opds/opds2/opds2-publication");
-init_globals_1.initGlobalConverters_OPDS();
-init_globals_1.initGlobalConverters_GENERIC();
+(0, init_globals_1.initGlobalConverters_OPDS)();
+(0, init_globals_1.initGlobalConverters_GENERIC)();
 const debug = debug_("r2:opds#test");
 const plainTextWithEscapedHtmlChars = `
 
@@ -47,7 +47,7 @@ const escapedHtmlWithSomeDoubleEscapedHtmlChars = `
     Hello &amp;amp;\t&lt;b&gt;  world &amp;lt; &amp;quot;_&amp;#039; &amp;gt;  &lt;/b&gt;!
 &lt;/div&gt;
 `;
-ava_1.default("OPDS1-2 description: summary + content(XHTML NAMESPACE PREFIX)", async (t) => {
+(0, ava_1.default)("OPDS1-2 description: summary + content(XHTML NAMESPACE PREFIX)", async (t) => {
     const xmlSrc = `
 <entry
     xmlns="http://www.w3.org/2005/Atom"
@@ -60,16 +60,16 @@ ava_1.default("OPDS1-2 description: summary + content(XHTML NAMESPACE PREFIX)", 
     const isEntry = xmlDom.documentElement.localName === "entry";
     t.true(isEntry);
     const opds1Entry = xml_js_mapper_1.XML.deserialize(xmlDom, opds_entry_1.Entry);
-    t.is(opds1Entry.Summary, converter_1.unescapeHtmlEntities(plainTextWithEscapedHtmlChars));
+    t.is(opds1Entry.Summary, (0, converter_1.unescapeHtmlEntities)(plainTextWithEscapedHtmlChars));
     const toMatch = xhtmlWithSomeEscapedHtmlCharsPrefixedNamespace
         .replace(/&gt;/g, ">")
         .replace(/&quot;/g, "\"")
         .replace(/&#039;/g, "'");
     t.is(opds1Entry.Content.replace(/ xmlns:xhtm="http:\/\/www\.w3\.org\/1999\/xhtml"/, ""), toMatch);
-    const opds2Pub = converter_1.convertOpds1ToOpds2_EntryToPublication(opds1Entry);
+    const opds2Pub = (0, converter_1.convertOpds1ToOpds2_EntryToPublication)(opds1Entry);
     t.is(opds2Pub.Metadata.Description.replace(/ xmlns:xhtm="http:\/\/www\.w3\.org\/1999\/xhtml"/, ""), toMatch);
 });
-ava_1.default("OPDS1-2 description: summary + content(XHTML NAMESPACE NO PREFIX)", async (t) => {
+(0, ava_1.default)("OPDS1-2 description: summary + content(XHTML NAMESPACE NO PREFIX)", async (t) => {
     const xmlSrc = `
 <entry
     xmlns="http://www.w3.org/2005/Atom"
@@ -82,16 +82,16 @@ ava_1.default("OPDS1-2 description: summary + content(XHTML NAMESPACE NO PREFIX)
     const isEntry = xmlDom.documentElement.localName === "entry";
     t.true(isEntry);
     const opds1Entry = xml_js_mapper_1.XML.deserialize(xmlDom, opds_entry_1.Entry);
-    t.is(opds1Entry.Summary, converter_1.unescapeHtmlEntities(plainTextWithEscapedHtmlChars));
+    t.is(opds1Entry.Summary, (0, converter_1.unescapeHtmlEntities)(plainTextWithEscapedHtmlChars));
     const toMatch = xhtmlWithSomeEscapedHtmlCharsNoPrefixedNamespace
         .replace(/&gt;/g, ">")
         .replace(/&quot;/g, "\"")
         .replace(/&#039;/g, "'");
     t.is(opds1Entry.Content, toMatch);
-    const opds2Pub = converter_1.convertOpds1ToOpds2_EntryToPublication(opds1Entry);
+    const opds2Pub = (0, converter_1.convertOpds1ToOpds2_EntryToPublication)(opds1Entry);
     t.is(opds2Pub.Metadata.Description, toMatch);
 });
-ava_1.default("OPDS1-2 description: summary + content(XML DEFAULT ATOM NAMESPACE)", async (t) => {
+(0, ava_1.default)("OPDS1-2 description: summary + content(XML DEFAULT ATOM NAMESPACE)", async (t) => {
     const xmlSrc = `
 <entry
     xmlns="http://www.w3.org/2005/Atom"
@@ -104,16 +104,16 @@ ava_1.default("OPDS1-2 description: summary + content(XML DEFAULT ATOM NAMESPACE
     const isEntry = xmlDom.documentElement.localName === "entry";
     t.true(isEntry);
     const opds1Entry = xml_js_mapper_1.XML.deserialize(xmlDom, opds_entry_1.Entry);
-    t.is(opds1Entry.Summary, converter_1.unescapeHtmlEntities(plainTextWithEscapedHtmlChars));
+    t.is(opds1Entry.Summary, (0, converter_1.unescapeHtmlEntities)(plainTextWithEscapedHtmlChars));
     const toMatch = xmlWithSomeEscapedHtmlCharsAtomDefaultNamespace
         .replace(/&gt;/g, ">")
         .replace(/&quot;/g, "\"")
         .replace(/&#039;/g, "'");
     t.is(opds1Entry.Content.replace(/ xmlns="http:\/\/www\.w3\.org\/2005\/Atom"/, ""), toMatch);
-    const opds2Pub = converter_1.convertOpds1ToOpds2_EntryToPublication(opds1Entry);
+    const opds2Pub = (0, converter_1.convertOpds1ToOpds2_EntryToPublication)(opds1Entry);
     t.is(opds2Pub.Metadata.Description.replace(/ xmlns="http:\/\/www\.w3\.org\/1999\/xhtml"/, ""), toMatch);
 });
-ava_1.default("OPDS1-2 description: summary", async (t) => {
+(0, ava_1.default)("OPDS1-2 description: summary", async (t) => {
     const xmlSrc = `
 <entry
     xmlns="http://www.w3.org/2005/Atom"
@@ -125,12 +125,12 @@ ava_1.default("OPDS1-2 description: summary", async (t) => {
     const isEntry = xmlDom.documentElement.localName === "entry";
     t.true(isEntry);
     const opds1Entry = xml_js_mapper_1.XML.deserialize(xmlDom, opds_entry_1.Entry);
-    const toMatch = converter_1.unescapeHtmlEntities(plainTextWithEscapedHtmlChars);
+    const toMatch = (0, converter_1.unescapeHtmlEntities)(plainTextWithEscapedHtmlChars);
     t.is(opds1Entry.Summary, toMatch);
-    const opds2Pub = converter_1.convertOpds1ToOpds2_EntryToPublication(opds1Entry);
+    const opds2Pub = (0, converter_1.convertOpds1ToOpds2_EntryToPublication)(opds1Entry);
     t.is(opds2Pub.Metadata.Description, toMatch);
 });
-ava_1.default("OPDS1-2 description: summary + content(HTML)", async (t) => {
+(0, ava_1.default)("OPDS1-2 description: summary + content(HTML)", async (t) => {
     const xmlSrc = `
 <entry
     xmlns="http://www.w3.org/2005/Atom"
@@ -143,16 +143,16 @@ ava_1.default("OPDS1-2 description: summary + content(HTML)", async (t) => {
     const isEntry = xmlDom.documentElement.localName === "entry";
     t.true(isEntry);
     const opds1Entry = xml_js_mapper_1.XML.deserialize(xmlDom, opds_entry_1.Entry);
-    t.is(opds1Entry.Summary, converter_1.unescapeHtmlEntities(plainTextWithEscapedHtmlChars));
-    const toMatch = converter_1.unescapeHtmlEntities(escapedHtmlWithSomeDoubleEscapedHtmlChars);
+    t.is(opds1Entry.Summary, (0, converter_1.unescapeHtmlEntities)(plainTextWithEscapedHtmlChars));
+    const toMatch = (0, converter_1.unescapeHtmlEntities)(escapedHtmlWithSomeDoubleEscapedHtmlChars);
     t.is(opds1Entry.Content, toMatch);
-    const opds2Pub = converter_1.convertOpds1ToOpds2_EntryToPublication(opds1Entry);
+    const opds2Pub = (0, converter_1.convertOpds1ToOpds2_EntryToPublication)(opds1Entry);
     t.is(opds2Pub.Metadata.Description, toMatch);
 });
 async function fn() {
     return Promise.resolve("foo");
 }
-ava_1.default("dummy async test", async (t) => {
+(0, ava_1.default)("dummy async test", async (t) => {
     debug("test ASYNC");
     t.is(await fn(), "foo");
 });
@@ -252,58 +252,58 @@ async function parseCompareJSONs(url, json1, json2) {
                     }
                 });
             };
-            JsonUtils_1.traverseJsonObjects(json1, (obj) => {
+            (0, JsonUtils_1.traverseJsonObjects)(json1, (obj) => {
                 if (obj !== null) {
                     harmonizeDate(obj);
                 }
             });
-            JsonUtils_1.traverseJsonObjects(json1, (obj) => {
+            (0, JsonUtils_1.traverseJsonObjects)(json1, (obj) => {
                 if (obj !== null) {
                     harmonizeName(obj);
                 }
             });
-            JsonUtils_1.traverseJsonObjects(json1, (obj) => {
+            (0, JsonUtils_1.traverseJsonObjects)(json1, (obj) => {
                 if (obj !== null) {
                     harmonizeArrays(obj);
                 }
             });
-            JsonUtils_1.traverseJsonObjects(json1, (obj) => {
+            (0, JsonUtils_1.traverseJsonObjects)(json1, (obj) => {
                 if (obj !== null) {
                     harmonizeBitrateAndTrack(obj);
                 }
             });
-            JsonUtils_1.traverseJsonObjects(json1, (obj) => {
+            (0, JsonUtils_1.traverseJsonObjects)(json1, (obj) => {
                 if (obj !== null) {
                     harmonizeNulls(obj);
                 }
             });
-            JsonUtils_1.traverseJsonObjects(json2, (obj) => {
+            (0, JsonUtils_1.traverseJsonObjects)(json2, (obj) => {
                 if (obj !== null) {
                     harmonizeDate(obj);
                 }
             });
-            JsonUtils_1.traverseJsonObjects(json2, (obj) => {
+            (0, JsonUtils_1.traverseJsonObjects)(json2, (obj) => {
                 if (obj !== null) {
                     harmonizeName(obj);
                 }
             });
-            JsonUtils_1.traverseJsonObjects(json2, (obj) => {
+            (0, JsonUtils_1.traverseJsonObjects)(json2, (obj) => {
                 if (obj !== null) {
                     harmonizeArrays(obj);
                 }
             });
-            JsonUtils_1.traverseJsonObjects(json2, (obj) => {
+            (0, JsonUtils_1.traverseJsonObjects)(json2, (obj) => {
                 if (obj !== null) {
                     harmonizeBitrateAndTrack(obj);
                 }
             });
-            JsonUtils_1.traverseJsonObjects(json2, (obj) => {
+            (0, JsonUtils_1.traverseJsonObjects)(json2, (obj) => {
                 if (obj !== null) {
                     harmonizeNulls(obj);
                 }
             });
-            json1 = JsonUtils_1.sortObject(json1);
-            json2 = JsonUtils_1.sortObject(json2);
+            json1 = (0, JsonUtils_1.sortObject)(json1);
+            json2 = (0, JsonUtils_1.sortObject)(json2);
             const str1 = JSON.stringify(json1, null, 2);
             const str2 = JSON.stringify(json2, null, 2);
             if (str1 !== str2) {
@@ -324,7 +324,7 @@ async function parseCompareJSONs(url, json1, json2) {
         const webpubUrls = new Set();
         const audiowebpubUrls = new Set();
         const authenticationUrls = new Set();
-        JsonUtils_1.traverseJsonObjects(json1, (obj) => {
+        (0, JsonUtils_1.traverseJsonObjects)(json1, (obj) => {
             if (obj === null) {
                 return;
             }
@@ -420,10 +420,10 @@ async function opds2Test(url) {
                     !json1.catalogs &&
                     json1.metadata;
                 const isAuth = !isPublication && json1.authentication;
-                const opds2Feed = isPublication ? serializable_1.TaJsonDeserialize(json1, opds2_publication_1.OPDSPublication) :
-                    (isAuth ? serializable_1.TaJsonDeserialize(json1, opds2_authentication_doc_1.OPDSAuthenticationDoc) :
-                        serializable_1.TaJsonDeserialize(json1, opds2_1.OPDSFeed));
-                const json2 = serializable_1.TaJsonSerialize(opds2Feed);
+                const opds2Feed = isPublication ? (0, serializable_1.TaJsonDeserialize)(json1, opds2_publication_1.OPDSPublication) :
+                    (isAuth ? (0, serializable_1.TaJsonDeserialize)(json1, opds2_authentication_doc_1.OPDSAuthenticationDoc) :
+                        (0, serializable_1.TaJsonDeserialize)(json1, opds2_1.OPDSFeed));
+                const json2 = (0, serializable_1.TaJsonSerialize)(opds2Feed);
                 let res;
                 try {
                     res = await parseCompareJSONs(url, json1, json2);
@@ -482,14 +482,14 @@ async function webpubTest(url, alreadyDone) {
                 const json1 = JSON.parse(src);
                 let pub;
                 try {
-                    pub = serializable_1.TaJsonDeserialize(json1, publication_1.Publication);
+                    pub = (0, serializable_1.TaJsonDeserialize)(json1, publication_1.Publication);
                 }
                 catch (err) {
                     debug(err);
                     reject(err);
                     return;
                 }
-                const json2 = serializable_1.TaJsonSerialize(pub);
+                const json2 = (0, serializable_1.TaJsonSerialize)(pub);
                 try {
                     await parseCompareJSONs(url, json1, json2);
                 }
@@ -671,8 +671,8 @@ async function testUrlAlt(t, url, alreadyDone) {
                     return;
                 }
                 const opds1Feed = xml_js_mapper_1.XML.deserialize(xmlDom, opds_1.OPDS);
-                const opds2Feed = converter_1.convertOpds1ToOpds2(opds1Feed);
-                const opds2FeedJson = serializable_1.TaJsonSerialize(opds2Feed);
+                const opds2Feed = (0, converter_1.convertOpds1ToOpds2)(opds1Feed);
+                const opds2FeedJson = (0, serializable_1.TaJsonSerialize)(opds2Feed);
                 let urls;
                 try {
                     urls = await parseCompareJSONs(url, opds2FeedJson, opds2FeedJson);
@@ -724,27 +724,27 @@ async function runUrlTestAlt(t, url) {
     }
     t.true(await delay(false));
 }
-ava_1.default("OPDS2 HTTP (de)serialize roundtrip (recursive) 1", async (t) => {
+(0, ava_1.default)("OPDS2 HTTP (de)serialize roundtrip (recursive) 1", async (t) => {
     const url = "https://test.opds.io/2.0/home.json";
     await runUrlTest(t, url);
 });
-ava_1.default("OPDS2 HTTP (de)serialize roundtrip (recursive) 2", async (t) => {
+(0, ava_1.default)("OPDS2 HTTP (de)serialize roundtrip (recursive) 2", async (t) => {
     const url = "https://catalog.feedbooks.com/catalog/public_domain.json";
     await runUrlTest(t, url);
 });
-ava_1.default("OPDS2 HTTP (de)serialize roundtrip (recursive) CATALOGS", async (t) => {
+(0, ava_1.default)("OPDS2 HTTP (de)serialize roundtrip (recursive) CATALOGS", async (t) => {
     const url = "https://libraryregistry.librarysimplified.org/libraries";
     await runUrlTest(t, url);
 });
-ava_1.default("OPDS2 HTTP (de)serialize roundtrip (recursive) AUTHENTICATION", async (t) => {
+(0, ava_1.default)("OPDS2 HTTP (de)serialize roundtrip (recursive) AUTHENTICATION", async (t) => {
     const url = "http://acl.simplye-ca.org/CALMDA/authentication_document";
     await runUrlTest(t, url);
 });
-ava_1.default("OPDS1-2 HTTP convert (de)serialize roundtrip (recursive)", async (t) => {
+(0, ava_1.default)("OPDS1-2 HTTP convert (de)serialize roundtrip (recursive)", async (t) => {
     const url = "https://bookserver.archive.org/group/openaudiobooks";
     await runUrlTestAlt(t, url);
 });
-ava_1.default("test", async (t) => {
+(0, ava_1.default)("test", async (t) => {
     const url = "https://api.archivelab.org/books/bookconcord_preface_1202/opds_audio_manifest";
     const done = new Set([]);
     await webpubTest(url, done);
@@ -752,7 +752,7 @@ ava_1.default("test", async (t) => {
     debug(done.size);
     t.true(await delay(true));
 });
-ava_1.default("OPDS1-2 LCP passphrase convert (de)serialize roundtrip", async (t) => {
+(0, ava_1.default)("OPDS1-2 LCP passphrase convert (de)serialize roundtrip", async (t) => {
     const xmlSrc = `
 <entry
     xmlns="http://www.w3.org/2005/Atom"
@@ -772,9 +772,9 @@ ava_1.default("OPDS1-2 LCP passphrase convert (de)serialize roundtrip", async (t
     t.true(isEntry);
     const opds1Entry = xml_js_mapper_1.XML.deserialize(xmlDom, opds_entry_1.Entry);
     t.is(opds1Entry.Links[0].LcpHashedPassphrase, "FAKE_BASE64");
-    const opds2Pub = converter_1.convertOpds1ToOpds2_EntryToPublication(opds1Entry);
+    const opds2Pub = (0, converter_1.convertOpds1ToOpds2_EntryToPublication)(opds1Entry);
     t.is(opds2Pub.Links[0].Properties.AdditionalJSON.lcp_hashed_passphrase, "FAKE_BASE64");
-    const opds2PubJson = serializable_1.TaJsonSerialize(opds2Pub);
+    const opds2PubJson = (0, serializable_1.TaJsonSerialize)(opds2Pub);
     t.is(opds2PubJson.links[0].properties.lcp_hashed_passphrase, "FAKE_BASE64");
 });
 //# sourceMappingURL=test.js.map

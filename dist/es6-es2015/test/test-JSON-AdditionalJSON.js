@@ -6,13 +6,13 @@ const init_globals_1 = require("../src/opds/init-globals");
 const opds2_1 = require("../src/opds/opds2/opds2");
 const opds2_metadata_1 = require("../src/opds/opds2/opds2-metadata");
 const helpers_1 = require("./helpers");
-init_globals_1.initGlobalConverters_OPDS();
-init_globals_1.initGlobalConverters_GENERIC();
+(0, init_globals_1.initGlobalConverters_OPDS)();
+(0, init_globals_1.initGlobalConverters_GENERIC)();
 const titleStr1 = "str1";
 const titleStr2 = "str2";
 const titleStr3 = "str3";
 const n = 999;
-ava_1.default("JSON SERIALIZE: Metadata.AdditionalJSON", (t) => {
+(0, ava_1.default)("JSON SERIALIZE: Metadata.AdditionalJSON", (t) => {
     const md = new opds2_metadata_1.OPDSMetadata();
     md.Title = titleStr1;
     md.NumberOfItems = n;
@@ -31,23 +31,23 @@ ava_1.default("JSON SERIALIZE: Metadata.AdditionalJSON", (t) => {
     };
     const pub = new opds2_1.OPDSFeed();
     pub.Metadata = md;
-    helpers_1.inspect(pub);
-    const jsonPub = serializable_1.TaJsonSerialize(pub);
-    helpers_1.logJSON(jsonPub);
+    (0, helpers_1.inspect)(pub);
+    const jsonPub = (0, serializable_1.TaJsonSerialize)(pub);
+    (0, helpers_1.logJSON)(jsonPub);
     const json = jsonPub.metadata;
-    helpers_1.checkType_Number(t, json.numberOfItems);
+    (0, helpers_1.checkType_Number)(t, json.numberOfItems);
     t.is(json.numberOfItems, n);
-    helpers_1.checkType_Number(t, json.itemsPerPage);
+    (0, helpers_1.checkType_Number)(t, json.itemsPerPage);
     t.is(json.itemsPerPage, n);
-    helpers_1.checkType_Number(t, json.numberOfPages);
+    (0, helpers_1.checkType_Number)(t, json.numberOfPages);
     t.is(json.numberOfPages, n);
-    helpers_1.checkType_String(t, json.title);
+    (0, helpers_1.checkType_String)(t, json.title);
     t.is(json.title, titleStr1);
     if (!json.tizz) {
         t.fail();
         return;
     }
-    helpers_1.checkType_Object(t, json.tizz);
+    (0, helpers_1.checkType_Object)(t, json.tizz);
     t.is(json.tizz.sub1, true);
     if (json.tizz.sub2 || json.tizz.sub2 !== null) {
         t.fail();
@@ -57,20 +57,20 @@ ava_1.default("JSON SERIALIZE: Metadata.AdditionalJSON", (t) => {
         t.fail();
         return;
     }
-    helpers_1.checkType_Number(t, json.tizz.sub3.inner1);
+    (0, helpers_1.checkType_Number)(t, json.tizz.sub3.inner1);
     t.is(json.tizz.sub3.inner1, n);
     if (!json.tizz.sub3.inner2) {
         t.fail();
         return;
     }
-    helpers_1.checkType_Array(t, json.tizz.sub3.inner2);
+    (0, helpers_1.checkType_Array)(t, json.tizz.sub3.inner2);
     t.is(json.tizz.sub3.inner2[0], titleStr3);
     if (!json.tizz.sub3.inner1) {
         t.fail();
         return;
     }
 });
-ava_1.default("JSON DESERIALIZE: Metadata.AdditionalJSON", (t) => {
+(0, ava_1.default)("JSON DESERIALIZE: Metadata.AdditionalJSON", (t) => {
     const json = {
         itemsPerPage: n,
         numberOfItems: n,
@@ -89,17 +89,17 @@ ava_1.default("JSON DESERIALIZE: Metadata.AdditionalJSON", (t) => {
     const jsonPub = {
         metadata: json,
     };
-    helpers_1.logJSON(jsonPub);
-    const pub = serializable_1.TaJsonDeserialize(jsonPub, opds2_1.OPDSFeed);
+    (0, helpers_1.logJSON)(jsonPub);
+    const pub = (0, serializable_1.TaJsonDeserialize)(jsonPub, opds2_1.OPDSFeed);
     const md = pub.Metadata;
-    helpers_1.inspect(md);
-    helpers_1.checkType_Number(t, md.NumberOfItems);
+    (0, helpers_1.inspect)(md);
+    (0, helpers_1.checkType_Number)(t, md.NumberOfItems);
     t.is(md.NumberOfItems, n);
-    helpers_1.checkType_Number(t, md.ItemsPerPage);
+    (0, helpers_1.checkType_Number)(t, md.ItemsPerPage);
     t.is(md.ItemsPerPage, n);
-    helpers_1.checkType_Number(t, md.NumberOfPages);
+    (0, helpers_1.checkType_Number)(t, md.NumberOfPages);
     t.is(md.NumberOfPages, n);
-    helpers_1.checkType_String(t, md.Title);
+    (0, helpers_1.checkType_String)(t, md.Title);
     t.is(md.Title, titleStr1);
     if (!md.AdditionalJSON) {
         t.fail();
@@ -108,13 +108,13 @@ ava_1.default("JSON DESERIALIZE: Metadata.AdditionalJSON", (t) => {
     t.true(typeof md.AdditionalJSON.numberOfItems === "undefined");
     t.true(typeof md.AdditionalJSON.itemsPerPage === "undefined");
     t.true(typeof md.AdditionalJSON.numberOfPages === "undefined");
-    helpers_1.checkType_String(t, md.AdditionalJSON.title2);
+    (0, helpers_1.checkType_String)(t, md.AdditionalJSON.title2);
     t.is(md.AdditionalJSON.title2, titleStr2);
     if (!md.AdditionalJSON.tizz) {
         t.fail();
         return;
     }
-    helpers_1.checkType_Object(t, md.AdditionalJSON.tizz);
+    (0, helpers_1.checkType_Object)(t, md.AdditionalJSON.tizz);
     t.is(md.AdditionalJSON.tizz.sub1, true);
     if (md.AdditionalJSON.tizz.sub2 ||
         md.AdditionalJSON.tizz.sub2 !== null) {
@@ -125,13 +125,13 @@ ava_1.default("JSON DESERIALIZE: Metadata.AdditionalJSON", (t) => {
         t.fail();
         return;
     }
-    helpers_1.checkType_Number(t, md.AdditionalJSON.tizz.sub3.inner1);
+    (0, helpers_1.checkType_Number)(t, md.AdditionalJSON.tizz.sub3.inner1);
     t.is(md.AdditionalJSON.tizz.sub3.inner1, n);
     if (!md.AdditionalJSON.tizz.sub3.inner2) {
         t.fail();
         return;
     }
-    helpers_1.checkType_Array(t, md.AdditionalJSON.tizz.sub3.inner2);
+    (0, helpers_1.checkType_Array)(t, md.AdditionalJSON.tizz.sub3.inner2);
     t.is(md.AdditionalJSON.tizz.sub3.inner2[0], titleStr3);
     if (!md.AdditionalJSON.tizz.sub3.inner1) {
         t.fail();

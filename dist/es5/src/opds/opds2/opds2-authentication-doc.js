@@ -21,36 +21,36 @@ var OPDSAuthenticationDoc = (function () {
             console.log("OPDSAuthenticationDoc.Id is not set!");
         }
     };
-    tslib_1.__decorate([
-        ta_json_x_1.JsonProperty("title"),
-        tslib_1.__metadata("design:type", String)
+    (0, tslib_1.__decorate)([
+        (0, ta_json_x_1.JsonProperty)("title"),
+        (0, tslib_1.__metadata)("design:type", String)
     ], OPDSAuthenticationDoc.prototype, "Title", void 0);
-    tslib_1.__decorate([
-        ta_json_x_1.JsonProperty("id"),
-        tslib_1.__metadata("design:type", String)
+    (0, tslib_1.__decorate)([
+        (0, ta_json_x_1.JsonProperty)("id"),
+        (0, tslib_1.__metadata)("design:type", String)
     ], OPDSAuthenticationDoc.prototype, "Id", void 0);
-    tslib_1.__decorate([
-        ta_json_x_1.JsonProperty("description"),
-        tslib_1.__metadata("design:type", String)
+    (0, tslib_1.__decorate)([
+        (0, ta_json_x_1.JsonProperty)("description"),
+        (0, tslib_1.__metadata)("design:type", String)
     ], OPDSAuthenticationDoc.prototype, "Description", void 0);
-    tslib_1.__decorate([
-        ta_json_x_1.JsonProperty(LINKS_JSON_PROP),
-        ta_json_x_1.JsonElementType(opds2_link_1.OPDSLink),
-        tslib_1.__metadata("design:type", Array)
+    (0, tslib_1.__decorate)([
+        (0, ta_json_x_1.JsonProperty)(LINKS_JSON_PROP),
+        (0, ta_json_x_1.JsonElementType)(opds2_link_1.OPDSLink),
+        (0, tslib_1.__metadata)("design:type", Array)
     ], OPDSAuthenticationDoc.prototype, "Links", void 0);
-    tslib_1.__decorate([
-        ta_json_x_1.JsonProperty(AUTHENTICATION_JSON_PROP),
-        ta_json_x_1.JsonElementType(opds2_authentication_1.OPDSAuthentication),
-        tslib_1.__metadata("design:type", Array)
+    (0, tslib_1.__decorate)([
+        (0, ta_json_x_1.JsonProperty)(AUTHENTICATION_JSON_PROP),
+        (0, ta_json_x_1.JsonElementType)(opds2_authentication_1.OPDSAuthentication),
+        (0, tslib_1.__metadata)("design:type", Array)
     ], OPDSAuthenticationDoc.prototype, "Authentication", void 0);
-    tslib_1.__decorate([
-        ta_json_x_1.OnDeserialized(),
-        tslib_1.__metadata("design:type", Function),
-        tslib_1.__metadata("design:paramtypes", []),
-        tslib_1.__metadata("design:returntype", void 0)
+    (0, tslib_1.__decorate)([
+        (0, ta_json_x_1.OnDeserialized)(),
+        (0, tslib_1.__metadata)("design:type", Function),
+        (0, tslib_1.__metadata)("design:paramtypes", []),
+        (0, tslib_1.__metadata)("design:returntype", void 0)
     ], OPDSAuthenticationDoc.prototype, "_OnDeserialized", null);
-    OPDSAuthenticationDoc = tslib_1.__decorate([
-        ta_json_x_1.JsonObject()
+    OPDSAuthenticationDoc = (0, tslib_1.__decorate)([
+        (0, ta_json_x_1.JsonObject)()
     ], OPDSAuthenticationDoc);
     return OPDSAuthenticationDoc;
 }());

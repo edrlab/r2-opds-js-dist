@@ -1,10 +1,10 @@
 {
-  "node": "14.17.5",
-  "npm": "6.14.14",
-  "short": "19a6a91",
-  "long": "19a6a916a9ce1d93f118c12dbe93cfb3333d75e4",
+  "node": "14.18.1",
+  "npm": "6.14.15",
+  "short": "33b095c",
+  "long": "33b095c421d1c4f57fad2da42bf9f5b56182a0c5",
   "branch": "develop",
-  "date": "2021-08-26T09:57:13.000Z",
-  "urlHistory": "https://github.com/readium/r2-opds-js/commits/19a6a916a9ce1d93f118c12dbe93cfb3333d75e4",
-  "urlDiff": "https://github.com/readium/r2-opds-js/compare/19a6a916a9ce1d93f118c12dbe93cfb3333d75e4...develop"
+  "date": "2021-10-20T15:08:20.000Z",
+  "urlHistory": "https://github.com/readium/r2-opds-js/commits/33b095c421d1c4f57fad2da42bf9f5b56182a0c5",
+  "urlDiff": "https://github.com/readium/r2-opds-js/compare/33b095c421d1c4f57fad2da42bf9f5b56182a0c5...develop"
 }

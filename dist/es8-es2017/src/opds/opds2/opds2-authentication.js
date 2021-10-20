@@ -13,27 +13,27 @@ let OPDSAuthentication = class OPDSAuthentication {
         }
     }
 };
-tslib_1.__decorate([
-    ta_json_x_1.JsonProperty("type"),
-    tslib_1.__metadata("design:type", String)
+(0, tslib_1.__decorate)([
+    (0, ta_json_x_1.JsonProperty)("type"),
+    (0, tslib_1.__metadata)("design:type", String)
 ], OPDSAuthentication.prototype, "Type", void 0);
-tslib_1.__decorate([
-    ta_json_x_1.JsonProperty(LINKS_JSON_PROP),
-    ta_json_x_1.JsonElementType(opds2_link_1.OPDSLink),
-    tslib_1.__metadata("design:type", Array)
+(0, tslib_1.__decorate)([
+    (0, ta_json_x_1.JsonProperty)(LINKS_JSON_PROP),
+    (0, ta_json_x_1.JsonElementType)(opds2_link_1.OPDSLink),
+    (0, tslib_1.__metadata)("design:type", Array)
 ], OPDSAuthentication.prototype, "Links", void 0);
-tslib_1.__decorate([
-    ta_json_x_1.JsonProperty("labels"),
-    tslib_1.__metadata("design:type", opds2_authentication_labels_1.OPDSAuthenticationLabels)
+(0, tslib_1.__decorate)([
+    (0, ta_json_x_1.JsonProperty)("labels"),
+    (0, tslib_1.__metadata)("design:type", opds2_authentication_labels_1.OPDSAuthenticationLabels)
 ], OPDSAuthentication.prototype, "Labels", void 0);
-tslib_1.__decorate([
-    ta_json_x_1.OnDeserialized(),
-    tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", []),
-    tslib_1.__metadata("design:returntype", void 0)
+(0, tslib_1.__decorate)([
+    (0, ta_json_x_1.OnDeserialized)(),
+    (0, tslib_1.__metadata)("design:type", Function),
+    (0, tslib_1.__metadata)("design:paramtypes", []),
+    (0, tslib_1.__metadata)("design:returntype", void 0)
 ], OPDSAuthentication.prototype, "_OnDeserialized", null);
-OPDSAuthentication = tslib_1.__decorate([
-    ta_json_x_1.JsonObject()
+OPDSAuthentication = (0, tslib_1.__decorate)([
+    (0, ta_json_x_1.JsonObject)()
 ], OPDSAuthentication);
 exports.OPDSAuthentication = OPDSAuthentication;
 //# sourceMappingURL=opds2-authentication.js.map

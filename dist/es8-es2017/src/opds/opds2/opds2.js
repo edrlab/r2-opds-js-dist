@@ -251,54 +251,54 @@ let OPDSFeed = class OPDSFeed {
         }
     }
 };
-tslib_1.__decorate([
-    ta_json_x_1.JsonProperty("@context"),
-    ta_json_x_1.JsonElementType(String),
-    ta_json_x_1.JsonConverter(ta_json_string_converter_1.JsonStringConverter),
-    tslib_1.__metadata("design:type", Array)
+(0, tslib_1.__decorate)([
+    (0, ta_json_x_1.JsonProperty)("@context"),
+    (0, ta_json_x_1.JsonElementType)(String),
+    (0, ta_json_x_1.JsonConverter)(ta_json_string_converter_1.JsonStringConverter),
+    (0, tslib_1.__metadata)("design:type", Array)
 ], OPDSFeed.prototype, "Context", void 0);
-tslib_1.__decorate([
-    ta_json_x_1.JsonProperty(METADATA_JSON_PROP),
-    tslib_1.__metadata("design:type", opds2_metadata_1.OPDSMetadata)
+(0, tslib_1.__decorate)([
+    (0, ta_json_x_1.JsonProperty)(METADATA_JSON_PROP),
+    (0, tslib_1.__metadata)("design:type", opds2_metadata_1.OPDSMetadata)
 ], OPDSFeed.prototype, "Metadata", void 0);
-tslib_1.__decorate([
-    ta_json_x_1.JsonProperty(LINKS_JSON_PROP),
-    ta_json_x_1.JsonElementType(opds2_link_1.OPDSLink),
-    tslib_1.__metadata("design:type", Array)
+(0, tslib_1.__decorate)([
+    (0, ta_json_x_1.JsonProperty)(LINKS_JSON_PROP),
+    (0, ta_json_x_1.JsonElementType)(opds2_link_1.OPDSLink),
+    (0, tslib_1.__metadata)("design:type", Array)
 ], OPDSFeed.prototype, "Links", void 0);
-tslib_1.__decorate([
-    ta_json_x_1.JsonProperty(PUBLICATIONS_JSON_PROP),
-    ta_json_x_1.JsonElementType(opds2_publication_1.OPDSPublication),
-    tslib_1.__metadata("design:type", Array)
+(0, tslib_1.__decorate)([
+    (0, ta_json_x_1.JsonProperty)(PUBLICATIONS_JSON_PROP),
+    (0, ta_json_x_1.JsonElementType)(opds2_publication_1.OPDSPublication),
+    (0, tslib_1.__metadata)("design:type", Array)
 ], OPDSFeed.prototype, "Publications", void 0);
-tslib_1.__decorate([
-    ta_json_x_1.JsonProperty(NAVIGATION_JSON_PROP),
-    ta_json_x_1.JsonElementType(opds2_link_1.OPDSLink),
-    tslib_1.__metadata("design:type", Array)
+(0, tslib_1.__decorate)([
+    (0, ta_json_x_1.JsonProperty)(NAVIGATION_JSON_PROP),
+    (0, ta_json_x_1.JsonElementType)(opds2_link_1.OPDSLink),
+    (0, tslib_1.__metadata)("design:type", Array)
 ], OPDSFeed.prototype, "Navigation", void 0);
-tslib_1.__decorate([
-    ta_json_x_1.JsonProperty(FACETS_JSON_PROP),
-    ta_json_x_1.JsonElementType(opds2_facet_1.OPDSFacet),
-    tslib_1.__metadata("design:type", Array)
+(0, tslib_1.__decorate)([
+    (0, ta_json_x_1.JsonProperty)(FACETS_JSON_PROP),
+    (0, ta_json_x_1.JsonElementType)(opds2_facet_1.OPDSFacet),
+    (0, tslib_1.__metadata)("design:type", Array)
 ], OPDSFeed.prototype, "Facets", void 0);
-tslib_1.__decorate([
-    ta_json_x_1.JsonProperty(GROUPS_JSON_PROP),
-    ta_json_x_1.JsonElementType(opds2_group_1.OPDSGroup),
-    tslib_1.__metadata("design:type", Array)
+(0, tslib_1.__decorate)([
+    (0, ta_json_x_1.JsonProperty)(GROUPS_JSON_PROP),
+    (0, ta_json_x_1.JsonElementType)(opds2_group_1.OPDSGroup),
+    (0, tslib_1.__metadata)("design:type", Array)
 ], OPDSFeed.prototype, "Groups", void 0);
-tslib_1.__decorate([
-    ta_json_x_1.JsonProperty(CATALOGS_JSON_PROP),
-    ta_json_x_1.JsonElementType(opds2_publication_1.OPDSPublication),
-    tslib_1.__metadata("design:type", Array)
+(0, tslib_1.__decorate)([
+    (0, ta_json_x_1.JsonProperty)(CATALOGS_JSON_PROP),
+    (0, ta_json_x_1.JsonElementType)(opds2_publication_1.OPDSPublication),
+    (0, tslib_1.__metadata)("design:type", Array)
 ], OPDSFeed.prototype, "Catalogs", void 0);
-tslib_1.__decorate([
-    ta_json_x_1.OnDeserialized(),
-    tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", []),
-    tslib_1.__metadata("design:returntype", void 0)
+(0, tslib_1.__decorate)([
+    (0, ta_json_x_1.OnDeserialized)(),
+    (0, tslib_1.__metadata)("design:type", Function),
+    (0, tslib_1.__metadata)("design:paramtypes", []),
+    (0, tslib_1.__metadata)("design:returntype", void 0)
 ], OPDSFeed.prototype, "_OnDeserialized", null);
-OPDSFeed = tslib_1.__decorate([
-    ta_json_x_1.JsonObject()
+OPDSFeed = (0, tslib_1.__decorate)([
+    (0, ta_json_x_1.JsonObject)()
 ], OPDSFeed);
 exports.OPDSFeed = OPDSFeed;
 //# sourceMappingURL=opds2.js.map

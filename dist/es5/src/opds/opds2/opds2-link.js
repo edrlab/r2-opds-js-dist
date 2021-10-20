@@ -18,16 +18,16 @@ var OPDSLinkRelEnum;
 })(OPDSLinkRelEnum = exports.OPDSLinkRelEnum || (exports.OPDSLinkRelEnum = {}));
 var PROPERTIES_JSON_PROP = "properties";
 var OPDSLink = (function (_super) {
-    tslib_1.__extends(OPDSLink, _super);
+    (0, tslib_1.__extends)(OPDSLink, _super);
     function OPDSLink() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    tslib_1.__decorate([
-        ta_json_x_1.JsonProperty(PROPERTIES_JSON_PROP),
-        tslib_1.__metadata("design:type", opds2_properties_1.OPDSProperties)
+    (0, tslib_1.__decorate)([
+        (0, ta_json_x_1.JsonProperty)(PROPERTIES_JSON_PROP),
+        (0, tslib_1.__metadata)("design:type", opds2_properties_1.OPDSProperties)
     ], OPDSLink.prototype, "Properties", void 0);
-    OPDSLink = tslib_1.__decorate([
-        ta_json_x_1.JsonObject()
+    OPDSLink = (0, tslib_1.__decorate)([
+        (0, ta_json_x_1.JsonObject)()
     ], OPDSLink);
     return OPDSLink;
 }(publication_link_1.Link));

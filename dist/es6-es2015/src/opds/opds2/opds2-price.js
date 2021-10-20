@@ -195,22 +195,22 @@ let OPDSPrice = class OPDSPrice {
         }
     }
 };
-tslib_1.__decorate([
-    ta_json_x_1.JsonProperty("currency"),
-    tslib_1.__metadata("design:type", String)
+(0, tslib_1.__decorate)([
+    (0, ta_json_x_1.JsonProperty)("currency"),
+    (0, tslib_1.__metadata)("design:type", String)
 ], OPDSPrice.prototype, "Currency", void 0);
-tslib_1.__decorate([
-    ta_json_x_1.JsonProperty("value"),
-    tslib_1.__metadata("design:type", Number)
+(0, tslib_1.__decorate)([
+    (0, ta_json_x_1.JsonProperty)("value"),
+    (0, tslib_1.__metadata)("design:type", Number)
 ], OPDSPrice.prototype, "Value", void 0);
-tslib_1.__decorate([
-    ta_json_x_1.OnDeserialized(),
-    tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", []),
-    tslib_1.__metadata("design:returntype", void 0)
+(0, tslib_1.__decorate)([
+    (0, ta_json_x_1.OnDeserialized)(),
+    (0, tslib_1.__metadata)("design:type", Function),
+    (0, tslib_1.__metadata)("design:paramtypes", []),
+    (0, tslib_1.__metadata)("design:returntype", void 0)
 ], OPDSPrice.prototype, "_OnDeserialized", null);
-OPDSPrice = tslib_1.__decorate([
-    ta_json_x_1.JsonObject()
+OPDSPrice = (0, tslib_1.__decorate)([
+    (0, ta_json_x_1.JsonObject)()
 ], OPDSPrice);
 exports.OPDSPrice = OPDSPrice;
 //# sourceMappingURL=opds2-price.js.map
