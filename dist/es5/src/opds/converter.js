@@ -218,11 +218,22 @@ exports.convertOpds1ToOpds2_EntryToPublication = convertOpds1ToOpds2_EntryToPubl
 function convertOpds1ToOpds2_EntryToLink(entry) {
     var linkNav = new opds2_link_1.OPDSLink();
     if (entry.Title) {
-        linkNav.Title = processTypedString(entry.Title, entry.TitleType);
+        var t = processTypedString(entry.Title, entry.TitleType);
+        if (t) {
+            linkNav.Title = t;
+        }
     }
-    var t = convertContentSummary(entry);
-    if (t) {
-        linkNav.Title = t;
+    if (entry.Summary) {
+        var s = processTypedString(entry.Summary, entry.SummaryType);
+        if (s) {
+            if (!linkNav.Properties) {
+                linkNav.Properties = new opds2_properties_1.OPDSProperties();
+            }
+            if (!linkNav.Properties.AdditionalJSON) {
+                linkNav.Properties.AdditionalJSON = {};
+            }
+            linkNav.Properties.AdditionalJSON.title_summary = s;
+        }
     }
     if (entry.Links) {
         var atomLink = entry.Links.find(function (l) {

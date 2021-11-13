@@ -10,7 +10,7 @@ var opds2_metadata_1 = require("../src/opds/opds2/opds2-metadata");
 var helpers_1 = require("./helpers");
 (0, init_globals_1.initGlobalConverters_OPDS)();
 (0, init_globals_1.initGlobalConverters_GENERIC)();
-var num = 12345.67890;
+var num = 12345.6789;
 var numSTR = "12345.6789";
 (0, ava_1.default)("JSON SERIALIZE: Metadata.ItemsPerPage => Number", function (t) {
     var md = new opds2_metadata_1.OPDSMetadata();

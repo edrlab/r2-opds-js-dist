@@ -116,8 +116,7 @@ const n = 999;
     }
     (0, helpers_1.checkType_Object)(t, md.AdditionalJSON.tizz);
     t.is(md.AdditionalJSON.tizz.sub1, true);
-    if (md.AdditionalJSON.tizz.sub2 ||
-        md.AdditionalJSON.tizz.sub2 !== null) {
+    if (md.AdditionalJSON.tizz.sub2 || md.AdditionalJSON.tizz.sub2 !== null) {
         t.fail();
         return;
     }

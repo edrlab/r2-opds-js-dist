@@ -200,7 +200,24 @@ function parseCompareJSONs(url, json1, json2) {
                             });
                         };
                         var harmonizeName_1 = function (obj) {
-                            ["subject", "collection", "series", "author", "translator", "editor", "artist", "illustrator", "letterer", "penciler", "colorist", "inker", "narrator", "contributor", "publisher", "imprint"].forEach(function (term) {
+                            [
+                                "subject",
+                                "collection",
+                                "series",
+                                "author",
+                                "translator",
+                                "editor",
+                                "artist",
+                                "illustrator",
+                                "letterer",
+                                "penciler",
+                                "colorist",
+                                "inker",
+                                "narrator",
+                                "contributor",
+                                "publisher",
+                                "imprint",
+                            ].forEach(function (term) {
                                 if (obj[term]) {
                                     var isArray = obj[term] instanceof Array;
                                     var arr = isArray ? obj[term] : [obj[term]];
@@ -318,8 +335,7 @@ function parseCompareJSONs(url, json1, json2) {
                         var isPub = obj.type === "application/opds-publication+json";
                         var isWebPubManifestAudio = obj.type === "application/audiobook+json";
                         var isAuth = obj.type === "application/vnd.opds.authentication.v1.0+json";
-                        var isWebPubManifest = obj.type === "application/webpub+json" &&
-                            obj.href && obj.href.indexOf(".epub") < 0;
+                        var isWebPubManifest = obj.type === "application/webpub+json" && obj.href && obj.href.indexOf(".epub") < 0;
                         if (obj.href && (isFeed || isPub || isWebPubManifest || isWebPubManifestAudio || isAuth)) {
                             var u = new url_1.URL(obj.href, thisUrl);
                             var uStr = u.toString();
@@ -363,7 +379,8 @@ function opds2Test(url) {
             return [2, new Promise(function (resolve, reject) {
                     debug(url);
                     var proto = /^https:\/\//.test(url) ? https : http;
-                    proto.get(url, function (response) {
+                    proto
+                        .get(url, function (response) {
                         var str;
                         var buffs;
                         if (response.statusCode && (response.statusCode < 200 || response.statusCode >= 300)) {
@@ -408,15 +425,14 @@ function opds2Test(url) {
                                             return [2];
                                         }
                                         json1 = JSON.parse(src);
-                                        isPublication = !json1.publications &&
-                                            !json1.navigation &&
-                                            !json1.groups &&
-                                            !json1.catalogs &&
-                                            json1.metadata;
+                                        isPublication = !json1.publications && !json1.navigation && !json1.groups && !json1.catalogs && json1.metadata;
                                         isAuth = !isPublication && json1.authentication;
-                                        opds2Feed = isPublication ? (0, serializable_1.TaJsonDeserialize)(json1, opds2_publication_1.OPDSPublication) :
-                                            (isAuth ? (0, serializable_1.TaJsonDeserialize)(json1, opds2_authentication_doc_1.OPDSAuthenticationDoc) :
-                                                (0, serializable_1.TaJsonDeserialize)(json1, opds2_1.OPDSFeed));
+                                        opds2Feed = isPublication
+                                            ? (0, serializable_1.TaJsonDeserialize)(json1, opds2_publication_1.OPDSPublication)
+                                            :
+                                                isAuth
+                                                    ? (0, serializable_1.TaJsonDeserialize)(json1, opds2_authentication_doc_1.OPDSAuthenticationDoc)
+                                                    : (0, serializable_1.TaJsonDeserialize)(json1, opds2_1.OPDSFeed);
                                         json2 = (0, serializable_1.TaJsonSerialize)(opds2Feed);
                                         _a.label = 1;
                                     case 1:
@@ -436,7 +452,8 @@ function opds2Test(url) {
                                 }
                             });
                         }); });
-                    }).on("error", function (err) {
+                    })
+                        .on("error", function (err) {
                         reject(err);
                     });
                 })];
@@ -451,7 +468,8 @@ function webpubTest(url, alreadyDone) {
             return [2, new Promise(function (resolve, reject) {
                     debug(url);
                     var proto = /^https:\/\//.test(url) ? https : http;
-                    proto.get(url, function (response) {
+                    proto
+                        .get(url, function (response) {
                         var str;
                         var buffs;
                         if (response.statusCode && (response.statusCode < 200 || response.statusCode >= 300)) {
@@ -516,7 +534,8 @@ function webpubTest(url, alreadyDone) {
                                 }
                             });
                         }); });
-                    }).on("error", function (err) {
+                    })
+                        .on("error", function (err) {
                         reject(err);
                     });
                 })];
@@ -741,7 +760,8 @@ function testUrlAlt(t, url, alreadyDone) {
                     alreadyDone.add(url);
                     promise = new Promise(function (resolve, reject) {
                         var proto = /^https:\/\//.test(url) ? https : http;
-                        proto.get(url, function (response) { return (0, tslib_1.__awaiter)(_this, void 0, void 0, function () {
+                        proto
+                            .get(url, function (response) { return (0, tslib_1.__awaiter)(_this, void 0, void 0, function () {
                             var str, buffs;
                             var _this = this;
                             return (0, tslib_1.__generator)(this, function (_a) {
@@ -820,7 +840,8 @@ function testUrlAlt(t, url, alreadyDone) {
                                 }); });
                                 return [2];
                             });
-                        }); }).on("error", function (err) { return (0, tslib_1.__awaiter)(_this, void 0, void 0, function () {
+                        }); })
+                            .on("error", function (err) { return (0, tslib_1.__awaiter)(_this, void 0, void 0, function () {
                             return (0, tslib_1.__generator)(this, function (_a) {
                                 reject(err);
                                 return [2];

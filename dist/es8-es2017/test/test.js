@@ -214,7 +214,24 @@ async function parseCompareJSONs(url, json1, json2) {
                 });
             };
             const harmonizeName = (obj) => {
-                ["subject", "collection", "series", "author", "translator", "editor", "artist", "illustrator", "letterer", "penciler", "colorist", "inker", "narrator", "contributor", "publisher", "imprint"].forEach((term) => {
+                [
+                    "subject",
+                    "collection",
+                    "series",
+                    "author",
+                    "translator",
+                    "editor",
+                    "artist",
+                    "illustrator",
+                    "letterer",
+                    "penciler",
+                    "colorist",
+                    "inker",
+                    "narrator",
+                    "contributor",
+                    "publisher",
+                    "imprint",
+                ].forEach((term) => {
                     if (obj[term]) {
                         const isArray = obj[term] instanceof Array;
                         const arr = isArray ? obj[term] : [obj[term]];
@@ -332,8 +349,7 @@ async function parseCompareJSONs(url, json1, json2) {
             const isPub = obj.type === "application/opds-publication+json";
             const isWebPubManifestAudio = obj.type === "application/audiobook+json";
             const isAuth = obj.type === "application/vnd.opds.authentication.v1.0+json";
-            const isWebPubManifest = obj.type === "application/webpub+json" &&
-                obj.href && obj.href.indexOf(".epub") < 0;
+            const isWebPubManifest = obj.type === "application/webpub+json" && obj.href && obj.href.indexOf(".epub") < 0;
             if (obj.href && (isFeed || isPub || isWebPubManifest || isWebPubManifestAudio || isAuth)) {
                 const u = new url_1.URL(obj.href, thisUrl);
                 const uStr = u.toString();
@@ -372,7 +388,8 @@ async function opds2Test(url) {
     return new Promise((resolve, reject) => {
         debug(url);
         const proto = /^https:\/\//.test(url) ? https : http;
-        proto.get(url, (response) => {
+        proto
+            .get(url, (response) => {
             let str;
             let buffs;
             if (response.statusCode && (response.statusCode < 200 || response.statusCode >= 300)) {
@@ -414,15 +431,14 @@ async function opds2Test(url) {
                     return;
                 }
                 const json1 = JSON.parse(src);
-                const isPublication = !json1.publications &&
-                    !json1.navigation &&
-                    !json1.groups &&
-                    !json1.catalogs &&
-                    json1.metadata;
+                const isPublication = !json1.publications && !json1.navigation && !json1.groups && !json1.catalogs && json1.metadata;
                 const isAuth = !isPublication && json1.authentication;
-                const opds2Feed = isPublication ? (0, serializable_1.TaJsonDeserialize)(json1, opds2_publication_1.OPDSPublication) :
-                    (isAuth ? (0, serializable_1.TaJsonDeserialize)(json1, opds2_authentication_doc_1.OPDSAuthenticationDoc) :
-                        (0, serializable_1.TaJsonDeserialize)(json1, opds2_1.OPDSFeed));
+                const opds2Feed = isPublication
+                    ? (0, serializable_1.TaJsonDeserialize)(json1, opds2_publication_1.OPDSPublication)
+                    :
+                        isAuth
+                            ? (0, serializable_1.TaJsonDeserialize)(json1, opds2_authentication_doc_1.OPDSAuthenticationDoc)
+                            : (0, serializable_1.TaJsonDeserialize)(json1, opds2_1.OPDSFeed);
                 const json2 = (0, serializable_1.TaJsonSerialize)(opds2Feed);
                 let res;
                 try {
@@ -435,7 +451,8 @@ async function opds2Test(url) {
                 }
                 resolve(res);
             });
-        }).on("error", (err) => {
+        })
+            .on("error", (err) => {
             reject(err);
         });
     });
@@ -445,7 +462,8 @@ async function webpubTest(url, alreadyDone) {
     return new Promise((resolve, reject) => {
         debug(url);
         const proto = /^https:\/\//.test(url) ? https : http;
-        proto.get(url, (response) => {
+        proto
+            .get(url, (response) => {
             let str;
             let buffs;
             if (response.statusCode && (response.statusCode < 200 || response.statusCode >= 300)) {
@@ -500,7 +518,8 @@ async function webpubTest(url, alreadyDone) {
                 }
                 resolve(true);
             });
-        }).on("error", (err) => {
+        })
+            .on("error", (err) => {
             reject(err);
         });
     });
@@ -624,7 +643,8 @@ async function testUrlAlt(t, url, alreadyDone) {
     alreadyDone.add(url);
     const promise = new Promise((resolve, reject) => {
         const proto = /^https:\/\//.test(url) ? https : http;
-        proto.get(url, async (response) => {
+        proto
+            .get(url, async (response) => {
             let str;
             let buffs;
             if (response.statusCode && (response.statusCode < 200 || response.statusCode >= 300)) {
@@ -689,7 +709,8 @@ async function testUrlAlt(t, url, alreadyDone) {
                 resolve(true);
                 return;
             });
-        }).on("error", async (err) => {
+        })
+            .on("error", async (err) => {
             reject(err);
             return;
         });
