@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const ava_1 = require("ava");
-const xmldom = require("xmldom");
+const xmldom = require("@xmldom/xmldom");
 const serializable_1 = require("r2-lcp-js/dist/es7-es2016/src/serializable");
 const xml_js_mapper_1 = require("r2-utils-js/dist/es7-es2016/src/_utils/xml-js-mapper");
 const init_globals_1 = require("../src/opds/init-globals");

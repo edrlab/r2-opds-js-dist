@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var ava_1 = require("ava");
-var xmldom = require("xmldom");
+var xmldom = require("@xmldom/xmldom");
 var serializable_1 = require("r2-lcp-js/dist/es5/src/serializable");
 var xml_js_mapper_1 = require("r2-utils-js/dist/es5/src/_utils/xml-js-mapper");
 var init_globals_1 = require("../src/opds/init-globals");
@@ -32,7 +32,7 @@ var numSTR = "12345.6789";
     (0, helpers_1.checkNumber)(t, md.ItemsPerPage, num);
 });
 (0, ava_1.default)("XML DESERIALIZE: OPDS opensearch:itemsPerPage => Number", function (t) {
-    var xmlStr = "<opds xmlns=\"http://opds-spec.org/2010/catalog\" xmlns:opensearch=\"http://a9.com/-/spec/opensearch/1.1/\">\n            <opensearch:itemsPerPage>" + numSTR + "</opensearch:itemsPerPage>\n        </opds>";
+    var xmlStr = "<opds xmlns=\"http://opds-spec.org/2010/catalog\" xmlns:opensearch=\"http://a9.com/-/spec/opensearch/1.1/\">\n            <opensearch:itemsPerPage>".concat(numSTR, "</opensearch:itemsPerPage>\n        </opds>");
     console.log(xmlStr);
     var xml = new xmldom.DOMParser().parseFromString(xmlStr);
     var opds = xml_js_mapper_1.XML.deserialize(xml, opds_1.OPDS);

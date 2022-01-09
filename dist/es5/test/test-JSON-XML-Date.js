@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var ava_1 = require("ava");
-var xmldom = require("xmldom");
+var xmldom = require("@xmldom/xmldom");
 var serializable_1 = require("r2-lcp-js/dist/es5/src/serializable");
 var metadata_1 = require("r2-shared-js/dist/es5/src/models/metadata");
 var xml_js_mapper_1 = require("r2-utils-js/dist/es5/src/_utils/xml-js-mapper");
@@ -33,7 +33,7 @@ var dateSTR = "2000-12-31T23:59:59.999Z";
     (0, helpers_1.checkDate)(t, md.Modified, date);
 });
 (0, ava_1.default)("XML DESERIALIZE: OPDS Entry.Updated => Date", function (t) {
-    var xmlStr = "<entry xmlns=\"http://opds-spec.org/2010/catalog\" xmlns:atom=\"http://www.w3.org/2005/Atom\">\n            <atom:updated>" + dateSTR + "</atom:updated>\n        </entry>";
+    var xmlStr = "<entry xmlns=\"http://opds-spec.org/2010/catalog\" xmlns:atom=\"http://www.w3.org/2005/Atom\">\n            <atom:updated>".concat(dateSTR, "</atom:updated>\n        </entry>");
     console.log(xmlStr);
     var xml = new xmldom.DOMParser().parseFromString(xmlStr);
     var md = xml_js_mapper_1.XML.deserialize(xml, opds_entry_1.Entry);

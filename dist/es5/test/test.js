@@ -7,7 +7,7 @@ var http = require("http");
 var https = require("https");
 var jsonDiff = require("json-diff");
 var url_1 = require("url");
-var xmldom = require("xmldom");
+var xmldom = require("@xmldom/xmldom");
 var serializable_1 = require("r2-lcp-js/dist/es5/src/serializable");
 var publication_1 = require("r2-shared-js/dist/es5/src/models/publication");
 var JsonUtils_1 = require("r2-utils-js/dist/es5/src/_utils/JsonUtils");
@@ -30,7 +30,7 @@ var escapedHtmlWithSomeDoubleEscapedHtmlChars = "\n&lt;div&gt;\n    Hello &amp;a
 (0, ava_1.default)("OPDS1-2 description: summary + content(XHTML NAMESPACE PREFIX)", function (t) { return (0, tslib_1.__awaiter)(void 0, void 0, void 0, function () {
     var xmlSrc, xmlDom, isEntry, opds1Entry, toMatch, opds2Pub;
     return (0, tslib_1.__generator)(this, function (_a) {
-        xmlSrc = "\n<entry\n    xmlns=\"http://www.w3.org/2005/Atom\"\n    xmlns:xhtm=\"http://www.w3.org/1999/xhtml\">\n<summary>" + plainTextWithEscapedHtmlChars + "</summary>\n<content type=\"xhtml\">" + xhtmlWithSomeEscapedHtmlCharsPrefixedNamespace + "</content>\n</entry>\n    ";
+        xmlSrc = "\n<entry\n    xmlns=\"http://www.w3.org/2005/Atom\"\n    xmlns:xhtm=\"http://www.w3.org/1999/xhtml\">\n<summary>".concat(plainTextWithEscapedHtmlChars, "</summary>\n<content type=\"xhtml\">").concat(xhtmlWithSomeEscapedHtmlCharsPrefixedNamespace, "</content>\n</entry>\n    ");
         xmlDom = new xmldom.DOMParser().parseFromString(xmlSrc);
         isEntry = xmlDom.documentElement.localName === "entry";
         t.true(isEntry);
@@ -49,7 +49,7 @@ var escapedHtmlWithSomeDoubleEscapedHtmlChars = "\n&lt;div&gt;\n    Hello &amp;a
 (0, ava_1.default)("OPDS1-2 description: summary + content(XHTML NAMESPACE NO PREFIX)", function (t) { return (0, tslib_1.__awaiter)(void 0, void 0, void 0, function () {
     var xmlSrc, xmlDom, isEntry, opds1Entry, toMatch, opds2Pub;
     return (0, tslib_1.__generator)(this, function (_a) {
-        xmlSrc = "\n<entry\n    xmlns=\"http://www.w3.org/2005/Atom\"\n    xmlns:xhtm=\"http://www.w3.org/1999/xhtml\">\n<summary>" + plainTextWithEscapedHtmlChars + "</summary>\n<content type=\"xhtml\">" + xhtmlWithSomeEscapedHtmlCharsNoPrefixedNamespace + "</content>\n</entry>\n    ";
+        xmlSrc = "\n<entry\n    xmlns=\"http://www.w3.org/2005/Atom\"\n    xmlns:xhtm=\"http://www.w3.org/1999/xhtml\">\n<summary>".concat(plainTextWithEscapedHtmlChars, "</summary>\n<content type=\"xhtml\">").concat(xhtmlWithSomeEscapedHtmlCharsNoPrefixedNamespace, "</content>\n</entry>\n    ");
         xmlDom = new xmldom.DOMParser().parseFromString(xmlSrc);
         isEntry = xmlDom.documentElement.localName === "entry";
         t.true(isEntry);
@@ -68,7 +68,7 @@ var escapedHtmlWithSomeDoubleEscapedHtmlChars = "\n&lt;div&gt;\n    Hello &amp;a
 (0, ava_1.default)("OPDS1-2 description: summary + content(XML DEFAULT ATOM NAMESPACE)", function (t) { return (0, tslib_1.__awaiter)(void 0, void 0, void 0, function () {
     var xmlSrc, xmlDom, isEntry, opds1Entry, toMatch, opds2Pub;
     return (0, tslib_1.__generator)(this, function (_a) {
-        xmlSrc = "\n<entry\n    xmlns=\"http://www.w3.org/2005/Atom\"\n    xmlns:xhtm=\"http://www.w3.org/1999/xhtml\">\n<summary>" + plainTextWithEscapedHtmlChars + "</summary>\n<content type=\"xhtml\">" + xmlWithSomeEscapedHtmlCharsAtomDefaultNamespace + "</content>\n</entry>\n    ";
+        xmlSrc = "\n<entry\n    xmlns=\"http://www.w3.org/2005/Atom\"\n    xmlns:xhtm=\"http://www.w3.org/1999/xhtml\">\n<summary>".concat(plainTextWithEscapedHtmlChars, "</summary>\n<content type=\"xhtml\">").concat(xmlWithSomeEscapedHtmlCharsAtomDefaultNamespace, "</content>\n</entry>\n    ");
         xmlDom = new xmldom.DOMParser().parseFromString(xmlSrc);
         isEntry = xmlDom.documentElement.localName === "entry";
         t.true(isEntry);
@@ -87,7 +87,7 @@ var escapedHtmlWithSomeDoubleEscapedHtmlChars = "\n&lt;div&gt;\n    Hello &amp;a
 (0, ava_1.default)("OPDS1-2 description: summary", function (t) { return (0, tslib_1.__awaiter)(void 0, void 0, void 0, function () {
     var xmlSrc, xmlDom, isEntry, opds1Entry, toMatch, opds2Pub;
     return (0, tslib_1.__generator)(this, function (_a) {
-        xmlSrc = "\n<entry\n    xmlns=\"http://www.w3.org/2005/Atom\"\n    xmlns:xhtm=\"http://www.w3.org/1999/xhtml\">\n<summary>" + plainTextWithEscapedHtmlChars + "</summary>\n</entry>\n    ";
+        xmlSrc = "\n<entry\n    xmlns=\"http://www.w3.org/2005/Atom\"\n    xmlns:xhtm=\"http://www.w3.org/1999/xhtml\">\n<summary>".concat(plainTextWithEscapedHtmlChars, "</summary>\n</entry>\n    ");
         xmlDom = new xmldom.DOMParser().parseFromString(xmlSrc);
         isEntry = xmlDom.documentElement.localName === "entry";
         t.true(isEntry);
@@ -102,7 +102,7 @@ var escapedHtmlWithSomeDoubleEscapedHtmlChars = "\n&lt;div&gt;\n    Hello &amp;a
 (0, ava_1.default)("OPDS1-2 description: summary + content(HTML)", function (t) { return (0, tslib_1.__awaiter)(void 0, void 0, void 0, function () {
     var xmlSrc, xmlDom, isEntry, opds1Entry, toMatch, opds2Pub;
     return (0, tslib_1.__generator)(this, function (_a) {
-        xmlSrc = "\n<entry\n    xmlns=\"http://www.w3.org/2005/Atom\"\n    xmlns:xhtm=\"http://www.w3.org/1999/xhtml\">\n<summary>" + plainTextWithEscapedHtmlChars + "</summary>\n<content type=\"html\">" + escapedHtmlWithSomeDoubleEscapedHtmlChars + "</content>\n</entry>\n    ";
+        xmlSrc = "\n<entry\n    xmlns=\"http://www.w3.org/2005/Atom\"\n    xmlns:xhtm=\"http://www.w3.org/1999/xhtml\">\n<summary>".concat(plainTextWithEscapedHtmlChars, "</summary>\n<content type=\"html\">").concat(escapedHtmlWithSomeDoubleEscapedHtmlChars, "</content>\n</entry>\n    ");
         xmlDom = new xmldom.DOMParser().parseFromString(xmlSrc);
         isEntry = xmlDom.documentElement.localName === "entry";
         t.true(isEntry);
@@ -384,7 +384,7 @@ function opds2Test(url) {
                         var str;
                         var buffs;
                         if (response.statusCode && (response.statusCode < 200 || response.statusCode >= 300)) {
-                            debug(url + " ==> " + response.statusCode + " (skipped)");
+                            debug("".concat(url, " ==> ").concat(response.statusCode, " (skipped)"));
                             var empty = {
                                 audiowebpubs: new Set([]),
                                 authentications: new Set([]),
@@ -421,7 +421,7 @@ function opds2Test(url) {
                                             src = Buffer.concat(buffs).toString("utf8");
                                         }
                                         if (!src) {
-                                            reject("Problem loading: " + url);
+                                            reject("Problem loading: ".concat(url));
                                             return [2];
                                         }
                                         json1 = JSON.parse(src);
@@ -473,7 +473,7 @@ function webpubTest(url, alreadyDone) {
                         var str;
                         var buffs;
                         if (response.statusCode && (response.statusCode < 200 || response.statusCode >= 300)) {
-                            debug(url + " ==> " + response.statusCode + " (skipped)");
+                            debug("".concat(url, " ==> ").concat(response.statusCode, " (skipped)"));
                             resolve(true);
                             return;
                         }
@@ -503,7 +503,7 @@ function webpubTest(url, alreadyDone) {
                                             src = Buffer.concat(buffs).toString("utf8");
                                         }
                                         if (!src) {
-                                            reject("Problem loading: " + url);
+                                            reject("Problem loading: ".concat(url));
                                             return [2];
                                         }
                                         json1 = JSON.parse(src);
@@ -766,7 +766,7 @@ function testUrlAlt(t, url, alreadyDone) {
                             var _this = this;
                             return (0, tslib_1.__generator)(this, function (_a) {
                                 if (response.statusCode && (response.statusCode < 200 || response.statusCode >= 300)) {
-                                    debug(url + " ==> " + response.statusCode + " (skipped)");
+                                    debug("".concat(url, " ==> ").concat(response.statusCode, " (skipped)"));
                                     resolve(true);
                                     return [2];
                                 }
@@ -796,7 +796,7 @@ function testUrlAlt(t, url, alreadyDone) {
                                                     src = Buffer.concat(buffs).toString("utf8");
                                                 }
                                                 if (!src) {
-                                                    debug("Problem loading: " + url + " (skip)");
+                                                    debug("Problem loading: ".concat(url, " (skip)"));
                                                     resolve(true);
                                                     return [2];
                                                 }
