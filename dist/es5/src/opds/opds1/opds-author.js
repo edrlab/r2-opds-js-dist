@@ -6,19 +6,19 @@ var xml_js_mapper_1 = require("r2-utils-js/dist/es5/src/_utils/xml-js-mapper");
 var Author = (function () {
     function Author() {
     }
-    (0, tslib_1.__decorate)([
+    tslib_1.__decorate([
         (0, xml_js_mapper_1.XmlXPathSelector)("atom:name/text()"),
-        (0, tslib_1.__metadata)("design:type", String)
+        tslib_1.__metadata("design:type", String)
     ], Author.prototype, "Name", void 0);
-    (0, tslib_1.__decorate)([
+    tslib_1.__decorate([
         (0, xml_js_mapper_1.XmlXPathSelector)("atom:uri/text()"),
-        (0, tslib_1.__metadata)("design:type", String)
+        tslib_1.__metadata("design:type", String)
     ], Author.prototype, "Uri", void 0);
-    (0, tslib_1.__decorate)([
+    tslib_1.__decorate([
         (0, xml_js_mapper_1.XmlXPathSelector)("atom:email/text()"),
-        (0, tslib_1.__metadata)("design:type", String)
+        tslib_1.__metadata("design:type", String)
     ], Author.prototype, "Email", void 0);
-    Author = (0, tslib_1.__decorate)([
+    Author = tslib_1.__decorate([
         (0, xml_js_mapper_1.XmlObject)({
             app: "http://www.w3.org/2007/app",
             atom: "http://www.w3.org/2005/Atom",

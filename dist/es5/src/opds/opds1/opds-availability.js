@@ -6,23 +6,23 @@ var xml_js_mapper_1 = require("r2-utils-js/dist/es5/src/_utils/xml-js-mapper");
 var Availability = (function () {
     function Availability() {
     }
-    (0, tslib_1.__decorate)([
+    tslib_1.__decorate([
         (0, xml_js_mapper_1.XmlXPathSelector)("@state"),
-        (0, tslib_1.__metadata)("design:type", String)
+        tslib_1.__metadata("design:type", String)
     ], Availability.prototype, "State", void 0);
-    (0, tslib_1.__decorate)([
+    tslib_1.__decorate([
         (0, xml_js_mapper_1.XmlXPathSelector)("@status"),
-        (0, tslib_1.__metadata)("design:type", String)
+        tslib_1.__metadata("design:type", String)
     ], Availability.prototype, "Status", void 0);
-    (0, tslib_1.__decorate)([
+    tslib_1.__decorate([
         (0, xml_js_mapper_1.XmlXPathSelector)("@since"),
-        (0, tslib_1.__metadata)("design:type", Date)
+        tslib_1.__metadata("design:type", Date)
     ], Availability.prototype, "Since", void 0);
-    (0, tslib_1.__decorate)([
+    tslib_1.__decorate([
         (0, xml_js_mapper_1.XmlXPathSelector)("@until"),
-        (0, tslib_1.__metadata)("design:type", Date)
+        tslib_1.__metadata("design:type", Date)
     ], Availability.prototype, "Until", void 0);
-    Availability = (0, tslib_1.__decorate)([
+    Availability = tslib_1.__decorate([
         (0, xml_js_mapper_1.XmlObject)({
             app: "http://www.w3.org/2007/app",
             atom: "http://www.w3.org/2005/Atom",

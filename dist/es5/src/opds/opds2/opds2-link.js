@@ -18,15 +18,15 @@ var OPDSLinkRelEnum;
 })(OPDSLinkRelEnum = exports.OPDSLinkRelEnum || (exports.OPDSLinkRelEnum = {}));
 var PROPERTIES_JSON_PROP = "properties";
 var OPDSLink = (function (_super) {
-    (0, tslib_1.__extends)(OPDSLink, _super);
+    tslib_1.__extends(OPDSLink, _super);
     function OPDSLink() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    (0, tslib_1.__decorate)([
+    tslib_1.__decorate([
         (0, ta_json_x_1.JsonProperty)(PROPERTIES_JSON_PROP),
-        (0, tslib_1.__metadata)("design:type", opds2_properties_1.OPDSProperties)
+        tslib_1.__metadata("design:type", opds2_properties_1.OPDSProperties)
     ], OPDSLink.prototype, "Properties", void 0);
-    OPDSLink = (0, tslib_1.__decorate)([
+    OPDSLink = tslib_1.__decorate([
         (0, ta_json_x_1.JsonObject)()
     ], OPDSLink);
     return OPDSLink;

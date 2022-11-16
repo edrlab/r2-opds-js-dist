@@ -62,7 +62,6 @@ const escapedHtmlWithSomeDoubleEscapedHtmlChars = `
     const opds1Entry = xml_js_mapper_1.XML.deserialize(xmlDom, opds_entry_1.Entry);
     t.is(opds1Entry.Summary, (0, converter_1.unescapeHtmlEntities)(plainTextWithEscapedHtmlChars));
     const toMatch = xhtmlWithSomeEscapedHtmlCharsPrefixedNamespace
-        .replace(/&gt;/g, ">")
         .replace(/&quot;/g, "\"")
         .replace(/&#039;/g, "'");
     t.is(opds1Entry.Content.replace(/ xmlns:xhtm="http:\/\/www\.w3\.org\/1999\/xhtml"/, ""), toMatch);
@@ -84,7 +83,6 @@ const escapedHtmlWithSomeDoubleEscapedHtmlChars = `
     const opds1Entry = xml_js_mapper_1.XML.deserialize(xmlDom, opds_entry_1.Entry);
     t.is(opds1Entry.Summary, (0, converter_1.unescapeHtmlEntities)(plainTextWithEscapedHtmlChars));
     const toMatch = xhtmlWithSomeEscapedHtmlCharsNoPrefixedNamespace
-        .replace(/&gt;/g, ">")
         .replace(/&quot;/g, "\"")
         .replace(/&#039;/g, "'");
     t.is(opds1Entry.Content, toMatch);
@@ -106,7 +104,6 @@ const escapedHtmlWithSomeDoubleEscapedHtmlChars = `
     const opds1Entry = xml_js_mapper_1.XML.deserialize(xmlDom, opds_entry_1.Entry);
     t.is(opds1Entry.Summary, (0, converter_1.unescapeHtmlEntities)(plainTextWithEscapedHtmlChars));
     const toMatch = xmlWithSomeEscapedHtmlCharsAtomDefaultNamespace
-        .replace(/&gt;/g, ">")
         .replace(/&quot;/g, "\"")
         .replace(/&#039;/g, "'");
     t.is(opds1Entry.Content.replace(/ xmlns="http:\/\/www\.w3\.org\/2005\/Atom"/, ""), toMatch);
@@ -430,6 +427,12 @@ async function opds2Test(url) {
                     reject(`Problem loading: ${url}`);
                     return;
                 }
+                src = src.replace("-0514-01-01T00:00:00Z", "2022-01-01T00:00:00Z");
+                src = src.replace("-0322-01-01T00:00:00Z", "2022-01-01T00:00:00Z");
+                src = src.replace("-0347-01-01T00:00:00Z", "2022-01-01T00:00:00Z");
+                src = src.replace("-0600-01-01T00:00:00Z", "2022-01-01T00:00:00Z");
+                src = src.replace("-1790-01-01T00:00:00Z", "2022-01-01T00:00:00Z");
+                src = src.replace("-0380-01-01T00:00:00Z", "2022-01-01T00:00:00Z");
                 const json1 = JSON.parse(src);
                 const isPublication = !json1.publications && !json1.navigation && !json1.groups && !json1.catalogs && json1.metadata;
                 const isAuth = !isPublication && json1.authentication;

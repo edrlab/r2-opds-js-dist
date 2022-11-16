@@ -6,15 +6,15 @@ var xml_js_mapper_1 = require("r2-utils-js/dist/es5/src/_utils/xml-js-mapper");
 var Copies = (function () {
     function Copies() {
     }
-    (0, tslib_1.__decorate)([
+    tslib_1.__decorate([
         (0, xml_js_mapper_1.XmlXPathSelector)("@total"),
-        (0, tslib_1.__metadata)("design:type", Number)
+        tslib_1.__metadata("design:type", Number)
     ], Copies.prototype, "Total", void 0);
-    (0, tslib_1.__decorate)([
+    tslib_1.__decorate([
         (0, xml_js_mapper_1.XmlXPathSelector)("@available"),
-        (0, tslib_1.__metadata)("design:type", Number)
+        tslib_1.__metadata("design:type", Number)
     ], Copies.prototype, "Available", void 0);
-    Copies = (0, tslib_1.__decorate)([
+    Copies = tslib_1.__decorate([
         (0, xml_js_mapper_1.XmlObject)({
             app: "http://www.w3.org/2007/app",
             atom: "http://www.w3.org/2005/Atom",

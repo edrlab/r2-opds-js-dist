@@ -6,13 +6,13 @@ var ta_json_x_1 = require("ta-json-x");
 var OPDSHold = (function () {
     function OPDSHold() {
     }
-    (0, tslib_1.__decorate)([
+    tslib_1.__decorate([
         (0, ta_json_x_1.JsonProperty)("total"),
-        (0, tslib_1.__metadata)("design:type", Number)
+        tslib_1.__metadata("design:type", Number)
     ], OPDSHold.prototype, "Total", void 0);
-    (0, tslib_1.__decorate)([
+    tslib_1.__decorate([
         (0, ta_json_x_1.JsonProperty)("position"),
-        (0, tslib_1.__metadata)("design:type", Number)
+        tslib_1.__metadata("design:type", Number)
     ], OPDSHold.prototype, "Position", void 0);
     return OPDSHold;
 }());

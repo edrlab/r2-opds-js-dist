@@ -27,9 +27,9 @@ var xhtmlWithSomeEscapedHtmlCharsPrefixedNamespace = "\n<xhtm:div>\n    Hello &a
 var xhtmlWithSomeEscapedHtmlCharsNoPrefixedNamespace = "\n<div xmlns=\"http://www.w3.org/1999/xhtml\">\n    Hi &amp;\t<b>  world &lt; &quot;_&#039; &gt;  </b>!\n</div>\n";
 var xmlWithSomeEscapedHtmlCharsAtomDefaultNamespace = "\n<div>\n    Oops &amp;\t<b>  world &lt; &quot;_&#039; &gt;  </b>!\n</div>\n";
 var escapedHtmlWithSomeDoubleEscapedHtmlChars = "\n&lt;div&gt;\n    Hello &amp;amp;\t&lt;b&gt;  world &amp;lt; &amp;quot;_&amp;#039; &amp;gt;  &lt;/b&gt;!\n&lt;/div&gt;\n";
-(0, ava_1.default)("OPDS1-2 description: summary + content(XHTML NAMESPACE PREFIX)", function (t) { return (0, tslib_1.__awaiter)(void 0, void 0, void 0, function () {
+(0, ava_1.default)("OPDS1-2 description: summary + content(XHTML NAMESPACE PREFIX)", function (t) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
     var xmlSrc, xmlDom, isEntry, opds1Entry, toMatch, opds2Pub;
-    return (0, tslib_1.__generator)(this, function (_a) {
+    return tslib_1.__generator(this, function (_a) {
         xmlSrc = "\n<entry\n    xmlns=\"http://www.w3.org/2005/Atom\"\n    xmlns:xhtm=\"http://www.w3.org/1999/xhtml\">\n<summary>".concat(plainTextWithEscapedHtmlChars, "</summary>\n<content type=\"xhtml\">").concat(xhtmlWithSomeEscapedHtmlCharsPrefixedNamespace, "</content>\n</entry>\n    ");
         xmlDom = new xmldom.DOMParser().parseFromString(xmlSrc);
         isEntry = xmlDom.documentElement.localName === "entry";
@@ -37,7 +37,6 @@ var escapedHtmlWithSomeDoubleEscapedHtmlChars = "\n&lt;div&gt;\n    Hello &amp;a
         opds1Entry = xml_js_mapper_1.XML.deserialize(xmlDom, opds_entry_1.Entry);
         t.is(opds1Entry.Summary, (0, converter_1.unescapeHtmlEntities)(plainTextWithEscapedHtmlChars));
         toMatch = xhtmlWithSomeEscapedHtmlCharsPrefixedNamespace
-            .replace(/&gt;/g, ">")
             .replace(/&quot;/g, "\"")
             .replace(/&#039;/g, "'");
         t.is(opds1Entry.Content.replace(/ xmlns:xhtm="http:\/\/www\.w3\.org\/1999\/xhtml"/, ""), toMatch);
@@ -46,9 +45,9 @@ var escapedHtmlWithSomeDoubleEscapedHtmlChars = "\n&lt;div&gt;\n    Hello &amp;a
         return [2];
     });
 }); });
-(0, ava_1.default)("OPDS1-2 description: summary + content(XHTML NAMESPACE NO PREFIX)", function (t) { return (0, tslib_1.__awaiter)(void 0, void 0, void 0, function () {
+(0, ava_1.default)("OPDS1-2 description: summary + content(XHTML NAMESPACE NO PREFIX)", function (t) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
     var xmlSrc, xmlDom, isEntry, opds1Entry, toMatch, opds2Pub;
-    return (0, tslib_1.__generator)(this, function (_a) {
+    return tslib_1.__generator(this, function (_a) {
         xmlSrc = "\n<entry\n    xmlns=\"http://www.w3.org/2005/Atom\"\n    xmlns:xhtm=\"http://www.w3.org/1999/xhtml\">\n<summary>".concat(plainTextWithEscapedHtmlChars, "</summary>\n<content type=\"xhtml\">").concat(xhtmlWithSomeEscapedHtmlCharsNoPrefixedNamespace, "</content>\n</entry>\n    ");
         xmlDom = new xmldom.DOMParser().parseFromString(xmlSrc);
         isEntry = xmlDom.documentElement.localName === "entry";
@@ -56,7 +55,6 @@ var escapedHtmlWithSomeDoubleEscapedHtmlChars = "\n&lt;div&gt;\n    Hello &amp;a
         opds1Entry = xml_js_mapper_1.XML.deserialize(xmlDom, opds_entry_1.Entry);
         t.is(opds1Entry.Summary, (0, converter_1.unescapeHtmlEntities)(plainTextWithEscapedHtmlChars));
         toMatch = xhtmlWithSomeEscapedHtmlCharsNoPrefixedNamespace
-            .replace(/&gt;/g, ">")
             .replace(/&quot;/g, "\"")
             .replace(/&#039;/g, "'");
         t.is(opds1Entry.Content, toMatch);
@@ -65,9 +63,9 @@ var escapedHtmlWithSomeDoubleEscapedHtmlChars = "\n&lt;div&gt;\n    Hello &amp;a
         return [2];
     });
 }); });
-(0, ava_1.default)("OPDS1-2 description: summary + content(XML DEFAULT ATOM NAMESPACE)", function (t) { return (0, tslib_1.__awaiter)(void 0, void 0, void 0, function () {
+(0, ava_1.default)("OPDS1-2 description: summary + content(XML DEFAULT ATOM NAMESPACE)", function (t) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
     var xmlSrc, xmlDom, isEntry, opds1Entry, toMatch, opds2Pub;
-    return (0, tslib_1.__generator)(this, function (_a) {
+    return tslib_1.__generator(this, function (_a) {
         xmlSrc = "\n<entry\n    xmlns=\"http://www.w3.org/2005/Atom\"\n    xmlns:xhtm=\"http://www.w3.org/1999/xhtml\">\n<summary>".concat(plainTextWithEscapedHtmlChars, "</summary>\n<content type=\"xhtml\">").concat(xmlWithSomeEscapedHtmlCharsAtomDefaultNamespace, "</content>\n</entry>\n    ");
         xmlDom = new xmldom.DOMParser().parseFromString(xmlSrc);
         isEntry = xmlDom.documentElement.localName === "entry";
@@ -75,7 +73,6 @@ var escapedHtmlWithSomeDoubleEscapedHtmlChars = "\n&lt;div&gt;\n    Hello &amp;a
         opds1Entry = xml_js_mapper_1.XML.deserialize(xmlDom, opds_entry_1.Entry);
         t.is(opds1Entry.Summary, (0, converter_1.unescapeHtmlEntities)(plainTextWithEscapedHtmlChars));
         toMatch = xmlWithSomeEscapedHtmlCharsAtomDefaultNamespace
-            .replace(/&gt;/g, ">")
             .replace(/&quot;/g, "\"")
             .replace(/&#039;/g, "'");
         t.is(opds1Entry.Content.replace(/ xmlns="http:\/\/www\.w3\.org\/2005\/Atom"/, ""), toMatch);
@@ -84,9 +81,9 @@ var escapedHtmlWithSomeDoubleEscapedHtmlChars = "\n&lt;div&gt;\n    Hello &amp;a
         return [2];
     });
 }); });
-(0, ava_1.default)("OPDS1-2 description: summary", function (t) { return (0, tslib_1.__awaiter)(void 0, void 0, void 0, function () {
+(0, ava_1.default)("OPDS1-2 description: summary", function (t) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
     var xmlSrc, xmlDom, isEntry, opds1Entry, toMatch, opds2Pub;
-    return (0, tslib_1.__generator)(this, function (_a) {
+    return tslib_1.__generator(this, function (_a) {
         xmlSrc = "\n<entry\n    xmlns=\"http://www.w3.org/2005/Atom\"\n    xmlns:xhtm=\"http://www.w3.org/1999/xhtml\">\n<summary>".concat(plainTextWithEscapedHtmlChars, "</summary>\n</entry>\n    ");
         xmlDom = new xmldom.DOMParser().parseFromString(xmlSrc);
         isEntry = xmlDom.documentElement.localName === "entry";
@@ -99,9 +96,9 @@ var escapedHtmlWithSomeDoubleEscapedHtmlChars = "\n&lt;div&gt;\n    Hello &amp;a
         return [2];
     });
 }); });
-(0, ava_1.default)("OPDS1-2 description: summary + content(HTML)", function (t) { return (0, tslib_1.__awaiter)(void 0, void 0, void 0, function () {
+(0, ava_1.default)("OPDS1-2 description: summary + content(HTML)", function (t) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
     var xmlSrc, xmlDom, isEntry, opds1Entry, toMatch, opds2Pub;
-    return (0, tslib_1.__generator)(this, function (_a) {
+    return tslib_1.__generator(this, function (_a) {
         xmlSrc = "\n<entry\n    xmlns=\"http://www.w3.org/2005/Atom\"\n    xmlns:xhtm=\"http://www.w3.org/1999/xhtml\">\n<summary>".concat(plainTextWithEscapedHtmlChars, "</summary>\n<content type=\"html\">").concat(escapedHtmlWithSomeDoubleEscapedHtmlChars, "</content>\n</entry>\n    ");
         xmlDom = new xmldom.DOMParser().parseFromString(xmlSrc);
         isEntry = xmlDom.documentElement.localName === "entry";
@@ -116,15 +113,15 @@ var escapedHtmlWithSomeDoubleEscapedHtmlChars = "\n&lt;div&gt;\n    Hello &amp;a
     });
 }); });
 function fn() {
-    return (0, tslib_1.__awaiter)(this, void 0, void 0, function () {
-        return (0, tslib_1.__generator)(this, function (_a) {
+    return tslib_1.__awaiter(this, void 0, void 0, function () {
+        return tslib_1.__generator(this, function (_a) {
             return [2, Promise.resolve("foo")];
         });
     });
 }
-(0, ava_1.default)("dummy async test", function (t) { return (0, tslib_1.__awaiter)(void 0, void 0, void 0, function () {
+(0, ava_1.default)("dummy async test", function (t) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
     var _a, _b;
-    return (0, tslib_1.__generator)(this, function (_c) {
+    return tslib_1.__generator(this, function (_c) {
         switch (_c.label) {
             case 0:
                 debug("test ASYNC");
@@ -139,8 +136,8 @@ function fn() {
 var MAX_TESTS = process.env.MAX_TESTS || 10;
 var FEEDS_FIRST = process.env.FEEDS_FIRST || false;
 function delay(okay) {
-    return (0, tslib_1.__awaiter)(this, void 0, void 0, function () {
-        return (0, tslib_1.__generator)(this, function (_a) {
+    return tslib_1.__awaiter(this, void 0, void 0, function () {
+        return tslib_1.__generator(this, function (_a) {
             return [2, new Promise(function (resolve, _reject) {
                     setTimeout(function () {
                         resolve(okay);
@@ -150,8 +147,8 @@ function delay(okay) {
     });
 }
 function parseCompareJSONs(url, json1, json2) {
-    return (0, tslib_1.__awaiter)(this, void 0, void 0, function () {
-        return (0, tslib_1.__generator)(this, function (_a) {
+    return tslib_1.__awaiter(this, void 0, void 0, function () {
+        return tslib_1.__generator(this, function (_a) {
             return [2, new Promise(function (resolve, reject) {
                     if (json1 !== json2) {
                         var harmonizeNulls_1 = function (obj) {
@@ -373,9 +370,9 @@ function parseCompareJSONs(url, json1, json2) {
     });
 }
 function opds2Test(url) {
-    return (0, tslib_1.__awaiter)(this, void 0, void 0, function () {
+    return tslib_1.__awaiter(this, void 0, void 0, function () {
         var _this = this;
-        return (0, tslib_1.__generator)(this, function (_a) {
+        return tslib_1.__generator(this, function (_a) {
             return [2, new Promise(function (resolve, reject) {
                     debug(url);
                     var proto = /^https:\/\//.test(url) ? https : http;
@@ -409,9 +406,9 @@ function opds2Test(url) {
                                 buffs.push(chunk);
                             }
                         });
-                        response.on("end", function () { return (0, tslib_1.__awaiter)(_this, void 0, void 0, function () {
+                        response.on("end", function () { return tslib_1.__awaiter(_this, void 0, void 0, function () {
                             var src, json1, isPublication, isAuth, opds2Feed, json2, res, err_1;
-                            return (0, tslib_1.__generator)(this, function (_a) {
+                            return tslib_1.__generator(this, function (_a) {
                                 switch (_a.label) {
                                     case 0:
                                         if (str) {
@@ -424,6 +421,12 @@ function opds2Test(url) {
                                             reject("Problem loading: ".concat(url));
                                             return [2];
                                         }
+                                        src = src.replace("-0514-01-01T00:00:00Z", "2022-01-01T00:00:00Z");
+                                        src = src.replace("-0322-01-01T00:00:00Z", "2022-01-01T00:00:00Z");
+                                        src = src.replace("-0347-01-01T00:00:00Z", "2022-01-01T00:00:00Z");
+                                        src = src.replace("-0600-01-01T00:00:00Z", "2022-01-01T00:00:00Z");
+                                        src = src.replace("-1790-01-01T00:00:00Z", "2022-01-01T00:00:00Z");
+                                        src = src.replace("-0380-01-01T00:00:00Z", "2022-01-01T00:00:00Z");
                                         json1 = JSON.parse(src);
                                         isPublication = !json1.publications && !json1.navigation && !json1.groups && !json1.catalogs && json1.metadata;
                                         isAuth = !isPublication && json1.authentication;
@@ -461,9 +464,9 @@ function opds2Test(url) {
     });
 }
 function webpubTest(url, alreadyDone) {
-    return (0, tslib_1.__awaiter)(this, void 0, void 0, function () {
+    return tslib_1.__awaiter(this, void 0, void 0, function () {
         var _this = this;
-        return (0, tslib_1.__generator)(this, function (_a) {
+        return tslib_1.__generator(this, function (_a) {
             alreadyDone.add(url);
             return [2, new Promise(function (resolve, reject) {
                     debug(url);
@@ -491,9 +494,9 @@ function webpubTest(url, alreadyDone) {
                                 buffs.push(chunk);
                             }
                         });
-                        response.on("end", function () { return (0, tslib_1.__awaiter)(_this, void 0, void 0, function () {
+                        response.on("end", function () { return tslib_1.__awaiter(_this, void 0, void 0, function () {
                             var src, json1, pub, json2, err_2;
-                            return (0, tslib_1.__generator)(this, function (_a) {
+                            return tslib_1.__generator(this, function (_a) {
                                 switch (_a.label) {
                                     case 0:
                                         if (str) {
@@ -543,9 +546,9 @@ function webpubTest(url, alreadyDone) {
     });
 }
 function recursePubs(t, urls, alreadyDone) {
-    return (0, tslib_1.__awaiter)(this, void 0, void 0, function () {
+    return tslib_1.__awaiter(this, void 0, void 0, function () {
         var urlsTodoWebPubs, _i, urlsTodoWebPubs_1, href, okay, err_3, urlsTodoAudioWebPubs, _a, urlsTodoAudioWebPubs_1, href, okay, err_4, urlsTodoPubs, _b, urlsTodoPubs_1, href, okay, urlsAuths, _c, urlsAuths_1, href, okay;
-        return (0, tslib_1.__generator)(this, function (_d) {
+        return tslib_1.__generator(this, function (_d) {
             switch (_d.label) {
                 case 0:
                     urlsTodoWebPubs = [];
@@ -655,9 +658,9 @@ function recursePubs(t, urls, alreadyDone) {
     });
 }
 function recurseFeeds(t, urls, alreadyDone) {
-    return (0, tslib_1.__awaiter)(this, void 0, void 0, function () {
+    return tslib_1.__awaiter(this, void 0, void 0, function () {
         var urlsTodoFeeds, _i, urlsTodoFeeds_1, href, okay;
-        return (0, tslib_1.__generator)(this, function (_a) {
+        return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     urlsTodoFeeds = [];
@@ -687,9 +690,9 @@ function recurseFeeds(t, urls, alreadyDone) {
     });
 }
 function recurse(t, urls, alreadyDone) {
-    return (0, tslib_1.__awaiter)(this, void 0, void 0, function () {
+    return tslib_1.__awaiter(this, void 0, void 0, function () {
         var b1, b2, b3, b4;
-        return (0, tslib_1.__generator)(this, function (_a) {
+        return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     if (!FEEDS_FIRST) return [3, 3];
@@ -718,9 +721,9 @@ function recurse(t, urls, alreadyDone) {
     });
 }
 function testUrl(t, url, alreadyDone) {
-    return (0, tslib_1.__awaiter)(this, void 0, void 0, function () {
+    return tslib_1.__awaiter(this, void 0, void 0, function () {
         var urls, err_5;
-        return (0, tslib_1.__generator)(this, function (_a) {
+        return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     if (alreadyDone.size >= MAX_TESTS) {
@@ -748,10 +751,10 @@ function testUrl(t, url, alreadyDone) {
     });
 }
 function testUrlAlt(t, url, alreadyDone) {
-    return (0, tslib_1.__awaiter)(this, void 0, void 0, function () {
+    return tslib_1.__awaiter(this, void 0, void 0, function () {
         var promise;
         var _this = this;
-        return (0, tslib_1.__generator)(this, function (_a) {
+        return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     if (alreadyDone.size >= MAX_TESTS) {
@@ -761,10 +764,10 @@ function testUrlAlt(t, url, alreadyDone) {
                     promise = new Promise(function (resolve, reject) {
                         var proto = /^https:\/\//.test(url) ? https : http;
                         proto
-                            .get(url, function (response) { return (0, tslib_1.__awaiter)(_this, void 0, void 0, function () {
+                            .get(url, function (response) { return tslib_1.__awaiter(_this, void 0, void 0, function () {
                             var str, buffs;
                             var _this = this;
-                            return (0, tslib_1.__generator)(this, function (_a) {
+                            return tslib_1.__generator(this, function (_a) {
                                 if (response.statusCode && (response.statusCode < 200 || response.statusCode >= 300)) {
                                     debug("".concat(url, " ==> ").concat(response.statusCode, " (skipped)"));
                                     resolve(true);
@@ -784,9 +787,9 @@ function testUrlAlt(t, url, alreadyDone) {
                                         buffs.push(chunk);
                                     }
                                 });
-                                response.on("end", function () { return (0, tslib_1.__awaiter)(_this, void 0, void 0, function () {
+                                response.on("end", function () { return tslib_1.__awaiter(_this, void 0, void 0, function () {
                                     var src, xmlDom, isEntry, opds1Feed, opds2Feed, opds2FeedJson, urls, err_6, b;
-                                    return (0, tslib_1.__generator)(this, function (_a) {
+                                    return tslib_1.__generator(this, function (_a) {
                                         switch (_a.label) {
                                             case 0:
                                                 if (str) {
@@ -841,8 +844,8 @@ function testUrlAlt(t, url, alreadyDone) {
                                 return [2];
                             });
                         }); })
-                            .on("error", function (err) { return (0, tslib_1.__awaiter)(_this, void 0, void 0, function () {
-                            return (0, tslib_1.__generator)(this, function (_a) {
+                            .on("error", function (err) { return tslib_1.__awaiter(_this, void 0, void 0, function () {
+                            return tslib_1.__generator(this, function (_a) {
                                 reject(err);
                                 return [2];
                             });
@@ -855,9 +858,9 @@ function testUrlAlt(t, url, alreadyDone) {
     });
 }
 function runUrlTest(t, url) {
-    return (0, tslib_1.__awaiter)(this, void 0, void 0, function () {
+    return tslib_1.__awaiter(this, void 0, void 0, function () {
         var done, okay, _a, _b, err_7, _c, _d;
-        return (0, tslib_1.__generator)(this, function (_e) {
+        return tslib_1.__generator(this, function (_e) {
             switch (_e.label) {
                 case 0:
                     done = new Set([]);
@@ -889,9 +892,9 @@ function runUrlTest(t, url) {
     });
 }
 function runUrlTestAlt(t, url) {
-    return (0, tslib_1.__awaiter)(this, void 0, void 0, function () {
+    return tslib_1.__awaiter(this, void 0, void 0, function () {
         var done, okay, _a, _b, err_8, _c, _d;
-        return (0, tslib_1.__generator)(this, function (_e) {
+        return tslib_1.__generator(this, function (_e) {
             switch (_e.label) {
                 case 0:
                     done = new Set([]);
@@ -922,9 +925,9 @@ function runUrlTestAlt(t, url) {
         });
     });
 }
-(0, ava_1.default)("OPDS2 HTTP (de)serialize roundtrip (recursive) 1", function (t) { return (0, tslib_1.__awaiter)(void 0, void 0, void 0, function () {
+(0, ava_1.default)("OPDS2 HTTP (de)serialize roundtrip (recursive) 1", function (t) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
     var url;
-    return (0, tslib_1.__generator)(this, function (_a) {
+    return tslib_1.__generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 url = "https://test.opds.io/2.0/home.json";
@@ -935,9 +938,9 @@ function runUrlTestAlt(t, url) {
         }
     });
 }); });
-(0, ava_1.default)("OPDS2 HTTP (de)serialize roundtrip (recursive) 2", function (t) { return (0, tslib_1.__awaiter)(void 0, void 0, void 0, function () {
+(0, ava_1.default)("OPDS2 HTTP (de)serialize roundtrip (recursive) 2", function (t) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
     var url;
-    return (0, tslib_1.__generator)(this, function (_a) {
+    return tslib_1.__generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 url = "https://catalog.feedbooks.com/catalog/public_domain.json";
@@ -948,9 +951,9 @@ function runUrlTestAlt(t, url) {
         }
     });
 }); });
-(0, ava_1.default)("OPDS2 HTTP (de)serialize roundtrip (recursive) CATALOGS", function (t) { return (0, tslib_1.__awaiter)(void 0, void 0, void 0, function () {
+(0, ava_1.default)("OPDS2 HTTP (de)serialize roundtrip (recursive) CATALOGS", function (t) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
     var url;
-    return (0, tslib_1.__generator)(this, function (_a) {
+    return tslib_1.__generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 url = "https://libraryregistry.librarysimplified.org/libraries";
@@ -961,9 +964,9 @@ function runUrlTestAlt(t, url) {
         }
     });
 }); });
-(0, ava_1.default)("OPDS2 HTTP (de)serialize roundtrip (recursive) AUTHENTICATION", function (t) { return (0, tslib_1.__awaiter)(void 0, void 0, void 0, function () {
+(0, ava_1.default)("OPDS2 HTTP (de)serialize roundtrip (recursive) AUTHENTICATION", function (t) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
     var url;
-    return (0, tslib_1.__generator)(this, function (_a) {
+    return tslib_1.__generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 url = "http://acl.simplye-ca.org/CALMDA/authentication_document";
@@ -974,9 +977,9 @@ function runUrlTestAlt(t, url) {
         }
     });
 }); });
-(0, ava_1.default)("OPDS1-2 HTTP convert (de)serialize roundtrip (recursive)", function (t) { return (0, tslib_1.__awaiter)(void 0, void 0, void 0, function () {
+(0, ava_1.default)("OPDS1-2 HTTP convert (de)serialize roundtrip (recursive)", function (t) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
     var url;
-    return (0, tslib_1.__generator)(this, function (_a) {
+    return tslib_1.__generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 url = "https://bookserver.archive.org/group/openaudiobooks";
@@ -987,9 +990,9 @@ function runUrlTestAlt(t, url) {
         }
     });
 }); });
-(0, ava_1.default)("test", function (t) { return (0, tslib_1.__awaiter)(void 0, void 0, void 0, function () {
+(0, ava_1.default)("test", function (t) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
     var url, done, _a, _b;
-    return (0, tslib_1.__generator)(this, function (_c) {
+    return tslib_1.__generator(this, function (_c) {
         switch (_c.label) {
             case 0:
                 url = "https://api.archivelab.org/books/bookconcord_preface_1202/opds_audio_manifest";
@@ -1007,9 +1010,9 @@ function runUrlTestAlt(t, url) {
         }
     });
 }); });
-(0, ava_1.default)("OPDS1-2 LCP passphrase convert (de)serialize roundtrip", function (t) { return (0, tslib_1.__awaiter)(void 0, void 0, void 0, function () {
+(0, ava_1.default)("OPDS1-2 LCP passphrase convert (de)serialize roundtrip", function (t) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
     var xmlSrc, xmlDom, isEntry, opds1Entry, opds2Pub, opds2PubJson;
-    return (0, tslib_1.__generator)(this, function (_a) {
+    return tslib_1.__generator(this, function (_a) {
         xmlSrc = "\n<entry\n    xmlns=\"http://www.w3.org/2005/Atom\"\n    xmlns:lcp=\"http://readium.org/lcp-specs/ns\">\n\n    <link\n        rel=\"http://opds-spec.org/acquisition/\"\n        href=\"FAKE_URL\"\n        type=\"application/vnd.readium.lcp.license.v1.0+json\">\n\n        <lcp:hashed_passphrase>FAKE_BASE64</lcp:hashed_passphrase>\n    </link>\n</entry>\n    ";
         xmlDom = new xmldom.DOMParser().parseFromString(xmlSrc);
         isEntry = xmlDom.documentElement.localName === "entry";

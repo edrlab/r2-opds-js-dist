@@ -48,7 +48,7 @@ const escapedHtmlWithSomeDoubleEscapedHtmlChars = `
     Hello &amp;amp;\t&lt;b&gt;  world &amp;lt; &amp;quot;_&amp;#039; &amp;gt;  &lt;/b&gt;!
 &lt;/div&gt;
 `;
-(0, ava_1.default)("OPDS1-2 description: summary + content(XHTML NAMESPACE PREFIX)", (t) => (0, tslib_1.__awaiter)(void 0, void 0, void 0, function* () {
+(0, ava_1.default)("OPDS1-2 description: summary + content(XHTML NAMESPACE PREFIX)", (t) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
     const xmlSrc = `
 <entry
     xmlns="http://www.w3.org/2005/Atom"
@@ -63,14 +63,13 @@ const escapedHtmlWithSomeDoubleEscapedHtmlChars = `
     const opds1Entry = xml_js_mapper_1.XML.deserialize(xmlDom, opds_entry_1.Entry);
     t.is(opds1Entry.Summary, (0, converter_1.unescapeHtmlEntities)(plainTextWithEscapedHtmlChars));
     const toMatch = xhtmlWithSomeEscapedHtmlCharsPrefixedNamespace
-        .replace(/&gt;/g, ">")
         .replace(/&quot;/g, "\"")
         .replace(/&#039;/g, "'");
     t.is(opds1Entry.Content.replace(/ xmlns:xhtm="http:\/\/www\.w3\.org\/1999\/xhtml"/, ""), toMatch);
     const opds2Pub = (0, converter_1.convertOpds1ToOpds2_EntryToPublication)(opds1Entry);
     t.is(opds2Pub.Metadata.Description.replace(/ xmlns:xhtm="http:\/\/www\.w3\.org\/1999\/xhtml"/, ""), toMatch);
 }));
-(0, ava_1.default)("OPDS1-2 description: summary + content(XHTML NAMESPACE NO PREFIX)", (t) => (0, tslib_1.__awaiter)(void 0, void 0, void 0, function* () {
+(0, ava_1.default)("OPDS1-2 description: summary + content(XHTML NAMESPACE NO PREFIX)", (t) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
     const xmlSrc = `
 <entry
     xmlns="http://www.w3.org/2005/Atom"
@@ -85,14 +84,13 @@ const escapedHtmlWithSomeDoubleEscapedHtmlChars = `
     const opds1Entry = xml_js_mapper_1.XML.deserialize(xmlDom, opds_entry_1.Entry);
     t.is(opds1Entry.Summary, (0, converter_1.unescapeHtmlEntities)(plainTextWithEscapedHtmlChars));
     const toMatch = xhtmlWithSomeEscapedHtmlCharsNoPrefixedNamespace
-        .replace(/&gt;/g, ">")
         .replace(/&quot;/g, "\"")
         .replace(/&#039;/g, "'");
     t.is(opds1Entry.Content, toMatch);
     const opds2Pub = (0, converter_1.convertOpds1ToOpds2_EntryToPublication)(opds1Entry);
     t.is(opds2Pub.Metadata.Description, toMatch);
 }));
-(0, ava_1.default)("OPDS1-2 description: summary + content(XML DEFAULT ATOM NAMESPACE)", (t) => (0, tslib_1.__awaiter)(void 0, void 0, void 0, function* () {
+(0, ava_1.default)("OPDS1-2 description: summary + content(XML DEFAULT ATOM NAMESPACE)", (t) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
     const xmlSrc = `
 <entry
     xmlns="http://www.w3.org/2005/Atom"
@@ -107,14 +105,13 @@ const escapedHtmlWithSomeDoubleEscapedHtmlChars = `
     const opds1Entry = xml_js_mapper_1.XML.deserialize(xmlDom, opds_entry_1.Entry);
     t.is(opds1Entry.Summary, (0, converter_1.unescapeHtmlEntities)(plainTextWithEscapedHtmlChars));
     const toMatch = xmlWithSomeEscapedHtmlCharsAtomDefaultNamespace
-        .replace(/&gt;/g, ">")
         .replace(/&quot;/g, "\"")
         .replace(/&#039;/g, "'");
     t.is(opds1Entry.Content.replace(/ xmlns="http:\/\/www\.w3\.org\/2005\/Atom"/, ""), toMatch);
     const opds2Pub = (0, converter_1.convertOpds1ToOpds2_EntryToPublication)(opds1Entry);
     t.is(opds2Pub.Metadata.Description.replace(/ xmlns="http:\/\/www\.w3\.org\/1999\/xhtml"/, ""), toMatch);
 }));
-(0, ava_1.default)("OPDS1-2 description: summary", (t) => (0, tslib_1.__awaiter)(void 0, void 0, void 0, function* () {
+(0, ava_1.default)("OPDS1-2 description: summary", (t) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
     const xmlSrc = `
 <entry
     xmlns="http://www.w3.org/2005/Atom"
@@ -131,7 +128,7 @@ const escapedHtmlWithSomeDoubleEscapedHtmlChars = `
     const opds2Pub = (0, converter_1.convertOpds1ToOpds2_EntryToPublication)(opds1Entry);
     t.is(opds2Pub.Metadata.Description, toMatch);
 }));
-(0, ava_1.default)("OPDS1-2 description: summary + content(HTML)", (t) => (0, tslib_1.__awaiter)(void 0, void 0, void 0, function* () {
+(0, ava_1.default)("OPDS1-2 description: summary + content(HTML)", (t) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
     const xmlSrc = `
 <entry
     xmlns="http://www.w3.org/2005/Atom"
@@ -151,18 +148,18 @@ const escapedHtmlWithSomeDoubleEscapedHtmlChars = `
     t.is(opds2Pub.Metadata.Description, toMatch);
 }));
 function fn() {
-    return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
+    return tslib_1.__awaiter(this, void 0, void 0, function* () {
         return Promise.resolve("foo");
     });
 }
-(0, ava_1.default)("dummy async test", (t) => (0, tslib_1.__awaiter)(void 0, void 0, void 0, function* () {
+(0, ava_1.default)("dummy async test", (t) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
     debug("test ASYNC");
     t.is(yield fn(), "foo");
 }));
 const MAX_TESTS = process.env.MAX_TESTS || 10;
 const FEEDS_FIRST = process.env.FEEDS_FIRST || false;
 function delay(okay) {
-    return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
+    return tslib_1.__awaiter(this, void 0, void 0, function* () {
         return new Promise((resolve, _reject) => {
             setTimeout(() => {
                 resolve(okay);
@@ -171,7 +168,7 @@ function delay(okay) {
     });
 }
 function parseCompareJSONs(url, json1, json2) {
-    return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
+    return tslib_1.__awaiter(this, void 0, void 0, function* () {
         return new Promise((resolve, reject) => {
             if (json1 !== json2) {
                 const harmonizeNulls = (obj) => {
@@ -392,7 +389,7 @@ function parseCompareJSONs(url, json1, json2) {
     });
 }
 function opds2Test(url) {
-    return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
+    return tslib_1.__awaiter(this, void 0, void 0, function* () {
         return new Promise((resolve, reject) => {
             debug(url);
             const proto = /^https:\/\//.test(url) ? https : http;
@@ -426,7 +423,7 @@ function opds2Test(url) {
                         buffs.push(chunk);
                     }
                 });
-                response.on("end", () => (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
+                response.on("end", () => tslib_1.__awaiter(this, void 0, void 0, function* () {
                     let src;
                     if (str) {
                         src = str;
@@ -438,6 +435,12 @@ function opds2Test(url) {
                         reject(`Problem loading: ${url}`);
                         return;
                     }
+                    src = src.replace("-0514-01-01T00:00:00Z", "2022-01-01T00:00:00Z");
+                    src = src.replace("-0322-01-01T00:00:00Z", "2022-01-01T00:00:00Z");
+                    src = src.replace("-0347-01-01T00:00:00Z", "2022-01-01T00:00:00Z");
+                    src = src.replace("-0600-01-01T00:00:00Z", "2022-01-01T00:00:00Z");
+                    src = src.replace("-1790-01-01T00:00:00Z", "2022-01-01T00:00:00Z");
+                    src = src.replace("-0380-01-01T00:00:00Z", "2022-01-01T00:00:00Z");
                     const json1 = JSON.parse(src);
                     const isPublication = !json1.publications && !json1.navigation && !json1.groups && !json1.catalogs && json1.metadata;
                     const isAuth = !isPublication && json1.authentication;
@@ -467,7 +470,7 @@ function opds2Test(url) {
     });
 }
 function webpubTest(url, alreadyDone) {
-    return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
+    return tslib_1.__awaiter(this, void 0, void 0, function* () {
         alreadyDone.add(url);
         return new Promise((resolve, reject) => {
             debug(url);
@@ -495,7 +498,7 @@ function webpubTest(url, alreadyDone) {
                         buffs.push(chunk);
                     }
                 });
-                response.on("end", () => (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
+                response.on("end", () => tslib_1.__awaiter(this, void 0, void 0, function* () {
                     let src;
                     if (str) {
                         src = str;
@@ -536,7 +539,7 @@ function webpubTest(url, alreadyDone) {
     });
 }
 function recursePubs(t, urls, alreadyDone) {
-    return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
+    return tslib_1.__awaiter(this, void 0, void 0, function* () {
         const urlsTodoWebPubs = [];
         urls.webpubs.forEach((u) => {
             if (!alreadyDone.has(u)) {
@@ -601,7 +604,7 @@ function recursePubs(t, urls, alreadyDone) {
     });
 }
 function recurseFeeds(t, urls, alreadyDone) {
-    return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
+    return tslib_1.__awaiter(this, void 0, void 0, function* () {
         const urlsTodoFeeds = [];
         urls.feeds.forEach((u) => {
             if (!alreadyDone.has(u)) {
@@ -618,7 +621,7 @@ function recurseFeeds(t, urls, alreadyDone) {
     });
 }
 function recurse(t, urls, alreadyDone) {
-    return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
+    return tslib_1.__awaiter(this, void 0, void 0, function* () {
         if (FEEDS_FIRST) {
             const b1 = yield recurseFeeds(t, urls, alreadyDone);
             if (!b1) {
@@ -636,7 +639,7 @@ function recurse(t, urls, alreadyDone) {
     });
 }
 function testUrl(t, url, alreadyDone) {
-    return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
+    return tslib_1.__awaiter(this, void 0, void 0, function* () {
         if (alreadyDone.size >= MAX_TESTS) {
             return true;
         }
@@ -656,7 +659,7 @@ function testUrl(t, url, alreadyDone) {
     });
 }
 function testUrlAlt(t, url, alreadyDone) {
-    return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
+    return tslib_1.__awaiter(this, void 0, void 0, function* () {
         if (alreadyDone.size >= MAX_TESTS) {
             return true;
         }
@@ -664,7 +667,7 @@ function testUrlAlt(t, url, alreadyDone) {
         const promise = new Promise((resolve, reject) => {
             const proto = /^https:\/\//.test(url) ? https : http;
             proto
-                .get(url, (response) => (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
+                .get(url, (response) => tslib_1.__awaiter(this, void 0, void 0, function* () {
                 let str;
                 let buffs;
                 if (response.statusCode && (response.statusCode < 200 || response.statusCode >= 300)) {
@@ -686,7 +689,7 @@ function testUrlAlt(t, url, alreadyDone) {
                         buffs.push(chunk);
                     }
                 });
-                response.on("end", () => (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
+                response.on("end", () => tslib_1.__awaiter(this, void 0, void 0, function* () {
                     let src;
                     if (str) {
                         src = str;
@@ -730,7 +733,7 @@ function testUrlAlt(t, url, alreadyDone) {
                     return;
                 }));
             }))
-                .on("error", (err) => (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
+                .on("error", (err) => tslib_1.__awaiter(this, void 0, void 0, function* () {
                 reject(err);
                 return;
             }));
@@ -739,7 +742,7 @@ function testUrlAlt(t, url, alreadyDone) {
     });
 }
 function runUrlTest(t, url) {
-    return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
+    return tslib_1.__awaiter(this, void 0, void 0, function* () {
         const done = new Set([]);
         try {
             const okay = yield testUrl(t, url, done);
@@ -755,7 +758,7 @@ function runUrlTest(t, url) {
     });
 }
 function runUrlTestAlt(t, url) {
-    return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
+    return tslib_1.__awaiter(this, void 0, void 0, function* () {
         const done = new Set([]);
         try {
             const okay = yield testUrlAlt(t, url, done);
@@ -770,27 +773,27 @@ function runUrlTestAlt(t, url) {
         t.true(yield delay(false));
     });
 }
-(0, ava_1.default)("OPDS2 HTTP (de)serialize roundtrip (recursive) 1", (t) => (0, tslib_1.__awaiter)(void 0, void 0, void 0, function* () {
+(0, ava_1.default)("OPDS2 HTTP (de)serialize roundtrip (recursive) 1", (t) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
     const url = "https://test.opds.io/2.0/home.json";
     yield runUrlTest(t, url);
 }));
-(0, ava_1.default)("OPDS2 HTTP (de)serialize roundtrip (recursive) 2", (t) => (0, tslib_1.__awaiter)(void 0, void 0, void 0, function* () {
+(0, ava_1.default)("OPDS2 HTTP (de)serialize roundtrip (recursive) 2", (t) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
     const url = "https://catalog.feedbooks.com/catalog/public_domain.json";
     yield runUrlTest(t, url);
 }));
-(0, ava_1.default)("OPDS2 HTTP (de)serialize roundtrip (recursive) CATALOGS", (t) => (0, tslib_1.__awaiter)(void 0, void 0, void 0, function* () {
+(0, ava_1.default)("OPDS2 HTTP (de)serialize roundtrip (recursive) CATALOGS", (t) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
     const url = "https://libraryregistry.librarysimplified.org/libraries";
     yield runUrlTest(t, url);
 }));
-(0, ava_1.default)("OPDS2 HTTP (de)serialize roundtrip (recursive) AUTHENTICATION", (t) => (0, tslib_1.__awaiter)(void 0, void 0, void 0, function* () {
+(0, ava_1.default)("OPDS2 HTTP (de)serialize roundtrip (recursive) AUTHENTICATION", (t) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
     const url = "http://acl.simplye-ca.org/CALMDA/authentication_document";
     yield runUrlTest(t, url);
 }));
-(0, ava_1.default)("OPDS1-2 HTTP convert (de)serialize roundtrip (recursive)", (t) => (0, tslib_1.__awaiter)(void 0, void 0, void 0, function* () {
+(0, ava_1.default)("OPDS1-2 HTTP convert (de)serialize roundtrip (recursive)", (t) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
     const url = "https://bookserver.archive.org/group/openaudiobooks";
     yield runUrlTestAlt(t, url);
 }));
-(0, ava_1.default)("test", (t) => (0, tslib_1.__awaiter)(void 0, void 0, void 0, function* () {
+(0, ava_1.default)("test", (t) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
     const url = "https://api.archivelab.org/books/bookconcord_preface_1202/opds_audio_manifest";
     const done = new Set([]);
     yield webpubTest(url, done);
@@ -798,7 +801,7 @@ function runUrlTestAlt(t, url) {
     debug(done.size);
     t.true(yield delay(true));
 }));
-(0, ava_1.default)("OPDS1-2 LCP passphrase convert (de)serialize roundtrip", (t) => (0, tslib_1.__awaiter)(void 0, void 0, void 0, function* () {
+(0, ava_1.default)("OPDS1-2 LCP passphrase convert (de)serialize roundtrip", (t) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
     const xmlSrc = `
 <entry
     xmlns="http://www.w3.org/2005/Atom"
