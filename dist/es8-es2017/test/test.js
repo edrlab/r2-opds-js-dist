@@ -389,6 +389,9 @@ async function opds2Test(url) {
             .get(url, (response) => {
             let str;
             let buffs;
+            if (response.statusMessage) {
+                debug(`${url} STATUS ==> ${response.statusMessage}`);
+            }
             if (response.statusCode && (response.statusCode < 200 || response.statusCode >= 300)) {
                 debug(`${url} ==> ${response.statusCode} (skipped)`);
                 const empty = {
@@ -456,7 +459,15 @@ async function opds2Test(url) {
             });
         })
             .on("error", (err) => {
-            reject(err);
+            debug(`${url} ERROR ==> ${err}`);
+            const empty = {
+                audiowebpubs: new Set([]),
+                authentications: new Set([]),
+                feeds: new Set([]),
+                pubs: new Set([]),
+                webpubs: new Set([]),
+            };
+            resolve(empty);
         });
     });
 }
@@ -469,6 +480,9 @@ async function webpubTest(url, alreadyDone) {
             .get(url, (response) => {
             let str;
             let buffs;
+            if (response.statusMessage) {
+                debug(`${url} STATUS ==> ${response.statusMessage}`);
+            }
             if (response.statusCode && (response.statusCode < 200 || response.statusCode >= 300)) {
                 debug(`${url} ==> ${response.statusCode} (skipped)`);
                 resolve(true);
@@ -523,7 +537,8 @@ async function webpubTest(url, alreadyDone) {
             });
         })
             .on("error", (err) => {
-            reject(err);
+            debug(`${url} ERROR ==> ${err}`);
+            resolve(true);
         });
     });
 }
@@ -650,6 +665,9 @@ async function testUrlAlt(t, url, alreadyDone) {
             .get(url, async (response) => {
             let str;
             let buffs;
+            if (response.statusMessage) {
+                debug(`${url} STATUS ==> ${response.statusMessage}`);
+            }
             if (response.statusCode && (response.statusCode < 200 || response.statusCode >= 300)) {
                 debug(`${url} ==> ${response.statusCode} (skipped)`);
                 resolve(true);
@@ -713,9 +731,9 @@ async function testUrlAlt(t, url, alreadyDone) {
                 return;
             });
         })
-            .on("error", async (err) => {
-            reject(err);
-            return;
+            .on("error", (err) => {
+            debug(`${url} ERROR ==> ${err}`);
+            resolve(true);
         });
     });
     return await promise;

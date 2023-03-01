@@ -380,6 +380,9 @@ function opds2Test(url) {
                         .get(url, function (response) {
                         var str;
                         var buffs;
+                        if (response.statusMessage) {
+                            debug("".concat(url, " STATUS ==> ").concat(response.statusMessage));
+                        }
                         if (response.statusCode && (response.statusCode < 200 || response.statusCode >= 300)) {
                             debug("".concat(url, " ==> ").concat(response.statusCode, " (skipped)"));
                             var empty = {
@@ -457,7 +460,15 @@ function opds2Test(url) {
                         }); });
                     })
                         .on("error", function (err) {
-                        reject(err);
+                        debug("".concat(url, " ERROR ==> ").concat(err));
+                        var empty = {
+                            audiowebpubs: new Set([]),
+                            authentications: new Set([]),
+                            feeds: new Set([]),
+                            pubs: new Set([]),
+                            webpubs: new Set([]),
+                        };
+                        resolve(empty);
                     });
                 })];
         });
@@ -475,6 +486,9 @@ function webpubTest(url, alreadyDone) {
                         .get(url, function (response) {
                         var str;
                         var buffs;
+                        if (response.statusMessage) {
+                            debug("".concat(url, " STATUS ==> ").concat(response.statusMessage));
+                        }
                         if (response.statusCode && (response.statusCode < 200 || response.statusCode >= 300)) {
                             debug("".concat(url, " ==> ").concat(response.statusCode, " (skipped)"));
                             resolve(true);
@@ -539,7 +553,8 @@ function webpubTest(url, alreadyDone) {
                         }); });
                     })
                         .on("error", function (err) {
-                        reject(err);
+                        debug("".concat(url, " ERROR ==> ").concat(err));
+                        resolve(true);
                     });
                 })];
         });
@@ -768,6 +783,9 @@ function testUrlAlt(t, url, alreadyDone) {
                             var str, buffs;
                             var _this = this;
                             return tslib_1.__generator(this, function (_a) {
+                                if (response.statusMessage) {
+                                    debug("".concat(url, " STATUS ==> ").concat(response.statusMessage));
+                                }
                                 if (response.statusCode && (response.statusCode < 200 || response.statusCode >= 300)) {
                                     debug("".concat(url, " ==> ").concat(response.statusCode, " (skipped)"));
                                     resolve(true);
@@ -844,12 +862,10 @@ function testUrlAlt(t, url, alreadyDone) {
                                 return [2];
                             });
                         }); })
-                            .on("error", function (err) { return tslib_1.__awaiter(_this, void 0, void 0, function () {
-                            return tslib_1.__generator(this, function (_a) {
-                                reject(err);
-                                return [2];
-                            });
-                        }); });
+                            .on("error", function (err) {
+                            debug("".concat(url, " ERROR ==> ").concat(err));
+                            resolve(true);
+                        });
                     });
                     return [4, promise];
                 case 1: return [2, _a.sent()];

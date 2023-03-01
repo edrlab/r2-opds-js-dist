@@ -397,6 +397,9 @@ function opds2Test(url) {
                 .get(url, (response) => {
                 let str;
                 let buffs;
+                if (response.statusMessage) {
+                    debug(`${url} STATUS ==> ${response.statusMessage}`);
+                }
                 if (response.statusCode && (response.statusCode < 200 || response.statusCode >= 300)) {
                     debug(`${url} ==> ${response.statusCode} (skipped)`);
                     const empty = {
@@ -464,7 +467,15 @@ function opds2Test(url) {
                 }));
             })
                 .on("error", (err) => {
-                reject(err);
+                debug(`${url} ERROR ==> ${err}`);
+                const empty = {
+                    audiowebpubs: new Set([]),
+                    authentications: new Set([]),
+                    feeds: new Set([]),
+                    pubs: new Set([]),
+                    webpubs: new Set([]),
+                };
+                resolve(empty);
             });
         });
     });
@@ -479,6 +490,9 @@ function webpubTest(url, alreadyDone) {
                 .get(url, (response) => {
                 let str;
                 let buffs;
+                if (response.statusMessage) {
+                    debug(`${url} STATUS ==> ${response.statusMessage}`);
+                }
                 if (response.statusCode && (response.statusCode < 200 || response.statusCode >= 300)) {
                     debug(`${url} ==> ${response.statusCode} (skipped)`);
                     resolve(true);
@@ -533,7 +547,8 @@ function webpubTest(url, alreadyDone) {
                 }));
             })
                 .on("error", (err) => {
-                reject(err);
+                debug(`${url} ERROR ==> ${err}`);
+                resolve(true);
             });
         });
     });
@@ -670,6 +685,9 @@ function testUrlAlt(t, url, alreadyDone) {
                 .get(url, (response) => tslib_1.__awaiter(this, void 0, void 0, function* () {
                 let str;
                 let buffs;
+                if (response.statusMessage) {
+                    debug(`${url} STATUS ==> ${response.statusMessage}`);
+                }
                 if (response.statusCode && (response.statusCode < 200 || response.statusCode >= 300)) {
                     debug(`${url} ==> ${response.statusCode} (skipped)`);
                     resolve(true);
@@ -733,10 +751,10 @@ function testUrlAlt(t, url, alreadyDone) {
                     return;
                 }));
             }))
-                .on("error", (err) => tslib_1.__awaiter(this, void 0, void 0, function* () {
-                reject(err);
-                return;
-            }));
+                .on("error", (err) => {
+                debug(`${url} ERROR ==> ${err}`);
+                resolve(true);
+            });
         });
         return yield promise;
     });
