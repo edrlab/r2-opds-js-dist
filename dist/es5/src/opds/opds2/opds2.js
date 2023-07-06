@@ -84,7 +84,7 @@ var cloneLinkInfo = function (linkSource, linkDest) {
         }
     }
 };
-var OPDSFeed = (function () {
+var OPDSFeed = exports.OPDSFeed = (function () {
     function OPDSFeed() {
     }
     OPDSFeed.prototype.findFirstLinkByRel = function (rel) {
@@ -304,5 +304,4 @@ var OPDSFeed = (function () {
     ], OPDSFeed);
     return OPDSFeed;
 }());
-exports.OPDSFeed = OPDSFeed;
 //# sourceMappingURL=opds2.js.map

@@ -133,7 +133,7 @@ function fn() {
         }
     });
 }); });
-var MAX_TESTS = process.env.MAX_TESTS || 10;
+var MAX_TESTS = parseInt(process.env.MAX_TESTS || "0", 10) || 10;
 var FEEDS_FIRST = process.env.FEEDS_FIRST || false;
 function delay(okay) {
     return tslib_1.__awaiter(this, void 0, void 0, function () {
@@ -243,7 +243,7 @@ function parseCompareJSONs(url, json1, json2) {
                             });
                         };
                         var harmonizeArrays_1 = function (obj) {
-                            ["role", "@context", "rel", "language"].forEach(function (term) {
+                            ["role", "@context", "rel", "language", "conformsTo"].forEach(function (term) {
                                 if (obj[term]) {
                                     var isArray = obj[term] instanceof Array;
                                     if (!isArray) {
@@ -941,6 +941,19 @@ function runUrlTestAlt(t, url) {
         });
     });
 }
+(0, ava_1.default)("OPDS2 HTTP (de)serialize roundtrip (accessibility feed)", function (t) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
+    var url;
+    return tslib_1.__generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                url = "https://www.feedbooks.com/recent.json?accessibility=accessibility_fully";
+                return [4, runUrlTest(t, url)];
+            case 1:
+                _a.sent();
+                return [2];
+        }
+    });
+}); });
 (0, ava_1.default)("OPDS2 HTTP (de)serialize roundtrip (recursive) 1", function (t) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
     var url;
     return tslib_1.__generator(this, function (_a) {

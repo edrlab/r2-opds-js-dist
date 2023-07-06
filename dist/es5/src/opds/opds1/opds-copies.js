@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Copies = void 0;
 var tslib_1 = require("tslib");
 var xml_js_mapper_1 = require("r2-utils-js/dist/es5/src/_utils/xml-js-mapper");
-var Copies = (function () {
+var Copies = exports.Copies = (function () {
     function Copies() {
     }
     tslib_1.__decorate([
@@ -31,5 +31,4 @@ var Copies = (function () {
     ], Copies);
     return Copies;
 }());
-exports.Copies = Copies;
 //# sourceMappingURL=opds-copies.js.map

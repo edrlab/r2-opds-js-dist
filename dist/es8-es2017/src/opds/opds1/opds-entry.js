@@ -7,7 +7,7 @@ const opds_author_1 = require("./opds-author");
 const opds_category_1 = require("./opds-category");
 const opds_link_1 = require("./opds-link");
 const opds_serie_1 = require("./opds-serie");
-let Entry = class Entry {
+let Entry = exports.Entry = class Entry {
 };
 tslib_1.__decorate([
     (0, xml_js_mapper_1.XmlXPathSelector)("schema:Rating/@schema:ratingValue"),
@@ -117,7 +117,7 @@ tslib_1.__decorate([
     (0, xml_js_mapper_1.XmlItemType)(opds_serie_1.Serie),
     tslib_1.__metadata("design:type", Array)
 ], Entry.prototype, "Series", void 0);
-Entry = tslib_1.__decorate([
+exports.Entry = Entry = tslib_1.__decorate([
     (0, xml_js_mapper_1.XmlObject)({
         app: "http://www.w3.org/2007/app",
         atom: "http://www.w3.org/2005/Atom",
@@ -132,5 +132,4 @@ Entry = tslib_1.__decorate([
         xsi: "http://www.w3.org/2001/XMLSchema-instance",
     })
 ], Entry);
-exports.Entry = Entry;
 //# sourceMappingURL=opds-entry.js.map

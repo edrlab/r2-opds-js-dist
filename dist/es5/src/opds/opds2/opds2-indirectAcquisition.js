@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.OPDSIndirectAcquisition = void 0;
 var tslib_1 = require("tslib");
 var ta_json_x_1 = require("ta-json-x");
-var OPDSIndirectAcquisition = (function () {
+var OPDSIndirectAcquisition = exports.OPDSIndirectAcquisition = (function () {
     function OPDSIndirectAcquisition() {
     }
     OPDSIndirectAcquisition_1 = OPDSIndirectAcquisition;
@@ -33,5 +33,4 @@ var OPDSIndirectAcquisition = (function () {
     ], OPDSIndirectAcquisition);
     return OPDSIndirectAcquisition;
 }());
-exports.OPDSIndirectAcquisition = OPDSIndirectAcquisition;
 //# sourceMappingURL=opds2-indirectAcquisition.js.map

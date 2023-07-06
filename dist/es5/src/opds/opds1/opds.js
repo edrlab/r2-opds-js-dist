@@ -6,7 +6,7 @@ var xml_js_mapper_1 = require("r2-utils-js/dist/es5/src/_utils/xml-js-mapper");
 var opds_author_1 = require("./opds-author");
 var opds_entry_1 = require("./opds-entry");
 var opds_link_1 = require("./opds-link");
-var OPDS = (function () {
+var OPDS = exports.OPDS = (function () {
     function OPDS() {
     }
     tslib_1.__decorate([
@@ -74,5 +74,4 @@ var OPDS = (function () {
     ], OPDS);
     return OPDS;
 }());
-exports.OPDS = OPDS;
 //# sourceMappingURL=opds.js.map

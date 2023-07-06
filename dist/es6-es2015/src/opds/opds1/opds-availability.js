@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Availability = void 0;
 const tslib_1 = require("tslib");
 const xml_js_mapper_1 = require("r2-utils-js/dist/es6-es2015/src/_utils/xml-js-mapper");
-let Availability = class Availability {
+let Availability = exports.Availability = class Availability {
 };
 tslib_1.__decorate([
     (0, xml_js_mapper_1.XmlXPathSelector)("@state"),
@@ -21,7 +21,7 @@ tslib_1.__decorate([
     (0, xml_js_mapper_1.XmlXPathSelector)("@until"),
     tslib_1.__metadata("design:type", Date)
 ], Availability.prototype, "Until", void 0);
-Availability = tslib_1.__decorate([
+exports.Availability = Availability = tslib_1.__decorate([
     (0, xml_js_mapper_1.XmlObject)({
         app: "http://www.w3.org/2007/app",
         atom: "http://www.w3.org/2005/Atom",
@@ -36,5 +36,4 @@ Availability = tslib_1.__decorate([
         xsi: "http://www.w3.org/2001/XMLSchema-instance",
     })
 ], Availability);
-exports.Availability = Availability;
 //# sourceMappingURL=opds-availability.js.map

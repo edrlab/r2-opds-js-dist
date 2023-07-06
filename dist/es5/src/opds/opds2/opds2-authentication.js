@@ -6,7 +6,7 @@ var ta_json_x_1 = require("ta-json-x");
 var opds2_authentication_labels_1 = require("./opds2-authentication-labels");
 var opds2_link_1 = require("./opds2-link");
 var LINKS_JSON_PROP = "links";
-var OPDSAuthentication = (function () {
+var OPDSAuthentication = exports.OPDSAuthentication = (function () {
     function OPDSAuthentication() {
     }
     OPDSAuthentication.prototype._OnDeserialized = function () {
@@ -38,5 +38,4 @@ var OPDSAuthentication = (function () {
     ], OPDSAuthentication);
     return OPDSAuthentication;
 }());
-exports.OPDSAuthentication = OPDSAuthentication;
 //# sourceMappingURL=opds2-authentication.js.map

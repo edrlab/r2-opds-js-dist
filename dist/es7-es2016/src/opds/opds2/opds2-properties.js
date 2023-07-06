@@ -9,7 +9,7 @@ const opds2_copy_1 = require("./opds2-copy");
 const opds2_hold_1 = require("./opds2-hold");
 const opds2_indirectAcquisition_1 = require("./opds2-indirectAcquisition");
 const opds2_price_1 = require("./opds2-price");
-let OPDSProperties = class OPDSProperties extends metadata_properties_1.Properties {
+let OPDSProperties = exports.OPDSProperties = class OPDSProperties extends metadata_properties_1.Properties {
 };
 tslib_1.__decorate([
     (0, ta_json_x_1.JsonProperty)("numberOfItems"),
@@ -36,8 +36,7 @@ tslib_1.__decorate([
     (0, ta_json_x_1.JsonProperty)("availability"),
     tslib_1.__metadata("design:type", opds2_availability_1.OPDSAvailability)
 ], OPDSProperties.prototype, "Availability", void 0);
-OPDSProperties = tslib_1.__decorate([
+exports.OPDSProperties = OPDSProperties = tslib_1.__decorate([
     (0, ta_json_x_1.JsonObject)()
 ], OPDSProperties);
-exports.OPDSProperties = OPDSProperties;
 //# sourceMappingURL=opds2-properties.js.map

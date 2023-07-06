@@ -156,7 +156,7 @@ function fn() {
     debug("test ASYNC");
     t.is(yield fn(), "foo");
 }));
-const MAX_TESTS = process.env.MAX_TESTS || 10;
+const MAX_TESTS = parseInt(process.env.MAX_TESTS || "0", 10) || 10;
 const FEEDS_FIRST = process.env.FEEDS_FIRST || false;
 function delay(okay) {
     return tslib_1.__awaiter(this, void 0, void 0, function* () {
@@ -263,7 +263,7 @@ function parseCompareJSONs(url, json1, json2) {
                     });
                 };
                 const harmonizeArrays = (obj) => {
-                    ["role", "@context", "rel", "language"].forEach((term) => {
+                    ["role", "@context", "rel", "language", "conformsTo"].forEach((term) => {
                         if (obj[term]) {
                             const isArray = obj[term] instanceof Array;
                             if (!isArray) {
@@ -791,6 +791,10 @@ function runUrlTestAlt(t, url) {
         t.true(yield delay(false));
     });
 }
+(0, ava_1.default)("OPDS2 HTTP (de)serialize roundtrip (accessibility feed)", (t) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
+    const url = "https://www.feedbooks.com/recent.json?accessibility=accessibility_fully";
+    yield runUrlTest(t, url);
+}));
 (0, ava_1.default)("OPDS2 HTTP (de)serialize roundtrip (recursive) 1", (t) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
     const url = "https://test.opds.io/2.0/home.json";
     yield runUrlTest(t, url);

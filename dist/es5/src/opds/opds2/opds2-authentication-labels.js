@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.OPDSAuthenticationLabels = void 0;
 var tslib_1 = require("tslib");
 var ta_json_x_1 = require("ta-json-x");
-var OPDSAuthenticationLabels = (function () {
+var OPDSAuthenticationLabels = exports.OPDSAuthenticationLabels = (function () {
     function OPDSAuthenticationLabels() {
     }
     OPDSAuthenticationLabels.prototype._OnDeserialized = function () {
@@ -27,5 +27,4 @@ var OPDSAuthenticationLabels = (function () {
     ], OPDSAuthenticationLabels);
     return OPDSAuthenticationLabels;
 }());
-exports.OPDSAuthenticationLabels = OPDSAuthenticationLabels;
 //# sourceMappingURL=opds2-authentication-labels.js.map

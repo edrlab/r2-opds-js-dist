@@ -6,7 +6,7 @@ const xml_js_mapper_1 = require("r2-utils-js/dist/es8-es2017/src/_utils/xml-js-m
 const opds_author_1 = require("./opds-author");
 const opds_entry_1 = require("./opds-entry");
 const opds_link_1 = require("./opds-link");
-let OPDS = class OPDS {
+let OPDS = exports.OPDS = class OPDS {
 };
 tslib_1.__decorate([
     (0, xml_js_mapper_1.XmlXPathSelector)("opensearch:totalResults/text()"),
@@ -55,7 +55,7 @@ tslib_1.__decorate([
     (0, xml_js_mapper_1.XmlItemType)(opds_entry_1.Entry),
     tslib_1.__metadata("design:type", Array)
 ], OPDS.prototype, "Entries", void 0);
-OPDS = tslib_1.__decorate([
+exports.OPDS = OPDS = tslib_1.__decorate([
     (0, xml_js_mapper_1.XmlObject)({
         app: "http://www.w3.org/2007/app",
         atom: "http://www.w3.org/2005/Atom",
@@ -71,5 +71,4 @@ OPDS = tslib_1.__decorate([
         xsi: "http://www.w3.org/2001/XMLSchema-instance",
     })
 ], OPDS);
-exports.OPDS = OPDS;
 //# sourceMappingURL=opds.js.map

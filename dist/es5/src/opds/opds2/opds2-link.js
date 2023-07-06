@@ -15,9 +15,9 @@ var OPDSLinkRelEnum;
     OPDSLinkRelEnum["BorrowURI"] = "http://opds-spec.org/acquisition/borrow";
     OPDSLinkRelEnum["SampleURI"] = "http://opds-spec.org/acquisition/sample";
     OPDSLinkRelEnum["SubscribeURI"] = "http://opds-spec.org/acquisition/subscribe";
-})(OPDSLinkRelEnum = exports.OPDSLinkRelEnum || (exports.OPDSLinkRelEnum = {}));
+})(OPDSLinkRelEnum || (exports.OPDSLinkRelEnum = OPDSLinkRelEnum = {}));
 var PROPERTIES_JSON_PROP = "properties";
-var OPDSLink = (function (_super) {
+var OPDSLink = exports.OPDSLink = (function (_super) {
     tslib_1.__extends(OPDSLink, _super);
     function OPDSLink() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -31,5 +31,4 @@ var OPDSLink = (function (_super) {
     ], OPDSLink);
     return OPDSLink;
 }(publication_link_1.Link));
-exports.OPDSLink = OPDSLink;
 //# sourceMappingURL=opds2-link.js.map

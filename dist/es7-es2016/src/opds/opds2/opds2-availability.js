@@ -9,7 +9,7 @@ var OPDSAvailabilityEnum;
     OPDSAvailabilityEnum["Unavailable"] = "unavailable";
     OPDSAvailabilityEnum["Reserved"] = "reserved";
     OPDSAvailabilityEnum["Ready"] = "ready";
-})(OPDSAvailabilityEnum = exports.OPDSAvailabilityEnum || (exports.OPDSAvailabilityEnum = {}));
+})(OPDSAvailabilityEnum || (exports.OPDSAvailabilityEnum = OPDSAvailabilityEnum = {}));
 class OPDSAvailability {
     _OnDeserialized() {
         if (!this.State) {
@@ -17,6 +17,7 @@ class OPDSAvailability {
         }
     }
 }
+exports.OPDSAvailability = OPDSAvailability;
 tslib_1.__decorate([
     (0, ta_json_x_1.JsonProperty)("state"),
     tslib_1.__metadata("design:type", String)
@@ -35,5 +36,4 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:paramtypes", []),
     tslib_1.__metadata("design:returntype", void 0)
 ], OPDSAvailability.prototype, "_OnDeserialized", null);
-exports.OPDSAvailability = OPDSAvailability;
 //# sourceMappingURL=opds2-availability.js.map

@@ -7,7 +7,7 @@ const opds_availability_1 = require("./opds-availability");
 const opds_copies_1 = require("./opds-copies");
 const opds_holds_1 = require("./opds-holds");
 const opds_indirectAcquisition_1 = require("./opds-indirectAcquisition");
-let Link = class Link {
+let Link = exports.Link = class Link {
     HasRel(rel) {
         return this.Rel === rel;
     }
@@ -68,7 +68,7 @@ tslib_1.__decorate([
     (0, xml_js_mapper_1.XmlXPathSelector)("@rel"),
     tslib_1.__metadata("design:type", String)
 ], Link.prototype, "Rel", void 0);
-Link = tslib_1.__decorate([
+exports.Link = Link = tslib_1.__decorate([
     (0, xml_js_mapper_1.XmlObject)({
         app: "http://www.w3.org/2007/app",
         atom: "http://www.w3.org/2005/Atom",
@@ -84,5 +84,4 @@ Link = tslib_1.__decorate([
         xsi: "http://www.w3.org/2001/XMLSchema-instance",
     })
 ], Link);
-exports.Link = Link;
 //# sourceMappingURL=opds-link.js.map

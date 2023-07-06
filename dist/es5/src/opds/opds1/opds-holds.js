@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Holds = void 0;
 var tslib_1 = require("tslib");
 var xml_js_mapper_1 = require("r2-utils-js/dist/es5/src/_utils/xml-js-mapper");
-var Holds = (function () {
+var Holds = exports.Holds = (function () {
     function Holds() {
     }
     tslib_1.__decorate([
@@ -31,5 +31,4 @@ var Holds = (function () {
     ], Holds);
     return Holds;
 }());
-exports.Holds = Holds;
 //# sourceMappingURL=opds-holds.js.map

@@ -184,8 +184,8 @@ var OPDSCurrencyEnum;
     OPDSCurrencyEnum["ZAR"] = "ZAR";
     OPDSCurrencyEnum["ZMW"] = "ZMW";
     OPDSCurrencyEnum["ZWL"] = "ZWL";
-})(OPDSCurrencyEnum = exports.OPDSCurrencyEnum || (exports.OPDSCurrencyEnum = {}));
-var OPDSPrice = (function () {
+})(OPDSCurrencyEnum || (exports.OPDSCurrencyEnum = OPDSCurrencyEnum = {}));
+var OPDSPrice = exports.OPDSPrice = (function () {
     function OPDSPrice() {
     }
     OPDSPrice.prototype._OnDeserialized = function () {
@@ -215,5 +215,4 @@ var OPDSPrice = (function () {
     ], OPDSPrice);
     return OPDSPrice;
 }());
-exports.OPDSPrice = OPDSPrice;
 //# sourceMappingURL=opds2-price.js.map

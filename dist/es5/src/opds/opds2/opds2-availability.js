@@ -9,8 +9,8 @@ var OPDSAvailabilityEnum;
     OPDSAvailabilityEnum["Unavailable"] = "unavailable";
     OPDSAvailabilityEnum["Reserved"] = "reserved";
     OPDSAvailabilityEnum["Ready"] = "ready";
-})(OPDSAvailabilityEnum = exports.OPDSAvailabilityEnum || (exports.OPDSAvailabilityEnum = {}));
-var OPDSAvailability = (function () {
+})(OPDSAvailabilityEnum || (exports.OPDSAvailabilityEnum = OPDSAvailabilityEnum = {}));
+var OPDSAvailability = exports.OPDSAvailability = (function () {
     function OPDSAvailability() {
     }
     OPDSAvailability.prototype._OnDeserialized = function () {
@@ -38,5 +38,4 @@ var OPDSAvailability = (function () {
     ], OPDSAvailability.prototype, "_OnDeserialized", null);
     return OPDSAvailability;
 }());
-exports.OPDSAvailability = OPDSAvailability;
 //# sourceMappingURL=opds2-availability.js.map

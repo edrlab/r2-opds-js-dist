@@ -83,7 +83,7 @@ const cloneLinkInfo = (linkSource, linkDest) => {
         }
     }
 };
-let OPDSFeed = class OPDSFeed {
+let OPDSFeed = exports.OPDSFeed = class OPDSFeed {
     findFirstLinkByRel(rel) {
         return this.Links ? this.Links.find((l) => {
             return l.HasRel(rel);
@@ -297,8 +297,7 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:paramtypes", []),
     tslib_1.__metadata("design:returntype", void 0)
 ], OPDSFeed.prototype, "_OnDeserialized", null);
-OPDSFeed = tslib_1.__decorate([
+exports.OPDSFeed = OPDSFeed = tslib_1.__decorate([
     (0, ta_json_x_1.JsonObject)()
 ], OPDSFeed);
-exports.OPDSFeed = OPDSFeed;
 //# sourceMappingURL=opds2.js.map

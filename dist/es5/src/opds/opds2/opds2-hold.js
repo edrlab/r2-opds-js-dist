@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.OPDSHold = void 0;
 var tslib_1 = require("tslib");
 var ta_json_x_1 = require("ta-json-x");
-var OPDSHold = (function () {
+var OPDSHold = exports.OPDSHold = (function () {
     function OPDSHold() {
     }
     tslib_1.__decorate([
@@ -16,5 +16,4 @@ var OPDSHold = (function () {
     ], OPDSHold.prototype, "Position", void 0);
     return OPDSHold;
 }());
-exports.OPDSHold = OPDSHold;
 //# sourceMappingURL=opds2-hold.js.map

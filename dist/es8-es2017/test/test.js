@@ -153,7 +153,7 @@ async function fn() {
     debug("test ASYNC");
     t.is(await fn(), "foo");
 });
-const MAX_TESTS = process.env.MAX_TESTS || 10;
+const MAX_TESTS = parseInt(process.env.MAX_TESTS || "0", 10) || 10;
 const FEEDS_FIRST = process.env.FEEDS_FIRST || false;
 async function delay(okay) {
     return new Promise((resolve, _reject) => {
@@ -257,7 +257,7 @@ async function parseCompareJSONs(url, json1, json2) {
                 });
             };
             const harmonizeArrays = (obj) => {
-                ["role", "@context", "rel", "language"].forEach((term) => {
+                ["role", "@context", "rel", "language", "conformsTo"].forEach((term) => {
                     if (obj[term]) {
                         const isArray = obj[term] instanceof Array;
                         if (!isArray) {
@@ -766,6 +766,10 @@ async function runUrlTestAlt(t, url) {
     }
     t.true(await delay(false));
 }
+(0, ava_1.default)("OPDS2 HTTP (de)serialize roundtrip (accessibility feed)", async (t) => {
+    const url = "https://www.feedbooks.com/recent.json?accessibility=accessibility_fully";
+    await runUrlTest(t, url);
+});
 (0, ava_1.default)("OPDS2 HTTP (de)serialize roundtrip (recursive) 1", async (t) => {
     const url = "https://test.opds.io/2.0/home.json";
     await runUrlTest(t, url);

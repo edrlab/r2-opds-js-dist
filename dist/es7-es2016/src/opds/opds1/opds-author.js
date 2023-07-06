@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Author = void 0;
 const tslib_1 = require("tslib");
 const xml_js_mapper_1 = require("r2-utils-js/dist/es7-es2016/src/_utils/xml-js-mapper");
-let Author = class Author {
+let Author = exports.Author = class Author {
 };
 tslib_1.__decorate([
     (0, xml_js_mapper_1.XmlXPathSelector)("atom:name/text()"),
@@ -17,7 +17,7 @@ tslib_1.__decorate([
     (0, xml_js_mapper_1.XmlXPathSelector)("atom:email/text()"),
     tslib_1.__metadata("design:type", String)
 ], Author.prototype, "Email", void 0);
-Author = tslib_1.__decorate([
+exports.Author = Author = tslib_1.__decorate([
     (0, xml_js_mapper_1.XmlObject)({
         app: "http://www.w3.org/2007/app",
         atom: "http://www.w3.org/2005/Atom",
@@ -32,5 +32,4 @@ Author = tslib_1.__decorate([
         xsi: "http://www.w3.org/2001/XMLSchema-instance",
     })
 ], Author);
-exports.Author = Author;
 //# sourceMappingURL=opds-author.js.map

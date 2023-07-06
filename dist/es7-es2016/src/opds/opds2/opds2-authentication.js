@@ -6,7 +6,7 @@ const ta_json_x_1 = require("ta-json-x");
 const opds2_authentication_labels_1 = require("./opds2-authentication-labels");
 const opds2_link_1 = require("./opds2-link");
 const LINKS_JSON_PROP = "links";
-let OPDSAuthentication = class OPDSAuthentication {
+let OPDSAuthentication = exports.OPDSAuthentication = class OPDSAuthentication {
     _OnDeserialized() {
         if (!this.Type) {
             console.log("OPDSAuthentication.Type is not set!");
@@ -32,8 +32,7 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:paramtypes", []),
     tslib_1.__metadata("design:returntype", void 0)
 ], OPDSAuthentication.prototype, "_OnDeserialized", null);
-OPDSAuthentication = tslib_1.__decorate([
+exports.OPDSAuthentication = OPDSAuthentication = tslib_1.__decorate([
     (0, ta_json_x_1.JsonObject)()
 ], OPDSAuthentication);
-exports.OPDSAuthentication = OPDSAuthentication;
 //# sourceMappingURL=opds2-authentication.js.map

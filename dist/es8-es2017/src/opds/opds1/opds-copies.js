@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Copies = void 0;
 const tslib_1 = require("tslib");
 const xml_js_mapper_1 = require("r2-utils-js/dist/es8-es2017/src/_utils/xml-js-mapper");
-let Copies = class Copies {
+let Copies = exports.Copies = class Copies {
 };
 tslib_1.__decorate([
     (0, xml_js_mapper_1.XmlXPathSelector)("@total"),
@@ -13,7 +13,7 @@ tslib_1.__decorate([
     (0, xml_js_mapper_1.XmlXPathSelector)("@available"),
     tslib_1.__metadata("design:type", Number)
 ], Copies.prototype, "Available", void 0);
-Copies = tslib_1.__decorate([
+exports.Copies = Copies = tslib_1.__decorate([
     (0, xml_js_mapper_1.XmlObject)({
         app: "http://www.w3.org/2007/app",
         atom: "http://www.w3.org/2005/Atom",
@@ -28,5 +28,4 @@ Copies = tslib_1.__decorate([
         xsi: "http://www.w3.org/2001/XMLSchema-instance",
     })
 ], Copies);
-exports.Copies = Copies;
 //# sourceMappingURL=opds-copies.js.map

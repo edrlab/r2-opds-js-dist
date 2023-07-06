@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Serie = void 0;
 const tslib_1 = require("tslib");
 const xml_js_mapper_1 = require("r2-utils-js/dist/es7-es2016/src/_utils/xml-js-mapper");
-let Serie = class Serie {
+let Serie = exports.Serie = class Serie {
 };
 tslib_1.__decorate([
     (0, xml_js_mapper_1.XmlXPathSelector)("@schema:name"),
@@ -17,7 +17,7 @@ tslib_1.__decorate([
     (0, xml_js_mapper_1.XmlXPathSelector)("@schema:position"),
     tslib_1.__metadata("design:type", Number)
 ], Serie.prototype, "Position", void 0);
-Serie = tslib_1.__decorate([
+exports.Serie = Serie = tslib_1.__decorate([
     (0, xml_js_mapper_1.XmlObject)({
         app: "http://www.w3.org/2007/app",
         atom: "http://www.w3.org/2005/Atom",
@@ -32,5 +32,4 @@ Serie = tslib_1.__decorate([
         xsi: "http://www.w3.org/2001/XMLSchema-instance",
     })
 ], Serie);
-exports.Serie = Serie;
 //# sourceMappingURL=opds-serie.js.map

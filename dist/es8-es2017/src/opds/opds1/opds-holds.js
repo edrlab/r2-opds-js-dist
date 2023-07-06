@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Holds = void 0;
 const tslib_1 = require("tslib");
 const xml_js_mapper_1 = require("r2-utils-js/dist/es8-es2017/src/_utils/xml-js-mapper");
-let Holds = class Holds {
+let Holds = exports.Holds = class Holds {
 };
 tslib_1.__decorate([
     (0, xml_js_mapper_1.XmlXPathSelector)("@total"),
@@ -13,7 +13,7 @@ tslib_1.__decorate([
     (0, xml_js_mapper_1.XmlXPathSelector)("@position"),
     tslib_1.__metadata("design:type", Number)
 ], Holds.prototype, "Position", void 0);
-Holds = tslib_1.__decorate([
+exports.Holds = Holds = tslib_1.__decorate([
     (0, xml_js_mapper_1.XmlObject)({
         app: "http://www.w3.org/2007/app",
         atom: "http://www.w3.org/2005/Atom",
@@ -28,5 +28,4 @@ Holds = tslib_1.__decorate([
         xsi: "http://www.w3.org/2001/XMLSchema-instance",
     })
 ], Holds);
-exports.Holds = Holds;
 //# sourceMappingURL=opds-holds.js.map

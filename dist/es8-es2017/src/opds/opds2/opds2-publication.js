@@ -12,7 +12,7 @@ const METADATA_JSON_PROP = "metadata";
 const LINKS_JSON_PROP = "links";
 const IMAGES_JSON_PROP = "images";
 const IMAGE_JSON_PROP = "image";
-let OPDSPublication = class OPDSPublication {
+let OPDSPublication = exports.OPDSPublication = class OPDSPublication {
     findFirstLinkByRel(rel) {
         return this.Links ? this.Links.find((l) => {
             return l.HasRel(rel);
@@ -160,8 +160,7 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:paramtypes", []),
     tslib_1.__metadata("design:returntype", void 0)
 ], OPDSPublication.prototype, "_OnDeserialized", null);
-OPDSPublication = tslib_1.__decorate([
+exports.OPDSPublication = OPDSPublication = tslib_1.__decorate([
     (0, ta_json_x_1.JsonObject)()
 ], OPDSPublication);
-exports.OPDSPublication = OPDSPublication;
 //# sourceMappingURL=opds2-publication.js.map

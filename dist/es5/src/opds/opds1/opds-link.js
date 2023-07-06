@@ -7,7 +7,7 @@ var opds_availability_1 = require("./opds-availability");
 var opds_copies_1 = require("./opds-copies");
 var opds_holds_1 = require("./opds-holds");
 var opds_indirectAcquisition_1 = require("./opds-indirectAcquisition");
-var Link = (function () {
+var Link = exports.Link = (function () {
     function Link() {
     }
     Link.prototype.HasRel = function (rel) {
@@ -87,5 +87,4 @@ var Link = (function () {
     ], Link);
     return Link;
 }());
-exports.Link = Link;
 //# sourceMappingURL=opds-link.js.map

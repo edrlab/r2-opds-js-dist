@@ -15,16 +15,15 @@ var OPDSLinkRelEnum;
     OPDSLinkRelEnum["BorrowURI"] = "http://opds-spec.org/acquisition/borrow";
     OPDSLinkRelEnum["SampleURI"] = "http://opds-spec.org/acquisition/sample";
     OPDSLinkRelEnum["SubscribeURI"] = "http://opds-spec.org/acquisition/subscribe";
-})(OPDSLinkRelEnum = exports.OPDSLinkRelEnum || (exports.OPDSLinkRelEnum = {}));
+})(OPDSLinkRelEnum || (exports.OPDSLinkRelEnum = OPDSLinkRelEnum = {}));
 const PROPERTIES_JSON_PROP = "properties";
-let OPDSLink = class OPDSLink extends publication_link_1.Link {
+let OPDSLink = exports.OPDSLink = class OPDSLink extends publication_link_1.Link {
 };
 tslib_1.__decorate([
     (0, ta_json_x_1.JsonProperty)(PROPERTIES_JSON_PROP),
     tslib_1.__metadata("design:type", opds2_properties_1.OPDSProperties)
 ], OPDSLink.prototype, "Properties", void 0);
-OPDSLink = tslib_1.__decorate([
+exports.OPDSLink = OPDSLink = tslib_1.__decorate([
     (0, ta_json_x_1.JsonObject)()
 ], OPDSLink);
-exports.OPDSLink = OPDSLink;
 //# sourceMappingURL=opds2-link.js.map

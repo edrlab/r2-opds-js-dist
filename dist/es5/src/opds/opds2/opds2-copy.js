@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.OPDSCopy = void 0;
 var tslib_1 = require("tslib");
 var ta_json_x_1 = require("ta-json-x");
-var OPDSCopy = (function () {
+var OPDSCopy = exports.OPDSCopy = (function () {
     function OPDSCopy() {
     }
     tslib_1.__decorate([
@@ -16,5 +16,4 @@ var OPDSCopy = (function () {
     ], OPDSCopy.prototype, "Available", void 0);
     return OPDSCopy;
 }());
-exports.OPDSCopy = OPDSCopy;
 //# sourceMappingURL=opds2-copy.js.map

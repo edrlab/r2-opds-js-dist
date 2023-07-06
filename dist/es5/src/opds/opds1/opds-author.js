@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Author = void 0;
 var tslib_1 = require("tslib");
 var xml_js_mapper_1 = require("r2-utils-js/dist/es5/src/_utils/xml-js-mapper");
-var Author = (function () {
+var Author = exports.Author = (function () {
     function Author() {
     }
     tslib_1.__decorate([
@@ -35,5 +35,4 @@ var Author = (function () {
     ], Author);
     return Author;
 }());
-exports.Author = Author;
 //# sourceMappingURL=opds-author.js.map
