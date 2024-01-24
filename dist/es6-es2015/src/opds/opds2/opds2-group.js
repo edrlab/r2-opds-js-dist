@@ -10,8 +10,9 @@ const METADATA_JSON_PROP = "metadata";
 const PUBLICATIONS_JSON_PROP = "publications";
 const LINKS_JSON_PROP = "links";
 const NAVIGATION_JSON_PROP = "navigation";
-let OPDSGroup = exports.OPDSGroup = class OPDSGroup {
+let OPDSGroup = class OPDSGroup {
 };
+exports.OPDSGroup = OPDSGroup;
 tslib_1.__decorate([
     (0, ta_json_x_1.JsonProperty)(METADATA_JSON_PROP),
     tslib_1.__metadata("design:type", opds2_metadata_1.OPDSMetadata)

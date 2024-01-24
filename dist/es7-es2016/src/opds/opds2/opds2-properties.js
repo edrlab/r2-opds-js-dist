@@ -9,8 +9,9 @@ const opds2_copy_1 = require("./opds2-copy");
 const opds2_hold_1 = require("./opds2-hold");
 const opds2_indirectAcquisition_1 = require("./opds2-indirectAcquisition");
 const opds2_price_1 = require("./opds2-price");
-let OPDSProperties = exports.OPDSProperties = class OPDSProperties extends metadata_properties_1.Properties {
+let OPDSProperties = class OPDSProperties extends metadata_properties_1.Properties {
 };
+exports.OPDSProperties = OPDSProperties;
 tslib_1.__decorate([
     (0, ta_json_x_1.JsonProperty)("numberOfItems"),
     tslib_1.__metadata("design:type", Number)

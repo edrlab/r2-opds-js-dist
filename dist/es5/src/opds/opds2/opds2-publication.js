@@ -12,7 +12,7 @@ var METADATA_JSON_PROP = "metadata";
 var LINKS_JSON_PROP = "links";
 var IMAGES_JSON_PROP = "images";
 var IMAGE_JSON_PROP = "image";
-var OPDSPublication = exports.OPDSPublication = (function () {
+var OPDSPublication = (function () {
     function OPDSPublication() {
     }
     OPDSPublication.prototype.findFirstLinkByRel = function (rel) {
@@ -166,4 +166,5 @@ var OPDSPublication = exports.OPDSPublication = (function () {
     ], OPDSPublication);
     return OPDSPublication;
 }());
+exports.OPDSPublication = OPDSPublication;
 //# sourceMappingURL=opds2-publication.js.map

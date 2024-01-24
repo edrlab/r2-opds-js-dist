@@ -83,7 +83,7 @@ const cloneLinkInfo = (linkSource, linkDest) => {
         }
     }
 };
-let OPDSFeed = exports.OPDSFeed = class OPDSFeed {
+let OPDSFeed = class OPDSFeed {
     findFirstLinkByRel(rel) {
         return this.Links ? this.Links.find((l) => {
             return l.HasRel(rel);
@@ -251,6 +251,7 @@ let OPDSFeed = exports.OPDSFeed = class OPDSFeed {
         }
     }
 };
+exports.OPDSFeed = OPDSFeed;
 tslib_1.__decorate([
     (0, ta_json_x_1.JsonProperty)("@context"),
     (0, ta_json_x_1.JsonElementType)(String),

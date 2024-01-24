@@ -9,7 +9,7 @@ var opds2_copy_1 = require("./opds2-copy");
 var opds2_hold_1 = require("./opds2-hold");
 var opds2_indirectAcquisition_1 = require("./opds2-indirectAcquisition");
 var opds2_price_1 = require("./opds2-price");
-var OPDSProperties = exports.OPDSProperties = (function (_super) {
+var OPDSProperties = (function (_super) {
     tslib_1.__extends(OPDSProperties, _super);
     function OPDSProperties() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -44,4 +44,5 @@ var OPDSProperties = exports.OPDSProperties = (function (_super) {
     ], OPDSProperties);
     return OPDSProperties;
 }(metadata_properties_1.Properties));
+exports.OPDSProperties = OPDSProperties;
 //# sourceMappingURL=opds2-properties.js.map

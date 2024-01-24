@@ -185,7 +185,7 @@ var OPDSCurrencyEnum;
     OPDSCurrencyEnum["ZMW"] = "ZMW";
     OPDSCurrencyEnum["ZWL"] = "ZWL";
 })(OPDSCurrencyEnum || (exports.OPDSCurrencyEnum = OPDSCurrencyEnum = {}));
-let OPDSPrice = exports.OPDSPrice = class OPDSPrice {
+let OPDSPrice = class OPDSPrice {
     _OnDeserialized() {
         if (!this.Currency) {
             console.log("OPDSPrice.Currency is not set!");
@@ -195,6 +195,7 @@ let OPDSPrice = exports.OPDSPrice = class OPDSPrice {
         }
     }
 };
+exports.OPDSPrice = OPDSPrice;
 tslib_1.__decorate([
     (0, ta_json_x_1.JsonProperty)("currency"),
     tslib_1.__metadata("design:type", String)

@@ -7,7 +7,7 @@ var opds2_authentication_1 = require("./opds2-authentication");
 var opds2_link_1 = require("./opds2-link");
 var AUTHENTICATION_JSON_PROP = "authentication";
 var LINKS_JSON_PROP = "links";
-var OPDSAuthenticationDoc = exports.OPDSAuthenticationDoc = (function () {
+var OPDSAuthenticationDoc = (function () {
     function OPDSAuthenticationDoc() {
     }
     OPDSAuthenticationDoc.prototype._OnDeserialized = function () {
@@ -54,4 +54,5 @@ var OPDSAuthenticationDoc = exports.OPDSAuthenticationDoc = (function () {
     ], OPDSAuthenticationDoc);
     return OPDSAuthenticationDoc;
 }());
+exports.OPDSAuthenticationDoc = OPDSAuthenticationDoc;
 //# sourceMappingURL=opds2-authentication-doc.js.map

@@ -3,8 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Copies = void 0;
 const tslib_1 = require("tslib");
 const xml_js_mapper_1 = require("r2-utils-js/dist/es7-es2016/src/_utils/xml-js-mapper");
-let Copies = exports.Copies = class Copies {
+let Copies = class Copies {
 };
+exports.Copies = Copies;
 tslib_1.__decorate([
     (0, xml_js_mapper_1.XmlXPathSelector)("@total"),
     tslib_1.__metadata("design:type", Number)

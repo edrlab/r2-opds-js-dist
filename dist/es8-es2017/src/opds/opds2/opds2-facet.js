@@ -7,8 +7,9 @@ const opds2_link_1 = require("./opds2-link");
 const opds2_metadata_1 = require("./opds2-metadata");
 const METADATA_JSON_PROP = "metadata";
 const LINKS_JSON_PROP = "links";
-let OPDSFacet = exports.OPDSFacet = class OPDSFacet {
+let OPDSFacet = class OPDSFacet {
 };
+exports.OPDSFacet = OPDSFacet;
 tslib_1.__decorate([
     (0, ta_json_x_1.JsonProperty)(METADATA_JSON_PROP),
     tslib_1.__metadata("design:type", opds2_metadata_1.OPDSMetadata)

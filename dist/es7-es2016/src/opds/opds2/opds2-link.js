@@ -17,8 +17,9 @@ var OPDSLinkRelEnum;
     OPDSLinkRelEnum["SubscribeURI"] = "http://opds-spec.org/acquisition/subscribe";
 })(OPDSLinkRelEnum || (exports.OPDSLinkRelEnum = OPDSLinkRelEnum = {}));
 const PROPERTIES_JSON_PROP = "properties";
-let OPDSLink = exports.OPDSLink = class OPDSLink extends publication_link_1.Link {
+let OPDSLink = class OPDSLink extends publication_link_1.Link {
 };
+exports.OPDSLink = OPDSLink;
 tslib_1.__decorate([
     (0, ta_json_x_1.JsonProperty)(PROPERTIES_JSON_PROP),
     tslib_1.__metadata("design:type", opds2_properties_1.OPDSProperties)

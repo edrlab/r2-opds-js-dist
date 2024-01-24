@@ -3,8 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Category = void 0;
 const tslib_1 = require("tslib");
 const xml_js_mapper_1 = require("r2-utils-js/dist/es7-es2016/src/_utils/xml-js-mapper");
-let Category = exports.Category = class Category {
+let Category = class Category {
 };
+exports.Category = Category;
 tslib_1.__decorate([
     (0, xml_js_mapper_1.XmlXPathSelector)("@term"),
     tslib_1.__metadata("design:type", String)

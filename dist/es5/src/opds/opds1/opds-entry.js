@@ -7,7 +7,7 @@ var opds_author_1 = require("./opds-author");
 var opds_category_1 = require("./opds-category");
 var opds_link_1 = require("./opds-link");
 var opds_serie_1 = require("./opds-serie");
-var Entry = exports.Entry = (function () {
+var Entry = (function () {
     function Entry() {
     }
     tslib_1.__decorate([
@@ -135,4 +135,5 @@ var Entry = exports.Entry = (function () {
     ], Entry);
     return Entry;
 }());
+exports.Entry = Entry;
 //# sourceMappingURL=opds-entry.js.map

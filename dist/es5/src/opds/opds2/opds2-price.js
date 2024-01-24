@@ -185,7 +185,7 @@ var OPDSCurrencyEnum;
     OPDSCurrencyEnum["ZMW"] = "ZMW";
     OPDSCurrencyEnum["ZWL"] = "ZWL";
 })(OPDSCurrencyEnum || (exports.OPDSCurrencyEnum = OPDSCurrencyEnum = {}));
-var OPDSPrice = exports.OPDSPrice = (function () {
+var OPDSPrice = (function () {
     function OPDSPrice() {
     }
     OPDSPrice.prototype._OnDeserialized = function () {
@@ -215,4 +215,5 @@ var OPDSPrice = exports.OPDSPrice = (function () {
     ], OPDSPrice);
     return OPDSPrice;
 }());
+exports.OPDSPrice = OPDSPrice;
 //# sourceMappingURL=opds2-price.js.map

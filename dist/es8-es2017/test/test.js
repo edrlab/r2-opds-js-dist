@@ -257,7 +257,7 @@ async function parseCompareJSONs(url, json1, json2) {
                 });
             };
             const harmonizeArrays = (obj) => {
-                ["role", "@context", "rel", "language", "conformsTo"].forEach((term) => {
+                ["role", "@context", "rel", "language", "conformsTo", "feature"].forEach((term) => {
                     if (obj[term]) {
                         const isArray = obj[term] instanceof Array;
                         if (!isArray) {
@@ -430,12 +430,7 @@ async function opds2Test(url) {
                     reject(`Problem loading: ${url}`);
                     return;
                 }
-                src = src.replace("-0514-01-01T00:00:00Z", "2022-01-01T00:00:00Z");
-                src = src.replace("-0322-01-01T00:00:00Z", "2022-01-01T00:00:00Z");
-                src = src.replace("-0347-01-01T00:00:00Z", "2022-01-01T00:00:00Z");
-                src = src.replace("-0600-01-01T00:00:00Z", "2022-01-01T00:00:00Z");
-                src = src.replace("-1790-01-01T00:00:00Z", "2022-01-01T00:00:00Z");
-                src = src.replace("-0380-01-01T00:00:00Z", "2022-01-01T00:00:00Z");
+                src = src.replace(/"published":\s*"-[^"]+"/g, '"published": "2022-01-01T00:00:00Z"');
                 const json1 = JSON.parse(src);
                 const isPublication = !json1.publications && !json1.navigation && !json1.groups && !json1.catalogs && json1.metadata;
                 const isAuth = !isPublication && json1.authentication;

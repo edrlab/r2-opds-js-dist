@@ -7,7 +7,7 @@ var opds2_link_1 = require("./opds2-link");
 var opds2_metadata_1 = require("./opds2-metadata");
 var METADATA_JSON_PROP = "metadata";
 var LINKS_JSON_PROP = "links";
-var OPDSFacet = exports.OPDSFacet = (function () {
+var OPDSFacet = (function () {
     function OPDSFacet() {
     }
     tslib_1.__decorate([
@@ -24,4 +24,5 @@ var OPDSFacet = exports.OPDSFacet = (function () {
     ], OPDSFacet);
     return OPDSFacet;
 }());
+exports.OPDSFacet = OPDSFacet;
 //# sourceMappingURL=opds2-facet.js.map

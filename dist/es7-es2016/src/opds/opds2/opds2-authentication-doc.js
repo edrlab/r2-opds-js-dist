@@ -7,7 +7,7 @@ const opds2_authentication_1 = require("./opds2-authentication");
 const opds2_link_1 = require("./opds2-link");
 const AUTHENTICATION_JSON_PROP = "authentication";
 const LINKS_JSON_PROP = "links";
-let OPDSAuthenticationDoc = exports.OPDSAuthenticationDoc = class OPDSAuthenticationDoc {
+let OPDSAuthenticationDoc = class OPDSAuthenticationDoc {
     _OnDeserialized() {
         if (!this.Authentication) {
             console.log("OPDSAuthenticationDoc.Authentication is not set!");
@@ -20,6 +20,7 @@ let OPDSAuthenticationDoc = exports.OPDSAuthenticationDoc = class OPDSAuthentica
         }
     }
 };
+exports.OPDSAuthenticationDoc = OPDSAuthenticationDoc;
 tslib_1.__decorate([
     (0, ta_json_x_1.JsonProperty)("title"),
     tslib_1.__metadata("design:type", String)

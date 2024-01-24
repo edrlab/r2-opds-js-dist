@@ -3,10 +3,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.OPDSAuthenticationLabels = void 0;
 const tslib_1 = require("tslib");
 const ta_json_x_1 = require("ta-json-x");
-let OPDSAuthenticationLabels = exports.OPDSAuthenticationLabels = class OPDSAuthenticationLabels {
+let OPDSAuthenticationLabels = class OPDSAuthenticationLabels {
     _OnDeserialized() {
     }
 };
+exports.OPDSAuthenticationLabels = OPDSAuthenticationLabels;
 tslib_1.__decorate([
     (0, ta_json_x_1.JsonProperty)("login"),
     tslib_1.__metadata("design:type", String)

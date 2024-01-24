@@ -10,7 +10,7 @@ var METADATA_JSON_PROP = "metadata";
 var PUBLICATIONS_JSON_PROP = "publications";
 var LINKS_JSON_PROP = "links";
 var NAVIGATION_JSON_PROP = "navigation";
-var OPDSGroup = exports.OPDSGroup = (function () {
+var OPDSGroup = (function () {
     function OPDSGroup() {
     }
     tslib_1.__decorate([
@@ -37,4 +37,5 @@ var OPDSGroup = exports.OPDSGroup = (function () {
     ], OPDSGroup);
     return OPDSGroup;
 }());
+exports.OPDSGroup = OPDSGroup;
 //# sourceMappingURL=opds2-group.js.map

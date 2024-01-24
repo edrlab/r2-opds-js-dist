@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Category = void 0;
 var tslib_1 = require("tslib");
 var xml_js_mapper_1 = require("r2-utils-js/dist/es5/src/_utils/xml-js-mapper");
-var Category = exports.Category = (function () {
+var Category = (function () {
     function Category() {
     }
     tslib_1.__decorate([
@@ -35,4 +35,5 @@ var Category = exports.Category = (function () {
     ], Category);
     return Category;
 }());
+exports.Category = Category;
 //# sourceMappingURL=opds-category.js.map

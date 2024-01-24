@@ -1,21 +1,21 @@
 "use strict";
-var IndirectAcquisition_1;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IndirectAcquisition = void 0;
 const tslib_1 = require("tslib");
 const xml_js_mapper_1 = require("r2-utils-js/dist/es8-es2017/src/_utils/xml-js-mapper");
-let IndirectAcquisition = exports.IndirectAcquisition = IndirectAcquisition_1 = class IndirectAcquisition {
+let IndirectAcquisition = class IndirectAcquisition {
 };
+exports.IndirectAcquisition = IndirectAcquisition;
 tslib_1.__decorate([
     (0, xml_js_mapper_1.XmlXPathSelector)("@type"),
     tslib_1.__metadata("design:type", String)
 ], IndirectAcquisition.prototype, "OpdsIndirectAcquisitionType", void 0);
 tslib_1.__decorate([
     (0, xml_js_mapper_1.XmlXPathSelector)("opds:indirectAcquisition"),
-    (0, xml_js_mapper_1.XmlItemType)(IndirectAcquisition_1),
+    (0, xml_js_mapper_1.XmlItemType)(IndirectAcquisition),
     tslib_1.__metadata("design:type", Array)
 ], IndirectAcquisition.prototype, "OpdsIndirectAcquisitions", void 0);
-exports.IndirectAcquisition = IndirectAcquisition = IndirectAcquisition_1 = tslib_1.__decorate([
+exports.IndirectAcquisition = IndirectAcquisition = tslib_1.__decorate([
     (0, xml_js_mapper_1.XmlObject)({
         app: "http://www.w3.org/2007/app",
         atom: "http://www.w3.org/2005/Atom",

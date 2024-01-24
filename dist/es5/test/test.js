@@ -243,7 +243,7 @@ function parseCompareJSONs(url, json1, json2) {
                             });
                         };
                         var harmonizeArrays_1 = function (obj) {
-                            ["role", "@context", "rel", "language", "conformsTo"].forEach(function (term) {
+                            ["role", "@context", "rel", "language", "conformsTo", "feature"].forEach(function (term) {
                                 if (obj[term]) {
                                     var isArray = obj[term] instanceof Array;
                                     if (!isArray) {
@@ -424,12 +424,7 @@ function opds2Test(url) {
                                             reject("Problem loading: ".concat(url));
                                             return [2];
                                         }
-                                        src = src.replace("-0514-01-01T00:00:00Z", "2022-01-01T00:00:00Z");
-                                        src = src.replace("-0322-01-01T00:00:00Z", "2022-01-01T00:00:00Z");
-                                        src = src.replace("-0347-01-01T00:00:00Z", "2022-01-01T00:00:00Z");
-                                        src = src.replace("-0600-01-01T00:00:00Z", "2022-01-01T00:00:00Z");
-                                        src = src.replace("-1790-01-01T00:00:00Z", "2022-01-01T00:00:00Z");
-                                        src = src.replace("-0380-01-01T00:00:00Z", "2022-01-01T00:00:00Z");
+                                        src = src.replace(/"published":\s*"-[^"]+"/g, '"published": "2022-01-01T00:00:00Z"');
                                         json1 = JSON.parse(src);
                                         isPublication = !json1.publications && !json1.navigation && !json1.groups && !json1.catalogs && json1.metadata;
                                         isAuth = !isPublication && json1.authentication;

@@ -4,8 +4,9 @@ exports.OPDSMetadata = void 0;
 const tslib_1 = require("tslib");
 const ta_json_x_1 = require("ta-json-x");
 const metadata_1 = require("r2-shared-js/dist/es6-es2015/src/models/metadata");
-let OPDSMetadata = exports.OPDSMetadata = class OPDSMetadata extends metadata_1.Metadata {
+let OPDSMetadata = class OPDSMetadata extends metadata_1.Metadata {
 };
+exports.OPDSMetadata = OPDSMetadata;
 tslib_1.__decorate([
     (0, ta_json_x_1.JsonProperty)("numberOfItems"),
     tslib_1.__metadata("design:type", Number)

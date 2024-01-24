@@ -7,8 +7,9 @@ const opds_author_1 = require("./opds-author");
 const opds_category_1 = require("./opds-category");
 const opds_link_1 = require("./opds-link");
 const opds_serie_1 = require("./opds-serie");
-let Entry = exports.Entry = class Entry {
+let Entry = class Entry {
 };
+exports.Entry = Entry;
 tslib_1.__decorate([
     (0, xml_js_mapper_1.XmlXPathSelector)("schema:Rating/@schema:ratingValue"),
     tslib_1.__metadata("design:type", String)

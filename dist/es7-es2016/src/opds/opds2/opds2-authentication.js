@@ -6,13 +6,14 @@ const ta_json_x_1 = require("ta-json-x");
 const opds2_authentication_labels_1 = require("./opds2-authentication-labels");
 const opds2_link_1 = require("./opds2-link");
 const LINKS_JSON_PROP = "links";
-let OPDSAuthentication = exports.OPDSAuthentication = class OPDSAuthentication {
+let OPDSAuthentication = class OPDSAuthentication {
     _OnDeserialized() {
         if (!this.Type) {
             console.log("OPDSAuthentication.Type is not set!");
         }
     }
 };
+exports.OPDSAuthentication = OPDSAuthentication;
 tslib_1.__decorate([
     (0, ta_json_x_1.JsonProperty)("type"),
     tslib_1.__metadata("design:type", String)

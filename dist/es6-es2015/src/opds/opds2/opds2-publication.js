@@ -12,7 +12,7 @@ const METADATA_JSON_PROP = "metadata";
 const LINKS_JSON_PROP = "links";
 const IMAGES_JSON_PROP = "images";
 const IMAGE_JSON_PROP = "image";
-let OPDSPublication = exports.OPDSPublication = class OPDSPublication {
+let OPDSPublication = class OPDSPublication {
     findFirstLinkByRel(rel) {
         return this.Links ? this.Links.find((l) => {
             return l.HasRel(rel);
@@ -136,6 +136,7 @@ let OPDSPublication = exports.OPDSPublication = class OPDSPublication {
         }
     }
 };
+exports.OPDSPublication = OPDSPublication;
 tslib_1.__decorate([
     (0, ta_json_x_1.JsonProperty)(METADATA_JSON_PROP),
     tslib_1.__metadata("design:type", metadata_1.Metadata)

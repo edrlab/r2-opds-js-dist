@@ -6,8 +6,9 @@ const xml_js_mapper_1 = require("r2-utils-js/dist/es8-es2017/src/_utils/xml-js-m
 const opds_author_1 = require("./opds-author");
 const opds_entry_1 = require("./opds-entry");
 const opds_link_1 = require("./opds-link");
-let OPDS = exports.OPDS = class OPDS {
+let OPDS = class OPDS {
 };
+exports.OPDS = OPDS;
 tslib_1.__decorate([
     (0, xml_js_mapper_1.XmlXPathSelector)("opensearch:totalResults/text()"),
     tslib_1.__metadata("design:type", Number)

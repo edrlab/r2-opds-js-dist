@@ -7,7 +7,7 @@ const opds_availability_1 = require("./opds-availability");
 const opds_copies_1 = require("./opds-copies");
 const opds_holds_1 = require("./opds-holds");
 const opds_indirectAcquisition_1 = require("./opds-indirectAcquisition");
-let Link = exports.Link = class Link {
+let Link = class Link {
     HasRel(rel) {
         return this.Rel === rel;
     }
@@ -15,6 +15,7 @@ let Link = exports.Link = class Link {
         this.Rel = rel;
     }
 };
+exports.Link = Link;
 tslib_1.__decorate([
     (0, xml_js_mapper_1.XmlXPathSelector)("opds:price/text()"),
     tslib_1.__metadata("design:type", Number)
