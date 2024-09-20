@@ -57,7 +57,7 @@ const escapedHtmlWithSomeDoubleEscapedHtmlChars = `
 <content type="xhtml">${xhtmlWithSomeEscapedHtmlCharsPrefixedNamespace}</content>
 </entry>
     `;
-    const xmlDom = new xmldom.DOMParser().parseFromString(xmlSrc);
+    const xmlDom = new xmldom.DOMParser().parseFromString(xmlSrc, "application/xml");
     const isEntry = xmlDom.documentElement.localName === "entry";
     t.true(isEntry);
     const opds1Entry = xml_js_mapper_1.XML.deserialize(xmlDom, opds_entry_1.Entry);
@@ -78,7 +78,7 @@ const escapedHtmlWithSomeDoubleEscapedHtmlChars = `
 <content type="xhtml">${xhtmlWithSomeEscapedHtmlCharsNoPrefixedNamespace}</content>
 </entry>
     `;
-    const xmlDom = new xmldom.DOMParser().parseFromString(xmlSrc);
+    const xmlDom = new xmldom.DOMParser().parseFromString(xmlSrc, "application/xml");
     const isEntry = xmlDom.documentElement.localName === "entry";
     t.true(isEntry);
     const opds1Entry = xml_js_mapper_1.XML.deserialize(xmlDom, opds_entry_1.Entry);
@@ -99,7 +99,7 @@ const escapedHtmlWithSomeDoubleEscapedHtmlChars = `
 <content type="xhtml">${xmlWithSomeEscapedHtmlCharsAtomDefaultNamespace}</content>
 </entry>
     `;
-    const xmlDom = new xmldom.DOMParser().parseFromString(xmlSrc);
+    const xmlDom = new xmldom.DOMParser().parseFromString(xmlSrc, "application/xml");
     const isEntry = xmlDom.documentElement.localName === "entry";
     t.true(isEntry);
     const opds1Entry = xml_js_mapper_1.XML.deserialize(xmlDom, opds_entry_1.Entry);
@@ -119,7 +119,7 @@ const escapedHtmlWithSomeDoubleEscapedHtmlChars = `
 <summary>${plainTextWithEscapedHtmlChars}</summary>
 </entry>
     `;
-    const xmlDom = new xmldom.DOMParser().parseFromString(xmlSrc);
+    const xmlDom = new xmldom.DOMParser().parseFromString(xmlSrc, "application/xml");
     const isEntry = xmlDom.documentElement.localName === "entry";
     t.true(isEntry);
     const opds1Entry = xml_js_mapper_1.XML.deserialize(xmlDom, opds_entry_1.Entry);
@@ -137,7 +137,7 @@ const escapedHtmlWithSomeDoubleEscapedHtmlChars = `
 <content type="html">${escapedHtmlWithSomeDoubleEscapedHtmlChars}</content>
 </entry>
     `;
-    const xmlDom = new xmldom.DOMParser().parseFromString(xmlSrc);
+    const xmlDom = new xmldom.DOMParser().parseFromString(xmlSrc, "application/xml");
     const isEntry = xmlDom.documentElement.localName === "entry";
     t.true(isEntry);
     const opds1Entry = xml_js_mapper_1.XML.deserialize(xmlDom, opds_entry_1.Entry);
@@ -715,7 +715,7 @@ function testUrlAlt(t, url, alreadyDone) {
                         resolve(true);
                         return;
                     }
-                    const xmlDom = new xmldom.DOMParser().parseFromString(src);
+                    const xmlDom = new xmldom.DOMParser().parseFromString(src, "application/xml");
                     if (!xmlDom || !xmlDom.documentElement) {
                         reject("Problem parsing OPDS1 XML. Fail.");
                         return;
@@ -833,7 +833,7 @@ function runUrlTestAlt(t, url) {
     </link>
 </entry>
     `;
-    const xmlDom = new xmldom.DOMParser().parseFromString(xmlSrc);
+    const xmlDom = new xmldom.DOMParser().parseFromString(xmlSrc, "application/xml");
     const isEntry = xmlDom.documentElement.localName === "entry";
     t.true(isEntry);
     const opds1Entry = xml_js_mapper_1.XML.deserialize(xmlDom, opds_entry_1.Entry);

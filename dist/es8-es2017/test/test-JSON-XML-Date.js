@@ -37,7 +37,7 @@ const dateSTR = "2000-12-31T23:59:59.999Z";
             <atom:updated>${dateSTR}</atom:updated>
         </entry>`;
     console.log(xmlStr);
-    const xml = new xmldom.DOMParser().parseFromString(xmlStr);
+    const xml = new xmldom.DOMParser().parseFromString(xmlStr, "application/xml");
     const md = xml_js_mapper_1.XML.deserialize(xml, opds_entry_1.Entry);
     (0, helpers_1.inspect)(md);
     (0, helpers_1.checkType)(t, md.Updated, Date);

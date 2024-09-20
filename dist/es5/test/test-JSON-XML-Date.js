@@ -35,7 +35,7 @@ var dateSTR = "2000-12-31T23:59:59.999Z";
 (0, ava_1.default)("XML DESERIALIZE: OPDS Entry.Updated => Date", function (t) {
     var xmlStr = "<entry xmlns=\"http://opds-spec.org/2010/catalog\" xmlns:atom=\"http://www.w3.org/2005/Atom\">\n            <atom:updated>".concat(dateSTR, "</atom:updated>\n        </entry>");
     console.log(xmlStr);
-    var xml = new xmldom.DOMParser().parseFromString(xmlStr);
+    var xml = new xmldom.DOMParser().parseFromString(xmlStr, "application/xml");
     var md = xml_js_mapper_1.XML.deserialize(xml, opds_entry_1.Entry);
     (0, helpers_1.inspect)(md);
     (0, helpers_1.checkType)(t, md.Updated, Date);

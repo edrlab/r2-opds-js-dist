@@ -36,7 +36,7 @@ const numSTR = "12345.6789";
             <opensearch:itemsPerPage>${numSTR}</opensearch:itemsPerPage>
         </opds>`;
     console.log(xmlStr);
-    const xml = new xmldom.DOMParser().parseFromString(xmlStr);
+    const xml = new xmldom.DOMParser().parseFromString(xmlStr, "application/xml");
     const opds = xml_js_mapper_1.XML.deserialize(xml, opds_1.OPDS);
     (0, helpers_1.inspect)(opds);
     (0, helpers_1.checkType_Number)(t, opds.OpensearchItemsPerPage);

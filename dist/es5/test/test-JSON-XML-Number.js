@@ -34,7 +34,7 @@ var numSTR = "12345.6789";
 (0, ava_1.default)("XML DESERIALIZE: OPDS opensearch:itemsPerPage => Number", function (t) {
     var xmlStr = "<opds xmlns=\"http://opds-spec.org/2010/catalog\" xmlns:opensearch=\"http://a9.com/-/spec/opensearch/1.1/\">\n            <opensearch:itemsPerPage>".concat(numSTR, "</opensearch:itemsPerPage>\n        </opds>");
     console.log(xmlStr);
-    var xml = new xmldom.DOMParser().parseFromString(xmlStr);
+    var xml = new xmldom.DOMParser().parseFromString(xmlStr, "application/xml");
     var opds = xml_js_mapper_1.XML.deserialize(xml, opds_1.OPDS);
     (0, helpers_1.inspect)(opds);
     (0, helpers_1.checkType_Number)(t, opds.OpensearchItemsPerPage);

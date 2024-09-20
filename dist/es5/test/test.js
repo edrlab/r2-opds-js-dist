@@ -31,7 +31,7 @@ var escapedHtmlWithSomeDoubleEscapedHtmlChars = "\n&lt;div&gt;\n    Hello &amp;a
     var xmlSrc, xmlDom, isEntry, opds1Entry, toMatch, opds2Pub;
     return tslib_1.__generator(this, function (_a) {
         xmlSrc = "\n<entry\n    xmlns=\"http://www.w3.org/2005/Atom\"\n    xmlns:xhtm=\"http://www.w3.org/1999/xhtml\">\n<summary>".concat(plainTextWithEscapedHtmlChars, "</summary>\n<content type=\"xhtml\">").concat(xhtmlWithSomeEscapedHtmlCharsPrefixedNamespace, "</content>\n</entry>\n    ");
-        xmlDom = new xmldom.DOMParser().parseFromString(xmlSrc);
+        xmlDom = new xmldom.DOMParser().parseFromString(xmlSrc, "application/xml");
         isEntry = xmlDom.documentElement.localName === "entry";
         t.true(isEntry);
         opds1Entry = xml_js_mapper_1.XML.deserialize(xmlDom, opds_entry_1.Entry);
@@ -49,7 +49,7 @@ var escapedHtmlWithSomeDoubleEscapedHtmlChars = "\n&lt;div&gt;\n    Hello &amp;a
     var xmlSrc, xmlDom, isEntry, opds1Entry, toMatch, opds2Pub;
     return tslib_1.__generator(this, function (_a) {
         xmlSrc = "\n<entry\n    xmlns=\"http://www.w3.org/2005/Atom\"\n    xmlns:xhtm=\"http://www.w3.org/1999/xhtml\">\n<summary>".concat(plainTextWithEscapedHtmlChars, "</summary>\n<content type=\"xhtml\">").concat(xhtmlWithSomeEscapedHtmlCharsNoPrefixedNamespace, "</content>\n</entry>\n    ");
-        xmlDom = new xmldom.DOMParser().parseFromString(xmlSrc);
+        xmlDom = new xmldom.DOMParser().parseFromString(xmlSrc, "application/xml");
         isEntry = xmlDom.documentElement.localName === "entry";
         t.true(isEntry);
         opds1Entry = xml_js_mapper_1.XML.deserialize(xmlDom, opds_entry_1.Entry);
@@ -67,7 +67,7 @@ var escapedHtmlWithSomeDoubleEscapedHtmlChars = "\n&lt;div&gt;\n    Hello &amp;a
     var xmlSrc, xmlDom, isEntry, opds1Entry, toMatch, opds2Pub;
     return tslib_1.__generator(this, function (_a) {
         xmlSrc = "\n<entry\n    xmlns=\"http://www.w3.org/2005/Atom\"\n    xmlns:xhtm=\"http://www.w3.org/1999/xhtml\">\n<summary>".concat(plainTextWithEscapedHtmlChars, "</summary>\n<content type=\"xhtml\">").concat(xmlWithSomeEscapedHtmlCharsAtomDefaultNamespace, "</content>\n</entry>\n    ");
-        xmlDom = new xmldom.DOMParser().parseFromString(xmlSrc);
+        xmlDom = new xmldom.DOMParser().parseFromString(xmlSrc, "application/xml");
         isEntry = xmlDom.documentElement.localName === "entry";
         t.true(isEntry);
         opds1Entry = xml_js_mapper_1.XML.deserialize(xmlDom, opds_entry_1.Entry);
@@ -85,7 +85,7 @@ var escapedHtmlWithSomeDoubleEscapedHtmlChars = "\n&lt;div&gt;\n    Hello &amp;a
     var xmlSrc, xmlDom, isEntry, opds1Entry, toMatch, opds2Pub;
     return tslib_1.__generator(this, function (_a) {
         xmlSrc = "\n<entry\n    xmlns=\"http://www.w3.org/2005/Atom\"\n    xmlns:xhtm=\"http://www.w3.org/1999/xhtml\">\n<summary>".concat(plainTextWithEscapedHtmlChars, "</summary>\n</entry>\n    ");
-        xmlDom = new xmldom.DOMParser().parseFromString(xmlSrc);
+        xmlDom = new xmldom.DOMParser().parseFromString(xmlSrc, "application/xml");
         isEntry = xmlDom.documentElement.localName === "entry";
         t.true(isEntry);
         opds1Entry = xml_js_mapper_1.XML.deserialize(xmlDom, opds_entry_1.Entry);
@@ -100,7 +100,7 @@ var escapedHtmlWithSomeDoubleEscapedHtmlChars = "\n&lt;div&gt;\n    Hello &amp;a
     var xmlSrc, xmlDom, isEntry, opds1Entry, toMatch, opds2Pub;
     return tslib_1.__generator(this, function (_a) {
         xmlSrc = "\n<entry\n    xmlns=\"http://www.w3.org/2005/Atom\"\n    xmlns:xhtm=\"http://www.w3.org/1999/xhtml\">\n<summary>".concat(plainTextWithEscapedHtmlChars, "</summary>\n<content type=\"html\">").concat(escapedHtmlWithSomeDoubleEscapedHtmlChars, "</content>\n</entry>\n    ");
-        xmlDom = new xmldom.DOMParser().parseFromString(xmlSrc);
+        xmlDom = new xmldom.DOMParser().parseFromString(xmlSrc, "application/xml");
         isEntry = xmlDom.documentElement.localName === "entry";
         t.true(isEntry);
         opds1Entry = xml_js_mapper_1.XML.deserialize(xmlDom, opds_entry_1.Entry);
@@ -816,7 +816,7 @@ function testUrlAlt(t, url, alreadyDone) {
                                                     resolve(true);
                                                     return [2];
                                                 }
-                                                xmlDom = new xmldom.DOMParser().parseFromString(src);
+                                                xmlDom = new xmldom.DOMParser().parseFromString(src, "application/xml");
                                                 if (!xmlDom || !xmlDom.documentElement) {
                                                     reject("Problem parsing OPDS1 XML. Fail.");
                                                     return [2];
@@ -1038,7 +1038,7 @@ function runUrlTestAlt(t, url) {
     var xmlSrc, xmlDom, isEntry, opds1Entry, opds2Pub, opds2PubJson;
     return tslib_1.__generator(this, function (_a) {
         xmlSrc = "\n<entry\n    xmlns=\"http://www.w3.org/2005/Atom\"\n    xmlns:lcp=\"http://readium.org/lcp-specs/ns\">\n\n    <link\n        rel=\"http://opds-spec.org/acquisition/\"\n        href=\"FAKE_URL\"\n        type=\"application/vnd.readium.lcp.license.v1.0+json\">\n\n        <lcp:hashed_passphrase>FAKE_BASE64</lcp:hashed_passphrase>\n    </link>\n</entry>\n    ";
-        xmlDom = new xmldom.DOMParser().parseFromString(xmlSrc);
+        xmlDom = new xmldom.DOMParser().parseFromString(xmlSrc, "application/xml");
         isEntry = xmlDom.documentElement.localName === "entry";
         t.true(isEntry);
         opds1Entry = xml_js_mapper_1.XML.deserialize(xmlDom, opds_entry_1.Entry);

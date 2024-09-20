@@ -1,6 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.convertOpds1ToOpds2 = exports.convertOpds1ToOpds2_EntryToLink = exports.convertOpds1ToOpds2_EntryToPublication = exports.escapeHtmlEntities = exports.unescapeHtmlEntities = void 0;
+exports.escapeHtmlEntities = exports.unescapeHtmlEntities = void 0;
+exports.convertOpds1ToOpds2_EntryToPublication = convertOpds1ToOpds2_EntryToPublication;
+exports.convertOpds1ToOpds2_EntryToLink = convertOpds1ToOpds2_EntryToLink;
+exports.convertOpds1ToOpds2 = convertOpds1ToOpds2;
 const metadata_1 = require("r2-shared-js/dist/es8-es2017/src/models/metadata");
 const metadata_belongsto_1 = require("r2-shared-js/dist/es8-es2017/src/models/metadata-belongsto");
 const metadata_contributor_1 = require("r2-shared-js/dist/es8-es2017/src/models/metadata-contributor");
@@ -212,7 +215,6 @@ function convertOpds1ToOpds2_EntryToPublication(entry) {
     }
     return p;
 }
-exports.convertOpds1ToOpds2_EntryToPublication = convertOpds1ToOpds2_EntryToPublication;
 function convertOpds1ToOpds2_EntryToLink(entry) {
     const linkNav = new opds2_link_1.OPDSLink();
     if (entry.Title) {
@@ -245,7 +247,6 @@ function convertOpds1ToOpds2_EntryToLink(entry) {
     }
     return linkNav;
 }
-exports.convertOpds1ToOpds2_EntryToLink = convertOpds1ToOpds2_EntryToLink;
 function convertOpds1ToOpds2(feed) {
     const opds2feed = new opds2_1.OPDSFeed();
     opds2feed.Metadata = new opds2_metadata_1.OPDSMetadata();
@@ -350,7 +351,6 @@ function convertOpds1ToOpds2(feed) {
     }
     return opds2feed;
 }
-exports.convertOpds1ToOpds2 = convertOpds1ToOpds2;
 const portLinkInfo = (linkSource, linkDest) => {
     if (!linkDest.Href && linkSource.Href) {
         linkDest.Href = linkSource.Href;
