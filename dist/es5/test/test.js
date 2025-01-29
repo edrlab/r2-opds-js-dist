@@ -12,6 +12,7 @@ var serializable_1 = require("r2-lcp-js/dist/es5/src/serializable");
 var publication_1 = require("r2-shared-js/dist/es5/src/models/publication");
 var JsonUtils_1 = require("r2-utils-js/dist/es5/src/_utils/JsonUtils");
 var xml_js_mapper_1 = require("r2-utils-js/dist/es5/src/_utils/xml-js-mapper");
+var bom_1 = require("r2-utils-js/dist/es5/src/_utils/bom");
 var converter_1 = require("../src/opds/converter");
 var init_globals_1 = require("../src/opds/init-globals");
 var opds_1 = require("../src/opds/opds1/opds");
@@ -816,7 +817,7 @@ function testUrlAlt(t, url, alreadyDone) {
                                                     resolve(true);
                                                     return [2];
                                                 }
-                                                xmlDom = new xmldom.DOMParser().parseFromString(src, "application/xml");
+                                                xmlDom = new xmldom.DOMParser().parseFromString((0, bom_1.removeUTF8BOM)(src), "application/xml");
                                                 if (!xmlDom || !xmlDom.documentElement) {
                                                     reject("Problem parsing OPDS1 XML. Fail.");
                                                     return [2];
